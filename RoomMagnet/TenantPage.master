@@ -1,0 +1,36 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="TenantPage.master.cs" Inherits="TenantPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RoomMagnet connects hosts, who are renting out thier rooom, and tenants, who are in need of a empty bedroom.">
+    <meta name="author" content="Skyline Consulting">
+    <meta name="keywords" content="RoomMagnet, renting room, rental site,">
+    <!-- Font Awesome for icons - see https://fontawesome.com/v4.7.0/cheatsheet/ -->
+    <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Custom CSS - update this if you use a name other than style.css for the Sass-generated CSS -->
+    <link href="style.css" rel="stylesheet" />
+
+
+    <!--FontAwesome icons-->
+    <script src="https://kit.fontawesome.com/78c52ebafc.js" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" data-auto-replace-svg="nest"></script>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
