@@ -1,40 +1,38 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="HostMessageCenter.aspx.cs" Inherits="HostMessageCenter" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TenantPage.master" AutoEventWireup="true" CodeFile="TenantMessageCenter.aspx.cs" Inherits="TenantMessageCenter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>RoomMagnet | Message Center</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
     <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-5 pb-3">
         <div class="navbar navbar-light">
             <p>
-                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
-                Welcome USER,
-            </p>
+                <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
+                Welcome USER,</p>
 
 
             <div class="progress" style="height: 30px;">
                 <div class="progress-bar bg-info" role="progressbar" style="width: 66%; color: #fff; font-size: 15px; font-weight: bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Profile Completion</div>
             </div>
+
         </div>
+
 
         <div class="row">
 
             <div class="col-md-12">
                 <div class="pl-3">
-                    <button class="btn btn-sm personality-outline">English</button>
-                    <button class="btn btn-sm personality-outline">Active</button>
-                    <button class="btn btn-sm personality-outline">Non-Smoker</button>
-                    <button class="btn btn-sm personality-outline">Adventurous</button>
-                    <button class="btn btn-sm personality-outline">Early Riser</button>
+                    <button class="btn personality-outline btn-sm">English</button>
+                    <button class="btn personality-outline btn-sm">Active</button>
+                    <button class="btn personality-outline btn-sm">Non-Smoker</button>
+                    <button class="btn personality-outline btn-sm">Adventurous</button>
+                    <button class="btn personality-outline btn-sm">Early Riser</button>
                 </div>
             </div>
-
         </div>
     </div>
     <!--END OF USER DASH-NAV-->
-
 
 
     <div class="container-fluid px-5">
@@ -42,7 +40,7 @@
         <section>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="TenantDashboard.aspx" class="breadLink">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Messages</li>
                 </ol>
             </nav>
@@ -77,34 +75,6 @@
             </div>
         </section>
 
-        <!-- <section class=" shadow-sm ">
-                
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card px-1 py-1">
-                            <div class="card-body">
-                                <div class="card-title">Liam Brown</div>
-                                <div class="card-subtitle">Subject: Meeting Schedule</div>
-                                <a href="#" class="btn btn-info">View Message</a>
-                            </div>    
-                        </div>    
-                    </div>    
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card px-1 py-1">
-                            <div class="card-body">
-                                <div class="card-title">Jake Smith</div>
-                                <div class="card-subtitle">Subject: Meeting Schedule</div>
-                                <a href="#" class="btn btn-info">View Message</a>
-                            </div>    
-                        </div>    
-                    </div>    
-                </div>
-                
-                
-            </section>-->
 
 
         <section class="message-center">
@@ -120,9 +90,9 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                 <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
+                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
                                 <div class="chat-ib">
-                                    <h5>Natalia Russo <span class="chat-date">Nov 12</span></h5>
+                                    <h5>Karen Smith<span class="chat-date">Nov 12</span></h5>
                                     <p>text</p>
                                 </div>
                             </div>
@@ -130,17 +100,7 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                 <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
+                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
                                 <div class="chat-ib">
                                     <h5>Name <span class="chat-date">Nov 12</span></h5>
                                     <p>text</p>
@@ -150,7 +110,7 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                 <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
+                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
                                 <div class="chat-ib">
                                     <h5>Name <span class="chat-date">Nov 12</span></h5>
                                     <p>text</p>
@@ -160,7 +120,7 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                 <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
+                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
                                 <div class="chat-ib">
                                     <h5>Name <span class="chat-date">Nov 12</span></h5>
                                     <p>text</p>
@@ -170,7 +130,7 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                 <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
+                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
                                 <div class="chat-ib">
                                     <h5>Name <span class="chat-date">Nov 12</span></h5>
                                     <p>text</p>
@@ -180,7 +140,7 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                 <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
+                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
                                 <div class="chat-ib">
                                     <h5>Name <span class="chat-date">Nov 12</span></h5>
                                     <p>text</p>
@@ -190,7 +150,17 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                 <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
+                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
+                                <div class="chat-ib">
+                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
+                                    <p>text</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-list">
+                            <div class="chat-people">
+                                <div class="chat-img">
+                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
                                 <div class="chat-ib">
                                     <h5>Name <span class="chat-date">Nov 12</span></h5>
                                     <p>text</p>
@@ -204,7 +174,7 @@
                     <div class="msg-history">
                         <div class="incoming-msg">
                             <div class="incoming-msg-img">
-                                <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
+                                <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
                             </div>
                             <div class="recieved-msg">
                                 <div class="recieved-withd-msg">
@@ -221,7 +191,7 @@
                         </div>
                         <div class="incoming-msg">
                             <div class="incoming-msg-img">
-                                <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
+                                <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
                             </div>
                             <div class="recieved-msg">
                                 <div class="recieved-withd-msg">
@@ -238,7 +208,7 @@
                         </div>
                         <div class="incoming-msg">
                             <div class="incoming-msg-img">
-                                <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
+                                <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
                             </div>
                             <div class="recieved-msg">
                                 <div class="recieved-withd-msg">
@@ -255,7 +225,7 @@
                         </div>
                         <div class="incoming-msg">
                             <div class="incoming-msg-img">
-                                <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
+                                <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
                             </div>
                             <div class="recieved-msg">
                                 <div class="recieved-withd-msg">
@@ -272,7 +242,7 @@
                         </div>
                         <div class="incoming-msg">
                             <div class="incoming-msg-img">
-                                <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
+                                <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
                             </div>
                             <div class="recieved-msg">
                                 <div class="recieved-withd-msg">
@@ -291,7 +261,6 @@
                     </div>
                     <div class="type-msg">
                         <div class="input-msg-write">
-                            <%--<input type="text" class="write-msg" placeholder="Type a message">--%>
                             <asp:TextBox ID="txtMessage" runat="server" class="write-msg" placeholder="Type a message"></asp:TextBox>
                             <button class="msg-send-btn" type="button"><i class="fas fa-paper-plane"></i></button>
                             <%--<asp:Button ID="btnMessage" runat="server" class="msg-send-btn" Text="Enter" />--%>
@@ -301,6 +270,8 @@
                 </div>
             </div>
         </section>
+
+
 
     </div>
 

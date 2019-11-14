@@ -77,7 +77,7 @@
         <footer class="page-footer bg-primary container-fluid">
             <div class="row footer-colors">
                 <div class="col-md-2">
-                    <a href="index.html">
+                    <a href="Home.aspx">
                         <img src="images/roommagnetLOGO.png" alt="roommagnet logo" class="img-fluid"></a>
                 </div>
 

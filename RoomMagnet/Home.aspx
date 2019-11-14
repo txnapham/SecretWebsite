@@ -78,36 +78,36 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterPetFriendly">
-                                                                <label class="form-check-lable" for="filterPetFriendly">Connected Bathroom</label>
+                                                                <asp:CheckBox ID="cbConBath" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterPetFriendly">Connected Bathroom</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Walk-In Closet</label>
+                                                                <asp:CheckBox ID="cbWalkInCloset" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Walk-In Closet</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Dryer</label>
+                                                                <asp:CheckBox ID="cbDryer" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Dryer</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Ceiling Fan</label>
+                                                                <asp:CheckBox ID="cbCeilFan" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Ceiling Fan</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Kitchen</label>
+                                                                <asp:CheckBox ID="cbKitchen" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Kitchen</label>
                                                             </div>
                                                         </div>
 
@@ -117,36 +117,36 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterPetFriendly">
-                                                                <label class="form-check-lable" for="filterPetFriendly">Separate Entrance</label>
+                                                                <asp:CheckBox ID="cbSepEntr" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterPetFriendly">Separate Entrance</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Air Conditioning</label>
+                                                                <asp:CheckBox ID="cbAirCon" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Air Conditioning</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Washer</label>
+                                                                <asp:CheckBox ID="cbWasher" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Washer</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Wifi</label>
+                                                                <asp:CheckBox ID="cbWifi" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Wifi</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Heating</label>
+                                                                <asp:CheckBox ID="cbHeating" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Heating</label>
                                                             </div>
                                                         </div>
 
@@ -163,22 +163,22 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterPetFriendly">
-                                                                <label class="form-check-lable" for="filterPetFriendly">Street Parking</label>
+                                                                <asp:CheckBox ID="cbStreetPark" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterPetFriendly">Street Parking</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Pool</label>
+                                                                <asp:CheckBox ID="cbPool" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Pool</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Deck</label>
+                                                                <asp:CheckBox ID="cbDeck" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Deck</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -187,22 +187,22 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterPetFriendly">
-                                                                <label class="form-check-lable" for="filterPetFriendly">Garage Parking</label>
+                                                                <asp:CheckBox ID="cbGarPark" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterPetFriendly">Garage Parking</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Backyard</label>
+                                                                <asp:CheckBox ID="cbBackyard" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Backyard</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Porch</label>
+                                                                <asp:CheckBox ID="cbPorch" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Porch</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -218,29 +218,29 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterPetFriendly">
-                                                                <label class="form-check-lable" for="filterPetFriendly">Introvert</label>
+                                                                <asp:CheckBox ID="cbIntrovert" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterPetFriendly">Introvert</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Extrovert</label>
+                                                                <asp:CheckBox ID="cbExtrovert" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Extrovert</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Family-Oriented</label>
+                                                                <asp:CheckBox ID="cbFamily" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Family-Oriented</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Tech-Savvy</label>
+                                                                <asp:CheckBox ID="cbTechSavy" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Tech-Savvy</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -249,29 +249,29 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterPetFriendly">
-                                                                <label class="form-check-lable" for="filterPetFriendly">Early Riser</label>
+                                                                <asp:CheckBox ID="cbEarlyRiser" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterPetFriendly">Early Riser</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Night Owl</label>
+                                                                <asp:CheckBox ID="cbNightOwl" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Night Owl</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Religious</label>
+                                                                <asp:CheckBox ID="cbReligious" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Religious</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Non-Smoker</label>
+                                                                <asp:CheckBox ID="cbNonSmoker" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Non-Smoker</label>
                                                             </div>
                                                         </div>
 
@@ -291,22 +291,22 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterPetFriendly">
-                                                                <label class="form-check-lable" for="filterPetFriendly">English</label>
+                                                                <asp:CheckBox ID="cbEnglish" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterPetFriendly">English</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Spanish</label>
+                                                                <asp:CheckBox ID="cbSpanish" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Spanish</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">Mandarin</label>
+                                                                <asp:CheckBox ID="cbMandarin" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">Mandarin</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -315,28 +315,27 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterPetFriendly">
-                                                                <label class="form-check-lable" for="filterPetFriendly">Japanese </label>
+                                                                <asp:CheckBox ID="cbJapanese" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterPetFriendly">Japanese </label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">German</label>
+                                                                <asp:CheckBox ID="cbGerman" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">German</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterSportsFan">
-                                                                <label class="form-check-lable" for="filterSportsFan">French</label>
+                                                                <asp:CheckBox ID="cbFrench" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterSportsFan">French</label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!--end of languages-->
-
 
                                                 <!--start of homesharesmarter-->
                                                 <h6>HomeshareSmarter® Living</h6>
@@ -346,21 +345,22 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterhomeshareYES">
-                                                                <label class="form-check-lable" for="filterhomeshareYES">Yes</label>
+                                                                <asp:CheckBox ID="cbHomeShareYES" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterhomeshareYES">Yes</label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="filterhomeshareNO">
-                                                                <label class="form-check-lable" for="filterhomeshareNO">No</label>
+                                                                <asp:CheckBox ID="cbHomeShareNO" runat="server" class="form-check-input" />
+                                                                <label class="form-check-label" for="filterhomeshareNO">No</label>
                                                             </div>
                                                         </div>
 
                                                     </div>
                                                 </div>
                                                 <!--end of homesharesmarter-->
+
 
 
                                                 <button type="button" class="btn btn-info btn-block">
