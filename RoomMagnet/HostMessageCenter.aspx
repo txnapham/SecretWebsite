@@ -117,86 +117,7 @@
                     </div>
 
                     <div class="inbox-chat">
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Natalia Russo <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/rebeccajames.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
+                        <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
                     </div>
                 </div>
 
@@ -292,7 +213,7 @@
                     <div class="type-msg">
                         <div class="input-msg-write">
                             <%--<input type="text" class="write-msg" placeholder="Type a message">--%>
-                            <asp:TextBox ID="txtMessage" runat="server" class="write-msg" placeholder="Type a message"></asp:TextBox>
+                            <asp:TextBox ID="txtMessage" runat="server" class="write-msg" placeholder="Please DO NOT Share Any Personal Information"></asp:TextBox>
                             <button class="msg-send-btn" type="button"><i class="fas fa-paper-plane"></i></button>
                             <%--<asp:Button ID="btnMessage" runat="server" class="msg-send-btn" Text="Enter" />--%>
                             <%--not sure how to do the button in aspx to make it look like the html. might have to rededign it to fit aspx--%>
