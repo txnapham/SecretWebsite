@@ -10,6 +10,9 @@
             <p>
                 <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
                 Welcome USER,
+                <ul>
+                    <asp:Literal ID="UserNameCard" runat="server" Mode="Transform"></asp:Literal>
+                </ul>
             </p>
 
 
@@ -75,7 +78,7 @@
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">Properties</h5>
                                 <ul>
-                                    <li><a href="#" class="tenantdashlist">South Main House</a></li>
+                                    <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>
                                 <!--BUTTON-->
                                 <div class=" text-center">
@@ -93,17 +96,7 @@
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">Message Center</h5>
 
-                                <div class="chat-list">
-                                    <div class="chat-people">
-                                        <div class="chat-img">
-                                            <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
-                                        </div>
-                                        <div class="chat-ib">
-                                            <h5>Natalia Russo <span class="chat-date">Nov 12</span></h5>
-                                            <p>Hello, I'm interested in your property.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <asp:Literal ID="Card3" runat="server" Mode="Transform"></asp:Literal>
 
 
                                 <!--BUTTON-->
@@ -130,7 +123,7 @@
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">Tenants</h5>
                                 <ul>
-                                    <li><a href="#" class="tenantdashlist">Natalia Russo</a></li>
+                                    <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>
                                 <!--BUTTON-->
                                 <div class=" text-center">
@@ -512,7 +505,7 @@
                                 <button class="nav-item btn createAppointment" type="button" data-toggle="modal" data-target="#createAppointment">
                                     <a class="btn btn-md btn-info btn-block" href="#">Create Appointment</a>
                                 </button>
-                                
+
 
                                 <div class="modal" id="createAppointment">
                                     <div class="modal-dialog">
@@ -522,7 +515,7 @@
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 <form>
                                                     <div class="form-group">
-                                                        <asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient" ></asp:TextBox>
+                                                        <asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>
                                                     </div>
 
                                                     <div class="form-group">

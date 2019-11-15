@@ -35,12 +35,11 @@
                     <div class="form-group">
                         <asp:TextBox ID="txtStreet" runat="server" class="form-control form-control-lg" placeholder="Street" MaxLength="30"></asp:TextBox>
                     </div>
-
+                    <div class="form-group">
+                        <asp:TextBox ID="txtCity" runat="server" class="form-control form-control-lg" placeholder="City" MaxLength="30"></asp:TextBox>
+                    </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-7">
-                            <input type="text" class="form-control  form-control-lg" id="inputCity" placeholder="City">
-                        </div>
                         <div class="form-group col-md-3">
                             <asp:DropDownList ID="ddState" runat="server" class="form-control  form-control-lg">
                                 <asp:ListItem Value="">State</asp:ListItem>
@@ -100,9 +99,12 @@
                         <div class="form-group col-md-2">
                             <asp:TextBox ID="txtZip" runat="server" class="form-control form-control-lg" placeholder="Zip" MaxLength="9"></asp:TextBox>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:TextBox ID="txtCountry" runat="server" class="form-control form-control-lg" placeholder="Country" MaxLength="2" Enabled="False">US</asp:TextBox>
+
+                        <div class="form-group">
+                            <asp:DropDownList ID="ddCountry" runat="server" class="form-control  form-control-lg">
+                                <asp:ListItem Value="US">US</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
                     </div>
 
                     <div class="form-group">

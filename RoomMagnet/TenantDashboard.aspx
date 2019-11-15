@@ -11,6 +11,10 @@
             <p>
                 <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
                 Welcome USER,
+                <ul>
+                    <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
+
+                </ul>
             </p>
 
 
@@ -79,8 +83,7 @@
                             <h5 class="card-title dash-card-titles">Favorited Properties</h5>
 
                             <ul>
-                                <li><a class="tenantdashlist" href="#">Favorited Property</a></li>
-
+                                <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
                             </ul>
 
                             <div class=" text-center">
@@ -501,7 +504,7 @@
                                                     <asp:TextBox ID="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYY"></asp:TextBox>
                                                 </div>
 
-                                                
+
                                                 <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" />
 
 

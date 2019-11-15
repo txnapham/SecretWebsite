@@ -546,7 +546,11 @@
             <form class="pt-4">
                 <div class="form-group">
                     <h5>Upload property images here:</h5>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="True" />
+                    <asp:Button runat="server" ID="FilesUpload" Text="Save to Property" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
+                    <br />
+                    <br />
+                    <asp:Label runat="server" ID="StatusLabel" Text="Upload status: " />
                 </div>
 
 
@@ -562,7 +566,7 @@
             </form>
 
 
-            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Property" />
+            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Property" CausesValidation="false" OnClick="btnListProperty_Click"/>
 
 
 
