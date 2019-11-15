@@ -5,32 +5,25 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class AboutUs : System.Web.UI.Page
+public partial class HomeLogout : System.Web.UI.Page
 {
     protected void Page_PreInit(object sender, EventArgs e)
     {
+        Session.Clear();
         if (Session["type"] != null)
         {
-            if ((int)Session["type"] == 1)
-            {
-                this.MasterPageFile = "~/AdminPage.master";
-            }
-            else if ((int)Session["type"] == 2)
-            {
-                this.MasterPageFile = "~/HostPage.master";
-            }
-            else if ((int)Session["type"] == 3)
-            {
-                this.MasterPageFile = "~/TenantPage.master";
-            }
+            this.MasterPageFile = "~/MasterPage.master";
         }
         else if (Session["type"] == null)
         {
             this.MasterPageFile = "~/MasterPage.master";
         }
     }
-
     protected void Page_Load(object sender, EventArgs e)
+    {
+        Response.Redirect("Home.aspx");
+    }
+    protected void btnSearch_Click(object sender, EventArgs e)
     {
 
     }

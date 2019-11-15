@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 public partial class HostMessageCenter : System.Web.UI.Page
 {
     System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+
     protected void Page_PreInit(object sender, EventArgs e)
     {
         if (Session["type"] != null)

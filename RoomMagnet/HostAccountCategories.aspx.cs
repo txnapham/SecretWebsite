@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class AboutUs : System.Web.UI.Page
+public partial class HostAccountCategories : System.Web.UI.Page
 {
     protected void Page_PreInit(object sender, EventArgs e)
     {
@@ -29,7 +29,6 @@ public partial class AboutUs : System.Web.UI.Page
             this.MasterPageFile = "~/MasterPage.master";
         }
     }
-
     protected void Page_Load(object sender, EventArgs e)
     {
 

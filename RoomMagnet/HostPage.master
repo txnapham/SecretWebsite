@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Custom CSS - update this if you use a name other than style.css for the Sass-generated CSS -->
     <link href="style.css" rel="stylesheet" />
+    <link href="awesomplete.css" rel="stylesheet" />
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -77,7 +78,7 @@
         <footer class="page-footer bg-primary container-fluid">
             <div class="row footer-colors">
                 <div class="col-md-2">
-                    <a href="index.html">
+                    <a href="Home.aspx">
                         <img src="images/roommagnetLOGO.png" alt="roommagnet logo" class="img-fluid"></a>
                 </div>
 
