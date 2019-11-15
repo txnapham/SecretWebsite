@@ -14,7 +14,7 @@
                     <h2>Welcome to roommagnet!</h2>
                 </div>
 
-                <form>
+                 
                     <div class="form-group">
                         <asp:TextBox ID="txtFN" runat="server" class="form-control form-control-lg" aria-describedby="FirstName" placeholder="First Name" MaxLength="50"></asp:TextBox>
                     </div>
@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <asp:DropDownList ID="ddState" runat="server" class="form-control  form-control-lg">
                                 <asp:ListItem Value="">State</asp:ListItem>
                                 <asp:ListItem>AL</asp:ListItem>
@@ -50,6 +50,7 @@
                                 <asp:ListItem>CA</asp:ListItem>
                                 <asp:ListItem>CO</asp:ListItem>
                                 <asp:ListItem>CT</asp:ListItem>
+                                <asp:ListItem>DC</asp:ListItem>
                                 <asp:ListItem>DE</asp:ListItem>
                                 <asp:ListItem>FL</asp:ListItem>
                                 <asp:ListItem>GA</asp:ListItem>
@@ -96,11 +97,11 @@
                             </asp:DropDownList>
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-6">
                             <asp:TextBox ID="txtZip" runat="server" class="form-control form-control-lg" placeholder="Zip" MaxLength="9"></asp:TextBox>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-md-2">
                             <asp:DropDownList ID="ddCountry" runat="server" class="form-control  form-control-lg">
                                 <asp:ListItem Value="US">US</asp:ListItem>
                             </asp:DropDownList>
@@ -140,7 +141,7 @@
                     </div>
                     <%--<a class="btn btn-info" id="createAccountButton" href="create-account-categories.html">Create Account</a>--%>
                     <asp:Button ID="btnCreateAccount" runat="server" Text="Create Account" class="btn btn-info" />
-                </form>
+                 
 
             </div>
 

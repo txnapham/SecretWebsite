@@ -54,7 +54,7 @@ public partial class AdminDashboard : System.Web.UI.Page
         sc.Open();
 
         //User Name Select
-        selectUserName.CommandText = "SELECT FirstName FROM Account WHERE (AccountID = FILL IN ) ;";
+        selectUserName.CommandText = "SELECT FirstName FROM Account WHERE AccountID = " + Session["AccountId"] + ";";
 
         //Host Select
         selectHost.CommandText = "SELECT TOP(5) FirstName, LastName FROM Account WHERE (AccountType = 2);";
@@ -125,7 +125,7 @@ public partial class AdminDashboard : System.Web.UI.Page
             String lastName = tenantRdr["LastName"].ToString();
             //StringBuilder
             StringBuilder myCard3 = new StringBuilder();
-            myCard3.Append(" Tenant: " + firstName + " " + lastName + "</a></li>");
+            myCard3.Append(", Tenant: " + firstName + " " + lastName + "</a></li>");
             Card3.Text += myCard3.ToString();
         }
         tenantRdr.Close();
@@ -139,21 +139,21 @@ public partial class AdminDashboard : System.Web.UI.Page
 
         //StringBuilder
         StringBuilder myCard5 = new StringBuilder();
-        myCard5.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Number of Users: " + leaseCount + "</a></li>");
+        myCard5.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Number of Leases: " + leaseCount + "</a></li>");
         Card5.Text += myCard5.ToString();
 
 
-        //Populate Dashboard with Admin Name
-        System.Data.SqlClient.SqlDataReader nameReader = selectUserName.ExecuteReader();
-        while (nameReader.Read())
-        {
-            String firstName = nameReader["FirstName"].ToString();
+        ////Populate Dashboard with Admin Name
+        //System.Data.SqlClient.SqlDataReader nameReader = selectUserName.ExecuteReader();
+        //while (nameReader.Read())
+        //{
+        //    String firstName = nameReader["FirstName"].ToString();
 
-            //StringBuilder
-            StringBuilder nameCard = new StringBuilder();
-            nameCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Welcome, " + firstName + "</a></li>");
-            UserNameCard.Text += nameCard.ToString();
-        }
-        nameReader.Close();
+        //    //StringBuilder
+        //    StringBuilder nameCard = new StringBuilder();
+        //    nameCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Welcome, " + firstName + "</a></li>");
+        //    UserNameCard.Text += nameCard.ToString();
+        //}
+        //nameReader.Close();
     }
 }

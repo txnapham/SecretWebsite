@@ -46,7 +46,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             //Selecting from Property
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             select.CommandText = "SELECT City, HomeState, LocalPriceRangeLow, LocalPriceRangeHigh FROM Property WHERE PropertyID in " +
-            "(SELECT TOP(3) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
+            "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
             select.Connection = sc;
             sc.Open();
             System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
@@ -62,7 +62,7 @@ public partial class TenantDashboard : System.Web.UI.Page
 
                 StringBuilder myCard = new StringBuilder();
                 myCard
-                .Append("<div class=\"col-md-3\">")
+                .Append("<div class=\"col-xs-4 col-md-3\">")
                 .Append("<div class=\"card  shadow-sm  mb-4\" >")
                 .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
                 .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
@@ -72,11 +72,8 @@ public partial class TenantDashboard : System.Web.UI.Page
                 .Append("                            </div>")
                 .Append("                        </a>")
                 .Append("")
-                .Append("                        <div>")
-                .Append("                            <button type=\"button\" id=\"heartbtn\" class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
-                .Append("                        </div>")
                 .Append("                    </div>")
-                .Append("</n 4div>");
+                .Append("</div>");
                 Card2.Text += myCard.ToString();
             }
             reader.Close();
