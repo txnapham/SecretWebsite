@@ -1,10 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="Home" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="HomeLogout.aspx.cs" Inherits="HomeLogout" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <title>RoomMagnet | Home</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
     <div class="container-fluid homepageAbove">
 
 
@@ -422,7 +420,7 @@
                     </p>
 
                     <div class="learnmore text-center">
-                        <a class="btn btn-md btn-info mb-3" href="AboutUs.aspx">
+                        <a class="btn btn-md btn-info mb-3" href="about-us.html">
                             <h3>Learn More</h3>
                         </a>
                     </div>
@@ -451,38 +449,11 @@
                         <p>3. Get matched!</p>
                     </div>
                     <div class="learnmore text-center">
-                        <a class="btn btn-md btn-info" data-toggle="modal" data-dismiss="modal" data-target="#chooseAccountType">
+                        <a class="btn btn-md btn-info" href="#">
                             <h3>Create Account</h3>
                         </a>
                     </div>
-
                 </div>
-
-                <!--HOST OR TENANT MOD-->
-                <div class="modal justify-content-center" id="chooseAccountType">
-                    <div class="modal-dialog">
-                        <div class="modal-content pb-1">
-
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-
-                            <!-- Modal body -->
-                            <div class="modal-body ">
-                                <form>
-                                    <h4 class="modal-title pb-3">Are you a</h4>
-
-                                    <a class="btn btn-info btn-block" href="HostCreateAccount.aspx">Host</a>
-
-                                    <a class="btn btn-info btn-block" href="TenantCreateAccount.aspx">Tenant</a>
-                                    <!--TENANT A TAG GOES IN BUTTON-->
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--END OF HOST OR TENANT MOD-->
 
                 <div class="col-md-5 rounded roomimagehomepage">
                 </div>
@@ -672,6 +643,5 @@
         };
         ajax.send();
     </script>
-
 </asp:Content>
 
