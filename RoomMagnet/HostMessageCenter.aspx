@@ -4,7 +4,13 @@
     <title>RoomMagnet | Dashboard | Message Center</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
+<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+ </asp:ScriptManager>
+<script>
+    function showMessage(tenantID) {
+        PageMethods.MessageShower(tenantID);
+    };
+</script>
     <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-5 pb-3">
         <div class="navbar navbar-light">
@@ -124,90 +130,12 @@
                 <div class="mesgs">
                     <div class="msg-history">
                         <div class="incoming-msg">
-                            <div class="incoming-msg-img">
-                                <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
-                            </div>
-                            <div class="recieved-msg">
-                                <div class="recieved-withd-msg">
-                                    <p>Message sent to property owner</p>
-                                    <span class="time-date">11:21 AM   |   Nov 11</span>
-                                </div>
-                            </div>
+                            <!--Put card here -->
+                            <asp:Literal ID="TMessage" runat="server" Mode="Transform"></asp:Literal>
+                        <!--End card here -->
                         </div>
-                        <div class="outgoing-msg">
-                            <div class="sent-msg">
-                                <p>Test of outgoing message</p>
-                                <span class="time-date">11:30 AM    |   Nov 11</span>
-                            </div>
-                        </div>
-                        <div class="incoming-msg">
-                            <div class="incoming-msg-img">
-                                <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
-                            </div>
-                            <div class="recieved-msg">
-                                <div class="recieved-withd-msg">
-                                    <p>Message sent to property owner</p>
-                                    <span class="time-date">11:21 AM   |   Nov 11</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing-msg">
-                            <div class="sent-msg">
-                                <p>Test of outgoing message</p>
-                                <span class="time-date">11:30 AM    |   Nov 11</span>
-                            </div>
-                        </div>
-                        <div class="incoming-msg">
-                            <div class="incoming-msg-img">
-                                <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
-                            </div>
-                            <div class="recieved-msg">
-                                <div class="recieved-withd-msg">
-                                    <p>Message sent to property owner</p>
-                                    <span class="time-date">11:21 AM   |   Nov 11</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing-msg">
-                            <div class="sent-msg">
-                                <p>Test of outgoing message</p>
-                                <span class="time-date">11:30 AM    |   Nov 11</span>
-                            </div>
-                        </div>
-                        <div class="incoming-msg">
-                            <div class="incoming-msg-img">
-                                <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
-                            </div>
-                            <div class="recieved-msg">
-                                <div class="recieved-withd-msg">
-                                    <p>Message sent to property owner</p>
-                                    <span class="time-date">11:21 AM   |   Nov 11</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing-msg">
-                            <div class="sent-msg">
-                                <p>Test of outgoing message</p>
-                                <span class="time-date">11:30 AM    |   Nov 11</span>
-                            </div>
-                        </div>
-                        <div class="incoming-msg">
-                            <div class="incoming-msg-img">
-                                <img src="images/rebeccajames.png" class="rounded-circle img-fluid">
-                            </div>
-                            <div class="recieved-msg">
-                                <div class="recieved-withd-msg">
-                                    <p>Message sent to property owner</p>
-                                    <span class="time-date">11:21 AM   |   Nov 11</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing-msg">
-                            <div class="sent-msg">
-                                <p>Test of outgoing message</p>
-                                <span class="time-date">11:30 AM    |   Nov 11</span>
-                            </div>
-                        </div>
+                        <!--Put Card here-->
+                        <asp:Literal ID="message2" runat="server" Mode="Transform"></asp:Literal>
 
                     </div>
                     <div class="type-msg">
