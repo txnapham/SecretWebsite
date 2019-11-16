@@ -36,47 +36,44 @@ public partial class HostMessageCenter : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (string.IsNullOrEmpty(HttpContext.Current.Session["AccountId"].ToString()))
-        //{
-        //}
-        //else
-        //{
-        //}
-        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-        select.CommandText = "select accountID, firstName, LastName from account where AccountID in (select tenantID from tenant where TenantID in " +
-            "(select tenantID from FavoritedTenants where HostID=3));";//change to session
-        select.Connection = sc;
-        sc.Open();
-        //Get Month and Day
-        String sDate = DateTime.Now.ToString();
-        DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
-        String dy = datevalue.Day.ToString();
-        String mn = datevalue.Month.ToString();
-        String yy = datevalue.Year.ToString();
-        //Reader to populate card 
-        System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
-        while (reader.Read())
+        if (Session["AccountId"] != null)
         {
-            String firstName = reader["FirstName"].ToString();
-            String lastName = reader["LastName"].ToString();
-            String tenantID = reader["AccountID"].ToString();
+            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
+            select.CommandText = "select accountID, firstName, LastName from account where AccountID in (select tenantID from tenant where TenantID in " +
+                "(select tenantID from FavoritedTenants where HostID=3));";//change to session
+            select.Connection = sc;
+            sc.Open();
+            //Get Month and Day
+            String sDate = DateTime.Now.ToString();
+            DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
+            String dy = datevalue.Day.ToString();
+            String mn = datevalue.Month.ToString();
+            String yy = datevalue.Year.ToString();
+            //Reader to populate card 
+            System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
+            while (reader.Read())
+            {
+                String firstName = reader["FirstName"].ToString();
+                String lastName = reader["LastName"].ToString();
+                String tenantID = reader["AccountID"].ToString();
 
-            StringBuilder myCard = new StringBuilder();
-            myCard
-                .Append("<div class=\"chat-list\">")
-                .Append("               <div class=\"chat-people\">")
-                .Append("                   <div class=\"chat-img\">")
-                .Append("                        <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" onClick=\"showMessage("+tenantID+")\"></div>")
-                .Append("                   <div class=\"chat-ib\">")
-                .Append("                       <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn+"/"+dy+"/"+yy + "</span></h5>")
-                .Append("                        <p>text</p>")
-                .Append("                    </div>")
-                .Append("                </div>")
-                .Append("            </div>");
-            Card.Text += myCard.ToString();
+                StringBuilder myCard = new StringBuilder();
+                myCard
+                    .Append("<div class=\"chat-list\">")
+                    .Append("               <div class=\"chat-people\">")
+                    .Append("                   <div class=\"chat-img\">")
+                    .Append("                        <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" onClick=\"showMessage(" + tenantID + ")\"></div>")
+                    .Append("                   <div class=\"chat-ib\">")
+                    .Append("                       <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
+                    .Append("                        <p>text</p>")
+                    .Append("                    </div>")
+                    .Append("                </div>")
+                    .Append("            </div>");
+                Card.Text += myCard.ToString();
+            }
+            reader.Close();
+            sc.Close();
         }
-        reader.Close();
-        sc.Close();
     }
     [System.Web.Services.WebMethod]
     [System.Web.Script.Services.ScriptMethod]
