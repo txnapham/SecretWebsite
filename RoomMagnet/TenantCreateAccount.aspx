@@ -16,6 +16,8 @@
 
                  
                     <div class="form-group">
+                        <asp:RequiredFieldValidator ID="fnReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a first name" Visible="False" Text="*Please enter a first name" ControlToValidate="txtFN"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="fnLettersValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid first name" Text="*Please enter a valid first name" ControlToValidate="txtFN" ValidationExpression="^[a-zA-Z]+$"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtFN" runat="server" class="form-control form-control-lg" aria-describedby="FirstName" placeholder="First Name" MaxLength="50"></asp:TextBox>
                     </div>
 
