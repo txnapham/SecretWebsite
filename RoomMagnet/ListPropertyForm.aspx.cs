@@ -55,9 +55,15 @@ public partial class ListPropertyForm : System.Web.UI.Page
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@homeState", newProperty.getHomeState()));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@zip", newProperty.getZip()));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@country", newProperty.getCountry()));
+        //insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@localPriceRangeLow", newProperty.getLocalPriceRangeLow()));
+        //insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@localPriceRangeHigh", newProperty.getLocalPriceRangeHigh()));
+        //insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@roomPriceRangeLow", newProperty.getRoomPriceRangeLow()));
+        //insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("roomPriceRangeHigh", newProperty.getRoomPriceRangeHigh()));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@date", newProperty.getModDate()));
+        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID", Session["AccountId"]));
 
-        insert.CommandText = "INSERT INTO PROPERTY VALUES(@houseNum, @street, @city, @homeState, @zip, @country, 0, 0, 0, 0, @date, 7)";
+    insert.CommandText = "INSERT INTO PROPERTY VALUES(@houseNum, @street, @city, @homeState, @zip, @country, 0,0,0,0,"+
+    "@date, @HostID);";
 
         string check = insert.CommandText;
         Console.Write(check);
