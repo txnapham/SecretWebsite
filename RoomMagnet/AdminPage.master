@@ -75,20 +75,6 @@
         <!--END OF NAVIGATION-->
 
 
-        <div class="container-fluid userDash mb-5">
-            <!--USER DASH-NAV-->
-            <div class="container-fluid userDash pt-2">
-                <div class="navbar navbar-light">
-                    <h4>
-                        <img src="images/robert.png" alt="..." class="rounded-circle img-fluid" width="30%" height="auto">
-                    Welcome Admin,</4>
-           
-                </div>
-
-            </div>
-            <!--END OF USER DASH-NAV-->
-        </div>
-
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
