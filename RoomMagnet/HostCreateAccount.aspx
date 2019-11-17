@@ -137,6 +137,7 @@
                     </div>
 
                     <div class="form-group">
+                        <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)@\w+([-.]\w+).\w+([-.]\w+)*" ControlToValidate="tbEmail" ErrorMessage="Invalid Email Format"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator ID="emailReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter an email." ControlToValidate="txtEmail" Text="*Please enter an email"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtEmail" runat="server" class="form-control form-control-lg" aria-describedby="emailHelp" placeholder="Email" MaxLength="50"></asp:TextBox>
                         <small id="emailHelp" class="form-text text-muted">*We will never share your email with anyone else.</small>
@@ -153,6 +154,7 @@
                     </div>
 
                     <div class="form-group form-check">
+                        <asp:CustomValidator ID="cbAgreementValidator" runat="server" Display="Dynamic" ErrorMessage="*Please accept the terms and conditions</br>" ClientValidationFunction="validateTerms" ></asp:CustomValidator>
                         <asp:CheckBox ID="cbAgreement" runat="server" class="form-check-input" />
                         <label class="form-check-label" for="exampleCheck1">Agreement to Terms &amp; Conditions</label>
                     </div>
@@ -165,5 +167,15 @@
         </div>
 
     </div>
+    <script>
+        function validateTerms(source, arguments) {
+            var $c = $('#<%= cbAgreement.ClientID %>');
+            if($c.prop("checked")){
+                arguments.IsValid = true;
+            } else {
+                arguments.IsValid = false;
+            }
+        }
+    </script>
 </asp:Content>
 

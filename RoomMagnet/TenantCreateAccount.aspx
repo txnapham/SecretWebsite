@@ -138,6 +138,7 @@
                     </div>
 
                     <div class="form-group form-check">
+                        <asp:CustomValidator ID="cbAgreementValidator" runat="server" Display="Dynamic" ErrorMessage="*Please accept the terms and conditions</br>" ClientValidationFunction="validateTerms" ></asp:CustomValidator>
                         <asp:CheckBox ID="cbAgreement" runat="server" class="form-check-input" />
                         <label class="form-check-label" for="exampleCheck1">Agreement to Terms &amp; Conditions</label>
                     </div>
@@ -152,5 +153,15 @@
         </div>
 
     </div>
+    <script>
+        function validateTerms(source, arguments) {
+            var $c = $('#<%= cbAgreement.ClientID %>');
+            if($c.prop("checked")){
+                arguments.IsValid = true;
+            } else {
+                arguments.IsValid = false;
+            }
+        }
+    </script>
 </asp:Content>
 
