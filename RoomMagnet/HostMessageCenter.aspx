@@ -131,11 +131,11 @@
                     <div class="msg-history">
                         <div class="incoming-msg">
                             <!--Put card here -->
-                            <asp:Literal ID="TMessage" runat="server" Mode="Transform"></asp:Literal>
+                            <asp:Literal ID="tenMessage" runat="server" Mode="Transform"></asp:Literal>
                         <!--End card here -->
                         </div>
                         <!--Put Card here-->
-                        <asp:Literal ID="message2" runat="server" Mode="Transform"></asp:Literal>
+                        <asp:Literal ID="hosMessage" runat="server" Mode="Transform"></asp:Literal>
 
                     </div>
                     <div class="type-msg">

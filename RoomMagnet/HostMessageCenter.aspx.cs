@@ -143,11 +143,11 @@ public partial class HostMessageCenter : System.Web.UI.Page
     public void TenantCardBuilder(StringBuilder myCard)
     {
         StringBuilder card = myCard;
-        TMessage.Text += card.ToString();
+        tenMessage.Text += card.ToString();
     }
     public void HostCardBuilder(StringBuilder myCard)
     {
         StringBuilder card = myCard;
-        message2.Text += card.ToString();
+        hosMessage.Text += card.ToString();
     }
 }
