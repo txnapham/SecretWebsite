@@ -47,7 +47,7 @@
                             <a class="nav-link " href="Home.aspx">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Search.aspx">Search</a>
+                            <a class="nav-link" href="Search-Tenant.aspx">Search</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About Us</a>
@@ -62,10 +62,10 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item js-scroll-trigger" href="#">View Profile</a>
+                                <a class="dropdown-item js-scroll-trigger" href="TenantDashboard.aspx">View Profile</a>
                                 <a class="dropdown-item js-scroll-trigger" href="#">Edit Profile</a>
                                 <a class="dropdown-item js-scroll-trigger" href="#">Settings</a>
-                                <a class="dropdown-item js-scroll-trigger" href="#">Logout</a>
+                                <a class="dropdown-item js-scroll-trigger" href="HomeLogout.aspx">Logout</a>
                             </div>
                         </li>
 
@@ -128,6 +128,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="roommagnet.js"></script>
-    </form>
+     </form>
 </body>
 </html>
