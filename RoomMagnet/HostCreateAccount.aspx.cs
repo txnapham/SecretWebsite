@@ -60,7 +60,7 @@ public partial class HostCreateAccount : System.Web.UI.Page
         {
             insert.CommandText = "INSERT into Account VALUES (@fName, @mName, @lName, @phone, @bday, @email, @HouseNbr, @street, @city, @state, @zip, @country, @AccType, @ModDate, @PID); " +
                 "INSERT into Host VALUES(@@Identity, @BackCheck, @HostReason);" +
-                "INSERT into Password VALUES((SELECT MAX(HostID) from HostID), @email, @password);";
+                "INSERT into Password VALUES((SELECT MAX(HostID) from Host), @email, @password);";
 
             //Insert into ACCOUNT
             insert.Parameters.Add(new SqlParameter("@fName", newHost.getFirstName()));
