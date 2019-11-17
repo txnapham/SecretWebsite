@@ -69,9 +69,6 @@ public partial class Search_Tenant : System.Web.UI.Page
             SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
 
             sqlConn.Open();
-            String classType = "card";
-            String imgSource = "";
-            String cardBody = "";
             String tSearch = HttpUtility.HtmlEncode(txtSearch.Text);
             int commaSplit = tSearch.IndexOf(",");
             String cityString = tSearch.Substring(0, commaSplit).ToUpper();
@@ -98,7 +95,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 .Append("<div class=\"col-xs-4 col-md-3\">")
                 .Append("<div class=\"card  shadow-sm  mb-4\" >")
                 .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
-                .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
+                .Append("                        <a href=\"PropertyDetails.aspx\" class=\"cardLinks\">")
                 .Append("                            <div class=\"card-body\">")
                 .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
                 .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
@@ -149,9 +146,7 @@ public partial class Search_Tenant : System.Web.UI.Page
             else
             {
                 sqlConn.Open();
-                String classType = "card";
-                String imgSource = "";
-                String cardBody = "";
+
                 String tSearch = HttpUtility.HtmlEncode(txtSearch.Text);
                 int commaSplit = tSearch.IndexOf(",");
                 String cityString = tSearch.Substring(0, commaSplit).ToUpper();
@@ -178,7 +173,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                     .Append("<div class=\"col-xs-4 col-md-3\">")
                     .Append("<div class=\"card  shadow-sm  mb-4\" >")
                     .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
-                    .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
+                    .Append("                        <a href=\"PropertyDetails.aspx\" class=\"cardLinks\">")
                     .Append("                            <div class=\"card-body\">")
                     .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
                     .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
@@ -217,17 +212,32 @@ public partial class Search_Tenant : System.Web.UI.Page
         System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
         sqlConn.Open();
 
-        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
-        insert.Connection = sqlConn;
-        insert.CommandText = "INSERT into [dbo].[FavoritedProperties] VALUES(@tenantID,@propertyID)";
-        insert.Parameters.Add(new SqlParameter("@tenantID", loginID));
-        insert.Parameters.Add(new SqlParameter("@propertyID", propID));
+        System.Data.SqlClient.SqlCommand check = new System.Data.SqlClient.SqlCommand();
+        check.Connection = sqlConn;
+        check.CommandText = "SELECT COUNT(*) FROM [dbo].[FavoritedProperties] WHERE (TenantID = @tenantID) AND (PropertyID = @propertyID)";
+        check.Parameters.Add(new SqlParameter("@tenantID", loginID));
+        check.Parameters.Add(new SqlParameter("@propertyID", propID));
+        int checkValue = (int)check.ExecuteScalar();
+        
+        if(checkValue == 0)
+        {
+            System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+            insert.Connection = sqlConn;
+            insert.CommandText = "INSERT into [dbo].[FavoritedProperties] VALUES(@tenantID, @propertyID)";
+            insert.Parameters.Add(new SqlParameter("@tenantID", loginID));
+            insert.Parameters.Add(new SqlParameter("@propertyID", propID));
 
-        insert.ExecuteNonQuery();
-        //Place holder for variables in favorited properties dash
-        HttpContext.Current.Session["city"] = city;
-        HttpContext.Current.Session["state"] = state;
-        HttpContext.Current.Session["priceLow"] = priceLow;
-        HttpContext.Current.Session["priceHigh"] = priceHigh;
+            insert.ExecuteNonQuery();
+        }
+        else if (checkValue == 1)
+        {
+            System.Data.SqlClient.SqlCommand delete = new System.Data.SqlClient.SqlCommand();
+            delete.Connection = sqlConn;
+            delete.CommandText = "DELETE FROM [dbo].[FavoritedProperties] WHERE (TenantID = @tenantID) AND (PropertyID = @propertyID)";
+            delete.Parameters.Add(new SqlParameter("@tenantID", loginID));
+            delete.Parameters.Add(new SqlParameter("@propertyID", propID));
+
+            delete.ExecuteNonQuery();
+        }
     }
 }

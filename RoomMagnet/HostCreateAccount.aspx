@@ -144,7 +144,7 @@
                     </div>
 
                     <div class="form-group">
-                        <asp:RegularExpressionValidator ID="passwordValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid password" Text="*Please enter a password with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character (example: !#&%) " ControlToValidate="txtPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="passwordValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid password" Text="*Please enter a password (8-15 characters) with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character (example: !#&%) " ControlToValidate="txtPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator ID="passwordReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a password." ControlToValidate="txtPassword" Text="*Please enter a password"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" placeholder="Password" TextMode="Password" MaxLength="256"></asp:TextBox>
                     </div>
