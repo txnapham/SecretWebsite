@@ -174,7 +174,7 @@
             <section>
                  
                     <div class="form-group descripmessagebox">
-                        <textarea class="form-control " id="descriptionMessagebox"> </textarea>
+                        <textarea class="form-control " id="descriptionMessagebox" runat="server"> </textarea>
                     </div>
 
                  
