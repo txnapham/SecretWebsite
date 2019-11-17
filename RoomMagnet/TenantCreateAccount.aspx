@@ -140,7 +140,7 @@
                         <label class="form-check-label" for="exampleCheck1">Agreement to Terms &amp; Conditions</label>
                     </div>
                     <%--<a class="btn btn-info" id="createAccountButton" href="create-account-categories.html">Create Account</a>--%>
-                    <asp:Button ID="btnCreateAccount" runat="server" Text="Create Account" class="btn btn-info" />
+                    <asp:Button ID="btnCreateAccount" runat="server" Text="Create Account" class="btn btn-info" OnClick="btnCreateAccount_Click" />
                  
 
             </div>
