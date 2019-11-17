@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <!--USER DASH-NAV-->
-    <div class="container-fluid userDash mb-5 pb-3">
+    <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
                 <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
@@ -20,7 +20,7 @@
 
         <div class="row">
 
-            <div class="col-md-12">
+            <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="pl-3">
                     <button class="btn btn-sm personality-outline">English</button>
                     <button class="btn btn-sm personality-outline">Active</button>
@@ -55,7 +55,7 @@
 
         <section>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-sm-12 col-md-12 col-lg-12">
                     <h6>Notification</h6>
                     <div class="alert alert-light alert-dismissible fade show" role="alert">
                         Someone favorited your property!
@@ -71,7 +71,7 @@
 
         <section>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-sm-12 col-md-12 col-lg-12">
 
                     <div class="text-center">
                         <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="20%" height="auto">

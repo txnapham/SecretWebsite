@@ -15,7 +15,6 @@
                     <h2>Welcome to roommagnet!</h2>
                 </div>
 
-                <form>
                     <div class="form-group">
                         <asp:TextBox ID="txtFN" runat="server" class="form-control form-control-lg" aria-describedby="FirstName" placeholder="First Name" MaxLength="50"></asp:TextBox>
                     </div>
@@ -136,7 +135,6 @@
                     </div>
                     <%--<a class="btn btn-info" id="createAccountButton" href="create-account-categories.html">Create Account</a>--%>
                     <asp:Button ID="btnCreateAccount" runat="server" Text="Create Account" class="btn btn-info" OnClick="btnCreateAccount_Click"  CausesValidation="false"/>
-                </form>
 
             </div>
 
