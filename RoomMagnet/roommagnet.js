@@ -10,16 +10,18 @@
 
 
 //$("#heartbtn").click(function(){
-    
-  // $(this).find('.fa-heart').toggleClass("far fas"); 
+
+// $(this).find('.fa-heart').toggleClass("far fas"); 
 //});
 
 
 
-$(".favoriteHeartButton").click(function(){
+$(".favoriteHeartButton").click(function () {
     $(this).find('.fa-heart').toggleClass("far fas")
 });
 
+
+$("[data-toggle=popover]").popover();
 
 
 

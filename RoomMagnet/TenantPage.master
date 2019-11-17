@@ -63,7 +63,7 @@
                             <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item js-scroll-trigger" href="TenantDashboard.aspx">View Profile</a>
-                                <a class="dropdown-item js-scroll-trigger" href="#">Edit Profile</a>
+                                <a class="dropdown-item js-scroll-trigger" href="TenantEditProfile.aspx">Edit Profile</a>
                                 <a class="dropdown-item js-scroll-trigger" href="#">Settings</a>
                                 <a class="dropdown-item js-scroll-trigger" href="HomeLogout.aspx">Logout</a>
                             </div>
