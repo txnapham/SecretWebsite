@@ -34,6 +34,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
     {
         ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
     }
+
     protected void btnCreateAccount_Click(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
@@ -57,8 +58,8 @@ public partial class TenantCreateAccount : System.Web.UI.Page
 
         if (emailCount < 1)
         {
-            insert.CommandText = "INSERT into Account VALUES (@fName, @mName, @lName, @phone, @bday, @email, @HouseNbr, @street, @city, @state, @zip, @country, @AccType, @ModDate, @PID); " +
-                                "INSERT into Tenant VALUES(@@IDENTITY from Account), @BackCheck, @TenantReason);" +
+            insert.CommandText = "INSERT into Account VALUES(@fName, @mName, @lName, @phone, @bday, @email, @HouseNbr, @street, @city, @state, @zip, @country, @AccType, @ModDate, @PID); " +
+                                "INSERT into Tenant VALUES(@@IDENTITY, @BackCheck, @TenantReason); " +
                                 "INSERT into Password VALUES((SELECT MAX(TenantID) from Tenant), @email, @password);";
 
             //Insert into ACCOUNT
@@ -90,7 +91,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
             Session["type"] = 3;
 
             System.Data.SqlClient.SqlCommand getAcctID = new System.Data.SqlClient.SqlCommand();
-            getAcctID.CommandText = "SELECT AccountID FROM ACCOUNT WHERE EMAIL = @emailCheck";
+            getAcctID.CommandText = "SELECT AccountID FROM Account WHERE EMAIL = @emailCheck";
             getAcctID.Parameters.Add(new SqlParameter("@emailCheck", newAccount.getEmail()));
             getAcctID.Connection = sc;
             int AccountID = (int)getAcctID.ExecuteScalar();

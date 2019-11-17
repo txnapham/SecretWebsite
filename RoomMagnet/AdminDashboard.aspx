@@ -4,7 +4,7 @@
     <title>RoomMagnet | Dashboard</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container-fluid userDash mb-5">
+    <div class="container-fluid userDash mb-2">
         <!--USER DASH-NAV-->
         <div class="container-fluid userDash pt-2">
             <div class="navbar navbar-light">
@@ -21,59 +21,64 @@
 
 
 
-    <div class="container-fluid px-5">
+    <div class="container-fluid">
         <!--Cards start here-->
         <section>
-            <div class="card-deck">
-                <div class="card  shadow-sm  mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Registered Hosts</h5>
+            <div class="card-deck row">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="card  shadow-sm  mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Registered Hosts</h5>
 
-                        <ul>
-                            <asp:literal id="Card" runat="server" mode="Transform"></asp:literal>
+                            <ul>
+                                <asp:literal id="Card" runat="server" mode="Transform"></asp:literal>
 
-                        </ul>
+                            </ul>
 
 
-                        <a href="#" class="btn btn-info">View more</a>
+                            <a href="RegisteredHosts.aspx" class="btn btn-info">View more</a>
+                        </div>
                     </div>
-                </div>
 
-                <div class="card  shadow-sm  mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Registered Tenants</h5>
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <div class="card  shadow-sm  mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Registered Tenants</h5>
 
-                        <ul>
-                            <asp:literal id="Card2" runat="server" mode="Transform"></asp:literal>
-                        </ul>
+                                <ul>
+                                    <asp:literal id="Card2" runat="server" mode="Transform"></asp:literal>
+                                </ul>
 
 
-                        <a href="#" class="btn btn-info">View more</a>
+                                <a href="RegisteredTenants.aspx" class="btn btn-info">View more</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="card  shadow-sm  mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Intended Leases</h5>
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <div class="card  shadow-sm  mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Intended Leases</h5>
 
-                        <ul>
-                            <asp:literal id="Card3" runat="server" mode="Transform"></asp:literal>
-                        </ul>
+                                <ul>
+                                    <asp:literal id="Card3" runat="server" mode="Transform"></asp:literal>
+                                </ul>
 
 
-                        <%--<a href="intent-to-lease.html" class="btn btn-info">View more</a> --%>
-                        <%--should not go to intent to lease--%>
+                                <a href="ViewLeases.aspx" class="btn btn-info">View more</a>
+
+                            </div>
+                        </div>
                     </div>
+
+
                 </div>
-
-
-
             </div>
 
         </section>
 
 
-        <section>
+        <%--<section>
             <div class="card  shadow-sm  mb-4">
                 <div class="card-body">
                     <h5 class="card-title">RoomMagnet Data</h5>
@@ -83,6 +88,51 @@
                     </ul>
 
                     <a href="#" class="btn btn-info">View more</a>
+                </div>
+            </div>
+
+        </section>--%>
+        <section>
+            <div class="card-deck row">
+                <div class="col-sm-8 col-md-8 col-lg-8">
+                    <div class="card shadow-sm  mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">RoomMagnet Data</h5>
+                            <ul>
+                                <asp:literal id="Card4" runat="server" mode="Transform"></asp:literal>
+                                <asp:literal id="Card5" runat="server" mode="Transform"></asp:literal>
+                            </ul>
+
+                            <a href="#" class="btn btn-info">View more</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="card shadow-sm  mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Create Admin Account</h5>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-lg" id="validation01" placeholder="First Name">
+                                <asp:TextBox ID="txtFN" runat="server" class="form-control form-control-lg" aria-describedby="FirstName" placeholder="First Name" MaxLength="50"></asp:TextBox>
+                            </div>
+
+                            <div class="form-group">
+                                <asp:TextBox ID="txtLN" runat="server" class="form-control form-control-lg" aria-describedby="LastName" placeholder="Last Name" MaxLength="50"></asp:TextBox>
+                            </div>
+
+                            <div class="form-group">
+                                <asp:TextBox ID="txtEmail" runat="server" class="form-control form-control-lg" aria-describedby="emailHelp" placeholder="Email" MaxLength="50"></asp:TextBox>
+                                <small id="emailHelp" class="form-text text-muted">*We will never share your email with anyone else.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" placeholder="Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                            </div>
+
+                            <asp:Button ID="btnCreateAdmin" runat="server" Text="Create New Admin" class="btn btn-info" CausesValidation="false"/>
+                        </div>
+                    </div>
                 </div>
             </div>
 
