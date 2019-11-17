@@ -381,7 +381,7 @@
                                 <!--END OF SEARCH BAR-->
 
                                 <!--BEGINNING OF SEARCH BUTTON-->
-                                <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-info" OnClick="btnSearch_Click" />
+                                <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-info" />
                                 <!--END OF SERACH BUTTON-->
                             </div>
                         </div>

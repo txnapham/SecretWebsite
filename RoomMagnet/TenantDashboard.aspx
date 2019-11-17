@@ -83,7 +83,9 @@
                             <h5 class="card-title dash-card-titles">Favorited Properties</h5>
 
                             <ul>
-                                <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
+                                <div class="row px-4 py-3">
+                                    <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
+                                </div>
                             </ul>
 
                             <div class=" text-center">
@@ -495,7 +497,7 @@
 
                                         <div class="modal-body">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <form>
+                                             
                                                 <div class="form-group">
                                                     <asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>
                                                 </div>
@@ -508,7 +510,7 @@
                                                 <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" />
 
 
-                                            </form>
+                                             
 
 
                                         </div>

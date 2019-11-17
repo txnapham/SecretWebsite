@@ -23,8 +23,4 @@ public partial class HomeLogout : System.Web.UI.Page
     {
         Response.Redirect("Home.aspx");
     }
-    protected void btnSearch_Click(object sender, EventArgs e)
-    {
-
-    }
 }

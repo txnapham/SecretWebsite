@@ -513,7 +513,7 @@
 
                                             <div class="modal-body">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <form>
+                                                 
                                                     <div class="form-group">
                                                         <asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>
                                                     </div>
@@ -525,7 +525,7 @@
 
                                                     <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" />
 
-                                                </form>
+                                                 
 
 
                                             </div>

@@ -64,7 +64,7 @@
 
 
             <section class="pt-3">
-                <form>
+                 
 
                     <div class="form-group">
                         <asp:TextBox ID="txtHouseNum" runat="server" class="form-control form-control-lg" placeholder="House Number"></asp:TextBox>
@@ -149,7 +149,7 @@
                         <small id="addressDisclosure" class="form-text text-muted">*We will never share your address until you begin the lease process.</small>
                     </div>
 
-                </form>
+                 
             </section>
 
 
@@ -164,12 +164,12 @@
 
 
             <section>
-                <form>
+                 
                     <div class="form-group descripmessagebox">
                         <textarea class="form-control " id="descriptionMessagebox"> </textarea>
                     </div>
 
-                </form>
+                 
             </section>
 
 
@@ -497,12 +497,12 @@
                         </div>
 
 
-                        <form>
+                         
                             <h6>Don't see one that applies to you? Fill out the form below:</h6>
                             <div class="form-group">
                                 <asp:TextBox ID="txtOtherRules" runat="server" class="form-control" aria-describedby="HouseRule" placeholder="Type your house rule here"></asp:TextBox>
                             </div>
-                        </form>
+                         
 
 
                     </div>
@@ -563,7 +563,7 @@
                     <asp:CheckBox ID="cbAgreement" runat="server" class="form-check-input" />
                     <label class="form-check-label" for="exampleCheck1">Agreement to Terms &amp; Conditions</label>
                 </div>
-            </form>
+             
 
 
             <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Property" CausesValidation="false" OnClick="btnListProperty_Click"/>
