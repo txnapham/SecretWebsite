@@ -68,10 +68,7 @@ public partial class Search : System.Web.UI.Page
         {
             SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
 
-            sqlConn.Open();
-            String classType = "card";
-            String imgSource = "";
-            String cardBody = "";
+            sqlConn.Open(); 
             String tSearch = HttpUtility.HtmlEncode(homeSearch);
             int commaSplit = tSearch.IndexOf(",");
             String cityString = tSearch.Substring(0, commaSplit).ToUpper();
@@ -142,9 +139,6 @@ public partial class Search : System.Web.UI.Page
             else
             {
                 sqlConn.Open();
-                String classType = "card";
-                String imgSource = "";
-                String cardBody = "";
                 String tSearch = HttpUtility.HtmlEncode(txtSearch.Text);
                 int commaSplit = tSearch.IndexOf(",");
                 String cityString = tSearch.Substring(0, commaSplit).ToUpper();

@@ -166,7 +166,7 @@
             <section>
                  
                     <div class="form-group descripmessagebox">
-                        <textarea class="form-control " id="descriptionMessagebox"> </textarea>
+                        <textarea class="form-control " id="descriptionMessagebox" runat="server"> </textarea>
                     </div>
 
                  
@@ -543,7 +543,6 @@
             </section>
             <!--end of homesharesmarter-->
 
-            <form class="pt-4">
                 <div class="form-group">
                     <h5>Upload property images here:</h5>
                     <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="True" />
