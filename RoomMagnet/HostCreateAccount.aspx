@@ -137,7 +137,7 @@
                     </div>
 
                     <div class="form-group">
-                        <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)@\w+([-.]\w+).\w+([-.]\w+)*" ControlToValidate="tbEmail" ErrorMessage="Invalid Email Format"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)@\w+([-.]\w+).\w+([-.]\w+)*" ControlToValidate="txtEmail" ErrorMessage="Invalid Email Format"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator ID="emailReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter an email." ControlToValidate="txtEmail" Text="*Please enter an email"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtEmail" runat="server" class="form-control form-control-lg" aria-describedby="emailHelp" placeholder="Email" MaxLength="50"></asp:TextBox>
                         <small id="emailHelp" class="form-text text-muted">*We will never share your email with anyone else.</small>
