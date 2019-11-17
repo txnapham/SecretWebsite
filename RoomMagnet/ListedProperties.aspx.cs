@@ -34,16 +34,15 @@ public partial class ListedProperties : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (string.IsNullOrEmpty(HttpContext.Current.Session["AccountId"].ToString()))
-        {
-        }
-        else
-        {
+        if (Session["AccountId"] != null)
+        { 
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
             //Select Statements properties
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT Property.HouseNumber, Property.Street, PropertyRoom.MonthlyPrice FROM Property INNER JOIN PropertyRoom ON " +
-                "Property.PropertyID = PropertyRoom.PropertyID where Property.HostID  =" + accountID + "; ";
+            select.CommandText = "SELECT Property.HouseNumber, Property.Street, PropertyRoom.MonthlyPrice " +
+                "FROM PropertyRoomImages INNER JOIN PropertyRoom ON PropertyRoomImages.RoomID = PropertyRoom.RoomID " +
+                "INNER JOIN Property ON PropertyRoomImages.PropertyID = Property.PropertyID " +
+                "WHERE Property.HostID  =" + accountID + "; ";
             //Connections
             select.Connection = sc;
             sc.Open();

@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3>Account Created!</h3>
-                    <h6 class="headingsetPrefs">Set preferences now or <a class="doLaterLink" href="host-dashboard.html">later</a></h6>
+                    <h6 class="headingsetPrefs">Set preferences now or <a class="doLaterLink" href="TenantDashboard.aspx">later</a></h6>
                 </div>
             </div>
         </section>

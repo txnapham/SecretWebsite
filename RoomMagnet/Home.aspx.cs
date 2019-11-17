@@ -37,13 +37,17 @@ public partial class Home : System.Web.UI.Page
     {
 
     }
+
     [System.Web.Services.WebMethod]
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         Session["Search"] = txtSearch.Text;
-        if ((int)Session["type"] == 3)
+        if (Session["type"] != null)
         {
-            Response.Redirect("Search-Tenant.aspx");
+            if ((int)Session["type"] == 3)
+            {
+                Response.Redirect("Search-Tenant.aspx");
+            }
         }
         else
         {

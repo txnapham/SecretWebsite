@@ -13,9 +13,8 @@ using System.Xml.Linq;
 using System.Data.SqlClient;
 
 
-public partial class Search : System.Web.UI.Page
+public partial class Search_Tenant : System.Web.UI.Page
 {
-    System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
     protected void Page_PreInit(object sender, EventArgs e)
     {
         if (Session["type"] != null)
@@ -39,25 +38,26 @@ public partial class Search : System.Web.UI.Page
         }
     }
 
+    String homeSearch = "";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["Search"] != null)
         {
             String homeSearch = "";
-            if(Session["Search"] != null)
-            {
-                homeSearch = Convert.ToString(Session["Search"]);
-            }
-            btnHomeSearch_Click(homeSearch);
+            homeSearch = Convert.ToString(Session["Search"]);
+            btnSearch_Click(homeSearch);
         }
     }
 
-    public void btnHomeSearch_Click(String homeSearch)
+    SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+
+    public void btnSearch_Click(String homeSearch)
     {
         Boolean searchCheck = false;
-        for (int i = 0; i < homeSearch.Length - 1; i++)
+        for (int i = 0; i < txtSearch.Text.Length - 1; i++)
         {
-            String checkValue = homeSearch.Substring(i, 2);
+            String checkValue = txtSearch.Text.Substring(i, 2);
             if (checkValue == ", ")
             {
                 searchCheck = true;
@@ -72,7 +72,7 @@ public partial class Search : System.Web.UI.Page
             String classType = "card";
             String imgSource = "";
             String cardBody = "";
-            String tSearch = HttpUtility.HtmlEncode(homeSearch);
+            String tSearch = HttpUtility.HtmlEncode(txtSearch.Text);
             int commaSplit = tSearch.IndexOf(",");
             String cityString = tSearch.Substring(0, commaSplit).ToUpper();
             String state = tSearch.Substring(commaSplit + 2).ToUpper();
@@ -98,11 +98,18 @@ public partial class Search : System.Web.UI.Page
                 .Append("<div class=\"col-xs-4 col-md-3\">")
                 .Append("<div class=\"card  shadow-sm  mb-4\" >")
                 .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
                 .Append("                            <div class=\"card-body\">")
                 .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
                 .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
                 .Append("                            </div>")
+                .Append("                        </a>")
                 .Append("")
+                .Append("                        <div>")
+                .Append("                            <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
+                                                "\'" + homeState + "\'" + "," + priceLowRounded + "," + priceHighRounded + ")\" " +
+                                            "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
+                .Append("                        </div>")
                 .Append("                    </div>")
                 .Append("</div>");
 
@@ -158,6 +165,7 @@ public partial class Search : System.Web.UI.Page
 
                 while (reader.Read())
                 {
+                    int PropID = Convert.ToInt32(reader["PropertyID"]);
                     String city = reader["City"].ToString();
                     String homeState = reader["HomeState"].ToString();
                     String priceRangeLow = reader["RoomPriceRangeLow"].ToString();
@@ -170,11 +178,18 @@ public partial class Search : System.Web.UI.Page
                     .Append("<div class=\"col-xs-4 col-md-3\">")
                     .Append("<div class=\"card  shadow-sm  mb-4\" >")
                     .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                    .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
                     .Append("                            <div class=\"card-body\">")
                     .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
                     .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
                     .Append("                            </div>")
+                    .Append("                        </a>")
                     .Append("")
+                    .Append("                        <div>")
+                    .Append("                            <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
+                                                    "\'" + homeState + "\'" + "," + priceLowRounded + "," + priceHighRounded + ")\" " +
+                                                "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
+                    .Append("                        </div>")
                     .Append("                    </div>")
                     .Append("</div>");
 
@@ -191,12 +206,13 @@ public partial class Search : System.Web.UI.Page
         }
     }
 
+
     [System.Web.Services.WebMethod]
     [System.Web.Script.Services.ScriptMethod]
     public static void MiddleMan(int propertyID, string city, string state, double priceLow, double priceHigh)
     {
         int propID = propertyID;
-        int loginID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
+        int loginID = Convert.ToInt32(HttpContext.Current.Session["AccountId"].ToString());
 
         System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
         sqlConn.Open();

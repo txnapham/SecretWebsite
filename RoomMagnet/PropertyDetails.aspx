@@ -109,7 +109,7 @@
                 <div class="col-md-4 ">
                     <div class="px-5 py-5  shadow-sm  card">
                         <h4>Message Center</h4>
-                        <form>
+                         
                             <div class="form-group">
                                 <label for="firstName">Name</label>
                                 <asp:TextBox ID="txtName" runat="server" class="form-control" placeholder="Name"></asp:TextBox>
@@ -124,7 +124,7 @@
                                 <asp:Button ID="btnSendMsg" runat="server" class="btn btn-info mt-5" Text="Send Message" />
                             </div>
 
-                        </form>
+                         
                     </div>
                 </div>
 

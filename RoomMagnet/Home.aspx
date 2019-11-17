@@ -470,14 +470,14 @@
 
                             <!-- Modal body -->
                             <div class="modal-body ">
-                                <form>
+                                 
                                     <h4 class="modal-title pb-3">Are you a</h4>
 
                                     <a class="btn btn-info btn-block" href="HostCreateAccount.aspx">Host</a>
 
                                     <a class="btn btn-info btn-block" href="TenantCreateAccount.aspx">Tenant</a>
                                     <!--TENANT A TAG GOES IN BUTTON-->
-                                </form>
+                                 
                             </div>
                         </div>
                     </div>
@@ -628,7 +628,6 @@
                         <i class="fas fa-user-check fa-7x  "></i>
                     </span>
                     <h2>Background Checks</h2>
-                    =
                    
                 </div>
 
@@ -672,6 +671,5 @@
         };
         ajax.send();
     </script>
-
 </asp:Content>
 
