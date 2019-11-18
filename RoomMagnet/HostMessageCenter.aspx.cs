@@ -137,13 +137,10 @@ public partial class HostMessageCenter : System.Web.UI.Page
         rdr.Close();
         sqlConn.Close();
     }
-
-    [System.Web.Services.WebMethod]
-    protected void TenantCardBuilder(StringBuilder myCard)
+    public void TenantCardBuilder(StringBuilder myCard)
     {
         StringBuilder card = myCard;
-        Literal test = (Literal)this.Page.FindControl("TMessage"); 
-        test.Text += card.ToString();
+        TMessage.Text += card.ToString();
     }
     public void HostCardBuilder(StringBuilder myCard)
     {
