@@ -113,7 +113,6 @@
                         <div class="card-body">
                             <h5 class="card-title">Create Admin Account</h5>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-lg" id="validation01" placeholder="First Name">
                                 <asp:TextBox ID="txtFN" runat="server" class="form-control form-control-lg" aria-describedby="FirstName" placeholder="First Name" MaxLength="50"></asp:TextBox>
                             </div>
 

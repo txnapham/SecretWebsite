@@ -54,7 +54,7 @@
 
                 <section class="searchform">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
                             <!--FILTER BUTTON AND FILTER FORM-->
                             <div class="form-row">
                                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterOptions">Filter</button>
@@ -377,8 +377,8 @@
 
 
                                 <!--SEARCH BAR-->
-                                <div class="col-md-7 searchBar">
-                                    <asp:TextBox ID="txtSearch" runat="server" class="form-control form-control-lg" placeholder="Search" ClientIDMode="Static"></asp:TextBox>
+                                <div class="col-md-6 searchBar">
+                                    <asp:TextBox ID="txtSearch" runat="server" class="form-control form-control-lg " placeholder="Search" ClientIDMode="Static"></asp:TextBox>
                                 </div>
                                 <!--END OF SEARCH BAR-->
 

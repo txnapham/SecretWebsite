@@ -137,6 +137,7 @@
                         <!--Put Card here-->
                         <asp:Literal ID="message2" runat="server" Mode="Transform"></asp:Literal>
 
+
                     </div>
                     <div class="type-msg">
                         <div class="input-msg-write">
@@ -149,7 +150,9 @@
                     </div>
 
                     <div>
-                        <button type="button" class="btn btn-light createLeaseButton btn-block" href="HostCreateLease.aspx">Create Lease with TENANT NAME</button>
+                        <button type="button" class="btn btn-light createLeaseButton btn-block" >Create Lease with TENANT NAME
+                            <%--<a href="HostCreateLease.aspx" />--%>
+                        </button>
 
                         <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
                     </div>
