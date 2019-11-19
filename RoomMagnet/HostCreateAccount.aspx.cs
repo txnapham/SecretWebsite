@@ -58,7 +58,7 @@ public partial class HostCreateAccount : System.Web.UI.Page
 
         if (emailCount < 1)
         {
-            insert.CommandText = "INSERT into Account VALUES (@fName, @mName, @lName, @phone, @bday, @email, @HouseNbr, @street, @city, @state, @zip, @country, @AccType, @ModDate, @PID); " +
+            insert.CommandText = "INSERT into Account VALUES (@fName, @mName, @lName, @phone, @bday, @email, @HouseNbr, @street, @city, @state, @zip, @country, NULL, @AccType, @ModDate, @PID); " +
                 "INSERT into Host VALUES(@@Identity, @BackCheck, @HostReason);" +
                 "INSERT into Password VALUES((SELECT MAX(HostID) from Host), @email, @password);";
 
