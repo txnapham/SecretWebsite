@@ -68,7 +68,8 @@ public partial class Search : System.Web.UI.Page
         {
             SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
 
-            sqlConn.Open();
+            sqlConn.Open(); 
+
             String tSearch = HttpUtility.HtmlEncode(homeSearch);
             int commaSplit = tSearch.IndexOf(",");
             String cityString = tSearch.Substring(0, commaSplit).ToUpper();
