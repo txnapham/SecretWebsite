@@ -93,21 +93,20 @@ public partial class Search_Tenant : System.Web.UI.Page
                 StringBuilder myCard = new StringBuilder();
                 myCard
                 .Append("<div class=\"col-xs-4 col-md-3\">")
-                .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
-                .Append("                        <a href=\"PropertyDetails.aspx\" class=\"cardLinks\">")
-                .Append("                            <div class=\"card-body\">")
-                .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
-                .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
-                .Append("                            </div>")
-                .Append("                        </a>")
-                .Append("")
-                .Append("                        <div>")
-                .Append("                            <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
-                                                "\'" + homeState + "\'" + "," + priceLowRounded + "," + priceHighRounded + ")\" " +
-                                            "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
-                .Append("                        </div>")
-                .Append("                    </div>")
+                .Append("   <div class=\"card  shadow-sm  mb-4\" >")
+                .Append("       <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                .Append("       <a href=\"PropertyDetails.aspx\" class=\"cardLinks\">")
+                .Append("   <div class=\"card-body\">")
+                .Append("       <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
+                .Append("       <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                .Append("   </div>")
+                .Append("       </a>")
+                .Append("       <div>")
+                .Append("           <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
+                                    "\'" + homeState + "\'" + "," + priceLowRounded + "," + priceHighRounded + ")\" " +
+                                    "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
+                .Append("       </div>")
+                .Append("   </div>")
                 .Append("</div>");
 
                 Card1.Text += myCard.ToString();
@@ -171,21 +170,20 @@ public partial class Search_Tenant : System.Web.UI.Page
                     StringBuilder myCard = new StringBuilder();
                     myCard
                     .Append("<div class=\"col-xs-4 col-md-3\">")
-                    .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                    .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
-                    .Append("                        <a href=\"PropertyDetails.aspx\" class=\"cardLinks\">")
-                    .Append("                            <div class=\"card-body\">")
-                    .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
-                    .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
-                    .Append("                            </div>")
-                    .Append("                        </a>")
-                    .Append("")
-                    .Append("                        <div>")
-                    .Append("                            <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
-                                                    "\'" + homeState + "\'" + "," + priceLowRounded + "," + priceHighRounded + ")\" " +
-                                                "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
-                    .Append("                        </div>")
-                    .Append("                    </div>")
+                    .Append("   <div class=\"card  shadow-sm  mb-4\" >")
+                    .Append("       <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                    .Append("       <a href=\"PropertyDetails.aspx\" class=\"cardLinks\">")
+                    .Append("   <div class=\"card-body\">")
+                    .Append("       <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
+                    .Append("       <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                    .Append("   </div>")
+                    .Append("        </a>")
+                    .Append("       <div>")
+                    .Append("           <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
+                                        "\'" + homeState + "\'" + "," + priceLowRounded + "," + priceHighRounded + ")\" " +
+                                        "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
+                    .Append("     </div>")
+                    .Append("   </div>")
                     .Append("</div>");
 
                     Card1.Text += myCard.ToString();

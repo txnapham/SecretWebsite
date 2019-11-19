@@ -38,6 +38,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
     {
         //if (Session["AccountId"] != null)
         //{
+            Card.Text = "";
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             select.CommandText = "select accountID, firstName, LastName from account where AccountID in (select tenantID from tenant where TenantID in " +
                 "(select tenantID from FavoritedTenants where HostID=3));";//change to session
@@ -60,15 +61,17 @@ public partial class HostMessageCenter : System.Web.UI.Page
                 StringBuilder myCard = new StringBuilder();
                 myCard
                     .Append("<div class=\"chat-list\">")
-                    .Append("               <div class=\"chat-people\">")
-                    .Append("                   <div class=\"chat-img\">")
-                    .Append("                        <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" onClick=\"showMessage(" + tenantID + ")\"></div>")
-                    .Append("                   <div class=\"chat-ib\">")
-                    .Append("                       <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
-                    .Append("                        <p>text</p>")
-                    .Append("                    </div>")
-                    .Append("                </div>")
-                    .Append("            </div>");
+                    .Append("   <div class=\"chat-people\">")
+                    .Append("       <div class=\"chat-img\">")
+                    //.Append("                        <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" onClick=\"showMessage(" + tenantID + ")\"></div>")
+                    .Append("           <asp:ImageButton ImageUrl=\"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" runat=\"server\" ID=\"imgButton\" />")
+                    .Append("       </div>")
+                    .Append("       <div class=\"chat-ib\">")
+                    .Append("           <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
+                    .Append("           <p>text</p>")
+                    .Append("       </div>")
+                    .Append("   </div>")
+                    .Append("</div>");
                 Card.Text += myCard.ToString();
             }
             reader.Close();

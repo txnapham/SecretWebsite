@@ -45,11 +45,11 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     Session["type"] = type;
 
                     //Current User id
-                    System.Data.SqlClient.SqlCommand search1 = new System.Data.SqlClient.SqlCommand();
-                    search1.Connection = sc;
-                    search1.CommandText = "SELECT AccountID from Account where Email = @email";
-                    search1.Parameters.Add(new SqlParameter("@email", txtEmail.Text));
-                    HttpContext.Current.Session["AccountId"] = search1.ExecuteScalar();
+                    System.Data.SqlClient.SqlCommand getAcctID = new System.Data.SqlClient.SqlCommand();
+                    getAcctID.Connection = sc;
+                    getAcctID.CommandText = "SELECT AccountID from Account where Email = @email";
+                    getAcctID.Parameters.Add(new SqlParameter("@email", txtEmail.Text));
+                    HttpContext.Current.Session["AccountId"] = getAcctID.ExecuteScalar();
 
 
                     if (type == 1)
