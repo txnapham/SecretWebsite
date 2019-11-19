@@ -18,19 +18,6 @@
             </div>
         </div>
 
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="pl-3">
-                    <button class="btn btn-sm personality-outline">English</button>
-                    <button class="btn btn-sm personality-outline">Active</button>
-                    <button class="btn btn-sm personality-outline">Non-Smoker</button>
-                    <button class="btn btn-sm personality-outline">Adventurous</button>
-                    <button class="btn btn-sm personality-outline">Early Riser</button>
-                </div>
-            </div>
-
-        </div>
     </div>
     <!--END OF USER DASH-NAV-->
 
@@ -42,14 +29,14 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Listed Properties</li>
+                    <li class="breadcrumb-item active" aria-current="page">Listed Rooms</li>
                 </ol>
             </nav>
         </section>
         <!--END OF BREADCRUMBS-->
 
         <div class="pl-3">
-            <h3>Properties</h3>
+            <h3>Rooms</h3>
         </div>
 
         <section>
@@ -60,9 +47,7 @@
 
 
         <div>
-            <a class="btn btn-info ml-3" href="ListPropertyForm.aspx">Add Property</a>
-
-        </div>
+            <a class="btn btn-info ml-3" href="ListPropertyForm.aspx">Add Room </a>&nbsp;</div>
 
 
     </div>

@@ -21,19 +21,6 @@
             </div>
         </div>
 
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="pl-3">
-                    <button class="btn btn-sm personality-outline">English</button>
-                    <button class="btn btn-sm personality-outline">Active</button>
-                    <button class="btn btn-sm personality-outline">Non-Smoker</button>
-                    <button class="btn btn-sm personality-outline">Adventurous</button>
-                    <button class="btn btn-sm personality-outline">Early Riser</button>
-                </div>
-            </div>
-
-        </div>
     </div>
     <!--END OF USER DASH-NAV-->
 
@@ -76,7 +63,7 @@
                     <div class="col-md-12">
                         <div class="card  shadow-sm  mb-4">
                             <div class="card-body">
-                                <h5 class="card-title dash-card-titles">Properties</h5>
+                                <h5 class="card-title dash-card-titles">Rooms</h5>
                                 <ul>
                                     <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>
@@ -108,10 +95,6 @@
                         </div>
                     </div>
                     <!--END OF MESSAGE MOD-->
-
-
-
-
 
                 </div>
 

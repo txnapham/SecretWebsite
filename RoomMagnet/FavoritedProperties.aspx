@@ -19,18 +19,7 @@
         </div>
 
 
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="pl-3">
-                    <button class="btn personality-outline btn-sm">English</button>
-                    <button class="btn personality-outline btn-sm">Active</button>
-                    <button class="btn personality-outline btn-sm">Non-Smoker</button>
-                    <button class="btn personality-outline btn-sm">Adventurous</button>
-                    <button class="btn personality-outline btn-sm">Early Riser</button>
-                </div>
-            </div>
-        </div>
+        
     </div>
     <!--END OF USER DASH-NAV-->
 
@@ -42,14 +31,14 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="TenantDashboard.aspx" class="breadLink">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Favorited Properties</li>
+                    <li class="breadcrumb-item active" aria-current="page">Favorited Rooms</li>
                 </ol>
             </nav>
         </section>
         <!--END OF BREADCRUMBS-->
 
         <div class="pl-3">
-            <h3>Favorited Properties</h3>
+            <h3>Favorited Rooms</h3>
         </div>
 
         <section>

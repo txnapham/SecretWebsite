@@ -18,19 +18,6 @@
             </div>
         </div>
 
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="pl-3">
-                    <button class="btn btn-sm personality-outline">English</button>
-                    <button class="btn btn-sm personality-outline">Active</button>
-                    <button class="btn btn-sm personality-outline">Non-Smoker</button>
-                    <button class="btn btn-sm personality-outline">Adventurous</button>
-                    <button class="btn btn-sm personality-outline">Early Riser</button>
-                </div>
-            </div>
-
-        </div>
     </div>
     <!--END OF USER DASH-NAV-->
 
@@ -43,8 +30,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="HostPropertyDetails.aspx" class="breadLink">Properties</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">List Property</li>
+                    <li class="breadcrumb-item"><a href="HostPropertyDetails.aspx" class="breadLink">R</a><a href="HostPropertyDetails.aspx">ooms</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">List Room</li>
                 </ol>
             </nav>
         </section>
@@ -265,7 +252,7 @@
                                     <asp:CheckBox ID="cbConnBath" runat="server" />
                                     <span class="slider round"></span>
                                 </label>
-                                <div>Connected Bathroom</div>
+                                <div>Private Bathroom</div>
                             </div>
                         </div>
 
@@ -285,29 +272,11 @@
                                     <asp:CheckBox ID="cbDryer" runat="server" />
                                     <span class="slider round"></span>
                                 </label>
-                                <div>Dryer</div>
+                                <div>Washer / Dryer</div>
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Ceiling Fan</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbKitchen" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Kitchen</div>
-                            </div>
-                        </div>
+                        
 
 
                     </div>
@@ -318,33 +287,13 @@
                         <div class="col-md-12">
                             <div class="switchwrapper">
                                 <label class="switch">
-                                    <asp:CheckBox ID="cbSepEnt" runat="server" />
+                                    <asp:CheckBox ID="cbKitchen" runat="server" />
                                     <span class="slider round"></span>
                                 </label>
-                                <div>Separate Entrance</div>
+                                <div>Kitchen</div>
                             </div>
                         </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbAirCon" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Air Conditioning</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbWasher" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Washer</div>
-                            </div>
-                        </div>
-
+                        
                         <div class="col-md-12">
                             <div class="switchwrapper">
                                 <label class="switch">
@@ -361,7 +310,7 @@
                                     <asp:CheckBox ID="cbHeating" runat="server" />
                                     <span class="slider round"></span>
                                 </label>
-                                <div>Heating</div>
+                                <div>Heating / Air Conditioning</div>
                             </div>
                         </div>
 
@@ -404,15 +353,6 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbDeck" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Deck</div>
-                            </div>
-                        </div>
 
                     </div>
 
@@ -445,7 +385,7 @@
                                     <asp:CheckBox ID="cbPorch" runat="server" />
                                     <span class="slider round"></span>
                                 </label>
-                                <div>Porch</div>
+                                <div>Porch / Deck</div>
                             </div>
                         </div>
 

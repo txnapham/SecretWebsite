@@ -53,7 +53,7 @@
                     </tr>
                      <tr>
                         <td>First Name Last Name</td>
-                        <td><button class="btn btn-yes-go"> Background Status</button></td>
+                        <td><button class="btn btn-yes-go">Background Status</button></td>
                         <td><button class="btn btn-info">Delete Account</button></td>
                     </tr>
                      
