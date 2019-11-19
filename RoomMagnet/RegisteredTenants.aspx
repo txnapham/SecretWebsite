@@ -9,7 +9,7 @@
         <div class="container-fluid userDash pt-2">
             <div class="navbar navbar-light">
                     <h4><img src="images/robert.png" alt="..." class="rounded-circle img-fluid" width="30%" height="auto">
-                        Welcome Admin,</4>
+                        Welcome Admin,</h4>
             </div>
 
         </div>

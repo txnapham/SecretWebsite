@@ -27,7 +27,8 @@
                     </div>
 
                     <div class=" form-group">
-                        <asp:TextBox ID="txtBday" runat="server" class="form-control form-control-lg" placeholder="Birthdate (MM-DD-YYYY)" MaxLength="10"></asp:TextBox>
+<%--                        <asp:TextBox ID="txtBday" runat="server" class="form-control form-control-lg" placeholder="Birthdate (MM-DD-YYYY)" MaxLength="10"></asp:TextBox>--%>
+                            <input type="date" name="bDay" class="from-control form-control-lg">
                     </div>
                     <div class="form-group">
                         <asp:TextBox ID="txtHouseNum" runat="server" class="form-control form-control-lg" placeholder="House Number" MaxLength="10"></asp:TextBox>

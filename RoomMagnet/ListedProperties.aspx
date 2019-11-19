@@ -18,19 +18,6 @@
             </div>
         </div>
 
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="pl-3">
-                    <button class="btn btn-sm personality-outline">English</button>
-                    <button class="btn btn-sm personality-outline">Active</button>
-                    <button class="btn btn-sm personality-outline">Non-Smoker</button>
-                    <button class="btn btn-sm personality-outline">Adventurous</button>
-                    <button class="btn btn-sm personality-outline">Early Riser</button>
-                </div>
-            </div>
-
-        </div>
     </div>
     <!--END OF USER DASH-NAV-->
 
