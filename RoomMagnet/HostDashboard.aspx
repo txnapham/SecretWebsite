@@ -63,7 +63,7 @@
                     <div class="col-md-12">
                         <div class="card  shadow-sm  mb-4">
                             <div class="card-body">
-                                <h5 class="card-title dash-card-titles">Rooms</h5>
+                                <h5 class="card-title dash-card-titles">Properties</h5>
                                 <ul>
                                     <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>

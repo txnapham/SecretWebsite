@@ -45,7 +45,7 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <h6>Notification</h6>
                     <div class="alert alert-light alert-dismissible fade show" role="alert">
-                        Someone favorited your room!
+                        Someone favorited your property!
                            
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
