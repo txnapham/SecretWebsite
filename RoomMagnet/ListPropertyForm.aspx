@@ -157,30 +157,24 @@
                         <small id="addressDisclosure" class="form-text text-muted">*We will never share your address until you begin the lease process.</small>
                     </div>
 
-                 
-            </section>
 
-
-            <section>
-                <div class="row pt-3">
-                    <div class="col-md-12">
-                        <h5>Please provide a brief description of your property:</h5>
-                    </div>
-                </div>
-            </section>
-
-
-
-            <section>
-                 
-                    <div class="form-group descripmessagebox">
-                        <textarea class="form-control " id="descriptionMessagebox" runat="server"> </textarea>
+                <div class="form-row">
+                    <div class="form-group col-md-7">
+                        <asp:RequiredFieldValidator ID="minPriceFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a minimum room price." ControlToValidate="txtMinPrice" Text="*Please enter price "></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="priceNumbers" Display="Dynamic" runat="server" ErrorMessage="Please enter a correct amount" Text="*Please enter a valid price" ControlToValidate="txtMinPrice" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
+                        <asp:TextBox ID="txtMinPrice" runat="server" class="form-control form-control-lg" placeholder="Minimum room price"></asp:TextBox>
                     </div>
 
-                 
+
+
+                    <div class="form-row">
+                    <div class="form-group col-md-7">
+                        <asp:RequiredFieldValidator ID="maxPriceFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a maximum room price." ControlToValidate="txtMaxPrice" Text="*Please enter price "></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" Display="Dynamic" runat="server" ErrorMessage="Please enter a correct amount" Text="*Please enter a valid price" ControlToValidate="txtMaxPrice" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
+                        <asp:TextBox ID="txtMaxPrice" runat="server" class="form-control form-control-lg" placeholder="Maximum room price"></asp:TextBox>
+                    </div>
+
             </section>
-
-
 
 
             <section>
@@ -247,131 +241,6 @@
             <!--end of property type-->
 
             <section>
-                <div class="row pt-3">
-                    <div class="col-md-12">
-                        <h5>Please select amenities that apply to you:</h5>
-                    </div>
-                </div>
-            </section>
-
-            <!--Amenities Start here-->
-            <section>
-                <div class="row px-5 py-3">
-                    <div class="col-md-6">
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbConnBath" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Connected Bathroom</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbWalkInClos" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Walk-In Closet</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbDryer" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Dryer</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Ceiling Fan</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbKitchen" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Kitchen</div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="col-md-6">
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbSepEnt" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Separate Entrance</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbAirCon" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Air Conditioning</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbWasher" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Washer</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbWifi" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Wifi</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbHeating" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Heating</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </section>
-            <!--end of amenities-->
-
-            <section>
                 <div class="row">
                     <div class="col-md-12">
                         <h5>Please select facilities that apply to you:</h5>
@@ -407,10 +276,10 @@
                         <div class="col-md-12">
                             <div class="switchwrapper">
                                 <label class="switch">
-                                    <asp:CheckBox ID="cbDeck" runat="server" />
+                                    <asp:CheckBox ID="cbPorchOrDeck" runat="server" />
                                     <span class="slider round"></span>
                                 </label>
-                                <div>Deck</div>
+                                <div>Porch/Deck</div>
                             </div>
                         </div>
 
@@ -442,10 +311,10 @@
                         <div class="col-md-12">
                             <div class="switchwrapper">
                                 <label class="switch">
-                                    <asp:CheckBox ID="cbPorch" runat="server" />
+                                    <asp:CheckBox ID="CheckBox1" runat="server" />
                                     <span class="slider round"></span>
                                 </label>
-                                <div>Porch</div>
+                                <div>Backyard</div>
                             </div>
                         </div>
 
@@ -473,16 +342,6 @@
                         <div class="col-md-12">
                             <div class="switchwrapper">
                                 <label class="switch">
-                                    <asp:CheckBox ID="cbPets" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Pets Allowed</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
                                     <asp:CheckBox ID="cbSmoke" runat="server" />
                                     <span class="slider round"></span>
                                 </label>
@@ -492,28 +351,6 @@
                     </div>
 
 
-                    <div class="col-md-6">
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbGuest" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Guest Allowed</div>
-                            </div>
-                        </div>
-
-
-                         
-                            <h6>Don't see one that applies to you? Fill out the form below:</h6>
-                            <div class="form-group">
-                                <asp:TextBox ID="txtOtherRules" runat="server" class="form-control" aria-describedby="HouseRule" placeholder="Type your house rule here"></asp:TextBox>
-                            </div>
-                         
-
-
-                    </div>
                 </div>
             </section>
             <!--end of property type-->
@@ -555,7 +392,7 @@
                 <div class="form-group">
                     <h5>Upload property images here:</h5>
                     <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="True" />
-                    <asp:Button runat="server" ID="FilesUpload" Text="Save to Property" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
+                    <asp:Button runat="server" ID="FilesUpload" Text="Save to Property" AutoPostBack="false" OnClientClick="FileUpload1_Click"/>
                     <br />
                     <br />
                     <asp:Label runat="server" ID="StatusLabel" Text="Upload status: " />

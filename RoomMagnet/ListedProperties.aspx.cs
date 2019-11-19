@@ -39,9 +39,9 @@ public partial class ListedProperties : System.Web.UI.Page
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
             //Select Statements properties
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT Property.HouseNumber, Property.Street, PropertyRoom.MonthlyPrice, PropertyRoomImages.images " +
-                "FROM PropertyRoomImages INNER JOIN PropertyRoom ON PropertyRoomImages.RoomID = PropertyRoom.RoomID " +
-                "INNER JOIN Property ON PropertyRoomImages.PropertyID = Property.PropertyID " +
+            select.CommandText = "SELECT Property.HouseNumber, Property.Street, Property.RoomPriceRangeLow, Property.RoomPriceRangeHigh, PropertyImages.images " +
+                "FROM PropertyImages INNER JOIN PropertyRoom ON PropertyImages.PropertyID = PropertyRoom.RoomID " +
+                "INNER JOIN Property ON PropertyImages.PropertyID = Property.PropertyID " +
                 "WHERE Property.HostID  =" + accountID + "; ";
             //Connections
             select.Connection = sc;
@@ -60,7 +60,7 @@ public partial class ListedProperties : System.Web.UI.Page
                 myCard
                 .Append("<div class=\"col-md-3\">")
                 .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                .Append("                        <img src=\"s3://elasticbeanstalk-us-east-1-606091308774/PropertyImages/" + filename + " alt =\"image\">")
+                //.Append("                        <img src=\"https://elasticbeanstalk-us-east-1-606091308774.s3.amazonaws.com/PropertyImages//" + filename + " alt =\"image\">")
                 .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
                 .Append("                            <div class=\"card-body\">")
                 .Append("                                <h5 class=\"card-title\">" + HouseNum + " " + Street + "</h5>")
