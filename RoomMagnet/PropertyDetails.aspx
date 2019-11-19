@@ -76,6 +76,15 @@
                 <div class="col-md-2">
                     <button class="btn favoriteHeartButton"><i class="far fa-heart"></i></button>
                 </div>
+
+                <div class="col-md-12">
+                    <div class="pl-3">
+                        <button class="btn personality-outline btn-sm">Extrovert</button>
+                        <button class="btn personality-outline btn-sm">Wifi</button>
+                        <button class="btn personality-outline btn-sm">Street Parking</button>
+                    </div>
+                </div>
+
             </div>
         </section>
 

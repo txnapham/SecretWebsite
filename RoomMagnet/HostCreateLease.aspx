@@ -19,19 +19,6 @@
                 </div>
             </div>
 
-            <div class="row">
-
-                <div class="col-md-12">
-                    <div class="pl-3">
-                        <button class="btn btn-sm personality-outline">English</button>
-                        <button class="btn btn-sm personality-outline">Active</button>
-                        <button class="btn btn-sm personality-outline">Non-Smoker</button>
-                        <button class="btn btn-sm personality-outline">Adventurous</button>
-                        <button class="btn btn-sm personality-outline">Early Riser</button>
-                    </div>
-                </div>
-
-            </div>
         </div>
         <!--END OF USER DASH-NAV-->
     </div>
@@ -407,7 +394,7 @@
                         <p>The following are additional items that Tenants and Host may want to discuss as part of this agreement.</p>
 
                         <ul>
-                            <li>Domestice task (if any)</li>
+                            <li>Domestic task (if any)</li>
                             <li>Guest (staying or visiting)</li>
                             <li>Tenant's belongings left behind</li>
                             <li>Owners Entry and Inspection</li>
