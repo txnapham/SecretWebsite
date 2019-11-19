@@ -33,7 +33,7 @@
         
             <div class="form-row justify-content-center">
                 <asp:TextBox ID="txtSearch" runat="server" class="form-control form-control-lg" placeholder="Search" style="width:80%;"></asp:TextBox>
-                <asp:Button ID="btnSearch" runat="server" Text="Seacrh" class="btn btn-info"/>
+                <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-info"/>
             </div>                 
                           
                 

@@ -120,7 +120,7 @@ public partial class HostCreateAccount : System.Web.UI.Page
             string MailText = str.ReadToEnd();
             str.Close();
 
-            //Repalce [newusername] = signup user name   
+            //Replace [newusername] = signup user name   
             MailText = MailText.Replace("[newusername]", txtFN.Text.Trim());
 
 

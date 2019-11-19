@@ -84,4 +84,52 @@ public partial class HostEditProfile : System.Web.UI.Page
         
 
     }
+
+    protected void btnChangePassword_Click(object sender, EventArgs e)
+    {
+        int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection();
+        sqlConn.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.Open();
+        sqlConn.Open();
+
+        System.Data.SqlClient.SqlCommand findPass = new System.Data.SqlClient.SqlCommand();
+        findPass.Connection = sc;
+        // SELECT PASSWORD STRING WHERE THE ENTERED USERNAME MATCHES
+        findPass.CommandText = "SELECT PasswordHash from Password where AccountID = @AccountID";
+        findPass.Parameters.Add(new SqlParameter("@AccountID", accountID));
+
+        SqlDataReader reader = findPass.ExecuteReader(); // create a reader
+
+        if (reader.HasRows) // if the email exists, it will continue
+        {
+            while (reader.Read()) // this will read the single record that matches the entered email
+            {
+                string storedHash = reader["PasswordHash"].ToString(); // store the database password into this variable
+
+                if (PasswordHash.ValidatePassword(txtPrevPassword.Text, storedHash)) // if the entered password matches what is stored, it will allow for password change
+                {
+                    System.Data.SqlClient.SqlCommand newPass = new System.Data.SqlClient.SqlCommand();
+                    newPass.Connection = sqlConn;
+                    newPass.CommandText = "UPDATE Password SET PasswordHash = @password WHERE AccountID = @accountID;";
+                    //Insert into PASSWORD
+                    newPass.Parameters.Add(new SqlParameter("@AccountID", accountID));
+                    newPass.Parameters.Add(new SqlParameter("@password", PasswordHash.HashPassword(txtReenterPassword.Text))); // hash entered password
+                    lblPrev.Text = "Success";
+                    newPass.ExecuteNonQuery();
+                    sqlConn.Close();
+                }
+                else
+                {
+                    lblPrev.Text = "Incorrect Password";
+                }
+            }
+        }
+        else // if the account doesn't exist, it will show failure
+
+        sc.Close();
+    }
+
 }

@@ -59,7 +59,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
 
         if (cbGuest.Checked == true)
             txtOtherRules.Text = "it works";
-        string value = descriptionMessagebox.Value;
+        //string value = descriptionMessagebox.Value;
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
@@ -76,7 +76,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@zip", newProperty.getZip()));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@country", newProperty.getCountry()));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@date", newProperty.getModDate()));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@description", value));
+        //insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@description", value));
 
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID", Session["AccountId"]));
 
