@@ -32,28 +32,30 @@ public partial class HostEditProfile : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
-        sc.Open();
-        int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
-        System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
-        search.Connection = sc;
-        search.CommandText = "SELECT HomeNumber, Street, City, HomeState, Country, Zip, PhoneNumber, Email FROM Account WHERE AccountID = " + accountID + ";";
-        SqlDataReader searching = search.ExecuteReader();
-
-        //checks the database for matches
-        if (searching.Read())
+        if (IsPostBack != true)
         {
-            txtHouseNum.Text = searching.GetString(0);
-            txtStreet.Text = searching.GetString(1);
-            txtCity.Text = searching.GetString(2);
-            ddState.SelectedValue = searching.GetString(3);
-            ddCountry.SelectedValue = searching.GetString(4);
-            txtZip.Text = searching.GetString(5);
-            txtPhone.Text = searching.GetString(6);
-            txtEmail.Text = searching.GetString(7);
-        }
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+            sc.Open();
+            int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
+            System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
+            search.Connection = sc;
+            search.CommandText = "SELECT HomeNumber, Street, City, HomeState, Country, Zip, PhoneNumber, Email FROM Account WHERE AccountID = " + accountID + ";";
+            SqlDataReader searching = search.ExecuteReader();
 
+            //checks the database for matches
+            if (searching.Read())
+            {
+                txtHouseNum.Text = searching.GetString(0);
+                txtStreet.Text = searching.GetString(1);
+                txtCity.Text = searching.GetString(2);
+                ddState.SelectedValue = searching.GetString(3);
+                ddCountry.SelectedValue = searching.GetString(4);
+                txtZip.Text = searching.GetString(5);
+                txtPhone.Text = searching.GetString(6);
+                txtEmail.Text = searching.GetString(7);
+            }
+        }
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -65,7 +67,7 @@ public partial class HostEditProfile : System.Web.UI.Page
 
         System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
         update.Connection = sc;
-        update.CommandText = "UPDATE Account SET PhoneNumber = @number WHERE AccountID = @accountID;";
+        update.CommandText = "UPDATE Account SET PhoneNumber = @number, Email = @email, HomeNumber = @HouseNbr, Street = @street, City = @city, HomeState = @state, Country = @country, Zip = @zip WHERE AccountID = @accountID;";
         update.Parameters.Add(new SqlParameter("@number", txtPhone.Text));
         update.Parameters.Add(new SqlParameter("@email", txtEmail.Text));
         update.Parameters.Add(new SqlParameter("@HouseNbr", this.txtHouseNum.Text));
@@ -76,6 +78,10 @@ public partial class HostEditProfile : System.Web.UI.Page
         update.Parameters.Add(new SqlParameter("@zip", this.txtZip.Text));
         update.Parameters.Add(new SqlParameter("@accountID", accountID));
 
+        update.ExecuteNonQuery();
+        sc.Close();
+
+        
 
     }
 }

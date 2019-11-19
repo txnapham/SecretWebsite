@@ -31,14 +31,14 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="TenantDashboard.aspx" class="breadLink">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Favorited Properties</li>
+                    <li class="breadcrumb-item active" aria-current="page">Favorited Rooms</li>
                 </ol>
             </nav>
         </section>
         <!--END OF BREADCRUMBS-->
 
         <div class="pl-3">
-            <h3>Favorited Properties</h3>
+            <h3>Favorited Rooms</h3>
         </div>
 
         <section>

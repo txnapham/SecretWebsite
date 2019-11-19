@@ -236,7 +236,7 @@
         </section>
 
 
-        <asp:Button ID="btnSet" runat="server" Text="Set Now" class="btn btn-info btn-block" href="HostDashboard.aspx" />
+        <asp:Button ID="btnSet" runat="server" Text="Set Now" class="btn btn-info btn-block" href="TenantDashboard.aspx" />
 
 
 

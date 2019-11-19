@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 public partial class HostDashboard : System.Web.UI.Page
 {
     System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+
     protected void Page_PreInit(object sender, EventArgs e)
     {
         if (Session["type"] != null)
@@ -49,7 +50,7 @@ public partial class HostDashboard : System.Web.UI.Page
             "(SELECT TOP(5) tenantID FROM Lease WHERE HostID = " + accountID + ");";
             //Property Select
             selectProp.CommandText = "SELECT HouseNumber, Street FROM Property WHERE PropertyID in (SELECT propertyID FROM Property WHERE HostID = " + accountID + ");";
-            //Message Center Tenant Populating once they favorite the current host's property
+            //Message Center Tenant Populating once they favorite the current host's room
             favoriteTenant.CommandText = "select firstName, LastName from account where AccountID in (select tenantID from tenant where TenantID in " +
                 "(select tenantID from FavoritedProperties where PropertyID in (select PropertyID from property where hostID =" + accountID + ")));";
             //Connections
@@ -90,6 +91,12 @@ public partial class HostDashboard : System.Web.UI.Page
             {
                 String firstName = drd["FirstName"].ToString();
                 String lastName = drd["LastName"].ToString();
+                //Get Month and Day
+                String sDate = DateTime.Now.ToString();
+                DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
+                String dy = datevalue.Day.ToString();
+                String mn = datevalue.Month.ToString();
+                String yy = datevalue.Year.ToString();
 
                 StringBuilder myCard = new StringBuilder();
                 myCard
@@ -97,7 +104,7 @@ public partial class HostDashboard : System.Web.UI.Page
                     .Append("           <div class=\"chat-people\">")
                     .Append("               <div class=\"chat-img\"> <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\"></div>")
                     .Append("                <div class=\"chat-ib\">")
-                    .Append("                    <h5>" + firstName + " " + lastName + "<span class=\"chat-date\"> Nov 12</span></h5>")
+                    .Append("                    <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
                     .Append("                    <p>Hello, I'm interested in your property.</p>")
                     .Append("                </div>")
                     .Append("            </div>")

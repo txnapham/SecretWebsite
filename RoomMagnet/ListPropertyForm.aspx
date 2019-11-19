@@ -30,8 +30,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="HostPropertyDetails.aspx" class="breadLink">Properties</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">List Property</li>
+                    <li class="breadcrumb-item"><a href="HostPropertyDetails.aspx" class="breadLink">R</a><a href="HostPropertyDetails.aspx">ooms</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">List Room</li>
                 </ol>
             </nav>
         </section>
@@ -43,7 +43,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>List Property</h3>
+                        <h3>List Room</h3>
                     </div>
                 </div>
             </section>
@@ -54,18 +54,24 @@
                  
 
                     <div class="form-group">
+                        <asp:RegularExpressionValidator ID="houseNumValidatorNumbers" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid house number" Text="*Please enter a valid house number" ControlToValidate="txtHouseNum" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="houseNumReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a house number." ControlToValidate="txtHouseNum" Text="*Please enter a house number"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtHouseNum" runat="server" class="form-control form-control-lg" placeholder="House Number"></asp:TextBox>
                     </div>
                     <div class="form-group">
+                        <asp:RequiredFieldValidator ID="streetReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a street." ControlToValidate="txtStreet" Text="*Please enter a street"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[a-zA-Z\s]+$"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtStreet" runat="server" class="form-control form-control-lg" placeholder="Street" MaxLength="30"></asp:TextBox>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-7">
+                            <asp:RequiredFieldValidator ID="cityReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a city." ControlToValidate="txtCity" Text="*Please enter a city"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[a-zA-Z]+$"></asp:RegularExpressionValidator>
                             <asp:TextBox ID="txtCity" runat="server" class="form-control form-control-lg" placeholder="City"></asp:TextBox>
                         </div>
 
-
+                        <asp:RequiredFieldValidator ID="stateReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please select a state." ControlToValidate="ddState" Text="*Please select a state"></asp:RequiredFieldValidator>
                         <div class="form-group col-md-3">
                             <asp:DropDownList ID="ddState" runat="server" class="form-control  form-control-lg">
                                 <asp:ListItem Value="">State</asp:ListItem>
@@ -123,6 +129,8 @@
                         </div>
 
                         <div class="form-group col-md-2">
+                            <asp:RequiredFieldValidator ID="zipReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a zip code." ControlToValidate="txtZip" Text="*Please enter a zip code"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="zipNumValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid zip code" Text="*Please enter a valid zip code" ControlToValidate="txtZip" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
                             <asp:TextBox ID="txtZip" runat="server" class="form-control form-control-lg" placeholder="Zip"></asp:TextBox>
                         </div>
                     </div>
@@ -143,7 +151,7 @@
             <section>
                 <div class="row pt-3">
                     <div class="col-md-12">
-                        <h5>Please provide a brief description of your property:</h5>
+                        <h5>Please provide a brief description of your room:</h5>
                     </div>
                 </div>
             </section>
@@ -153,7 +161,7 @@
             <section>
                  
                     <div class="form-group descripmessagebox">
-                        <textarea class="form-control " id="descriptionMessagebox"> </textarea>
+                        <textarea class="form-control " id="descriptionMessagebox" runat="server"> </textarea>
                     </div>
 
                  
@@ -483,11 +491,10 @@
             </section>
             <!--end of homesharesmarter-->
 
-            <form class="pt-4">
                 <div class="form-group">
-                    <h5>Upload property images here:</h5>
+                    <h5>Upload room images here:</h5>
                     <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="True" />
-                    <asp:Button runat="server" ID="FilesUpload" Text="Save to Property" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
+                    <asp:Button runat="server" ID="FilesUpload" Text="Save to Room" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
                     <br />
                     <br />
                     <asp:Label runat="server" ID="StatusLabel" Text="Upload status: " />
@@ -506,7 +513,7 @@
              
 
 
-            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Property" CausesValidation="false" OnClick="btnListProperty_Click"/>
+            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="false" OnClick="btnListProperty_Click"/>
 
 
 
