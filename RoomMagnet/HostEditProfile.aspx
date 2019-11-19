@@ -137,39 +137,31 @@
                     <%--<div class="form-group">
                         <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" placeholder="Password" TextMode="Password" MaxLength="256"></asp:TextBox>
                     </div>--%>
-                    
 
-                     <button class="btn btn-info" type="button" data-toggle="modal" data-target="updatePassword">
+                    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#updatePassword">
                         Change Password
                     </button>
 
-                        <div class="modal" id="updatePassword">
-
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <button type="button" class="close" data-dimiss="modal">&times;</button>
-                                    
-
-                                    <form>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Previous Password">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-lg" id="exampleInputPassword2" placeholder="Previous Password">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-lg" id="exampleInputPassword3" placeholder="Previous Password">
-                                        </div>
-
-                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>
-                                    </form>
-
+                    <div class="modal" id="updatePassword">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <div class="form-group">
+                                        <%--<input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Previous Password" />--%>
+                                        <asp:TextBox ID="txtPrevPassword" runat="server" class="form-control form-control-lg" placeholder="Previous Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <%--<input type="password" class="form-control form-control-lg" id="exampleInputPassword2" placeholder="New Password" />--%>
+                                        <asp:TextBox ID="txtNewPassword" runat="server" class="form-control form-control-lg" placeholder="Previous Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <%--<input type="password" class="form-control form-control-lg" id="exampleInputPassword3" placeholder="Re-enter New Password" />--%>
+                                        <asp:TextBox ID="txtReenterPassword" runat="server" class="form-control form-control-lg" placeholder="Previous Password" TextMode="Password" MaxLength="256"></asp:TextBox>
                                     </div>
+                                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>
                                 </div>
                             </div>
-
                         </div>
+                    </div>
+
+
 
                 </div>
             </div>
@@ -284,7 +276,7 @@
                 <!--PERSONALITY FILTER START HERE-->
 
 
-               <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="col-sm-4 col-md-4 col-lg-4">
 
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
@@ -348,6 +340,20 @@
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
+                                <asp:CheckBox ID="cbReligious" runat="server" />
+                                <span class="slider round"></span>
+                            </label>
+                            <div>Religious</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="switchwrapper">
+                            <label class="switch">
                                 <asp:CheckBox ID="cbTechSavy" runat="server" />
                                 <span class="slider round"></span>
                             </label>
@@ -355,13 +361,43 @@
                         </div>
                     </div>
 
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="switchwrapper">
+                            <label class="switch">
+                                <asp:CheckBox ID="cbSportsFan" runat="server" />
+                                <span class="slider round"></span>
+                            </label>
+                            <div>Sports Fan</div>
+                        </div>
+                    </div>
+
                 </div>
 
-               
-
-               
-
                 <div class="col-sm-4 col-md-4 col-lg-4">
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="switchwrapper">
+                            <label class="switch">
+                                <asp:CheckBox ID="cbAdventurous" runat="server" />
+                                <span class="slider round"></span>
+                            </label>
+                            <div>Adventurous</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="switchwrapper">
+                            <label class="switch">
+                                <asp:CheckBox ID="cbMusicAf" runat="server" />
+                                <span class="slider round"></span>
+                            </label>
+                            <div>Music Aficionado</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-3 col-md-3 col-lg-3">
 
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
@@ -373,7 +409,15 @@
                         </div>
                     </div>
 
-                    
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="switchwrapper">
+                            <label class="switch">
+                                <asp:CheckBox ID="cbHomebody" runat="server" />
+                                <span class="slider round"></span>
+                            </label>
+                            <div>Homebody</div>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -390,7 +434,7 @@
 
     </div>
 
-    <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-info btn-lg btn-block" OnClick="btnSave_Click"/>
+    <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-info btn-lg btn-block" OnClick="btnSave_Click" />
 
 
 </asp:Content>
