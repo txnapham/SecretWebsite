@@ -45,7 +45,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="HostMessageCenter.aspx" class="breadLink">Messages</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Lease Property</li>
+                    <li class="breadcrumb-item active" aria-current="page">Lease Room</li>
                 </ol>
             </nav>
         </section>

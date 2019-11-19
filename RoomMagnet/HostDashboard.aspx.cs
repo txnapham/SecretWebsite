@@ -50,7 +50,7 @@ public partial class HostDashboard : System.Web.UI.Page
             "(SELECT TOP(5) tenantID FROM Lease WHERE HostID = " + accountID + ");";
             //Property Select
             selectProp.CommandText = "SELECT HouseNumber, Street FROM Property WHERE PropertyID in (SELECT propertyID FROM Property WHERE HostID = " + accountID + ");";
-            //Message Center Tenant Populating once they favorite the current host's property
+            //Message Center Tenant Populating once they favorite the current host's room
             favoriteTenant.CommandText = "select firstName, LastName from account where AccountID in (select tenantID from tenant where TenantID in " +
                 "(select tenantID from FavoritedProperties where PropertyID in (select PropertyID from property where hostID =" + accountID + ")));";
             //Connections

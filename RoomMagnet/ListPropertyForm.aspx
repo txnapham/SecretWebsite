@@ -43,8 +43,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="HostPropertyDetails.aspx" class="breadLink">Properties</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">List Property</li>
+                    <li class="breadcrumb-item"><a href="HostPropertyDetails.aspx" class="breadLink">R</a><a href="HostPropertyDetails.aspx">ooms</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">List Room</li>
                 </ol>
             </nav>
         </section>
