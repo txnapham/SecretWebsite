@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TenantPage.master" AutoEventWireup="true" CodeFile="TenantEditProfile.aspx.cs" Inherits="TenantEditProfile" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>RoomMagnet | Edit Profile</title>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container-fluid px-5">
 
         <!--BREADCRUMBS-->
@@ -44,21 +44,6 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">
 
                     <div class="form-group">
-                        <asp:TextBox ID="txtFN" runat="server" class="form-control form-control-lg" aria-describedby="FirstName" placeholder="First Name" MaxLength="50"></asp:TextBox>
-                    </div>
-
-                    <div class="form-group">
-                        <asp:TextBox ID="txtMN" runat="server" class="form-control form-control-lg" aria-describedby="MiddleName" placeholder="Middle Name" MaxLength="50"></asp:TextBox>
-                    </div>
-                    <div class="form-group">
-                        <asp:TextBox ID="txtLN" runat="server" class="form-control form-control-lg" aria-describedby="LastName" placeholder="Last Name" MaxLength="50"></asp:TextBox>
-                    </div>
-
-                    <div class=" form-group">
-                        <asp:TextBox ID="txtBday" runat="server" class="form-control form-control-lg" placeholder="Birthdate (MM-DD-YYYY)" MaxLength="10"></asp:TextBox>
-                    </div>
-
-<div class="form-group">
                         <asp:TextBox ID="txtHouseNum" runat="server" class="form-control form-control-lg" placeholder="House Number" MaxLength="10"></asp:TextBox>
                     </div>
                     <div class="form-group">
@@ -149,9 +134,41 @@
                         <small id="emailHelp" class="form-text text-muted">*We will never share your email with anyone else.</small>
                     </div>
 
-                    <div class="form-group">
+                    <%--<div class="form-group">
                         <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" placeholder="Password" TextMode="Password" MaxLength="256"></asp:TextBox>
-                    </div>
+                    </div>--%>
+
+                    <button class="btn btn-info" type="button" data-toggle="modal" data-target="updatePassword">
+                        Change Password
+                    </button>
+
+                        <div class="modal" id="updatePassword">
+
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <button type="button" class="close" data-dimiss="modal">&times;</button>
+                                    
+
+                                    <form>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Previous Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-lg" id="exampleInputPassword2" placeholder="Previous Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-lg" id="exampleInputPassword3" placeholder="Previous Password">
+                                        </div>
+
+                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>
+                                    </form>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
 
                 </div>
             </div>
@@ -330,20 +347,6 @@
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
-                                <asp:CheckBox ID="cbReligious" runat="server" />
-                                <span class="slider round"></span>
-                            </label>
-                            <div>Religious</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-sm-4 col-md-4 col-lg-4">
-
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="switchwrapper">
-                            <label class="switch">
                                 <asp:CheckBox ID="cbTechSavy" runat="server" />
                                 <span class="slider round"></span>
                             </label>
@@ -351,43 +354,13 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="switchwrapper">
-                            <label class="switch">
-                                <asp:CheckBox ID="cbSportsFan" runat="server" />
-                                <span class="slider round"></span>
-                            </label>
-                            <div>Sports Fan</div>
-                        </div>
-                    </div>
-
                 </div>
+
+               
+
+               
 
                 <div class="col-sm-4 col-md-4 col-lg-4">
-
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="switchwrapper">
-                            <label class="switch">
-                                <asp:CheckBox ID="cbAdventurous" runat="server" />
-                                <span class="slider round"></span>
-                            </label>
-                            <div>Adventurous</div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="switchwrapper">
-                            <label class="switch">
-                                <asp:CheckBox ID="cbMusicAf" runat="server" />
-                                <span class="slider round"></span>
-                            </label>
-                            <div>Music Aficionado</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-sm-3 col-md-3 col-lg-3">
 
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
@@ -399,15 +372,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="switchwrapper">
-                            <label class="switch">
-                                <asp:CheckBox ID="cbHomebody" runat="server" />
-                                <span class="slider round"></span>
-                            </label>
-                            <div>Homebody</div>
-                        </div>
-                    </div>
+                    
 
                 </div>
 

@@ -68,7 +68,8 @@ public partial class Search : System.Web.UI.Page
         {
             SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
 
-            sqlConn.Open();
+            sqlConn.Open(); 
+
             String tSearch = HttpUtility.HtmlEncode(homeSearch);
             int commaSplit = tSearch.IndexOf(",");
             String cityString = tSearch.Substring(0, commaSplit).ToUpper();
@@ -93,14 +94,13 @@ public partial class Search : System.Web.UI.Page
                 StringBuilder myCard = new StringBuilder();
                 myCard
                 .Append("<div class=\"col-xs-4 col-md-3\">")
-                .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
-                .Append("                            <div class=\"card-body\">")
-                .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
-                .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
-                .Append("                            </div>")
-                .Append("")
-                .Append("                    </div>")
+                .Append("   <div class=\"card  shadow-sm  mb-4\">")
+                .Append("       <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                .Append("           <div class=\"card-body\">")
+                .Append("               <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
+                .Append("               <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                .Append("           </div>")
+                .Append("   </div>")
                 .Append("</div>");
 
                 Card1.Text += myCard.ToString();
@@ -162,14 +162,13 @@ public partial class Search : System.Web.UI.Page
                     StringBuilder myCard = new StringBuilder();
                     myCard
                     .Append("<div class=\"col-xs-4 col-md-3\">")
-                    .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                    .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
-                    .Append("                            <div class=\"card-body\">")
-                    .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
-                    .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
-                    .Append("                            </div>")
-                    .Append("")
-                    .Append("                    </div>")
+                    .Append("   <div class=\"card  shadow-sm  mb-4\">")
+                    .Append("       <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                    .Append("           <div class=\"card-body\">")
+                    .Append("               <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
+                    .Append("               <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                    .Append("           </div>")
+                    .Append("   </div>")
                     .Append("</div>");
 
                     Card1.Text += myCard.ToString();
@@ -181,31 +180,7 @@ public partial class Search : System.Web.UI.Page
         }
         else
         {
-            txtSearch.Text = "That Search Query Did Not Display Results";
+            txtSearch.Text = "That Search Did Not Display Results";
         }
-    }
-
-    [System.Web.Services.WebMethod]
-    [System.Web.Script.Services.ScriptMethod]
-    public static void MiddleMan(int propertyID, string city, string state, double priceLow, double priceHigh)
-    {
-        int propID = propertyID;
-        int loginID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
-
-        System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
-        sqlConn.Open();
-
-        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
-        insert.Connection = sqlConn;
-        insert.CommandText = "INSERT into [dbo].[FavoritedProperties] VALUES(@tenantID,@propertyID)";
-        insert.Parameters.Add(new SqlParameter("@tenantID", loginID));
-        insert.Parameters.Add(new SqlParameter("@propertyID", propID));
-
-        insert.ExecuteNonQuery();
-        //Place holder for variables in favorited properties dash
-        HttpContext.Current.Session["city"] = city;
-        HttpContext.Current.Session["state"] = state;
-        HttpContext.Current.Session["priceLow"] = priceLow;
-        HttpContext.Current.Session["priceHigh"] = priceHigh;
     }
 }

@@ -1,6 +1,7 @@
 ﻿@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap");
 
+
 .btn-termsandConditions label {
     color: #fe5f55;
 }
@@ -91,21 +92,22 @@ div.container-fluid.homepageAbove {
 }
 
 .caption-headline {
-    padding-top: 260px;
+    padding-top: 200px;
     font-size: 50px;
     font-weight: bold;
     color: #577399;
 }
 
 .caption-headline-dog {
-    padding-top: 260px;
+    padding-top: 200px;
     font-size: 50px;
     font-weight: bold;
     color: #f7f7ff;
 }
 
 .caption-headline-main {
-    padding-top: 290px;
+    padding-top: 240px;
+    margin: 0 auto;
     font-size: 50px;
     font-weight: bold;
     color: #577399;
@@ -213,9 +215,11 @@ a.doLaterLink {
 }
 
 .searchPageBodyContent {
-    margin-top: 180px;
-    margin-left: 0;
-    margin-right: 0;
+ margin-top: 5%;
+}
+
+#map {
+    padding-bottom: 5%;
 }
 
 .pagination .page-link {
@@ -2661,7 +2665,7 @@ select.form-control:focus::-ms-value {
 }
 
     .form-control-plaintext.form-control-sm, .form-control-plaintext.form-control-lg {
-        padding-right: 0;
+        padding-right: 120px;
         padding-left: 0;
     }
 
