@@ -36,7 +36,7 @@ public partial class AdminDashboard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["AccountId"] == null)
+        if (Session["AccountId"] != null)
         {
             //Select Statement for Host and Tenant to Populate on Dash
             System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
