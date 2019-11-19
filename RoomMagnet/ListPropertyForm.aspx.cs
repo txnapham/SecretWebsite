@@ -52,6 +52,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
 
     }
 
+    ArrayList imageId = new ArrayList();
     protected void btnListProperty_Click(object sender, EventArgs e)
     {
         Property newProperty = new Property(HttpUtility.HtmlEncode(txtHouseNum.Text), HttpUtility.HtmlEncode(txtStreet.Text), HttpUtility.HtmlEncode(txtCity.Text), ddState.SelectedValue, HttpUtility.HtmlEncode(txtZip.Text), HttpUtility.HtmlEncode(txtCountry.Text));
@@ -114,7 +115,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
         imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propID", propertyID));
         imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@roomID", roomID));
 
-        for (int i = 0; i < imageId.Capacity; i++)
+        for (int i = 0; i < imageId.Count; i++)
         {
             string arrayImageId = imageId[i].ToString();
             imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@insertImage", arrayImageId));
@@ -126,7 +127,6 @@ public partial class ListPropertyForm : System.Web.UI.Page
         Response.Redirect("HostDashboard.aspx");
     }
 
-    ArrayList imageId = new ArrayList();
     protected void FileUpload1_Click(object sender, EventArgs e)
     {
         if (FileUploadControl.HasFile)
@@ -160,6 +160,8 @@ public partial class ListPropertyForm : System.Web.UI.Page
             string selectQ = "SELECT MAX(ImagesID) from PropertyRoomImages";
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand(selectQ, sc);
             sc.Open();
+            int test = (int)select.ExecuteScalar();
+
             imageId.Add((int)select.ExecuteScalar());
 
             StatusLabel.Text = "Imaged Saved!";
