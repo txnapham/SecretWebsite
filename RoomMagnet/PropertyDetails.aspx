@@ -96,7 +96,7 @@
                 <div class="col-md-8 ">
                     <div class="col-md-12 card  shadow-sm  px-5 py-5">
                         <div>
-                            <h4>About Room</h4>
+                            <h4>AboutProperty</h4>
                         </div>
                     </div>
 
