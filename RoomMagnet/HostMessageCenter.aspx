@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="HostMessageCenter.aspx.cs" Inherits="HostMessageCenter" %>
+﻿<%@ Page MaintainScrollPositionOnPostback="true" Title="" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="HostMessageCenter.aspx.cs" Inherits="HostMessageCenter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>RoomMagnet | Message Center</title>
@@ -123,6 +123,17 @@
                     </div>
 
                     <div class="inbox-chat">
+                        <div class="chat-list">
+                            <div class="chat-people">
+                                 <div class="chat-img">
+                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/rebeccajames.png" class="rounded-circle img-fluid" CustomParameter="15" onClick= "btnSubmit_Click"/>
+                            </div>  
+                        <div class="chat-ib">
+                        <h5>chase miller<span class="chat-date">11/18/2019</span></h5>
+                                     <p>text</p>
+                                    </div>
+                                </div>
+                            </div>
                         <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
                     </div>
                 </div>
@@ -131,22 +142,19 @@
                     <div class="msg-history">
                         <div class="incoming-msg">
                             <!--Put card here -->
-                            <asp:Literal ID="tenMessage" runat="server" Mode="Transform"></asp:Literal>
+                            
+                            <asp:Literal ID="Message" runat="server" Mode="Transform"></asp:Literal>
                         <!--End card here -->
-                        </div>
-                        <!--Put Card here-->
-                        <asp:Literal ID="hosMessage" runat="server" Mode="Transform"></asp:Literal>
-
                     </div>
+                        </div>
                     <div class="type-msg">
                         <div class="input-msg-write">
                             <%--<input type="text" class="write-msg" placeholder="Type a message">--%>
                             <asp:TextBox ID="txtMessage" runat="server" class="write-msg" placeholder="Please DO NOT Share Any Personal Information"></asp:TextBox>
-                            <button class="msg-send-btn" type="button"><i class="fas fa-paper-plane"></i></button>
-                            <%--<asp:Button ID="btnMessage" runat="server" class="msg-send-btn" Text="Enter" />--%>
-                            <%--not sure how to do the button in aspx to make it look like the html. might have to rededign it to fit aspx--%>
+                            <asp:LinkButton id="LinkButton2" runat="server" class="msg-send-btn" type="button" Text ="Send" OnClick="messagebtn_Click"/>
                         </div>
                     </div>
+                    <asp:LinkButton id="LinkButton1" runat="server" class="msg-send-btn" type="button" Text ="Send" OnClick="messagebtn_Click"/>
 
                     <div>
                         <button type="button" class="btn btn-light createLeaseButton btn-block" href="HostCreateLease.aspx">Create Lease with TENANT NAME</button>
