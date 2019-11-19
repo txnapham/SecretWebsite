@@ -215,9 +215,11 @@ a.doLaterLink {
 }
 
 .searchPageBodyContent {
-    margin-top: 180px;
-    margin-left: 0;
-    margin-right: 0;
+ margin-top: 5%;
+}
+
+#map {
+    padding-bottom: 5%;
 }
 
 .pagination .page-link {

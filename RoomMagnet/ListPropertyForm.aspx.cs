@@ -42,31 +42,24 @@ public partial class ListPropertyForm : System.Web.UI.Page
     }
 
     SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+
     protected void Page_Load(object sender, EventArgs e)
     {
         FileUpload1_Click(sender, e);
 
         txtCountry.Text = "US";
         ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+
     }
 
-
+    ArrayList imageId = new ArrayList();
     protected void btnListProperty_Click(object sender, EventArgs e)
     {
         Property newProperty = new Property(HttpUtility.HtmlEncode(txtHouseNum.Text), HttpUtility.HtmlEncode(txtStreet.Text), HttpUtility.HtmlEncode(txtCity.Text), ddState.SelectedValue, HttpUtility.HtmlEncode(txtZip.Text), HttpUtility.HtmlEncode(txtCountry.Text));
 
-
-        if (cbStPark.Checked == true) newProperty.setStreetParking(1);
-        if (cbGarPark.Checked == true) newProperty.setGarageParking(1);
-        if (cbBackyard.Checked == true) newProperty.setBackyard(1);
-        if (cbPorchOrDeck.Checked == true) newProperty.setPorchOrDeck(1);
-        if (cbPool.Checked == true) newProperty.setPool(1);
-        if (cbSmoke.Checked == true) newProperty.setNonSmoking(1);
-
-        double minPrice = Convert.ToDouble(txtMinPrice.Text);
-        double maxPrice = Convert.ToDouble(txtMaxPrice.Text);
-
-        // string value = descriptionMessagebox.Value;
+        if (cbGuest.Checked == true)
+            txtOtherRules.Text = "it works";
+        //string value = descriptionMessagebox.Value;
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
@@ -74,8 +67,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
         insert.Connection = sc;
         sc.Open();
 
-        // string description = HttpUtility.HtmlEncode(Request.Form["descriptionBox"]);
-
+        string description = HttpUtility.HtmlEncode(Request.Form["descriptionBox"]);
 
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@houseNum", newProperty.getHouseNumber()));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@street", newProperty.getStreet()));
@@ -83,20 +75,13 @@ public partial class ListPropertyForm : System.Web.UI.Page
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@homeState", newProperty.getHomeState()));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@zip", newProperty.getZip()));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@country", newProperty.getCountry()));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@roomPriceRangeLow", minPrice));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@roomPriceRangeHigh", maxPrice));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@streetParking", newProperty.getStreetParking()));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@garageParking", newProperty.getGarageParking()));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@backyard", newProperty.getBackyard()));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@porchOrDeck", newProperty.getPorchOrDeck()));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@pool", newProperty.getStreetParking()));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@nonSmoking", newProperty.getStreetParking()));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@homeShareSmarter", newProperty.getStreetParking()));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@date", newProperty.getModDate()));
+        //insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@description", value));
+
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID", Session["AccountId"]));
 
-
-        insert.CommandText = "INSERT INTO PROPERTY VALUES(NULL, @houseNum, @street, @city, @homeState, @zip, @country, NULL, NULL, @roomPriceRangeLow, @roomPriceRangeHigh, @streetParking, @garageParking, @backyard, @porchOrDeck, @pool, @nonSmoking, @homeShareSmarter, @date, @HostID)";
+        insert.CommandText = "INSERT INTO PROPERTY VALUES(@houseNum, @street, @city, @homeState, @zip, @country, 0, 0, 0, 0, @date, @HostID); " +
+            "INSERT INTO PropertyRoom VALUES(0, NULLIF(@description, ''), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";
 
         string check = insert.CommandText;
         Console.Write(check);
@@ -128,24 +113,19 @@ public partial class ListPropertyForm : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand imageLink = new System.Data.SqlClient.SqlCommand();
         imageLink.Connection = sc;
         imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propID", propertyID));
-        // ArrayList imageId = (ArrayList)ViewState["ImageID"];
+        imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@roomID", roomID));
 
-        sc.Open();
-        for (int i = 0; i < PropertyRoomImages.propertyRoomImagesArray.Count; i++)
+        for (int i = 0; i < imageId.Count; i++)
         {
-            string arrayImageId = PropertyRoomImages.propertyRoomImagesArray[i].ToString();
-            // imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@insertImage", arrayImageId));
-            imageLink.CommandText = ("UPDATE PropertyImages SET PropertyID = @propID WHERE ImagesID = '" + arrayImageId + "';");
-        imageLink.ExecuteNonQuery();
+            string arrayImageId = imageId[i].ToString();
+            imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@insertImage", arrayImageId));
+            imageLink.CommandText = "UPDATE PropertyRoomImages SET PropertyID = @propID, RoomID = @roomID WHERE ImagesID = @insertImage";
+            imageLink.ExecuteNonQuery();
         }
-        sc.Close();
-        PropertyRoomImages.propertyRoomImagesArray.Clear();
+        imageId.Clear();
 
         Response.Redirect("HostDashboard.aspx");
-
     }
-
-    // ArrayList imageId = new ArrayList();
 
     protected void FileUpload1_Click(object sender, EventArgs e)
     {
@@ -168,8 +148,8 @@ public partial class ListPropertyForm : System.Web.UI.Page
             insert.Connection = sc;
             sc.Open();
 
-            insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@images", s3FileName));
-            insert.CommandText = "INSERT INTO PropertyImages VALUES(NULL, @images)";
+            insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@imagefilename", s3FileName));
+            insert.CommandText = "INSERT INTO PropertyRoomImages VALUES(NULL, NULL, @imagefilename)";
 
             string check = insert.CommandText;
             Console.Write(check);
@@ -177,13 +157,12 @@ public partial class ListPropertyForm : System.Web.UI.Page
 
             sc.Close();
 
-            string selectQ = "SELECT MAX(ImagesID) from PropertyImages";
+            string selectQ = "SELECT MAX(ImagesID) from PropertyRoomImages";
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand(selectQ, sc);
             sc.Open();
             int test = (int)select.ExecuteScalar();
-            PropertyRoomImages.propertyRoomImagesArray.Add(test);
 
-            // imageId.Add((int)select.ExecuteScalar());
+            imageId.Add((int)select.ExecuteScalar());
 
             StatusLabel.Text = "Imaged Saved!";
         }

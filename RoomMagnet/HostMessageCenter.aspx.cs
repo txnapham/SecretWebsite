@@ -36,12 +36,13 @@ public partial class HostMessageCenter : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Card.Text = String.Empty;
         //if (Session["AccountId"] != null)
         //{
-            Card.Text = "";
+            
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             select.CommandText = "select accountID, firstName, LastName from account where AccountID in (select tenantID from tenant where TenantID in " +
-                "(select tenantID from FavoritedTenants where HostID=3));";//change to session
+                "(select tenantID from FavoritedTenants where HostID = "+Session["AccountId"]+"));";
             select.Connection = sc;
             sc.Open();
             //Get Month and Day
@@ -50,7 +51,8 @@ public partial class HostMessageCenter : System.Web.UI.Page
             String dy = datevalue.Day.ToString();
             String mn = datevalue.Month.ToString();
             String yy = datevalue.Year.ToString();
-            //Reader to populate card 
+        //Reader to populate card 
+            int count = 0;
             System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
             while (reader.Read())
             {
@@ -61,98 +63,116 @@ public partial class HostMessageCenter : System.Web.UI.Page
                 StringBuilder myCard = new StringBuilder();
                 myCard
                     .Append("<div class=\"chat-list\">")
-                    .Append("   <div class=\"chat-people\">")
-                    .Append("       <div class=\"chat-img\">")
-                    //.Append("                        <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" onClick=\"showMessage(" + tenantID + ")\"></div>")
-                    .Append("           <asp:ImageButton ImageUrl=\"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" runat=\"server\" ID=\"imgButton\" />")
-                    .Append("       </div>")
-                    .Append("       <div class=\"chat-ib\">")
-                    .Append("           <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
-                    .Append("           <p>text</p>")
-                    .Append("       </div>")
-                    .Append("   </div>")
-                    .Append("</div>");
+                    .Append("               <div class=\"chat-people\">")
+                    .Append("                   <div class=\"chat-img\">")
+                    .Append("                        <asp:ImageButton id=\"btnSubmit"+count+ "\" runat=\"server\" =\"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" CustomParameter=\""+tenantID+"\" onClick= \"btnSubmit_Click\"/>") 
+                    .Append("                       </div>")
+                    .Append("                   <div class=\"chat-ib\">")
+                    .Append("                       <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
+                    .Append("                        <p>text</p>")
+                    .Append("                    </div>")
+                    .Append("                </div>")
+                    .Append("            </div>");
                 Card.Text += myCard.ToString();
+                count++;
             }
             reader.Close();
             sc.Close();
         //}
     }
-    [System.Web.Services.WebMethod]
-    [System.Web.Script.Services.ScriptMethod]
-    public static void MessageShower(int tenantID)
+    protected void btnSubmit_Click(object sender, ImageClickEventArgs e)
     {
-        int tenID = tenantID;
-        System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+        ImageButton lnk = sender as ImageButton;
+        String tenantID = lnk.Attributes["CustomParameter"].ToString();
 
-        System.Data.SqlClient.SqlCommand tenantMessage = new System.Data.SqlClient.SqlCommand();
-        System.Data.SqlClient.SqlCommand hostMessage = new System.Data.SqlClient.SqlCommand();
-        //Tenant Message
-        tenantMessage.CommandText = "select messageContent, date from message where (messageType = 1) and FavPropID in (select FavPropID from FavoritedProperties where PropertyID in " +
-            " (select PropertyID from Property where HostID = 3)) and " +//change to session
-            "FavTenantID in (select FavTenantID from FavoritedTenants where TenantID = "+tenID+"); ";
-        //Host Message
-        hostMessage.CommandText = "select messageContent, date from message where (messageType = 0) and FavPropID in (select FavPropID from FavoritedProperties where PropertyID in " +
-            " (select PropertyID from Property where HostID = 3)) and " +//change to session
-            "FavTenantID in (select FavTenantID from FavoritedTenants where TenantID = " + tenID + ");"; 
-        tenantMessage.Connection = sqlConn;
-        hostMessage.Connection = sqlConn;
-        sqlConn.Open();
-        System.Data.SqlClient.SqlDataReader reader = tenantMessage.ExecuteReader();
+        System.Data.SqlClient.SqlCommand selectMessage = new System.Data.SqlClient.SqlCommand();
+        //Message
+        selectMessage.CommandText = "select messageContent, date,MessageType from message where (messageType = 1) and FavPropID in (select FavPropID " +
+            "from FavoritedProperties where PropertyID in (select PropertyID from Property where HostID =" + Session["AccountId"] + ")) and FavTenantID in (select FavTenantID from " +
+            "FavoritedTenants where TenantID = " + tenantID + ")" +
+            "Union " +
+            "select messageContent, date,MessageType from message where(messageType = 0) and FavPropID in (select FavPropID from FavoritedProperties where " +
+            "PropertyID in (select PropertyID from Property where HostID="+ Session["AccountId"]+")) and FavTenantID in (select FavTenantID from FavoritedTenants where TenantID=" +tenantID+")" +
+            " order by date; ";
+        selectMessage.Connection = sc;
+        sc.Open();
+        System.Data.SqlClient.SqlDataReader reader = selectMessage.ExecuteReader();
+        Message.Text = String.Empty;
         while (reader.Read())
         {
             String message = reader["MessageContent"].ToString();
             String date = reader["Date"].ToString();
+            int messageType = Convert.ToInt16(reader["MessageType"].ToString());
 
-            StringBuilder myCard = new StringBuilder();
-            myCard
-            .Append("    <div class=\"incoming-msg-img\">")
-            .Append("                    <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\">")
-            .Append("                </div>")
-            .Append("                <div class=\"recieved-msg\">")
-            .Append("                    <div class=\"recieved-withd-msg\">")
-            .Append("                        <p>"+message+"</p>")
-            .Append("                        <span class=\"time-date\">"+date+"</span>")
-            .Append("                    </div>")
-            .Append("                </div>");
-            
-            Literal tenMessage = new Literal();
-            tenMessage.ID = "tenMessage";
-            tenMessage.Text += myCard.ToString();
+            if (messageType == 1)
+            {
+                StringBuilder myCard = new StringBuilder();
+                myCard
+                .Append("    <div class=\"incoming-msg-img\">")
+                .Append("                    <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\">")
+                .Append("                </div>")
+                .Append("                <div class=\"recieved-msg\">")
+                .Append("                    <div class=\"recieved-withd-msg\">")
+                .Append("                        <p>" + message + "</p>")
+                .Append("                        <span class=\"time-date\">" + date + "</span>")
+                .Append("                    </div>")
+                .Append("                </div>");
 
-            //HostMessageCenter x = new HostMessageCenter();
-            //x.TenantCardBuilder(myCard);
+                Message.Text += myCard.ToString();
+            }
+            else if(messageType == 0)
+            {
+                StringBuilder myCard = new StringBuilder();
+                myCard
+                .Append("<div class=\"outgoing-msg\">")
+                .Append("                <div class=\"sent-msg\">")
+                .Append("                   <p>" + message + "</p>")
+                .Append("                   <span class=\"time-date\">" + date + "</span>")
+                .Append("                </div>")
+                .Append("            </div>");
+
+                Message.Text += myCard.ToString();
+            }
         }
         reader.Close();
-        System.Data.SqlClient.SqlDataReader rdr = hostMessage.ExecuteReader();
-        while (rdr.Read())
-        {
-            String message = rdr["MessageContent"].ToString();
-            String date = rdr["Date"].ToString();
-
-            StringBuilder myCard = new StringBuilder();
-            myCard
-            .Append("<div class=\"outgoing - msg\">")
-            .Append("                <div class=\"sent - msg\">")
-            .Append("                   <p>"+message+"</p>")
-            .Append("                   <span class=\"time - date\">"+date+"</span>")
-            .Append("                </div>")
-            .Append("            </div>");
-
-            //HostMessageCenter x = new HostMessageCenter();
-            //x.HostCardBuilder(myCard);
-        }
-        rdr.Close();
-        sqlConn.Close();
+        sc.Close();
     }
-    //protected void TenantCardBuilder(StringBuilder myCard)
-    //{
-    //    StringBuilder card = myCard;
-    //    tenMessage.Text += card.ToString();
-    //}
-    //protected void HostCardBuilder(StringBuilder myCard)
-    //{
-    //    StringBuilder card = myCard;
-    //    hosMessage.Text += card.ToString();
-    //}
+
+    protected void messagebtn_Click(object sender, EventArgs e)
+    {
+        //Selecting FavProp and FavTenant
+        System.Data.SqlClient.SqlCommand favTenant = new System.Data.SqlClient.SqlCommand();
+        System.Data.SqlClient.SqlCommand favProp = new System.Data.SqlClient.SqlCommand();
+        favProp.Connection = sc;
+        favTenant.Connection = sc;
+        sc.Open();
+        favProp.CommandText = "SELECT FavoritedProperties.FavPropID FROM FavoritedProperties INNER JOIN Message ON FavoritedProperties.FavPropID = " +
+            "Message.FavPropID INNER JOIN Property ON FavoritedProperties.PropertyID = Property.PropertyID AND Property.HostID =" + Session["AccountId"] + ";";
+        int favPropID = Convert.ToInt16(favProp.ExecuteScalar());
+        sc.Close();
+        favTenant.CommandText = "SELECT FavTenantID FROM Message where FavPropID = " + favPropID + ";";
+        sc.Open();
+        int favTenantID = Convert.ToInt16(favTenant.ExecuteScalar());
+        sc.Close();
+
+        //Insert Message Statement 
+        String message = txtMessage.Text;
+        String date = DateTime.Now.ToString();
+
+        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+        insert.Connection = sc;
+        sc.Open();
+        insert.CommandText = "INSERT INTO MESSAGE VALUES(@MessageContent,@MessageType,@Date,@FavPropID,@FavTenantID);";
+        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MessageContent", message));
+        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MessageType", "0"));
+        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Date", date));
+        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@FavPropID", favPropID));
+        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@FavTenantID",favTenantID ));
+
+        insert.ExecuteNonQuery();
+        sc.Close();
+        txtMessage.Text = String.Empty;
+        //e as ImageClickEventArgs;
+        //btnSubmit_Click(sender,e);
+    }
 }

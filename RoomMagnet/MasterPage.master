@@ -79,7 +79,8 @@
                                 <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" placeholder="Password" TextMode ="Password"></asp:TextBox>
                             </div>
                             <asp:Button ID="btnLogin" runat="server" Text="Login" class="btn btn-md btn-info btn-block" OnClick="btnLogin_Click" />
-                         
+                            
+                            <a class="text-center" href="#">Forgot Password?</a>
                     </div>
 
                     <div class="modal-body">

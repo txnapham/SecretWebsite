@@ -20,6 +20,22 @@
         <section>
             <div class="row pt-3">
                 <div class="col-md-12">
+                    <h5>Add profile picture:</h5>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="btn">
+                <span>Add photo</span>
+                <input type="file"/>
+            </div>
+        </section>
+
+
+        <section>
+            <div class="row pt-3">
+                <div class="col-md-12">
                     <h5>Please select your preferred language:</h5>
                 </div>
             </div>
@@ -121,12 +137,12 @@
 
         <section>
             <div class="row px-5 py-3">
-                <!--PERSONALITY FILTER START HERE-->
+    <!--PERSONALITY FILTER START HERE-->
 
 
-                <div class="col-md-4">
+               <div class="col-sm-4 col-md-4 col-lg-4">
 
-                    <div class="col-md-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
                                 <asp:CheckBox ID="cbEarlyRiser" runat="server" />
@@ -136,7 +152,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
                                 <asp:CheckBox ID="cbNightOwl" runat="server" />
@@ -149,9 +165,9 @@
                 </div>
 
 
-                <div class="col-md-4">
+                <div class="col-sm-4 col-md-4 col-lg-4">
 
-                    <div class="col-md-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
                                 <asp:CheckBox ID="cbIntrovert" runat="server" />
@@ -161,7 +177,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
                                 <asp:CheckBox ID="cbExtrovert" runat="server" />
@@ -173,33 +189,19 @@
 
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-sm-4 col-md-4 col-lg-4">
 
-                    <div class="col-md-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
-                                <asp:CheckBox ID="fbFamily" runat="server" />
+                                <asp:CheckBox ID="cbFamily" runat="server" />
                                 <span class="slider round"></span>
                             </label>
                             <div>Family-Oriented</div>
                         </div>
                     </div>
 
-                    <div class="col-md-12">
-                        <div class="switchwrapper">
-                            <label class="switch">
-                                <asp:CheckBox ID="cbReligious" runat="server" />
-                                <span class="slider round"></span>
-                            </label>
-                            <div>Religious</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-md-4">
-
-                    <div class="col-md-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
                                 <asp:CheckBox ID="cbTechSavy" runat="server" />
@@ -209,45 +211,11 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
-                        <div class="switchwrapper">
-                            <label class="switch">
-                                <asp:CheckBox ID="cbSportsFan" runat="server" />
-                                <span class="slider round"></span>
-                            </label>
-                            <div>Sports Fan</div>
-                        </div>
-                    </div>
-
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-sm-4 col-md-4 col-lg-4">
 
-                    <div class="col-md-12">
-                        <div class="switchwrapper">
-                            <label class="switch">
-                                <asp:CheckBox ID="cbAdventurous" runat="server" />
-                                <span class="slider round"></span>
-                            </label>
-                            <div>Adventurous</div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="switchwrapper">
-                            <label class="switch">
-                                <asp:CheckBox ID="cbMusicAf" runat="server" />
-                                <span class="slider round"></span>
-                            </label>
-                            <div>Music Aficionado</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div class="col-md-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
                                 <asp:CheckBox ID="cbNonSmoker" runat="server" />
@@ -257,15 +225,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
-                        <div class="switchwrapper">
-                            <label class="switch">
-                                <asp:CheckBox ID="cbHomebody" runat="server" />
-                                <span class="slider round"></span>
-                            </label>
-                            <div>Homebody</div>
-                        </div>
-                    </div>
+                    
 
                 </div>
 
@@ -276,7 +236,7 @@
         </section>
 
 
-        <asp:Button ID="btnSet" runat="server" Text="Set Now" class="btn btn-info btn-block" href="HostDashboard.aspx" />
+        <asp:Button ID="btnSet" runat="server" Text="Set Now" class="btn btn-info btn-block" href="TenantDashboard.aspx" OnClick="btnSet_Click" />
 
 
 

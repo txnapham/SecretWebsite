@@ -32,11 +32,15 @@
                     </div>
 
                     <div class=" form-group">
-                        <asp:RegularExpressionValidator ID="realBday" runat="server" ValidationExpression="^(?:(?:(?:0?[13578]|1[02])(\/|-|\.)31)\1|(?:(?:0?[1,3-9]|1[0-2])(\/|-|\.)(?:29|30)\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:0?2(\/|-|\.)29\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:(?:0?[1-9])|(?:1[0-2]))(\/|-|\.)(?:0?[1-9]|1\d|2[0-8])\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" ControlToValidate="txtBday" ErrorMessage="Invalid Date"></asp:RegularExpressionValidator>
-                        <asp:RegularExpressionValidator ID="bdayDateValidator" runat="server" ValidationExpression="^\d{1,2}\-\d{1,2}\-\d{4}$" ControlToValidate="txtBday" ErrorMessage="Invalid Date Input (MM-DD-YYYY)"></asp:RegularExpressionValidator>
-                        <asp:RegularExpressionValidator ID="bdayCharValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid birth date (MM-DD-YYYY)" Text="*Please enter a valid birth date" ControlToValidate="txtBday" ValidationExpression="^[0-9-]+$"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="bdayReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a birth date." ControlToValidate="txtBday" Text="*Please enter a birth date"></asp:RequiredFieldValidator>
-                        <asp:TextBox ID="txtBday" runat="server" class="form-control form-control-lg" placeholder="Birthdate (MM-DD-YYYY)" MaxLength="10"></asp:TextBox>
+
+                        <%--<input type="date" name="bDay" class="from-control form-control-lg">--%>
+                        <asp:TextBox type="date" ID="txtBday" runat="server" class="form-control form-control-lg" placeholder="Birthdate (MM/DD/YYYY)" MaxLength="10"></asp:TextBox>
+<%--                    <asp:RegularExpressionValidator ID="realBday" Display="Dynamic" runat="server" ValidationExpression="^(?:(?:(?:0?[13578]|1[02])(\/|-|\.)31)\1|(?:(?:0?[1,3-9]|1[0-2])(\/|-|\.)(?:29|30)\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:0?2(\/|-|\.)29\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:(?:0?[1-9])|(?:1[0-2]))(\/|-|\.)(?:0?[1-9]|1\d|2[0-8])\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" ControlToValidate="txtBday" ErrorMessage="*Invalid Date<br/>"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="bdayDateValidator" Display="Dynamic" runat="server" ValidationExpression="^\d{1,2}\-\d{1,2}\-\d{4}$" ControlToValidate="txtBday" ErrorMessage="*Invalid Date Input (MM-DD-YYYY)<br/>"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="bdayCharValidator" Display="Dynamic" runat="server" ErrorMessage="*Please enter a valid birth date (MM-DD-YYYY)<br/>" Text="*Please enter a valid birth date" ControlToValidate="txtBday" ValidationExpression="^[0-9-]+$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="bdayReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="*Please enter a birth date." ControlToValidate="txtBday" Text="*Please enter a birth date"></asp:RequiredFieldValidator>
+                        <asp:TextBox ID="txtBday" runat="server" class="form-control form-control-lg" placeholder="Birthdate (MM-DD-YYYY)" MaxLength="10"></asp:TextBox> --%>
+
                     </div>
                     <div class="form-group">
                         <asp:RegularExpressionValidator ID="houseNumValidatorNumbers" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid house number" Text="*Please enter a valid house number" ControlToValidate="txtHouseNum" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
@@ -138,7 +142,7 @@
                     </div>
 
                     <div class="form-group">
-<%--                        <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)@\w+([-.]\w+).\w+([-.]\w+)*" ControlToValidate="txtEmail" ErrorMessage="Invalid Email Format"></asp:RegularExpressionValidator>--%>
+                        <asp:RegularExpressionValidator ID="regexEmailValid" Display="Dynamic" runat="server" ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" ControlToValidate="txtEmail" ErrorMessage="*Invalid Email Format"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator ID="emailReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter an email." ControlToValidate="txtEmail" Text="*Please enter an email"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtEmail" runat="server" class="form-control form-control-lg" aria-describedby="emailHelp" placeholder="Email" MaxLength="50"></asp:TextBox>
                         <small id="emailHelp" class="form-text text-muted">*We will never share your email with anyone else.</small>
@@ -148,6 +152,12 @@
                         <asp:RegularExpressionValidator ID="passwordValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid password" Text="*Please enter a password with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character (example: !#&%) " ControlToValidate="txtPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator ID="passwordReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a password." ControlToValidate="txtPassword" Text="*Please enter a password"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" placeholder="Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                    </div>
+
+                    <div class="form-group">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" runat="server" ErrorMessage="Re-Enter password" ControlToValidate="txtConPass" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:CompareValidator ID="CompareValidator1" Display="Dynamic" runat="server" ErrorMessage="Passwords do no match" ControlToValidate="txtConPass" ControlToCompare="txtPassword" ForeColor="Red"></asp:CompareValidator>
+                        <asp:TextBox ID="txtConPass" runat="server" class="form-control form-control-lg" placeholder="Re-Enter Password" TextMode="Password" MaxLength="256"></asp:TextBox>
                     </div>
 
                     <div class="form-group">

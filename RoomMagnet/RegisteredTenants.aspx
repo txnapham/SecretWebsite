@@ -9,7 +9,7 @@
         <div class="container-fluid userDash pt-2">
             <div class="navbar navbar-light">
                     <h4><img src="images/robert.png" alt="..." class="rounded-circle img-fluid" width="30%" height="auto">
-                        Welcome Admin,</4>
+                        Welcome Admin,</h4>
             </div>
 
         </div>
@@ -33,7 +33,7 @@
         
             <div class="form-row justify-content-center">
                 <asp:TextBox ID="txtSearch" runat="server" class="form-control form-control-lg" placeholder="Search" style="width:80%;"></asp:TextBox>
-                <asp:Button ID="btnSearch" runat="server" Text="Seacrh" class="btn btn-info"/>
+                <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-info"/>
             </div>                 
                           
                 

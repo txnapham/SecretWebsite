@@ -4,7 +4,7 @@
     <title>RoomMagnet | Edit Profile</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container-fluid px-5">
+    <div class="container-fluid px-5 mt-4">
 
         <!--BREADCRUMBS-->
         <section>
@@ -134,9 +134,42 @@
                         <small id="emailHelp" class="form-text text-muted">*We will never share your email with anyone else.</small>
                     </div>
 
-                    <div class="form-group">
+                    <%--<div class="form-group">
                         <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" placeholder="Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                    </div>--%>
+
+                    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#updatePassword">
+                        Change Password
+                    </button>
+
+                    <div class="modal" id="updatePassword">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <div class="form-group">
+
+                                        <asp:TextBox ID="txtPrevPassword" runat="server" class="form-control form-control-lg" placeholder="Enter Previous Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="PrevPassReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Enter new password" ControlToValidate="txtPrevPassword" ForeColor="Red"></asp:RequiredFieldValidator>
+                                  
+                                        <asp:TextBox ID="txtNewPassword" runat="server" class="form-control form-control-lg" placeholder="Enter New Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="newPassReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Enter new password" ControlToValidate="txtNewPassword" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="passwordValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid password" Text="*Please enter a password (8-15 characters) with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character (example: !#&%) " ControlToValidate="txtNewPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$" ForeColor="Red"></asp:RegularExpressionValidator>
+
+                                        <asp:TextBox ID="txtReenterPassword" runat="server" class="form-control form-control-lg" placeholder="Re-Enter New Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" runat="server" ErrorMessage="Re-Enter password" ControlToValidate="txtReenterPassword" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <asp:CompareValidator ID="CompareValidator1" Display="Dynamic" runat="server" ErrorMessage="Passwords do no match" ControlToValidate="txtReenterPassword" ControlToCompare="txtNewPassword" ForeColor="Red"></asp:CompareValidator>
+
+                                    </div>
+                                    <%--<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>--%>
+                                    <asp:Button ID="btnChangePassword" class="btn btn-info btn-block" runat="server" Text="Change Password" OnClick="btnChangePassword_Click"/>
+                                    <asp:Label ID="lblPrev" runat="server" ForeColor="Red"></asp:Label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+
 
                 </div>
             </div>
@@ -409,7 +442,7 @@
 
     </div>
 
-    <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-info btn-lg btn-block" OnClick="btnSave_Click"/>
+    <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-info btn-lg btn-block" OnClick="btnSave_Click" />
 
 
 </asp:Content>

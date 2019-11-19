@@ -18,19 +18,6 @@
             </div>
         </div>
 
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="pl-3">
-                    <button class="btn btn-sm personality-outline">English</button>
-                    <button class="btn btn-sm personality-outline">Active</button>
-                    <button class="btn btn-sm personality-outline">Non-Smoker</button>
-                    <button class="btn btn-sm personality-outline">Adventurous</button>
-                    <button class="btn btn-sm personality-outline">Early Riser</button>
-                </div>
-            </div>
-
-        </div>
     </div>
     <!--END OF USER DASH-NAV-->
 
@@ -43,8 +30,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="HostPropertyDetails.aspx" class="breadLink">Properties</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">List Property</li>
+                    <li class="breadcrumb-item"><a href="ListedProperties.aspx" class="breadLink">Rooms</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">List Room</li>
                 </ol>
             </nav>
         </section>
@@ -56,7 +43,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>List Property</h3>
+                        <h3>List Room</h3>
                     </div>
                 </div>
             </section>
@@ -64,117 +51,240 @@
 
 
             <section class="pt-3">
-                 
-
-                    <div class="form-group">
-                        <asp:RegularExpressionValidator ID="houseNumValidatorNumbers" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid house number" Text="*Please enter a valid house number" ControlToValidate="txtHouseNum" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="houseNumReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a house number." ControlToValidate="txtHouseNum" Text="*Please enter a house number"></asp:RequiredFieldValidator>
-                        <asp:TextBox ID="txtHouseNum" runat="server" class="form-control form-control-lg" placeholder="House Number"></asp:TextBox>
-                    </div>
-                    <div class="form-group">
-                        <asp:RequiredFieldValidator ID="streetReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a street." ControlToValidate="txtStreet" Text="*Please enter a street"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[a-zA-Z\s]+$"></asp:RegularExpressionValidator>
-                        <asp:TextBox ID="txtStreet" runat="server" class="form-control form-control-lg" placeholder="Street" MaxLength="30"></asp:TextBox>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-7">
-                            <asp:RequiredFieldValidator ID="cityReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a city." ControlToValidate="txtCity" Text="*Please enter a city"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[a-zA-Z]+$"></asp:RegularExpressionValidator>
-                            <asp:TextBox ID="txtCity" runat="server" class="form-control form-control-lg" placeholder="City"></asp:TextBox>
-                        </div>
-
-                        <asp:RequiredFieldValidator ID="stateReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please select a state." ControlToValidate="ddState" Text="*Please select a state"></asp:RequiredFieldValidator>
-                        <div class="form-group col-md-3">
-                            <asp:DropDownList ID="ddState" runat="server" class="form-control  form-control-lg">
-                                <asp:ListItem Value="">State</asp:ListItem>
-                                <asp:ListItem>AL</asp:ListItem>
-                                <asp:ListItem>AK</asp:ListItem>
-                                <asp:ListItem>AZ</asp:ListItem>
-                                <asp:ListItem>AR</asp:ListItem>
-                                <asp:ListItem>CA</asp:ListItem>
-                                <asp:ListItem>CO</asp:ListItem>
-                                <asp:ListItem>CT</asp:ListItem>
-                                <asp:ListItem>DE</asp:ListItem>
-                                <asp:ListItem>FL</asp:ListItem>
-                                <asp:ListItem>GA</asp:ListItem>
-                                <asp:ListItem>HI</asp:ListItem>
-                                <asp:ListItem>ID</asp:ListItem>
-                                <asp:ListItem>IL</asp:ListItem>
-                                <asp:ListItem>IN</asp:ListItem>
-                                <asp:ListItem>IA</asp:ListItem>
-                                <asp:ListItem>KS</asp:ListItem>
-                                <asp:ListItem>KY</asp:ListItem>
-                                <asp:ListItem>LA</asp:ListItem>
-                                <asp:ListItem>ME</asp:ListItem>
-                                <asp:ListItem>MD</asp:ListItem>
-                                <asp:ListItem>MA</asp:ListItem>
-                                <asp:ListItem>MI</asp:ListItem>
-                                <asp:ListItem>MN</asp:ListItem>
-                                <asp:ListItem>MS</asp:ListItem>
-                                <asp:ListItem>MO</asp:ListItem>
-                                <asp:ListItem>MT</asp:ListItem>
-                                <asp:ListItem>NE</asp:ListItem>
-                                <asp:ListItem>NV</asp:ListItem>
-                                <asp:ListItem>NH</asp:ListItem>
-                                <asp:ListItem>NJ</asp:ListItem>
-                                <asp:ListItem>NM</asp:ListItem>
-                                <asp:ListItem>NY</asp:ListItem>
-                                <asp:ListItem>NC</asp:ListItem>
-                                <asp:ListItem>ND</asp:ListItem>
-                                <asp:ListItem>OH</asp:ListItem>
-                                <asp:ListItem>OK</asp:ListItem>
-                                <asp:ListItem>OR</asp:ListItem>
-                                <asp:ListItem>PA</asp:ListItem>
-                                <asp:ListItem>RI</asp:ListItem>
-                                <asp:ListItem>SC</asp:ListItem>
-                                <asp:ListItem>SD</asp:ListItem>
-                                <asp:ListItem>TN</asp:ListItem>
-                                <asp:ListItem>TX</asp:ListItem>
-                                <asp:ListItem>UT</asp:ListItem>
-                                <asp:ListItem>VT</asp:ListItem>
-                                <asp:ListItem>VA</asp:ListItem>
-                                <asp:ListItem>WA</asp:ListItem>
-                                <asp:ListItem>WV</asp:ListItem>
-                                <asp:ListItem>WI</asp:ListItem>
-                                <asp:ListItem>WY</asp:ListItem>
-                            </asp:DropDownList>
-                        </div>
-
-                        <div class="form-group col-md-2">
-                            <asp:RequiredFieldValidator ID="zipReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a zip code." ControlToValidate="txtZip" Text="*Please enter a zip code"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="zipNumValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid zip code" Text="*Please enter a valid zip code" ControlToValidate="txtZip" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
-                            <asp:TextBox ID="txtZip" runat="server" class="form-control form-control-lg" placeholder="Zip"></asp:TextBox>
-                        </div>
-                    </div>
 
 
-                    <div class="form-group">
-                        <asp:TextBox ID="txtCountry" runat="server" class="form-control form-control-lg" placeholder="Country"></asp:TextBox>
-                    </div>
-
-                    <div class="form-group">
-                        <small id="addressDisclosure" class="form-text text-muted">*We will never share your address until you begin the lease process.</small>
-                    </div>
-
+                <div class="form-group">
+                    <asp:RegularExpressionValidator ID="houseNumValidatorNumbers" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid house number" Text="*Please enter a valid house number" ControlToValidate="txtHouseNum" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator ID="houseNumReqField" Display="Dynamic" runat="server" ErrorMessage="Please enter a house number." ControlToValidate="txtHouseNum" Text="*Please enter a house number"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtHouseNum" runat="server" class="form-control form-control-lg" placeholder="House Number"></asp:TextBox>
+                </div>
+                <div class="form-group">
+                    <asp:RequiredFieldValidator ID="streetReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a street." ControlToValidate="txtStreet" Text="*Please enter a street"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[a-zA-Z\s]+$"></asp:RegularExpressionValidator>
+                    <asp:TextBox ID="txtStreet" runat="server" class="form-control form-control-lg" placeholder="Street" MaxLength="30"></asp:TextBox>
+                </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-7">
-                        <asp:RequiredFieldValidator ID="minPriceFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a minimum room price." ControlToValidate="txtMinPrice" Text="*Please enter price "></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="priceNumbers" Display="Dynamic" runat="server" ErrorMessage="Please enter a correct amount" Text="*Please enter a valid price" ControlToValidate="txtMinPrice" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
-                        <asp:TextBox ID="txtMinPrice" runat="server" class="form-control form-control-lg" placeholder="Minimum room price"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="cityReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a city." ControlToValidate="txtCity" Text="*Please enter a city"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[a-zA-Z]+$"></asp:RegularExpressionValidator>
+                        <asp:TextBox ID="txtCity" runat="server" class="form-control form-control-lg" placeholder="City"></asp:TextBox>
                     </div>
 
-
-
-                    <div class="form-row">
-                    <div class="form-group col-md-7">
-                        <asp:RequiredFieldValidator ID="maxPriceFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a maximum room price." ControlToValidate="txtMaxPrice" Text="*Please enter price "></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" Display="Dynamic" runat="server" ErrorMessage="Please enter a correct amount" Text="*Please enter a valid price" ControlToValidate="txtMaxPrice" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
-                        <asp:TextBox ID="txtMaxPrice" runat="server" class="form-control form-control-lg" placeholder="Maximum room price"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="stateReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please select a state." ControlToValidate="ddState" Text="*Please select a state"></asp:RequiredFieldValidator>
+                    <div class="form-group col-md-3">
+                        <asp:DropDownList ID="ddState" runat="server" class="form-control  form-control-lg">
+                            <asp:ListItem Value="">State</asp:ListItem>
+                            <asp:ListItem>AL</asp:ListItem>
+                            <asp:ListItem>AK</asp:ListItem>
+                            <asp:ListItem>AZ</asp:ListItem>
+                            <asp:ListItem>AR</asp:ListItem>
+                            <asp:ListItem>CA</asp:ListItem>
+                            <asp:ListItem>CO</asp:ListItem>
+                            <asp:ListItem>CT</asp:ListItem>
+                            <asp:ListItem>DE</asp:ListItem>
+                            <asp:ListItem>FL</asp:ListItem>
+                            <asp:ListItem>GA</asp:ListItem>
+                            <asp:ListItem>HI</asp:ListItem>
+                            <asp:ListItem>ID</asp:ListItem>
+                            <asp:ListItem>IL</asp:ListItem>
+                            <asp:ListItem>IN</asp:ListItem>
+                            <asp:ListItem>IA</asp:ListItem>
+                            <asp:ListItem>KS</asp:ListItem>
+                            <asp:ListItem>KY</asp:ListItem>
+                            <asp:ListItem>LA</asp:ListItem>
+                            <asp:ListItem>ME</asp:ListItem>
+                            <asp:ListItem>MD</asp:ListItem>
+                            <asp:ListItem>MA</asp:ListItem>
+                            <asp:ListItem>MI</asp:ListItem>
+                            <asp:ListItem>MN</asp:ListItem>
+                            <asp:ListItem>MS</asp:ListItem>
+                            <asp:ListItem>MO</asp:ListItem>
+                            <asp:ListItem>MT</asp:ListItem>
+                            <asp:ListItem>NE</asp:ListItem>
+                            <asp:ListItem>NV</asp:ListItem>
+                            <asp:ListItem>NH</asp:ListItem>
+                            <asp:ListItem>NJ</asp:ListItem>
+                            <asp:ListItem>NM</asp:ListItem>
+                            <asp:ListItem>NY</asp:ListItem>
+                            <asp:ListItem>NC</asp:ListItem>
+                            <asp:ListItem>ND</asp:ListItem>
+                            <asp:ListItem>OH</asp:ListItem>
+                            <asp:ListItem>OK</asp:ListItem>
+                            <asp:ListItem>OR</asp:ListItem>
+                            <asp:ListItem>PA</asp:ListItem>
+                            <asp:ListItem>RI</asp:ListItem>
+                            <asp:ListItem>SC</asp:ListItem>
+                            <asp:ListItem>SD</asp:ListItem>
+                            <asp:ListItem>TN</asp:ListItem>
+                            <asp:ListItem>TX</asp:ListItem>
+                            <asp:ListItem>UT</asp:ListItem>
+                            <asp:ListItem>VT</asp:ListItem>
+                            <asp:ListItem>VA</asp:ListItem>
+                            <asp:ListItem>WA</asp:ListItem>
+                            <asp:ListItem>WV</asp:ListItem>
+                            <asp:ListItem>WI</asp:ListItem>
+                            <asp:ListItem>WY</asp:ListItem>
+                        </asp:DropDownList>
                     </div>
+
+                    <div class="form-group col-md-2">
+                        <asp:RequiredFieldValidator ID="zipReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a zip code." ControlToValidate="txtZip" Text="*Please enter a zip code"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="zipNumValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid zip code" Text="*Please enter a valid zip code" ControlToValidate="txtZip" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
+                        <asp:TextBox ID="txtZip" runat="server" class="form-control form-control-lg" placeholder="Zip"></asp:TextBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <asp:TextBox ID="txtCountry" runat="server" class="form-control form-control-lg" placeholder="Country"></asp:TextBox>
+                </div>
+
+                <div class="form-group">
+                    <small id="addressDisclosure" class="form-text text-muted">*We will never share your address until you begin the lease process.</small>
+                </div>
+
 
             </section>
+
+
+            <%--            <section>
+                <div class="row pt-3">
+                    <div class="col-md-12">
+                        <h5>Please provide a brief description of your room:</h5>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section>
+                 
+                    <div class="form-group descripmessagebox">
+                        <textarea class="form-control " id="descriptionMessagebox" runat="server"> </textarea>
+                    </div>
+
+                 
+            </section>--%>
+
+            <div>
+                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#addRoom">
+                    Add Rooms
+                </button>
+            </div>
+
+            <!--HOST OR TENANT MOD-->
+            <div class="modal justify-content-center" id="addRoom">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content pb-1">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body ">
+                            <div class="pb-3">
+                                <h5 class="modal-title">Add Your Room:</h5>
+                            </div>
+                            <asp:TextBox ID="txtPrice" runat="server" class="form-control form-control-lg" placeholder="Price"></asp:TextBox>
+                            <br />
+                            <br />
+                            <asp:TextBox ID="txtDescription" runat="server" class="form-control form-control-lg" placeholder="Description" Height="100px"></asp:TextBox>
+
+                            <section>
+                                <div class="row pt-3">
+                                    <div class="col-md-12">
+                                        <h5>Please select amenities that apply to you:</h5>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--Amenities Start here-->
+                            <section>
+                                <div class="row px-5 py-3">
+                                    <div class="col-md-6">
+
+                                        <div class="col-md-12">
+                                            <div class="switchwrapper">
+                                                <label class="switch">
+                                                    <asp:CheckBox ID="cbConnBath" runat="server" />
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div>Private Bathroom</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="switchwrapper">
+                                                <label class="switch">
+                                                    <asp:CheckBox ID="cbWalkInClos" runat="server" />
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div>Walk-In Closet</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="switchwrapper">
+                                                <label class="switch">
+                                                    <asp:CheckBox ID="cbDryer" runat="server" />
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div>Washer / Dryer</div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+
+
+                                    <div class="col-md-6">
+
+                                        <div class="col-md-12">
+                                            <div class="switchwrapper">
+                                                <label class="switch">
+                                                    <asp:CheckBox ID="cbKitchen" runat="server" />
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div>Kitchen</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="switchwrapper">
+                                                <label class="switch">
+                                                    <asp:CheckBox ID="cbWifi" runat="server" />
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div>Wifi</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="switchwrapper">
+                                                <label class="switch">
+                                                    <asp:CheckBox ID="cbHeating" runat="server" />
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div>Heating / Air Conditioning</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </section>
+                            <!--end of amenities-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
 
             <section>
@@ -240,6 +350,93 @@
             </section>
             <!--end of property type-->
 
+            <%--<section>
+                <div class="row pt-3">
+                    <div class="col-md-12">
+                        <h5>Please select amenities that apply to you:</h5>
+                    </div>
+                </div>
+            </section>--%>
+
+            <%--<!--Amenities Start here-->
+            <section>
+                <div class="row px-5 py-3">
+                    <div class="col-md-6">
+
+                        <div class="col-md-12">
+                            <div class="switchwrapper">
+                                <label class="switch">
+                                    <asp:CheckBox ID="cbConnBath" runat="server" />
+                                    <span class="slider round"></span>
+                                </label>
+                                <div>Private Bathroom</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="switchwrapper">
+                                <label class="switch">
+                                    <asp:CheckBox ID="cbWalkInClos" runat="server" />
+                                    <span class="slider round"></span>
+                                </label>
+                                <div>Walk-In Closet</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="switchwrapper">
+                                <label class="switch">
+                                    <asp:CheckBox ID="cbDryer" runat="server" />
+                                    <span class="slider round"></span>
+                                </label>
+                                <div>Washer / Dryer</div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="col-md-12">
+                            <div class="switchwrapper">
+                                <label class="switch">
+                                    <asp:CheckBox ID="cbKitchen" runat="server" />
+                                    <span class="slider round"></span>
+                                </label>
+                                <div>Kitchen</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="switchwrapper">
+                                <label class="switch">
+                                    <asp:CheckBox ID="cbWifi" runat="server" />
+                                    <span class="slider round"></span>
+                                </label>
+                                <div>Wifi</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="switchwrapper">
+                                <label class="switch">
+                                    <asp:CheckBox ID="cbHeating" runat="server" />
+                                    <span class="slider round"></span>
+                                </label>
+                                <div>Heating / Air Conditioning</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+            <!--end of amenities-->--%>
+
             <section>
                 <div class="row">
                     <div class="col-md-12">
@@ -273,15 +470,6 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbPorchOrDeck" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Porch/Deck</div>
-                            </div>
-                        </div>
 
                     </div>
 
@@ -311,10 +499,10 @@
                         <div class="col-md-12">
                             <div class="switchwrapper">
                                 <label class="switch">
-                                    <asp:CheckBox ID="CheckBox1" runat="server" />
+                                    <asp:CheckBox ID="cbPorch" runat="server" />
                                     <span class="slider round"></span>
                                 </label>
-                                <div>Backyard</div>
+                                <div>Porch / Deck</div>
                             </div>
                         </div>
 
@@ -342,6 +530,16 @@
                         <div class="col-md-12">
                             <div class="switchwrapper">
                                 <label class="switch">
+                                    <asp:CheckBox ID="cbPets" runat="server" />
+                                    <span class="slider round"></span>
+                                </label>
+                                <div>Pets Allowed</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="switchwrapper">
+                                <label class="switch">
                                     <asp:CheckBox ID="cbSmoke" runat="server" />
                                     <span class="slider round"></span>
                                 </label>
@@ -351,6 +549,28 @@
                     </div>
 
 
+                    <div class="col-md-6">
+
+                        <div class="col-md-12">
+                            <div class="switchwrapper">
+                                <label class="switch">
+                                    <asp:CheckBox ID="cbGuest" runat="server" />
+                                    <span class="slider round"></span>
+                                </label>
+                                <div>Guest Allowed</div>
+                            </div>
+                        </div>
+
+
+
+                        <h6>Don't see one that applies to you? Fill out the form below:</h6>
+                        <div class="form-group">
+                            <asp:TextBox ID="txtOtherRules" runat="server" class="form-control" aria-describedby="HouseRule" placeholder="Type your house rule here"></asp:TextBox>
+                        </div>
+
+
+
+                    </div>
                 </div>
             </section>
             <!--end of property type-->
@@ -388,30 +608,29 @@
             </section>
             <!--end of homesharesmarter-->
 
-            <form class="pt-4">
-                <div class="form-group">
-                    <h5>Upload property images here:</h5>
-                    <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="True" />
-                    <asp:Button runat="server" ID="FilesUpload" Text="Save to Property" AutoPostBack="false" OnClientClick="FileUpload1_Click"/>
-                    <br />
-                    <br />
-                    <asp:Label runat="server" ID="StatusLabel" Text="Upload status: " />
-                </div>
+            <div class="form-group">
+                <h5>Upload room images here:</h5>
+                <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="True" />
+                <asp:Button runat="server" ID="FilesUpload" Text="Save to Room" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
+                <br />
+                <br />
+                <asp:Label runat="server" ID="StatusLabel" Text="Upload status: " />
+            </div>
 
 
-                <div class="form-group form-check pt-4">
-                    <asp:CheckBox ID="cbBackCheck" runat="server" class="form-check-input" />
-                    <label class="form-check-label" for="exampleCheck1">Perform background check now</label>
-                </div>
+            <div class="form-group form-check pt-4">
+                <asp:CheckBox ID="cbBackCheck" runat="server" class="form-check-input" />
+                <label class="form-check-label" for="exampleCheck1">Perform background check now</label>
+            </div>
 
-                <div class="form-group form-check">
-                    <asp:CheckBox ID="cbAgreement" runat="server" class="form-check-input" />
-                    <label class="form-check-label" for="exampleCheck1">Agreement to Terms &amp; Conditions</label>
-                </div>
-             
+            <div class="form-group form-check">
+                <asp:CheckBox ID="cbAgreement" runat="server" class="form-check-input" />
+                <label class="form-check-label" for="exampleCheck1">Agreement to Terms &amp; Conditions</label>
+            </div>
 
 
-            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Property" CausesValidation="false" OnClick="btnListProperty_Click"/>
+
+            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="false" OnClick="btnListProperty_Click" />
 
 
 
