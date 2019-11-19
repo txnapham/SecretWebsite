@@ -461,5 +461,20 @@
         <!--END OF PAGINATION-->
 
     </div>
+
+    <script src="awesomplete.js"></script>
+    <script type="text/javascript">
+
+        var ajax = new XMLHttpRequest();
+        ajax.open("GET", "csvjson.json", true);
+        ajax.onload = function () {
+            var list = JSON.parse(ajax.responseText).map(function (i) { return i.CityState; });
+            new Awesomplete(document.querySelector("#<%=txtSearch.ClientID %>"), {
+                list: list,
+                minChars: 1
+            });
+        };
+        ajax.send();
+    </script>
 </asp:Content>
 

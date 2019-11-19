@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Net;
+using System.Net.Mail;
+using System.Configuration;
+using System.IO;
 
 public partial class TenantCreateAccount : System.Web.UI.Page
 {
@@ -34,6 +38,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
     {
         ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
     }
+
     protected void btnCreateAccount_Click(object sender, EventArgs e)
     {
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
@@ -57,8 +62,8 @@ public partial class TenantCreateAccount : System.Web.UI.Page
 
         if (emailCount < 1)
         {
-            insert.CommandText = "INSERT into Account VALUES (@fName, @mName, @lName, @phone, @bday, @email, @HouseNbr, @street, @city, @state, @zip, @country, @AccType, @ModDate, @PID); " +
-                                "INSERT into Tenant VALUES(@@IDENTITY from Account), @BackCheck, @TenantReason);" +
+            insert.CommandText = "INSERT into Account VALUES(@fName, @mName, @lName, @phone, @bday, @email, @HouseNbr, @street, @city, @state, @zip, @country, @AccType, @ModDate, @PID); " +
+                                "INSERT into Tenant VALUES(@@IDENTITY, @BackCheck, @TenantReason); " +
                                 "INSERT into Password VALUES((SELECT MAX(TenantID) from Tenant), @email, @password);";
 
             //Insert into ACCOUNT
@@ -90,7 +95,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
             Session["type"] = 3;
 
             System.Data.SqlClient.SqlCommand getAcctID = new System.Data.SqlClient.SqlCommand();
-            getAcctID.CommandText = "SELECT AccountID FROM ACCOUNT WHERE EMAIL = @emailCheck";
+            getAcctID.CommandText = "SELECT AccountID FROM Account WHERE EMAIL = @emailCheck";
             getAcctID.Parameters.Add(new SqlParameter("@emailCheck", newAccount.getEmail()));
             getAcctID.Connection = sc;
             int AccountID = (int)getAcctID.ExecuteScalar();
@@ -98,6 +103,64 @@ public partial class TenantCreateAccount : System.Web.UI.Page
             Session["AccountId"] = AccountID;
 
             sc.Close();
+
+            //Fetching Settings from WEB.CONFIG file.  
+            string emailSender = ConfigurationManager.AppSettings["username"].ToString();
+            string emailSenderPassword = ConfigurationManager.AppSettings["password"].ToString();
+            string emailSenderHost = ConfigurationManager.AppSettings["smtp"].ToString();
+            int emailSenderPort = Convert.ToInt16(ConfigurationManager.AppSettings["portnumber"]);
+            Boolean emailIsSSL = Convert.ToBoolean(ConfigurationManager.AppSettings["IsSSL"]);
+
+
+            //Fetching Email Body Text from EmailTemplate File.  
+            string FilePath = Server.MapPath("~/Email.aspx");
+            StreamReader str = new StreamReader(FilePath);
+            string MailText = str.ReadToEnd();
+            str.Close();
+
+            //Repalce [newusername] = signup user name   
+            MailText = MailText.Replace("[newusername]", txtFN.Text.Trim());
+
+
+            string subject = "Welcome to Roommagnet!";
+
+            //Base class for sending email  
+            MailMessage _mailmsg = new MailMessage();
+
+            //Make TRUE because our body text is html  
+            _mailmsg.IsBodyHtml = true;
+
+            //Set From Email ID  
+            _mailmsg.From = new MailAddress(emailSender);
+
+            //Set To Email ID  
+            _mailmsg.To.Add(txtEmail.Text.ToString());
+
+            //Set Subject  
+            _mailmsg.Subject = subject;
+
+            //Set Body Text of Email   
+            _mailmsg.Body = MailText;
+
+
+            //Now set your SMTP   
+            SmtpClient _smtp = new SmtpClient();
+
+            //Set HOST server SMTP detail  
+            _smtp.Host = emailSenderHost;
+
+            //Set PORT number of SMTP  
+            _smtp.Port = emailSenderPort;
+
+            //Set SSL --> True / False  
+            _smtp.EnableSsl = emailIsSSL;
+
+            //Set Sender UserEmailID, Password  
+            NetworkCredential _network = new NetworkCredential(emailSender, emailSenderPassword);
+            _smtp.Credentials = _network;
+
+            //Send Method will send your MailMessage create above.  
+            _smtp.Send(_mailmsg);
 
             //Clear text boxes
             txtFN.Text = "";

@@ -12,7 +12,7 @@
     };
 </script>
     <!--USER DASH-NAV-->
-    <div class="container-fluid userDash mb-5 pb-3">
+    <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
                 <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
@@ -131,11 +131,12 @@
                     <div class="msg-history">
                         <div class="incoming-msg">
                             <!--Put card here -->
-                            <asp:Literal ID="TMessage" runat="server" Mode="Transform"></asp:Literal>
+                            <asp:Literal ID="tenMessage" runat="server" Mode="Transform"></asp:Literal>
                         <!--End card here -->
                         </div>
                         <!--Put Card here-->
-                        <asp:Literal ID="message2" runat="server" Mode="Transform"></asp:Literal>
+                        <asp:Literal ID="hosMessage" runat="server" Mode="Transform"></asp:Literal>
+
 
                     </div>
                     <div class="type-msg">
@@ -146,6 +147,14 @@
                             <%--<asp:Button ID="btnMessage" runat="server" class="msg-send-btn" Text="Enter" />--%>
                             <%--not sure how to do the button in aspx to make it look like the html. might have to rededign it to fit aspx--%>
                         </div>
+                    </div>
+
+                    <div>
+                        <button type="button" class="btn btn-light createLeaseButton btn-block" >Create Lease with TENANT NAME
+                            <%--<a href="HostCreateLease.aspx" />--%>
+                        </button>
+
+                        <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
                     </div>
                 </div>
             </div>
