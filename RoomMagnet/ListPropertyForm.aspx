@@ -56,7 +56,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>List Property</h3>
+                        <h3>List Room</h3>
                     </div>
                 </div>
             </section>
@@ -164,7 +164,7 @@
             <section>
                 <div class="row pt-3">
                     <div class="col-md-12">
-                        <h5>Please provide a brief description of your property:</h5>
+                        <h5>Please provide a brief description of your room:</h5>
                     </div>
                 </div>
             </section>
@@ -553,9 +553,9 @@
 
             <form class="pt-4">
                 <div class="form-group">
-                    <h5>Upload property images here:</h5>
+                    <h5>Upload room images here:</h5>
                     <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="True" />
-                    <asp:Button runat="server" ID="FilesUpload" Text="Save to Property" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
+                    <asp:Button runat="server" ID="FilesUpload" Text="Save to Room" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
                     <br />
                     <br />
                     <asp:Label runat="server" ID="StatusLabel" Text="Upload status: " />
@@ -574,7 +574,7 @@
              
 
 
-            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Property" CausesValidation="false" OnClick="btnListProperty_Click"/>
+            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="false" OnClick="btnListProperty_Click"/>
 
 
 
