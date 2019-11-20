@@ -40,20 +40,59 @@ public partial class TenantDashboard : System.Web.UI.Page
         if(Session["AccountId"] != null)
         { 
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
-            //Selecting from Property
+            
+            //Selecting from Account
+            System.Data.SqlClient.SqlCommand selectAccount = new System.Data.SqlClient.SqlCommand();
+            string accountNameQuery = "SELECT FirstName FROM Account WHERE AccountID = @AccountID";
+            System.Data.SqlClient.SqlCommand accountNameGrab = new SqlCommand(accountNameQuery, sc);
+
+            string accountImageQuery = "SELECT AccountImage FROM Account WHERE AccountID = @AccountID";
+            System.Data.SqlClient.SqlCommand accountImageGrab = new SqlCommand(accountImageQuery, sc);
+
+
+            //string propertyIdQuery = "SELECT MAX(PropertyID) from Property";
+            //System.Data.SqlClient.SqlCommand propertyIdGrab = new System.Data.SqlClient.SqlCommand(propertyIdQuery, sc);
+
+
+            //Select Statements properties
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT City, HomeState, LocalPriceRangeLow, LocalPriceRangeHigh FROM Property WHERE PropertyID in " +
+            select.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
+            //Connections
+            select.Connection = sc;
+            sc.Open();
+
+            //Populating Tenant Part of Host Dashboard
+            System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
+            while (reader.Read())
+            {
+                String tenantName = reader["FirstName"].ToString();
+                String filename = reader["AccountImage"].ToString();
+                // No image uploaded (currently default image in S3)
+                if (filename == "") filename = "defaulttenantimg.jpg";
+                // User dashboard dynamically updated using S3
+                StringBuilder tenantImage = new StringBuilder();
+                tenantImage
+                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">")
+                .Append("                Welcome " + tenantName + "!");
+                Card.Text += tenantImage.ToString();
+            }
+            sc.Close();
+
+            //Selecting from Property
+            System.Data.SqlClient.SqlCommand selectProperty = new System.Data.SqlClient.SqlCommand();
+            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh FROM Property WHERE PropertyID in " +
             "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
             select.Connection = sc;
             sc.Open();
-            System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
+            System.Data.SqlClient.SqlDataReader readerProperty = select.ExecuteReader();
+
             //Populating Dashboard
-            while (reader.Read())
+            while (readerProperty.Read())
             {
                 String city = reader["City"].ToString();
                 String homeState = reader["HomeState"].ToString();
-                String priceRangeLow = reader["LocalPriceRangeLow"].ToString();
-                String priceRangeHigh = reader["LocalPriceRangeHigh"].ToString();
+                String priceRangeLow = reader["RoomPriceRangeLow"].ToString();
+                String priceRangeHigh = reader["RoomPriceRangeHigh"].ToString();
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
 
