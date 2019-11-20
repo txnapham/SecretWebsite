@@ -37,6 +37,7 @@ public partial class HostDashboard : System.Web.UI.Page
     {
         if (string.IsNullOrEmpty(HttpContext.Current.Session["AccountId"].ToString()))
         {
+            //Welcome USER Query info 
         }
         else
         {
@@ -45,6 +46,7 @@ public partial class HostDashboard : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectProp = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand favoriteTenant = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand selectName = new System.Data.SqlClient.SqlCommand();
             //Tenant Select
             select.CommandText = "SELECT FirstName,LastName FROM Account WHERE AccountID in " +
             "(SELECT TOP(5) tenantID FROM Lease WHERE HostID = " + accountID + ");";
@@ -57,6 +59,7 @@ public partial class HostDashboard : System.Web.UI.Page
             select.Connection = sc;
             selectProp.Connection = sc;
             favoriteTenant.Connection = sc;
+            selectName.Connection = sc;
             sc.Open();
 
             //Populating Tenant Part of Host Dashboard
@@ -113,6 +116,12 @@ public partial class HostDashboard : System.Web.UI.Page
 
                 Card3.Text += myCard.ToString();
             }
+
+            //USERNAME AT TOP 
+
+
+
+
             drd.Close();
             sc.Close();
         }

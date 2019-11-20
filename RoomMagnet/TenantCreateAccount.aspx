@@ -17,17 +17,17 @@
                  
                     <div class="form-group">
                         <asp:RequiredFieldValidator ID="fnReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a first name" Visible="False" Text="*Please enter a first name" ControlToValidate="txtFN"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="fnLettersValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid first name" Text="*Please enter a valid first name" ControlToValidate="txtFN" ValidationExpression="^[a-zA-Z]+$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="fnLettersValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid first name" Text="*Please enter a valid first name" ControlToValidate="txtFN" ValidationExpression="^[a-zA-Z-_ ]+$"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtFN" runat="server" class="form-control form-control-lg" aria-describedby="FirstName" placeholder="First Name" MaxLength="50"></asp:TextBox>
                     </div>
 
                     <div class="form-group">
-                        <asp:RegularExpressionValidator ID="mnLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid middle name" Text="*Please enter a valid middle name" ControlToValidate="txtMN" ValidationExpression="^[a-zA-Z]+$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="mnLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid middle name" Text="*Please enter a valid middle name" ControlToValidate="txtMN" ValidationExpression="^[a-zA-Z-_ ]+$"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtMN" runat="server" class="form-control form-control-lg" aria-describedby="MiddleName" placeholder="Middle Name" MaxLength="50"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <asp:RequiredFieldValidator ID="lnReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a last name." ControlToValidate="txtLN" Text="*Please enter a last name"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="lnLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid last name" Text="*Please enter a valid last name" ControlToValidate="txtLN" ValidationExpression="^[a-zA-Z]+$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="lnLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid last name" Text="*Please enter a valid last name" ControlToValidate="txtLN" ValidationExpression="^[a-zA-Z-_ ]+$"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtLN" runat="server" class="form-control form-control-lg" aria-describedby="LastName" placeholder="Last Name" MaxLength="50"></asp:TextBox>
                     </div>
 
@@ -53,12 +53,12 @@
                     </div>
                     <div class="form-group">
                         <asp:RequiredFieldValidator ID="streetReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a street." ControlToValidate="txtStreet" Text="*Please enter a street"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[a-zA-Z\s]+$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[a-zA-Z_ ]+$"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtStreet" runat="server" class="form-control form-control-lg" placeholder="Street" MaxLength="30"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <asp:RequiredFieldValidator ID="cityReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a city." ControlToValidate="txtCity" Text="*Please enter a city"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[a-zA-Z]+$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[a-zA-Z_ ]+$"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtCity" runat="server" class="form-control form-control-lg" placeholder="City" MaxLength="30"></asp:TextBox>
                     </div>
 
