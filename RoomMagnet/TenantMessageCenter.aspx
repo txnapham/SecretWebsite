@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TenantPage.master" AutoEventWireup="true" CodeFile="TenantMessageCenter.aspx.cs" Inherits="TenantMessageCenter" %>
+﻿<%@ Page Title="" MaintainScrollPositionOnPostback="true" Language="C#" MasterPageFile="~/TenantPage.master" AutoEventWireup="true" CodeFile="TenantMessageCenter.aspx.cs" Inherits="TenantMessageCenter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>RoomMagnet | Message Center</title>
@@ -78,11 +78,11 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                  <div class="chat-img">
-                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/bettyBrown.png" class="rounded-circle img-fluid" CustomParameter="6" onClick= "btnSubmit_Click"/>
+                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/alex-knight-2EJCSULRwC8-unsplash.jpg" class="rounded-circle img-fluid" CustomParameter="0" onClick= "btnSubmit_Click"/>
                             </div>  
                         <div class="chat-ib">
-                        <h5>Betty<span class="chat-date">11/18/2019</span></h5>
-                                     <p>text</p>
+                       <h5>Chat Bot</h5>
+                                     <p>Hi I'm the Chat Bot I'm here for any questions you might have!</p>
                                     </div>
                                 </div>
                             </div>

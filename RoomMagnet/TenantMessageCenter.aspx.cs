@@ -65,7 +65,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
                 .Append("<div class=\"chat-list\">")
                 .Append("               <div class=\"chat-people\">")
                 .Append("                   <div class=\"chat-img\">")
-                .Append("                        <asp:ImageButton id=\"btnSubmit" + count + "\" runat=\"server\" this.src=\"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" CustomParameter=\"" +HostID + "\" onClick= \"btnSubmit_Click\"/>")
+                .Append("<input type=\"image\" name=\"ctl00$ContentPlaceHolder1$btnSubmit"+count+"\" id=\"ContentPlaceHolder1_btnSubmit"+count+"\" class=\"rounded-circle img-fluid\" customparameter=\""+HostID+"\" src=\"images/bettyBrown.png\">")
                 .Append("                       </div>")
                 .Append("                   <div class=\"chat-ib\">")
                 .Append("                       <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
@@ -104,23 +104,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
             String date = reader["Date"].ToString();
             int messageType = Convert.ToInt16(reader["MessageType"].ToString());
 
-            if (messageType == 0)
-            {
-                StringBuilder myCard = new StringBuilder();
-                myCard
-                .Append("    <div class=\"incoming-msg-img\">")
-                .Append("                    <img src = \"images/bettyBrown.png\" class=\"rounded-circle img-fluid\">")
-                .Append("                </div>")
-                .Append("                <div class=\"recieved-msg\">")
-                .Append("                    <div class=\"recieved-withd-msg\">")
-                .Append("                        <p>" + message + "</p>")
-                .Append("                        <span class=\"time-date\">" + date + "</span>")
-                .Append("                    </div>")
-                .Append("                </div>");
-
-                Message.Text += myCard.ToString();
-            }
-            else if (messageType == 1)
+            if (messageType == 1)
             {
                 StringBuilder myCard = new StringBuilder();
                 myCard
@@ -131,6 +115,24 @@ public partial class TenantMessageCenter : System.Web.UI.Page
                 .Append("                </div>")
                 .Append("            </div>");
 
+
+                Message.Text += myCard.ToString();
+            }
+            else if (messageType == 0)
+            {
+                StringBuilder myCard = new StringBuilder();
+                myCard
+                .Append("<div>")
+                .Append("    <div class=\"incoming-msg-img\">")
+                .Append("                    <img src = \"images/bettyBrown.png\" class=\"rounded-circle img-fluid\">")
+                .Append("                </div>")
+                .Append("                <div class=\"recieved-msg\">")
+                .Append("                    <div class=\"recieved-withd-msg\">")
+                .Append("                        <p>" + message + "</p>")
+                .Append("                        <span class=\"time-date\">" + date + "</span>")
+                .Append("                    </div>")
+                .Append("                </div>")
+                .Append("</div>");
                 Message.Text += myCard.ToString();
             }
         }
@@ -146,8 +148,8 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         favProp.Connection = sc;
         favTenant.Connection = sc;
         sc.Open();
-        favProp.CommandText = "SELECT FavoritedProperties.FavPropID FROM FavoritedProperties INNER JOIN Message ON FavoritedProperties.FavPropID = " +
-            "Message.FavPropID INNER JOIN Property ON FavoritedProperties.TenantID = Tenant.TenantID AND Tenant.TenantID =" + Session["AccountId"] + ";";
+        favProp.CommandText = "SELECT Message.FavPropID FROM Message INNER JOIN FavoritedProperties ON Message.FavPropID = FavoritedProperties.FavPropID AND " +
+            "FavoritedProperties.TenantID =" + Session["AccountId"] + ";";
         int favPropID = Convert.ToInt16(favProp.ExecuteScalar());
         sc.Close();
         favTenant.CommandText = "SELECT FavTenantID FROM Message where FavPropID = " + favPropID + ";";
@@ -164,7 +166,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         sc.Open();
         insert.CommandText = "INSERT INTO MESSAGE VALUES(@MessageContent,@MessageType,@Date,@FavPropID,@FavTenantID);";
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MessageContent", message));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MessageType", "0"));
+        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MessageType", "1"));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Date", date));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@FavPropID", favPropID));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@FavTenantID", favTenantID));

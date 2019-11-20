@@ -89,17 +89,8 @@
                         <div class="card-body">
                             <h5 class="card-title dash-card-titles">Message Center</h5>
 
-                            <div class="chat-list">
-                                <div class="chat-people">
-                                    <div class="chat-img">
-                                        <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
-                                    </div>
-                                    <div class="chat-ib">
-                                        <h5>Karen Smith <span class="chat-date">Nov 12</span></h5>
-                                        <p>Hello, I would like to set up a meeting.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <asp:Literal ID="Card3" runat="server" Mode="Transform"></asp:Literal>
+
 
                             <div class=" text-center pt-3">
                                 <a href="TenantMessageCenter.aspx" class="btn btn-info">View Messages</a>
