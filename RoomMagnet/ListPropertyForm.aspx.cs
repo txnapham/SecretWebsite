@@ -70,7 +70,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
             StringBuilder tenantImage = new StringBuilder();
             tenantImage
             .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">");
-            Card.Text += tenantImage.ToString();
+            HostCard.Text += tenantImage.ToString();
         }
         sc.Close();
 

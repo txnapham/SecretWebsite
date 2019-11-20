@@ -82,7 +82,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             sc.Close();
 
             //Selecting from Property
-            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
+            // System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand messageSelect = new System.Data.SqlClient.SqlCommand();
             select.CommandText = "SELECT City, HomeState, LocalPriceRangeLow, LocalPriceRangeHigh FROM Property WHERE PropertyID in " +
             "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";

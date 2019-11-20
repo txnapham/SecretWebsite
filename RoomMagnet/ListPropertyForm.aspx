@@ -8,7 +8,7 @@
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
-                <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
+                <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
             </p>
 
 
