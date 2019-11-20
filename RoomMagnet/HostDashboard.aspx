@@ -15,10 +15,10 @@
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
-                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
+<%--                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">--%>
                 <%--Welcome USER,--%>
                 <p>
-                    <asp:Literal ID="UserNameCard" runat="server" Mode="Transform"></asp:Literal>
+                    <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
                 </p>
                     
             </p>
