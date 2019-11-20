@@ -77,7 +77,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
                     HttpUtility.HtmlEncode(txtPhone.Text), DateTime.Parse(txtBday.Text, new System.Globalization.CultureInfo("pt-BR")), HttpUtility.HtmlEncode(txtEmail.Text),
                     HttpUtility.HtmlEncode(txtHouseNum.Text), HttpUtility.HtmlEncode(txtStreet.Text), HttpUtility.HtmlEncode(txtCity.Text), ddState.SelectedValue,
                     HttpUtility.HtmlEncode(txtZip.Text), "US", Int32.Parse("3"), Int32.Parse("3"));
-                Tenant newTenant = new Tenant(newAccount, "N", "Student");
+                Tenant newTenant = new Tenant(newAccount, Int32.Parse("0"), "Student");
 
                 checkEmailCount.CommandText = "SELECT COUNT(*) FROM ACCOUNT WHERE EMAIL = @emailCheck";
                 checkEmailCount.Parameters.Add(new SqlParameter("@emailCheck", newAccount.getEmail()));

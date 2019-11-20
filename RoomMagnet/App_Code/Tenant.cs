@@ -4,11 +4,11 @@ public class Tenant : Account
 {
     //Attributes
     private int AccountID;
-    private String BackgroundStatus;
+    private int BackgroundStatus;
     private String TenantReason;
     
     //Constructor
-	public Tenant(Account account, String BackgroundStatus, String TenantReason)
+	public Tenant(Account account, int BackgroundStatus, String TenantReason)
         : base(account.getFirstName(), account.getMiddleName(), account.getLastName(), account.getPhone(),
             account.getBday(), account.getEmail(), account.getHouseNumber(), account.getStreet(), account.getCity(),
             account.getState(), account.getZip(), account.getCountry(), account.getAccType(), account.getPID())
@@ -17,7 +17,7 @@ public class Tenant : Account
         setTenantReason(TenantReason);
     }
     //Setters
-    public void setBackgroundStatus(String BackgroundStatus)
+    public void setBackgroundStatus(int BackgroundStatus)
     {
         this.BackgroundStatus = BackgroundStatus;
     }
@@ -26,7 +26,7 @@ public class Tenant : Account
         this.TenantReason = TenantReason;
     }
     //Getters
-    public String getBackgroundStatus()
+    public int getBackgroundStatus()
     {
         return this.BackgroundStatus;
     }

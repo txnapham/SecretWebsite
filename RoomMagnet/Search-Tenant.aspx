@@ -125,7 +125,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbTechSavy" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbTechSavvy" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterSportsFan">Tech-Savvy</label>
                                                             </div>
                                                         </div>
@@ -157,7 +157,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbHeating" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbHVAC" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterSportsFan">Heating / Air Conditioning</label>
                                                             </div>
                                                         </div>
@@ -181,7 +181,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbConBath" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbPrivateBath" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterPetFriendly">Private Bathroom</label>
                                                             </div>
                                                         </div>
@@ -195,7 +195,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbDryer" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbWashDry" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterSportsFan">Washer / Dryer</label>
                                                             </div>
                                                         </div>
