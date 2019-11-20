@@ -160,7 +160,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             //Selecting from Property
             // System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand messageSelect = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT City, HomeState, LocalPriceRangeLow, LocalPriceRangeHigh FROM Property WHERE PropertyID in " +
+            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh FROM Property WHERE PropertyID in " +
             "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
             messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, max(Message.Date) as Date FROM Message INNER JOIN FavoritedProperties ON " +
                 "Message.FavPropID = FavoritedProperties.FavPropID INNER JOIN Property ON FavoritedProperties.PropertyID = Property.PropertyID INNER JOIN Host ON " +
@@ -199,6 +199,9 @@ public partial class TenantDashboard : System.Web.UI.Page
                 Card2.Text += myCard.ToString();
             }
             reader.Close();
+            sc.Close();
+
+            sc.Open();
             System.Data.SqlClient.SqlDataReader rdr = messageSelect.ExecuteReader();
             while (rdr.Read())
             {
