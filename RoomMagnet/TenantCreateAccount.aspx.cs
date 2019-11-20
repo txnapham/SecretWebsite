@@ -184,7 +184,6 @@ public partial class TenantCreateAccount : System.Web.UI.Page
         else
         {
             sc.Close();
-            //Clear text boxes
         }
     }
 }

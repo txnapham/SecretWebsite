@@ -40,10 +40,7 @@ public partial class HostDashboard : System.Web.UI.Page
         Card2.Text = String.Empty;
         Card3.Text = String.Empty;
 
-        if (string.IsNullOrEmpty(HttpContext.Current.Session["AccountId"].ToString()))
-        {
-        }
-        else
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
@@ -182,6 +179,10 @@ public partial class HostDashboard : System.Web.UI.Page
             }
             drd.Close();
             sc.Close();
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
         }
     }
     [System.Web.Services.WebMethod]
