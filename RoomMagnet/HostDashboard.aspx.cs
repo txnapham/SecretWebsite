@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -35,41 +36,47 @@ public partial class HostDashboard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["AccountId"]!=null )
+        Card.Text = String.Empty;
+        Card2.Text = String.Empty;
+        Card3.Text = String.Empty;
+
+        if (string.IsNullOrEmpty(HttpContext.Current.Session["AccountId"].ToString()))
         {
-            //&& Convert.ToInt16(Session["AccountType"]) == 2
+        }
+        else
+        {
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
             //Select Statements for tenant and properties
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectProp = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand favoriteTenant = new System.Data.SqlClient.SqlCommand();
-            //System.Data.SqlClient.SqlCommand selectName = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand tenantDash = new System.Data.SqlClient.SqlCommand();
             //Tenant Select
             select.CommandText = "SELECT FirstName,LastName FROM Account WHERE AccountID in " +
             "(SELECT TOP(5) tenantID FROM Lease WHERE HostID = " + accountID + ");";
             //Property Select
             selectProp.CommandText = "SELECT HouseNumber, Street FROM Property WHERE PropertyID in (SELECT propertyID FROM Property WHERE HostID = " + accountID + ");";
             //Message Center Tenant Populating once they favorite the current host's room
-            favoriteTenant.CommandText = "select firstName, LastName from account where AccountID in (select tenantID from tenant where TenantID in " +
+            favoriteTenant.CommandText = "select firstName, LastName,AccountID,BirthDate from account where AccountID in (select tenantID from tenant where TenantID in " +
                 "(select tenantID from FavoritedProperties where PropertyID in (select PropertyID from property where hostID =" + accountID + ")));";
-            //USERNAME AT TOP 
-            //selectName.CommandText = "SELECT FirstName FROM Account WHERE AccountID = " + accountID + ";";
-            
+            //Select statement to get fsvorite tenantID to check if they exist already
+            tenantDash.CommandText = "select accountID from account where AccountID in (select tenantID from Tenant where TenantID in (select tenantID from " +
+                "FavoritedTenants where HostID =" + accountID + "));";
             //Connections
             select.Connection = sc;
             selectProp.Connection = sc;
             favoriteTenant.Connection = sc;
-            //selectName.Connection = sc;
+            tenantDash.Connection = sc;
             sc.Open();
 
-            //Execute Query for Name at Top 
-            //string name = selectName.ExecuteScalar().ToString();
-            //StringBuilder myHostNameCard = new StringBuilder();
-            ////myHostNameCard.Append("<li> Welcome, " + name + "</li>");
-            //myHostNameCard.Append("<p> Welcome, " + name + "</p>");
-            //UserNameCard.Text += myHostNameCard.ToString();
-
-
+            //Store tenantID for if statement
+            List<int> tenantList = new List<int>(); 
+            System.Data.SqlClient.SqlDataReader sqlDataReader = tenantDash.ExecuteReader();
+            while(sqlDataReader.Read())
+            {
+                tenantList.Add(Convert.ToInt16(sqlDataReader["AccountID"].ToString()));
+            }
+            sqlDataReader.Close();
             //Populating Tenant Part of Host Dashboard
             System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
             while (reader.Read())
@@ -98,39 +105,72 @@ public partial class HostDashboard : System.Web.UI.Page
             rdr.Close();
             //Populating Message Center Matches
             System.Data.SqlClient.SqlDataReader drd = favoriteTenant.ExecuteReader();
+            int count = 0;
             while (drd.Read())
             {
                 String firstName = drd["FirstName"].ToString();
                 String lastName = drd["LastName"].ToString();
-                //Get Month and Day
-                String sDate = DateTime.Now.ToString();
-                DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
-                String dy = datevalue.Day.ToString();
-                String mn = datevalue.Month.ToString();
-                String yy = datevalue.Year.ToString();
+                int tenantID = Convert.ToInt16(drd["AccountID"].ToString());
+                String bday = drd["BirthDate"].ToString();
 
-                StringBuilder myCard = new StringBuilder();
-                myCard
-                    .Append("<div class=\"chat-list\">")
-                    .Append("           <div class=\"chat-people\">")
-                    .Append("               <div class=\"chat-img\"> <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\"></div>")
-                    .Append("                <div class=\"chat-ib\">")
-                    .Append("                    <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
-                    .Append("                </div>")
-                    .Append("            </div>")
-                    .Append("        </div>")
-                    .Append("        </div>");
+                //Get Age
+                DateTime birthDay = Convert.ToDateTime(bday);
+                DateTime current = DateTime.Now;
+                int age = new DateTime(DateTime.Now.Subtract(birthDay).Ticks).Year - 1;
+                DateTime past = birthDay.AddYears(age);
+                int months = 0;
+                for (int i = 1; i <= 12; i++)
+                {
+                    if (past.AddMonths(i) == current)
+                    {
+                        months = i;
+                        break;
+                    }
+                    else if (past.AddMonths(i) >= current)
+                    {
+                        months = i - 1;
+                        break;
+                    }
+                }
+                int days = current.Subtract(past.AddMonths(months)).Days;
+                int hours = current.Subtract(past).Hours;
 
-                Card3.Text += myCard.ToString();
+                if (!tenantList.Contains(tenantID))
+                {
+                    StringBuilder myCard = new StringBuilder();
+                    myCard
+                        .Append("<div class=\"chat-list\">")
+                        .Append("           <div class=\"chat-people\">")
+                        .Append("               <div class=\"chat-img\"> <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\"></div>")
+                        .Append("                <div class=\"chat-ib\">")
+                        .Append("                    <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + "Age: " + age + "</a></h5>")
+                        .Append("                    <p>Hello I'm interested in your property!</p>")
+                        .Append("                  </div>")
+                        .Append("               </div>")
+                        .Append("            </div>")
+                        .Append("       </div>");
+
+                    Card3.Text += myCard.ToString();
+                    count++;
+                }
             }
-
-             
-
-
-
-
             drd.Close();
             sc.Close();
         }
+    }
+    [System.Web.Services.WebMethod]
+    [System.Web.Script.Services.ScriptMethod]
+    public static void MessageInsert(int tenantID, int hostID)
+    {
+        System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+
+        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+        insert.Connection = conn;
+        insert.CommandText = "INSERT into [roommagnetdb].[dbo].[FavoritedTenants] VALUES(@tenantID, @hostID)";
+        insert.Parameters.Add(new SqlParameter("@tenantID", tenantID));
+        insert.Parameters.Add(new SqlParameter("@hostID", hostID));
+        conn.Open();
+        insert.ExecuteNonQuery();
+        conn.Close();
     }
 }

@@ -1,9 +1,16 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="HostDashboard.aspx.cs" Inherits="HostDashboard" %>
+﻿<%@ Page Title="" MaintainScrollPositionOnPostback="true" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="HostDashboard.aspx.cs" Inherits="HostDashboard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>RoomMagnet | Dashboard</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+ <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+ </asp:ScriptManager>
+<script>
+    function insertMessage(tenantID, hostID) {
+        PageMethods.MessageInsert(tenantID, hostID);
+    };
+</script>
     <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
@@ -84,8 +91,9 @@
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">Message Center</h5>
 
-                                <asp:Literal ID="Card3" runat="server" Mode="Transform"></asp:Literal>
-
+                                
+                                    <asp:Literal ID="Card3" runat="server" Mode="Transform"></asp:Literal>
+                                
 
                                 <!--BUTTON-->
                                 <div class=" text-center pt-3">
@@ -98,6 +106,7 @@
                     <!--END OF MESSAGE MOD-->
 
                 </div>
+
 
 
                 <div class="col-md-6">
