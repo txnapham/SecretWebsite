@@ -46,12 +46,12 @@
 
     <!--BEGINNING OF SEARCH BAR-->
     <div class="container-fluid searchPageBodyContent">
+        <!--GOOGLE MAPS GOES HERE-->
         <section>
-
-        <div align="center">
-            <div id="map">
+             <div id="mapContainer" align="center">
+                    <div class="sticky-top" id="map">
+                    </div>
             </div>
-          </div>
         </section>
 
 
@@ -435,5 +435,6 @@
         };
         ajax.send();
     </script>
+    <script src="roommagnet.js"></script>
 </asp:Content>
 

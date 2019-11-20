@@ -11,7 +11,8 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using System.Data.SqlClient;
-
+using System.Collections;
+using System.Web.Script.Serialization;
 
 public partial class Search : System.Web.UI.Page
 {
@@ -500,5 +501,42 @@ public partial class Search : System.Web.UI.Page
         int size = queryFilter.Length;
         queryFilter = queryFilter.Substring(0, queryFilter.Length - 2);
         return queryFilter;
+    }
+
+    [System.Web.Services.WebMethod]
+    public static string queryToJSON(string query)
+    {
+        // connect to database perform query
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+        conn.Open();
+        SqlCommand sc = conn.CreateCommand();
+        sc.CommandText = query;
+        SqlDataReader sdr = sc.ExecuteReader();
+
+        // read data into a 2D array
+        ArrayList data = new ArrayList();
+        // get column headers
+        object[] fieldnames = new object[sdr.FieldCount];
+        for (int i = 0; i < sdr.FieldCount; i++)
+        {
+            fieldnames[i] = sdr.GetName(i);
+        }
+        data.Add(fieldnames);
+        // get row values
+        while (sdr.Read())
+        {
+            // create array from a row of data
+            object[] values = new object[sdr.FieldCount];
+            sdr.GetValues(values);
+            data.Add(values);
+        }
+
+        // serialize to JSON
+        JavaScriptSerializer jss = new JavaScriptSerializer();
+        String jsonResult = jss.Serialize(data);
+
+
+        // return the json string
+        return jsonResult;
     }
 }
