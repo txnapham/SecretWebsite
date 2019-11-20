@@ -79,7 +79,7 @@ public partial class HostDashboard : System.Web.UI.Page
 
                 StringBuilder myCard = new StringBuilder();
                 myCard
-                .Append("<li><a href=\"#\" class=\"tenantdashlist\">" + firstName + " " + lastName + "</a></li>");
+                .Append("<li><a href=\"PropertyDetails.aspx\" class=\"tenantdashlist\">" + firstName + " " + lastName + "</a></li>");
                 Card.Text += myCard.ToString();
             }
             reader.Close();
