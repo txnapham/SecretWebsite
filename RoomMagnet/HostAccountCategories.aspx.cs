@@ -167,5 +167,6 @@ public partial class HostAccountCategories : System.Web.UI.Page
 
         insert.ExecuteNonQuery();
         sc.Close();
+        Response.Redirect("HostDashboard.aspx");
     }
 }

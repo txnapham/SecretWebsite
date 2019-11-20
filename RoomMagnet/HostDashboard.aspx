@@ -1,18 +1,26 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="HostDashboard.aspx.cs" Inherits="HostDashboard" %>
+﻿<%@ Page Title="" MaintainScrollPositionOnPostback="true" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="HostDashboard.aspx.cs" Inherits="HostDashboard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>RoomMagnet | Dashboard</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+ <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+ </asp:ScriptManager>
+<script>
+    function insertMessage(tenantID, hostID) {
+        PageMethods.MessageInsert(tenantID, hostID);
+    };
+</script>
     <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
-<%--                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
-                Welcome USER,--%>
-                <ul>
-                    <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
-                </ul>
+                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
+                <%--Welcome USER,--%>
+                <p>
+                    <asp:Literal ID="UserNameCard" runat="server" Mode="Transform"></asp:Literal>
+                </p>
+                    
             </p>
 
 
@@ -83,8 +91,9 @@
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">Message Center</h5>
 
-                                <asp:Literal ID="Card3" runat="server" Mode="Transform"></asp:Literal>
-
+                                
+                                    <asp:Literal ID="Card3" runat="server" Mode="Transform"></asp:Literal>
+                                
 
                                 <!--BUTTON-->
                                 <div class=" text-center pt-3">
@@ -97,6 +106,7 @@
                     <!--END OF MESSAGE MOD-->
 
                 </div>
+
 
 
                 <div class="col-md-6">
@@ -524,7 +534,41 @@
                 </div>
             </div>
         </section>
+        <!-- OpenTok.js library -->
+<script src="https://static.opentok.com/v2/js/opentok.js"></script>
+<script>
+
+// credentials
+
+var apiKey = '45828062';
+var sessionId = '2_MX40NTgyODA2Mn5-MTU3NDIyNTcyMDMxMn51WENZdlQ5Y0NRY0xJdk8rdS9ud0lGZkR-UH4';
+var token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9ZThhNGUyODllZWQyZGUzYTUwMjEzODJjOTQzNDdjMmVjMjJhNTZlZjpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTNOREl5TlRjeU1ETXhNbjUxV0VOWmRsUTVZME5SWTB4SmRrOHJkUzl1ZDBsR1prUi1VSDQmY3JlYXRlX3RpbWU9MTU3NDIyNTc5MiZub25jZT0wLjY2MDkzOTkxNTkwOTI3OTMmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTU3NDMxMjE5Mg==';
+
+// connect to session
+var session = OT.initSession(apiKey, sessionId);
+
+// create publisher
+var publisher = OT.initPublisher();
+session.connect(token, function(err) {
+   // publish publisher
+    session.publish(publisher);
+   
+});
+  
+// create subscriber
+    session.on('streamCreated', function(event) {
+   session.subscribe(event.stream);
+    });
+    
+
+</script>
+     
+
+
+
+
     </div>
     <!--END OF DASHBOARD CARDS-->
+    
 </asp:Content>
 

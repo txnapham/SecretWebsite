@@ -702,6 +702,7 @@ table {
 button.btn-no-go {
     background-color: red;
     color: #fff;
+    width: 144px;
 }
 
 button.btn-yes-go {

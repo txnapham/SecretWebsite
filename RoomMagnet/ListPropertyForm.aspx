@@ -136,7 +136,8 @@
 
 
                 <div class="form-group">
-                    <asp:TextBox ID="txtCountry" runat="server" class="form-control form-control-lg" placeholder="Country"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldCountry" Display="Dynamic" runat="server" ErrorMessage="Please enter a zip code." ControlToValidate="txtCountry" Text="*Please enter a country"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtCountry" runat="server" class="form-control form-control-lg" placeholder="Country" MaxLength="2"></asp:TextBox>
                 </div>
 
                 <div class="form-group">
@@ -625,24 +626,30 @@
             </div>
 
 
-            <div class="form-group form-check pt-4">
-                <asp:CheckBox ID="cbBackCheck" runat="server" class="form-check-input" />
-                <label class="form-check-label" for="exampleCheck1">Perform background check now</label>
-            </div>
-
             <div class="form-group form-check">
+                <asp:CustomValidator ID="cbAgreementValidator" runat="server" Display="Dynamic" ErrorMessage="*Please accept the terms and conditions</br>" ClientValidationFunction="validateTerms" ></asp:CustomValidator>
                 <asp:CheckBox ID="cbAgreement" runat="server" class="form-check-input" />
                 <label class="form-check-label" for="exampleCheck1">Agreement to Terms &amp; Conditions</label>
             </div>
 
 
 
-            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="false" OnClick="btnListProperty_Click" />
+            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="true" OnClick="btnListProperty_Click" />
 
 
 
 
         </div>
+        <script>
+        function validateTerms(source, arguments) {
+            var $c = $('#<%= cbAgreement.ClientID %>');
+            if($c.prop("checked")){
+                arguments.IsValid = true;
+            } else {
+                arguments.IsValid = false;
+            }
+        }
+    </script>
         <!--END OF BODY CONTENT-->
 </asp:Content>
 

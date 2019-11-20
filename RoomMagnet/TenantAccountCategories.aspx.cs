@@ -168,6 +168,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
 
         insert.ExecuteNonQuery();
         sc.Close();
+        Response.Redirect("TenantDashboard.aspx");
     }
 
     protected void TenantImageUpload_Click(object sender, EventArgs e)

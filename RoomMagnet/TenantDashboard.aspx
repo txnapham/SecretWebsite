@@ -88,17 +88,8 @@
                         <div class="card-body">
                             <h5 class="card-title dash-card-titles">Message Center</h5>
 
-                            <div class="chat-list">
-                                <div class="chat-people">
-                                    <div class="chat-img">
-                                        <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
-                                    </div>
-                                    <div class="chat-ib">
-                                        <h5>Karen Smith <span class="chat-date">Nov 12</span></h5>
-                                        <p>Hello, I would like to set up a meeting.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <asp:Literal ID="Card3" runat="server" Mode="Transform"></asp:Literal>
+
 
                             <div class=" text-center pt-3">
                                 <a href="TenantMessageCenter.aspx" class="btn btn-info">View Messages</a>
@@ -517,5 +508,27 @@
 
     </div>
     <!--END OF DASHBOARD CARDS-->
+       <script src="https://static.opentok.com/v2/js/opentok.js" charset="utf-8"></script>
+    <script charset="utf-8">
+      var apiKey = '45828062';
+      var sessionId = '2_MX40NTgyODA2Mn5-MTU3NDIyNTcyMDMxMn51WENZdlQ5Y0NRY0xJdk8rdS9ud0lGZkR-UH4';
+      var token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9ZThhNGUyODllZWQyZGUzYTUwMjEzODJjOTQzNDdjMmVjMjJhNTZlZjpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTNOREl5TlRjeU1ETXhNbjUxV0VOWmRsUTVZME5SWTB4SmRrOHJkUzl1ZDBsR1prUi1VSDQmY3JlYXRlX3RpbWU9MTU3NDIyNTc5MiZub25jZT0wLjY2MDkzOTkxNTkwOTI3OTMmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTU3NDMxMjE5Mg==';
+
+// connect to session
+var session = OT.initSession(apiKey, sessionId);
+
+// create publisher
+var publisher = OT.initPublisher();
+session.connect(token, function(err) {
+   // publish publisher
+   session.publish(publisher); 
+})
+
+  
+// create subscriber
+session.on('streamCreated', function(event) {
+   session.subscribe(event.stream);
+});
+    </script>
 </asp:Content>
 

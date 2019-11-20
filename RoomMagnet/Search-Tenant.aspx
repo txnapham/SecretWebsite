@@ -64,7 +64,7 @@
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterOptions">Filter</button>
                         <!--END OF FILTER BUTTON-->
 
-                        <!--filter form starts-->
+                       <!--filter form starts-->
                                 <div class="modal" id="filterOptions">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -124,7 +124,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbTechSavy" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbTechSavvy" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterSportsFan">Tech-Savvy</label>
                                                             </div>
                                                         </div>
@@ -156,7 +156,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbHeating" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbHVAC" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterSportsFan">Heating / Air Conditioning</label>
                                                             </div>
                                                         </div>
@@ -180,7 +180,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbConBath" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbPrivateBath" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterPetFriendly">Private Bathroom</label>
                                                             </div>
                                                         </div>
@@ -194,7 +194,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbDryer" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbWashDry" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterSportsFan">Washer / Dryer</label>
                                                             </div>
                                                         </div>
@@ -341,14 +341,7 @@
                                                 </div>
                                                 <!--end of languages-->
 
-         
-
-
-
-                                                <button type="button" class="btn btn-info btn-block">
-                                                    Apply Filters
-                                           
-                                                </button>
+                                                <button type="button" class="btn btn-info btn-block" data-dismiss="modal"> Apply Filters</button>
 
 
                                             </div>

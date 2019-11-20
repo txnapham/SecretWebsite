@@ -36,31 +36,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
-
-        //Select Statements properties
-        System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
-        selectHost.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
-        //Connections
-        selectHost.Connection = sc;
-        sc.Open();
-
-        //Populating Tenant Part of Host Dashboard
-        System.Data.SqlClient.SqlDataReader readerHostImage = selectHost.ExecuteReader();
-        while (readerHostImage.Read())
-        {
-            String tenantName = readerHostImage["FirstName"].ToString();
-            String filename = readerHostImage["AccountImage"].ToString();
-            // No image uploaded (currently default image in S3)
-            if (filename == "") filename = "defaulttenantimg.jpg";
-            // User dashboard dynamically updated using S3
-            StringBuilder hostImage = new StringBuilder();
-            hostImage
-            .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">");
-            HostCard.Text += hostImage.ToString();
-        }
-        sc.Close();
-
+        Message.Text = String.Empty;
         Card.Text = String.Empty;
         //if (Session["AccountId"] != null)
         //{
@@ -88,25 +64,29 @@ public partial class HostMessageCenter : System.Web.UI.Page
                 StringBuilder myCard = new StringBuilder();
                 myCard
                     .Append("<div class=\"chat-list\">")
-                    .Append("               <div class=\"chat-people\">")
-                    .Append("                   <div class=\"chat-img\">")
-                    .Append("                        <asp:ImageButton id=\"btnSubmit"+count+ "\" runat=\"server\" =\"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" CustomParameter=\""+tenantID+"\" onClick= \"btnSubmit_Click\"/>") 
-                    .Append("                       </div>")
-                    .Append("                   <div class=\"chat-ib\">")
-                    .Append("                       <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
-                    .Append("                        <p>text</p>")
-                    .Append("                    </div>")
-                    .Append("                </div>")
-                    .Append("            </div>");
+                .Append("               <div class=\"chat-people\">")
+                .Append("                   <div class=\"chat-img\">")
+                //.Append("                        <asp:ImageButton id=\"btnSubmit" + count + "\" runat=\"server\" this.src=\"images/rebeccajames.png\" class=\"rounded-circle img-fluid\" CustomParameter=\"" + tenantID + "\" onClick= \"btnSubmit_Click\"/>")
+                .Append("<input type=\"image\" name=\"ctl00$ContentPlaceHolder1$btnSubmit"+count+"\" id=\"ContentPlaceHolder1_btnSubmit"+count+"\" class=\"rounded-circle img-fluid\" customparameter=\""+tenantID+"\" src=\"images/rebeccajames.png\">")
+                .Append("                       </div>")
+                .Append("                   <div class=\"chat-ib\">")
+                .Append("                       <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
+                .Append("                        <p>text</p>")
+                .Append("                    </div>")
+                .Append("                </div>")
+                .Append("            </div>");
+
                 Card.Text += myCard.ToString();
                 count++;
             }
             reader.Close();
             sc.Close();
         //}
+        
     }
     protected void btnSubmit_Click(object sender, ImageClickEventArgs e)
     {
+
         ImageButton lnk = sender as ImageButton;
         String tenantID = lnk.Attributes["CustomParameter"].ToString();
 
@@ -199,5 +179,11 @@ public partial class HostMessageCenter : System.Web.UI.Page
         txtMessage.Text = String.Empty;
         //e as ImageClickEventArgs;
         //btnSubmit_Click(sender,e);
+    }
+    [System.Web.Services.WebMethod]
+    [System.Web.Script.Services.ScriptMethod]
+    public static void CreateLease()
+    {
+
     }
 }

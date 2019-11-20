@@ -37,6 +37,9 @@ public partial class TenantDashboard : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Card2.Text = String.Empty;
+        Card3.Text = String.Empty;
+
         if(Session["AccountId"] != null)
         { 
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
@@ -79,10 +82,17 @@ public partial class TenantDashboard : System.Web.UI.Page
             sc.Close();
 
             //Selecting from Property
-            System.Data.SqlClient.SqlCommand selectProperty = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh FROM Property WHERE PropertyID in " +
+            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand messageSelect = new System.Data.SqlClient.SqlCommand();
+            select.CommandText = "SELECT City, HomeState, LocalPriceRangeLow, LocalPriceRangeHigh FROM Property WHERE PropertyID in " +
             "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
+            messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, max(Message.Date) as Date FROM Message INNER JOIN FavoritedProperties ON " +
+                "Message.FavPropID = FavoritedProperties.FavPropID INNER JOIN Property ON FavoritedProperties.PropertyID = Property.PropertyID INNER JOIN Host ON " +
+                "Property.HostID = Host.HostID INNER JOIN Account ON Host.HostID = Account.AccountID INNER JOIN FavoritedTenants ON Message.FavTenantID = " +
+                "FavoritedTenants.FavTenantID AND Host.HostID = FavoritedTenants.HostID where MessageType = 0 and FavoritedTenants.TenantID = " + accountID + " group by " +
+                "Account.FirstName, Account.LastName";
             select.Connection = sc;
+            messageSelect.Connection = sc;
             sc.Open();
             System.Data.SqlClient.SqlDataReader readerProperty = select.ExecuteReader();
 
@@ -113,6 +123,29 @@ public partial class TenantDashboard : System.Web.UI.Page
                 Card2.Text += myCard.ToString();
             }
             reader.Close();
+            System.Data.SqlClient.SqlDataReader rdr = messageSelect.ExecuteReader();
+            while (rdr.Read())
+            {
+                String firstName = rdr["FirstName"].ToString();
+                String LastName = rdr["LastName"].ToString();
+                String date = rdr["Date"].ToString();
+                
+                StringBuilder myCard = new StringBuilder();
+                myCard
+                    .Append(" <div class=\"chat-list\">")
+                    .Append("            <div class=\"chat-people\">")
+                    .Append("                <div class=\"chat-img\">")
+                    .Append("                    <img src = \"images/bettyBrown.png\" class=\"rounded-circle img-fluid\">")
+                    .Append("                </div>")
+                    .Append("                <div class=\"chat-ib\">")
+                    .Append("                    <h5>"+firstName +" "+LastName+"</h5>")
+                    .Append("                    <p>"+date+"</p>")
+                    .Append("                </div>")
+                    .Append("            </div>")
+                    .Append("        </div>");
+                Card3.Text += myCard.ToString();
+            }
+            rdr.Close();
             sc.Close();
         }
     }
