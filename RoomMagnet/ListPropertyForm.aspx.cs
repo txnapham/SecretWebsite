@@ -238,7 +238,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
             sc.Open();
             int test = (int)select.ExecuteScalar();
 
-            PropertyRoomImages.propertyRoomImagesArray.Add((int)select.ExecuteScalar());
+            PropertyRoomImages.propertyRoomImagesArray.Add(test);
 
             StatusLabel.Text = "Imaged Saved!";
         }
