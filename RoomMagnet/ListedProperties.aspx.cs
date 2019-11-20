@@ -55,6 +55,8 @@ public partial class ListedProperties : System.Web.UI.Page
                 String priceLow = reader["RoomPriceRangeLow"].ToString();
                 String priceHigh = reader["RoomPriceRangeHigh"].ToString();
                 String filename = reader["images"].ToString();
+                // No image uploaded (currently default image in S3)
+                if (filename == "") filename = "rmdefaultimg.jpg";
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceHigh), 0, MidpointRounding.ToEven);
  
@@ -62,7 +64,7 @@ public partial class ListedProperties : System.Web.UI.Page
                 myCard
                 .Append("<div class=\"col-xs-4 col-md-3\">")
                 .Append("   <div class=\"card  shadow-sm  mb-4\">")
-                .Append("       <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
                 .Append("           <div class=\"card-body\">")
                 .Append("               <h5 class=\"card-title\">" + HouseNum + ", " + Street + "</h5>")
                 .Append("               <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
