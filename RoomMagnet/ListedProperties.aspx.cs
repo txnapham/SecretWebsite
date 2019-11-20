@@ -39,10 +39,9 @@ public partial class ListedProperties : System.Web.UI.Page
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
             //Select Statements properties
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT Property.HouseNumber, Property.Street, PropertyRoom.MonthlyPrice, PropertyRoomImages.images " +
-                "FROM PropertyRoomImages INNER JOIN PropertyRoom ON PropertyRoomImages.RoomID = PropertyRoom.RoomID " +
-                "INNER JOIN Property ON PropertyRoomImages.PropertyID = Property.PropertyID " +
-                "WHERE Property.HostID  =" + accountID + "; ";
+            select.CommandText = "SELECT Property.HouseNumber, Property.Street, Property.RoomPriceRangeLow, Property.RoomPriceRangeHigh, PropertyImages.images " +
+                "FROM Property LEFT OUTER JOIN PropertyImages ON Property.PropertyID = PropertyImages.PropertyID " +
+                "WHERE Property.HostID = " + accountID + ";";
             //Connections
             select.Connection = sc;
             sc.Open();
@@ -53,26 +52,25 @@ public partial class ListedProperties : System.Web.UI.Page
             {
                 String HouseNum = reader["HouseNumber"].ToString();
                 String Street = reader["Street"].ToString();
-                String price = reader["MonthlyPrice"].ToString();
+                String priceLow = reader["RoomPriceRangeLow"].ToString();
+                String priceHigh = reader["RoomPriceRangeHigh"].ToString();
                 String filename = reader["images"].ToString();
-                double priceRounded = Math.Round(Convert.ToDouble(price), 0, MidpointRounding.ToEven);
+                // No image uploaded (currently default image in S3)
+                if (filename == "") filename = "rmdefaultimg.jpg";
+                double priceLowRounded = Math.Round(Convert.ToDouble(priceLow), 0, MidpointRounding.ToEven);
+                double priceHighRounded = Math.Round(Convert.ToDouble(priceHigh), 0, MidpointRounding.ToEven);
+ 
                 StringBuilder myCard = new StringBuilder();
                 myCard
-                .Append("<div class=\"col-md-3\">")
-                .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                .Append("                        <img src=\"s3://elasticbeanstalk-us-east-1-606091308774/PropertyImages/" + filename + " alt =\"image\">")
-                .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
-                .Append("                            <div class=\"card-body\">")
-                .Append("                                <h5 class=\"card-title\">" + HouseNum + " " + Street + "</h5>")
-                .Append("                                <p class=\"card-text\">" + "Room Price" + " - " + "$" + priceRounded + "</p>")
-                .Append("                            </div>")
-                .Append("                        </a>")
-                .Append("")
-                .Append("                        <div>")
-                .Append("                            <button type=\"button\" id=\"heartbtn\" class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
-                .Append("                        </div>")
-                .Append("                    </div>")
-                .Append("</n 4div>");
+                .Append("<div class=\"col-xs-4 col-md-3\">")
+                .Append("   <div class=\"card  shadow-sm  mb-4\">")
+                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
+                .Append("           <div class=\"card-body\">")
+                .Append("               <h5 class=\"card-title\">" + HouseNum + ", " + Street + "</h5>")
+                .Append("               <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                .Append("           </div>")
+                .Append("   </div>")
+                .Append("</div>");
                 Card.Text += myCard.ToString();
             }
             reader.Close();

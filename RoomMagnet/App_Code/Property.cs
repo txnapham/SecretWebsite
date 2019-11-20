@@ -18,6 +18,13 @@ public class Property
     private String localPriceRangeHigh;
     private String roomPriceRangeLow;
     private String roomPriceRangeHigh;
+    private int streetParking;
+    private int garageParking;
+    private int backyard;
+    private int porchOrDeck;
+    private int pool;
+    private int nonSmoking;
+    private int homeShareSmarter;
     private DateTime modifiedDate;
     private int hostID;
 
@@ -149,4 +156,82 @@ public class Property
     {
         this.modifiedDate = ModDate;
     }
+
+    //StreetParking
+    public void setStreetParking(int streetParking)
+    {
+        this.streetParking = streetParking;
+    }
+
+    public int getStreetParking()
+    {
+        return this.streetParking;
+    }
+
+    //GarageParking
+    public void setGarageParking(int garageParking)
+    {
+        this.garageParking = garageParking;
+    }
+
+    public int getGarageParking()
+    {
+        return this.garageParking;
+    }
+
+    //Backyard
+    public void setBackyard(int backyard)
+    {
+        this.backyard = backyard;
+    }
+
+    public int getBackyard()
+    {
+        return this.backyard;
+    }
+
+    //PorchOrDeck
+    public void setPorchOrDeck(int porchOrDeck)
+    {
+        this.porchOrDeck = porchOrDeck;
+    }
+
+    public int getPorchOrDeck()
+    {
+        return this.porchOrDeck;
+    }
+
+    //Pool
+    public void setPool(int pool)
+    {
+        this.pool = pool;
+    }
+
+    public int getPool()
+    {
+        return this.pool;
+    }
+
+    //NonSmoking
+    public void setNonSmoking(int nonSmoking)
+    {
+        this.nonSmoking = nonSmoking;
+    }
+
+    public int getNonSmoking()
+    {
+        return this.nonSmoking;
+    }
+
+    //HomeShareSmarter
+    public void setHomeShareSmarter(int homeShareSmarter)
+    {
+        this.homeShareSmarter = homeShareSmarter;
+    }
+
+    public int getHomeShareSmarter()
+    {
+        return this.homeShareSmarter;
+    }
+    
 }

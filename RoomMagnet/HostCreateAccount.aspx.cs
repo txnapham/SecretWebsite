@@ -52,7 +52,10 @@ public partial class HostCreateAccount : System.Web.UI.Page
 
         //create new account and host object
         //use HttpUtility.HtmlEncode for these inputs
-        Account newAccount = new Account(HttpUtility.HtmlEncode(txtFN.Text), HttpUtility.HtmlEncode(txtMN.Text), HttpUtility.HtmlEncode(txtLN.Text), HttpUtility.HtmlEncode(txtPhone.Text), DateTime.Parse(txtBday.Text), HttpUtility.HtmlEncode(txtEmail.Text), HttpUtility.HtmlEncode(txtHouseNum.Text), HttpUtility.HtmlEncode(txtStreet.Text), HttpUtility.HtmlEncode(txtCity.Text), ddState.SelectedValue, HttpUtility.HtmlEncode(txtZip.Text), "US", Int32.Parse("2"), Int32.Parse("2"));
+        Account newAccount = new Account(HttpUtility.HtmlEncode(txtFN.Text), HttpUtility.HtmlEncode(txtMN.Text), HttpUtility.HtmlEncode(txtLN.Text), 
+            HttpUtility.HtmlEncode(txtPhone.Text), DateTime.Parse(txtBday.Text, new System.Globalization.CultureInfo("pt-BR")), HttpUtility.HtmlEncode(txtEmail.Text), 
+            HttpUtility.HtmlEncode(txtHouseNum.Text), HttpUtility.HtmlEncode(txtStreet.Text), HttpUtility.HtmlEncode(txtCity.Text), ddState.SelectedValue, 
+            HttpUtility.HtmlEncode(txtZip.Text), "US", Int32.Parse("2"), Int32.Parse("2"));
         Host newHost = new Host(newAccount, "N", "Retiree");
 
         checkEmailCount.CommandText = "SELECT COUNT(*) FROM ACCOUNT WHERE EMAIL = @emailCheck";
@@ -62,7 +65,7 @@ public partial class HostCreateAccount : System.Web.UI.Page
 
         if (emailCount < 1)
         {
-            insert.CommandText = "INSERT into Account VALUES (@fName, @mName, @lName, @phone, @bday, @email, @HouseNbr, @street, @city, @state, @zip, @country, NULL, @AccType, @ModDate, @PID); " +
+            insert.CommandText = "INSERT into Account VALUES (@fName, NULLIF(@mName,''), @lName, @phone, @bday, @email, @HouseNbr, @street, @city, @state, @zip, @country, NULL, @AccType, @ModDate, @PID); " +
                 "INSERT into Host VALUES(@@Identity, @BackCheck, @HostReason);" +
                 "INSERT into Password VALUES((SELECT MAX(HostID) from Host), @email, @password);";
 

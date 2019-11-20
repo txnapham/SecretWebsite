@@ -29,6 +29,7 @@
                 <span>Add photo</span>
                 <input type="file"/>
             </div>
+            
         </section>
 
 
@@ -51,7 +52,7 @@
                     <div class="col-md-12">
                         <div class="switchwrapper">
                             <label class="switch">
-                                <asp:CheckBox ID="cbEnglish" runat="server" />
+                                <asp:CheckBox ID="cbEnglish" runat="server" AutoPostBack="True" />
                                 <span class="slider round"></span>
                             </label>
                             <div>English</div>
@@ -61,7 +62,7 @@
                     <div class="col-md-12">
                         <div class="switchwrapper">
                             <label class="switch">
-                                <asp:CheckBox ID="cbSpanish" runat="server" />
+                                <asp:CheckBox ID="cbSpanish" runat="server"/>
                                 <span class="slider round"></span>
                             </label>
                             <div>Spanish</div>
@@ -195,7 +196,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
-                                <asp:CheckBox ID="fbFamily" runat="server" />
+                                <asp:CheckBox ID="cbFamily" runat="server" />
                                 <span class="slider round"></span>
                             </label>
                             <div>Family-Oriented</div>
@@ -241,7 +242,7 @@
         </section>
 
 
-        <asp:Button ID="btnSet" runat="server" Text="Set Now" class="btn btn-info btn-block" href="HostDashboard.aspx" />
+        <asp:Button ID="btnSet" runat="server" Text="Set Now" class="btn btn-info btn-block" href="HostDashboard.aspx" OnClick="btnSet_Click" />
 
 
 

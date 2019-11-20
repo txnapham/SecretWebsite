@@ -4,7 +4,7 @@
     <title>RoomMagnet | Edit Profile</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container-fluid px-5">
+    <div class="container-fluid px-5 mt-4">
 
         <!--BREADCRUMBS-->
         <section>
@@ -148,14 +148,22 @@
                                 <div class="modal-body">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     <div class="form-group">
-                                        <%--<input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Previous Password" />--%>
-                                        <asp:TextBox ID="txtPrevPassword" runat="server" class="form-control form-control-lg" placeholder="Previous Password" TextMode="Password" MaxLength="256"></asp:TextBox>
-                                        <%--<input type="password" class="form-control form-control-lg" id="exampleInputPassword2" placeholder="New Password" />--%>
-                                        <asp:TextBox ID="txtNewPassword" runat="server" class="form-control form-control-lg" placeholder="Previous Password" TextMode="Password" MaxLength="256"></asp:TextBox>
-                                        <%--<input type="password" class="form-control form-control-lg" id="exampleInputPassword3" placeholder="Re-enter New Password" />--%>
-                                        <asp:TextBox ID="txtReenterPassword" runat="server" class="form-control form-control-lg" placeholder="Previous Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+
+                                        <asp:TextBox ID="txtPrevPassword" runat="server" class="form-control form-control-lg" placeholder="Enter Previous Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="PrevPassReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Enter new password" ControlToValidate="txtPrevPassword" ForeColor="Red"></asp:RequiredFieldValidator>
+                                  
+                                        <asp:TextBox ID="txtNewPassword" runat="server" class="form-control form-control-lg" placeholder="Enter New Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="newPassReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Enter new password" ControlToValidate="txtNewPassword" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="passwordValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid password" Text="*Please enter a password (8-15 characters) with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character (example: !#&%) " ControlToValidate="txtNewPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$" ForeColor="Red"></asp:RegularExpressionValidator>
+
+                                        <asp:TextBox ID="txtReenterPassword" runat="server" class="form-control form-control-lg" placeholder="Re-Enter New Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" runat="server" ErrorMessage="Re-Enter password" ControlToValidate="txtReenterPassword" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <asp:CompareValidator ID="CompareValidator1" Display="Dynamic" runat="server" ErrorMessage="Passwords do no match" ControlToValidate="txtReenterPassword" ControlToCompare="txtNewPassword" ForeColor="Red"></asp:CompareValidator>
+
                                     </div>
-                                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>
+                                    <%--<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>--%>
+                                    <asp:Button ID="btnChangePassword" class="btn btn-info btn-block" runat="server" Text="Change Password" OnClick="btnChangePassword_Click"/>
+                                    <asp:Label ID="lblPrev" runat="server" ForeColor="Red"></asp:Label>
                                 </div>
                             </div>
                         </div>
