@@ -17,9 +17,9 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-interval="10000">
                             <div class="carousel-caption">
-                                <h1 class="caption-headline-main">Matching students and empty-nesters.</h1>
-                            </div>
-                            <img class="d-block w-100 img-fluid" src="images/senior-woman-learning-on-computer.jpg" alt="First slide">
+                                <h1 class="caption-headline-main">Age in place without worrying about the financial strain.</h1>                                
+                                </div>
+                                <img class="d-block w-100 img-fluid" src="images/senior-woman-learning-on-computer.jpg" alt="First slide">
                         </div>
 
                         <div class="carousel-item" data-interval="10000">
@@ -202,7 +202,7 @@
                                                 <!--end of amenities-->
 
                                        <!--start of homesharesmarter-->
-                                                <h6>HomeshareSmarter® Living</h6>
+                                                <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housing">®</a>Living</h6>
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">

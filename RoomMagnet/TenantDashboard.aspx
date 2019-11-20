@@ -475,8 +475,8 @@
                             </div>
 
 
-                            <button class="nav-item btn createAppointment" type="button" data-toggle="modal" data-target="#createAppointment">
-                                <a class="btn btn-md btn-info btn-block" href="#">Create Appointment</a>
+                            <button class="nav-item btn btn-block createAppointment" type="button" data-toggle="modal" data-target="#createAppointment">
+                                <a class="btn btn-md btn-info " href="#">Create Appointment</a>
                             </button>
                             <div class="modal" id="createAppointment">
                                 <div class="modal-dialog">
