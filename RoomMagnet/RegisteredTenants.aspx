@@ -42,19 +42,26 @@
                 <table class="w-100 ">
                     <tr class="text-center">
                         <th class="w-50" scope="col">Registered Tenants</th>
-                        <th class="text-right w-10" scope="col">Background Status</th>
-                        <th class="text-right w-10" scope="col">Account Status</th>
+                        <th class="text-left w-10" scope="col">Background Status</th>
+                        <th class="text-left w-10" scope="col">Account Status</th>
                     </tr>
                     
                     <tr>
                         <td>First Name Last Name</td>
-                        <td><button class="btn btn-no-go">Background Status</button></td>
-                        <td><button class="btn btn-info">Delete Account</button></td>
+                        <td>
+                            <asp:Button ID="btnUpdate" runat="server" class="btn btn-info" Text="Update Status" OnClick="btnUpdate_Click" />
+                            <asp:Label ID="lblCompletedBC" runat="server" Text="  Incomplete" Visible="False"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Button ID="btnDelete" class="btn btn-danger" runat="server" Text="Delete Account" />
+                        </td>
                     </tr>
                      <tr>
                         <td>First Name Last Name</td>
-                        <td><button class="btn btn-yes-go"> Background Status</button></td>
-                        <td><button class="btn btn-info">Delete Account</button></td>
+                        <td><asp:Button ID="Button1" runat="server" class="btn btn-info" Text="Update Status" /></td>
+                        <td>
+                            <asp:Button ID="Button2" class="btn btn-danger" runat="server" Text="Delete Account" />
+                        </td>
                     </tr>
                      
                 
