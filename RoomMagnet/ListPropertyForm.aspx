@@ -202,7 +202,7 @@
                             </section>
                             <!--Amenities Start here-->
                             <section>
-                                <div class="row px-5 py-3">
+                                <div class="row px-3 py-3">
                                     <div class="col-md-6">
 
                                         <div class="col-md-12">

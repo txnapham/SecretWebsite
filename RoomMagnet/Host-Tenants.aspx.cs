@@ -35,30 +35,36 @@ public partial class Host_Tenants : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
-
-        //Select Statements properties
-        System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
-        selectHost.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
-        //Connections
-        selectHost.Connection = sc;
-        sc.Open();
-
-        //Populating Tenant Part of Host Dashboard
-        System.Data.SqlClient.SqlDataReader readerHostImage = selectHost.ExecuteReader();
-        while (readerHostImage.Read())
+        if(Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
-            String tenantName = readerHostImage["FirstName"].ToString();
-            String filename = readerHostImage["AccountImage"].ToString();
-            // No image uploaded (currently default image in S3)
-            if (filename == "") filename = "defaulttenantimg.jpg";
-            // User dashboard dynamically updated using S3
-            StringBuilder hostImage = new StringBuilder();
-            hostImage
-            .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">");
-            HostCard.Text += hostImage.ToString();
-        }
-        sc.Close();
+            int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
+            //Select Statements properties
+            System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
+            selectHost.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
+            //Connections
+            selectHost.Connection = sc;
+            sc.Open();
+
+            //Populating Tenant Part of Host Dashboard
+            System.Data.SqlClient.SqlDataReader readerHostImage = selectHost.ExecuteReader();
+            while (readerHostImage.Read())
+            {
+                String tenantName = readerHostImage["FirstName"].ToString();
+                String filename = readerHostImage["AccountImage"].ToString();
+                // No image uploaded (currently default image in S3)
+                if (filename == "") filename = "defaulttenantimg.jpg";
+                // User dashboard dynamically updated using S3
+                StringBuilder hostImage = new StringBuilder();
+                hostImage
+                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">");
+                HostCard.Text += hostImage.ToString();
+            }
+            sc.Close();
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
+        }
     }
 }

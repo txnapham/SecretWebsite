@@ -45,35 +45,41 @@ public partial class ListPropertyForm : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
-        FileUpload1_Click(sender, e);
-
-        txtCountry.Text = "US";
-        ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-
-
-        //Select Statements properties
-        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-        select.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
-        //Connections
-        select.Connection = sc;
-        sc.Open();
-        //Populating Tenant Part of Host Dashboard
-        System.Data.SqlClient.SqlDataReader readerHost = select.ExecuteReader();
-        while (readerHost.Read())
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
-            String tenantName = readerHost["FirstName"].ToString();
-            String filename = readerHost["AccountImage"].ToString();
-            // No image uploaded (currently default image in S3)
-            if (filename == "") filename = "defaulttenantimg.jpg";
-            // User dashboard dynamically updated using S3
-            StringBuilder tenantImage = new StringBuilder();
-            tenantImage
-            .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">");
-            HostCard.Text += tenantImage.ToString();
-        }
-        sc.Close();
+            int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
+            FileUpload1_Click(sender, e);
 
+            txtCountry.Text = "US";
+            ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+
+
+            //Select Statements properties
+            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
+            select.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
+            //Connections
+            select.Connection = sc;
+            sc.Open();
+            //Populating Tenant Part of Host Dashboard
+            System.Data.SqlClient.SqlDataReader readerHost = select.ExecuteReader();
+            while (readerHost.Read())
+            {
+                String tenantName = readerHost["FirstName"].ToString();
+                String filename = readerHost["AccountImage"].ToString();
+                // No image uploaded (currently default image in S3)
+                if (filename == "") filename = "defaulttenantimg.jpg";
+                // User dashboard dynamically updated using S3
+                StringBuilder tenantImage = new StringBuilder();
+                tenantImage
+                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">");
+                HostCard.Text += tenantImage.ToString();
+            }
+            sc.Close();
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
+        }
     }
 
     ArrayList imageId = new ArrayList();
@@ -153,11 +159,6 @@ public partial class ListPropertyForm : System.Web.UI.Page
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@homeShareSmarter", newProperty.getHomeShareSmarter()));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@date", newProperty.getModDate()));
 
-
-
-
-
-
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID", Session["AccountId"]));
 
         insert.CommandText = "INSERT INTO PROPERTY VALUES(@propertyType, @houseNum, @street, @city, @homeState, @zip, @country, @roomPriceRangeLow, @roomPriceRangeHigh, @streetParking, @garageParking, @backyard, @porchOrDeck, @pool, @nonSmoking, @homeShareSmarter, @date, @HostID)";
@@ -185,19 +186,19 @@ public partial class ListPropertyForm : System.Web.UI.Page
 
         System.Data.SqlClient.SqlCommand imageLink = new System.Data.SqlClient.SqlCommand();
         imageLink.Connection = sc;
-        imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propID", propertyID));
         sc.Open();
 
-        for (int i = 0; i < imageId.Count; i++)
+        for (int i = 0; i < PropertyRoomImages.propertyRoomImagesArray.Count; i++)
         {
-            string arrayImageId = imageId[i].ToString();
+            imageLink.CommandText = "UPDATE PropertyImages SET PropertyID = @propID WHERE ImagesID = @insertImage";
+            string arrayImageId = PropertyRoomImages.propertyRoomImagesArray[i].ToString();
             imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@insertImage", arrayImageId));
             imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propID", propertyID));
-            imageLink.CommandText = "UPDATE PropertyImages SET PropertyID = @propID WHERE ImagesID = @insertImage";
             imageLink.ExecuteNonQuery();
-            sc.Close();
         }
-        imageId.Clear();
+
+        PropertyRoomImages.propertyRoomImagesArray.Clear();
+        sc.Close();
 
         Response.Redirect("HostDashboard.aspx");
     }
@@ -237,7 +238,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
             sc.Open();
             int test = (int)select.ExecuteScalar();
 
-            imageId.Add((int)select.ExecuteScalar());
+            PropertyRoomImages.propertyRoomImagesArray.Add(test);
 
             StatusLabel.Text = "Imaged Saved!";
         }

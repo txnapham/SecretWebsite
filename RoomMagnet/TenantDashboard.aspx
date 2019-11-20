@@ -480,7 +480,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <asp:TextBox ID="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYY"></asp:TextBox>
+                                                    <asp:TextBox ID="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYYY"></asp:TextBox>
                                                 </div>
 
 

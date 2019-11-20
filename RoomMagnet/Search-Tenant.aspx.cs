@@ -42,11 +42,18 @@ public partial class Search_Tenant : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["Search"] != null)
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
-            String homeSearch = "";
-            homeSearch = Convert.ToString(Session["Search"]);
-            btnSearch_Click(homeSearch);
+            if (Session["Search"] != null)
+            {
+                String homeSearch = "";
+                homeSearch = Convert.ToString(Session["Search"]);
+                btnSearch_Click(homeSearch);
+            }
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
         }
     }
 

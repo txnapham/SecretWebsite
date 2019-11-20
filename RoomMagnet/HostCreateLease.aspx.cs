@@ -9,6 +9,13 @@ public partial class HostCreateLease : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
+        {
 
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
+        }
     }
 }

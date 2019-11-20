@@ -38,9 +38,9 @@ public partial class HostMessageCenter : System.Web.UI.Page
     {
         Message.Text = String.Empty;
         Card.Text = String.Empty;
-        //if (Session["AccountId"] != null)
-        //{
-            
+
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
+        { 
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             select.CommandText = "select accountID, firstName, LastName from account where AccountID in (select tenantID from tenant where TenantID in " +
                 "(select tenantID from FavoritedTenants where HostID = "+Session["AccountId"]+"));";
@@ -81,7 +81,11 @@ public partial class HostMessageCenter : System.Web.UI.Page
             }
             reader.Close();
             sc.Close();
-        //}
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
+        }
         
     }
     protected void btnSubmit_Click(object sender, ImageClickEventArgs e)

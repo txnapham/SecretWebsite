@@ -20,7 +20,7 @@
                 <p>
                     <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
                 </p>
-                    
+
             </p>
 
 
@@ -58,9 +58,6 @@
     </div>
     <!--end of reminders-->
 
-
-
-
     <!--DASHBOARD CARDS-->
     <div class="container-fluid px-5 ">
         <section>
@@ -72,13 +69,148 @@
                         <div class="card  shadow-sm  mb-4">
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">Properties</h5>
+
+                                <div class="text-center" style="padding-left: 90%;">
+                                    <a class="dropdown-toggle btn-info " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">+</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item js-scroll-trigger" href="ListPropertyForm.aspx">Add Property</a>
+                                        <button style="color: #000;" type="button" class="btn  dropdown-item js-scroll-trigger" data-toggle="modal" data-dismiss="modal" data-target="#addRoom">
+                                            Add Room</button>
+                                    </div>
+
+                                </div>
+
+                                <!--HOST OR TENANT MOD-->
+                                <div class="modal justify-content-center" id="addRoom">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content pb-1">
+
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+
+                                            <!-- Modal body -->
+                                            <div class="modal-body ">
+                                                <div class="pb-3">
+                                                    <h5 class="modal-title">Add Your Room:</h5>
+                                                </div>
+                                                <%--<asp:DropDownList ID="ddProperty" runat="server" AppendDataBoundItems="True" class="form-control">
+                                                        <asp:ListItem>Please Select a Property</asp:ListItem>
+                                                </asp:DropDownList>--%>
+                                                <br />
+                                                <br />
+                                                <asp:TextBox ID="txtPrice" runat="server" class="form-control form-control-lg" placeholder="Price"></asp:TextBox>
+                                                <br />
+                                                <br />
+                                                <asp:TextBox ID="txtDescription" runat="server" class="form-control form-control-lg" placeholder="Description" Height="100px"></asp:TextBox>
+
+                                                <section>
+                                                    <div class="row pt-3">
+                                                        <div class="col-md-12">
+                                                            <h5>Please select amenities that apply to you:</h5>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                                <!--Amenities Start here-->
+                                                <section>
+                                                    <div class="row px-3 py-3">
+                                                        <div class="col-md-6">
+
+                                                            <div class="col-md-12">
+                                                                <div class="switchwrapper">
+                                                                    <label class="switch">
+                                                                        <asp:CheckBox ID="cbConnBath" runat="server" />
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                    <div>Private Bathroom</div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="switchwrapper">
+                                                                    <label class="switch">
+                                                                        <asp:CheckBox ID="cbWalkInClos" runat="server" />
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                    <div>Walk-In Closet</div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="switchwrapper">
+                                                                    <label class="switch">
+                                                                        <asp:CheckBox ID="cbDryer" runat="server" />
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                    <div>Washer / Dryer</div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                        </div>
+
+
+                                                        <div class="col-md-6">
+
+                                                            <div class="col-md-12">
+                                                                <div class="switchwrapper">
+                                                                    <label class="switch">
+                                                                        <asp:CheckBox ID="cbKitchen" runat="server" />
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                    <div>Kitchen</div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="switchwrapper">
+                                                                    <label class="switch">
+                                                                        <asp:CheckBox ID="cbWifi" runat="server" />
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                    <div>Wifi</div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="switchwrapper">
+                                                                    <label class="switch">
+                                                                        <asp:CheckBox ID="cbHeating" runat="server" />
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                    <div>Heating / Air Conditioning</div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </section>
+                                                <!--end of amenities-->
+
+                                                <button class="btn btn-info btn-block">Add Room</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
                                 <ul>
                                     <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>
                                 <!--BUTTON-->
-                                <div class=" text-center">
+
+                                <%--<div class=" text-center">
                                     <a href="ListedProperties.aspx" class="btn btn-info">View more</a>
-                                </div>
+                                </div>--%>
+
                                 <!--END OF BUTTON-->
                             </div>
                         </div>
@@ -495,8 +627,8 @@
                                     </div>
                                 </div>
                                 <!--BUTTON-->
-                                <button class="nav-item btn createAppointment" type="button" data-toggle="modal" data-target="#createAppointment">
-                                    <a class="btn btn-md btn-info btn-block" href="#">Create Appointment</a>
+                                <button class="nav-item btn btn-block createAppointment" type="button" data-toggle="modal" data-target="#createAppointment">
+                                    <a class="btn btn-md btn-info " href="#">Create Appointment</a>
                                 </button>
 
 
@@ -506,19 +638,28 @@
 
                                             <div class="modal-body">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                 
-                                                    <div class="form-group">
-                                                        <asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <%--<input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text">--%>
-                                                        <asp:TextBox ID="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYY"></asp:TextBox>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <%--<asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>--%>
+                                                    <asp:DropDownList ID="ddRecipient" runat="server" AppendDataBoundItems="True" class="form-control" DataSourceID="SqlDataSource1" DataTextField="NAME" DataValueField="NAME">
+                                                        <asp:ListItem>Please Select a Recipient</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:roommagnetdbConnectionString %>" SelectCommand="SELECT (FirstName + ' ' + LastName) AS NAME FROM Account WHERE AccountID IN (SELECT TenantID FROM FavoritedTenants WHERE HostID = @AccountId )">
+                                                        <SelectParameters>
+                                                            <asp:SessionParameter Name="AccountId" SessionField="AccountId"/>
+                                                        </SelectParameters>
+                                                    </asp:SqlDataSource>
 
-                                                    <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" />
+                                                </div>
 
-                                                 
+                                                <div class="form-group">
+                                                    <%--<input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text">--%>
+                                                    <asp:TextBox ID="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYY"></asp:TextBox>
+                                                </div>
+
+                                                <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" OnClick="btnCreateAppt_Click "/>
+
+
 
 
                                             </div>

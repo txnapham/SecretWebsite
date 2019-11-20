@@ -16,18 +16,18 @@
 
                  
                     <div class="form-group">
-                        <asp:RequiredFieldValidator ID="fnReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a first name" Visible="False" Text="*Please enter a first name" ControlToValidate="txtFN"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="fnLettersValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid first name" Text="*Please enter a valid first name" ControlToValidate="txtFN" ValidationExpression="^[a-zA-Z-_ ]+$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="fnReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a first name" Visible="False" Text="*Please enter a first name" ControlToValidate="txtFN" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="fnLettersValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid first name" Text="*Please enter a valid first name" ControlToValidate="txtFN" ValidationExpression="^[a-zA-Z-_ ]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtFN" runat="server" class="form-control form-control-lg" aria-describedby="FirstName" placeholder="First Name" MaxLength="50"></asp:TextBox>
                     </div>
 
                     <div class="form-group">
-                        <asp:RegularExpressionValidator ID="mnLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid middle name" Text="*Please enter a valid middle name" ControlToValidate="txtMN" ValidationExpression="^[a-zA-Z-_ ]+$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="mnLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid middle name" Text="*Please enter a valid middle name" ControlToValidate="txtMN" ValidationExpression="^[a-zA-Z-_ ]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtMN" runat="server" class="form-control form-control-lg" aria-describedby="MiddleName" placeholder="Middle Name" MaxLength="50"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <asp:RequiredFieldValidator ID="lnReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a last name." ControlToValidate="txtLN" Text="*Please enter a last name"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="lnLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid last name" Text="*Please enter a valid last name" ControlToValidate="txtLN" ValidationExpression="^[a-zA-Z-_ ]+$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="lnReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a last name." ControlToValidate="txtLN" Text="*Please enter a last name" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="lnLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid last name" Text="*Please enter a valid last name" ControlToValidate="txtLN" ValidationExpression="^[a-zA-Z-_ ]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtLN" runat="server" class="form-control form-control-lg" aria-describedby="LastName" placeholder="Last Name" MaxLength="50"></asp:TextBox>
                     </div>
 
@@ -40,27 +40,28 @@
                         <asp:RegularExpressionValidator ID="bdayCharValidator" Display="Dynamic" runat="server" ErrorMessage="*Please enter a valid birth date (MM-DD-YYYY)<br/>" Text="*Please enter a valid birth date" ControlToValidate="txtBday" ValidationExpression="^[0-9-]+$"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator ID="bdayReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="*Please enter a birth date." ControlToValidate="txtBday" Text="*Please enter a birth date"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtBday" runat="server" class="form-control form-control-lg" placeholder="Birthdate (MM-DD-YYYY)" MaxLength="10"></asp:TextBox> --%>
+                        <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
 
                     </div>
                     <div class="form-group">
-                        <asp:RegularExpressionValidator ID="houseNumValidatorNumbers" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid house number" Text="*Please enter a valid house number" ControlToValidate="txtHouseNum" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="houseNumReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a house number." ControlToValidate="txtHouseNum" Text="*Please enter a house number"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="houseNumValidatorNumbers" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid house number" Text="*Please enter a valid house number" ControlToValidate="txtHouseNum" ValidationExpression="^[0-9]+$" ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="houseNumReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a house number." ControlToValidate="txtHouseNum" Text="*Please enter a house number" ForeColor="Red"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtHouseNum" runat="server" class="form-control form-control-lg" placeholder="House Number" MaxLength="10"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <asp:RequiredFieldValidator ID="streetReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a street." ControlToValidate="txtStreet" Text="*Please enter a street"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[a-zA-Z_ ]+$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="streetReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a street." ControlToValidate="txtStreet" Text="*Please enter a street" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[a-zA-Z_ ]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtStreet" runat="server" class="form-control form-control-lg" placeholder="Street" MaxLength="30"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <asp:RequiredFieldValidator ID="cityReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a city." ControlToValidate="txtCity" Text="*Please enter a city"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[a-zA-Z_ ]+$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="cityReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a city." ControlToValidate="txtCity" Text="*Please enter a city" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[a-zA-Z_ ]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtCity" runat="server" class="form-control form-control-lg" placeholder="City" MaxLength="30"></asp:TextBox>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <asp:RequiredFieldValidator ID="stateReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please select a state." ControlToValidate="ddState" Text="*Please select a state"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="stateReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please select a state." ControlToValidate="ddState" Text="*Please select a state" ForeColor="Red"></asp:RequiredFieldValidator>
                             <asp:DropDownList ID="ddState" runat="server" class="form-control  form-control-lg">
                                 <asp:ListItem Value="">State</asp:ListItem>
                                 <asp:ListItem>AL</asp:ListItem>
@@ -118,13 +119,13 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <asp:RequiredFieldValidator ID="zipReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a zip code." ControlToValidate="txtZip" Text="*Please enter a zip code"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="zipNumValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid zip code" Text="*Please enter a valid zip code" ControlToValidate="txtZip" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
+                            <asp:RequiredFieldValidator ID="zipReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a zip code." ControlToValidate="txtZip" Text="*Please enter a zip code" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="zipNumValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid zip code" Text="*Please enter a valid zip code" ControlToValidate="txtZip" ValidationExpression="^[0-9]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                             <asp:TextBox ID="txtZip" runat="server" class="form-control form-control-lg" placeholder="Zip" MaxLength="9"></asp:TextBox>
                         </div>
 
                         <div class="form-group col-md-2">
-                            <asp:RequiredFieldValidator ID="ddCountryValidator" Display ="Dynamic" runat="server" ErrorMessage="Please select a country." ControlToValidate="ddCountry" Text="*Please select a country"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="ddCountryValidator" Display ="Dynamic" runat="server" ErrorMessage="Please select a country." ControlToValidate="ddCountry" Text="*Please select a country" ForeColor="Red"></asp:RequiredFieldValidator>
                             <asp:DropDownList ID="ddCountry" runat="server" class="form-control  form-control-lg">
                                 <asp:ListItem Value="US">US</asp:ListItem>
                             </asp:DropDownList>
@@ -136,21 +137,21 @@
                     </div>
 
                     <div class="form-group">
-                        <asp:RequiredFieldValidator ID="phoneReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a phone number." ControlToValidate="txtPhone" Text="*Please enter a phone number"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="phoneNumberValidation" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid phone number" Text="*Please enter a valid phone number" ControlToValidate="txtPhone" ValidationExpression="^[0-9-]+$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="phoneReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a phone number." ControlToValidate="txtPhone" Text="*Please enter a phone number" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="phoneNumberValidation" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid phone number" Text="*Please enter a valid phone number" ControlToValidate="txtPhone" ValidationExpression="^[0-9-]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtPhone" runat="server" class="form-control form-control-lg" placeholder="Phone Number (XXX-XXX-XXXX)" MaxLength="20"></asp:TextBox>
                     </div>
 
                     <div class="form-group">
-                        <asp:RegularExpressionValidator ID="regexEmailValid" Display="Dynamic" runat="server" ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" ControlToValidate="txtEmail" ErrorMessage="*Invalid Email Format"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="emailReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter an email." ControlToValidate="txtEmail" Text="*Please enter an email"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="regexEmailValid" Display="Dynamic" runat="server" ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" ControlToValidate="txtEmail" ErrorMessage="*Invalid Email Format" ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="emailReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter an email." ControlToValidate="txtEmail" Text="*Please enter an email" ForeColor="Red"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtEmail" runat="server" class="form-control form-control-lg" aria-describedby="emailHelp" placeholder="Email" MaxLength="50"></asp:TextBox>
                         <small id="emailHelp" class="form-text text-muted">*We will never share your email with anyone else.</small>
                     </div>
 
                     <div class="form-group">
-                        <asp:RegularExpressionValidator ID="passwordValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid password" Text="*Please enter a password with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character (example: !#&%) " ControlToValidate="txtPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="passwordReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a password." ControlToValidate="txtPassword" Text="*Please enter a password"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="passwordValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid password" Text="*Please enter a password with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character (example: !#&%) " ControlToValidate="txtPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$" ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="passwordReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a password." ControlToValidate="txtPassword" Text="*Please enter a password" ForeColor="Red"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" placeholder="Password" TextMode="Password" MaxLength="256"></asp:TextBox>
                     </div>
 
@@ -171,7 +172,7 @@
                     </div>
 
                     <div class="form-group form-check">
-                        <asp:CustomValidator ID="cbAgreementValidator" runat="server" Display="Dynamic" ErrorMessage="*Please accept the terms and conditions</br>" ClientValidationFunction="validateTerms" ></asp:CustomValidator>
+                        <asp:CustomValidator ID="cbAgreementValidator" runat="server" Display="Dynamic" ErrorMessage="*Please accept the terms and conditions</br>" ClientValidationFunction="validateTerms" ForeColor="Red"></asp:CustomValidator>
                         <asp:CheckBox ID="cbAgreement" runat="server" class="form-check-input" />
                         <label class="form-check-label" for="exampleCheck1">Agreement to Terms &amp; Conditions</label>
                     </div>
