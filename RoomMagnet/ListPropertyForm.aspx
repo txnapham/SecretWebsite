@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="ListPropertyForm.aspx.cs" Inherits="ListPropertyForm" %>
+﻿<%@ Page Title="" MaintainScrollPositionOnPostback="true" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="ListPropertyForm.aspx.cs" Inherits="ListPropertyForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>RoomMagnet | List Property Form</title>
@@ -8,8 +8,7 @@
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
-                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
-                Welcome USER,
+                <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
             </p>
 
 
@@ -302,9 +301,17 @@
             <section>
                 <div class="row px-5 py-3">
                     <div class="col-md-6">
-
                         <div class="col-md-12">
                             <div class="switchwrapper">
+                                <asp:RadioButtonList ID="RadioButtonList" runat="server" RepeatLayout="Table" RepeatColumns="2" Width="100%">
+                                    <asp:ListItem>Apartment</asp:ListItem>
+                                    <asp:ListItem>Loft</asp:ListItem>
+                                    <asp:ListItem>House</asp:ListItem>
+                                    <asp:ListItem>Townhouse</asp:ListItem>
+                                </asp:RadioButtonList>
+                            </div>
+                        </div>
+<%--                            <div class="switchwrapper">
                                 <label class="switch">
                                     <asp:CheckBox ID="cbApartment" runat="server" />
                                     <span class="slider round"></span>
@@ -321,11 +328,11 @@
                                 </label>
                                 <div>Loft</div>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
 
 
-                    <div class="col-md-6">
+<%--                    <div class="col-md-6">
 
                         <div class="col-md-12">
                             <div class="switchwrapper">
@@ -346,7 +353,7 @@
                                 <div>Townhouse</div>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
             </section>
             <!--end of property type-->
@@ -611,7 +618,7 @@
 
             <div class="form-group">
                 <h5>Upload room images here:</h5>
-                <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="True" />
+                <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="False" />
                 <asp:Button runat="server" ID="FilesUpload" Text="Save to Room" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
                 <br />
                 <br />

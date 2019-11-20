@@ -11,7 +11,8 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using System.Data.SqlClient;
-
+using System.Collections;
+using System.Web.Script.Serialization;
 
 public partial class Search : System.Web.UI.Page
 {
@@ -74,8 +75,10 @@ public partial class Search : System.Web.UI.Page
             int commaSplit = tSearch.IndexOf(",");
             String cityString = tSearch.Substring(0, commaSplit).ToUpper();
             String state = tSearch.Substring(commaSplit + 2).ToUpper();
-            String query = "select [PropertyID], [City], [HomeState], [Zip], [RoomPriceRangeLow],[RoomPriceRangeHigh] from[dbo].[Property] where upper([City]) like '" + cityString + "' AND upper([HomeState]) like '" + state + "';";
+            String query = filter();
             System.Data.SqlClient.SqlCommand sqlComm = new System.Data.SqlClient.SqlCommand(query, sqlConn);
+            sqlComm.Parameters.Add(new SqlParameter("@City", cityString));
+            sqlComm.Parameters.Add(new SqlParameter("@State", state));
             System.Data.SqlClient.SqlDataReader reader = sqlComm.ExecuteReader();
 
             Card1.Text = "";
@@ -115,7 +118,6 @@ public partial class Search : System.Web.UI.Page
         }
     }
 
-    [System.Web.Services.WebMethod]
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         Boolean searchCheck = false;
@@ -143,9 +145,13 @@ public partial class Search : System.Web.UI.Page
                 int commaSplit = tSearch.IndexOf(",");
                 String cityString = tSearch.Substring(0, commaSplit).ToUpper();
                 String state = tSearch.Substring(commaSplit + 2).ToUpper();
-                String query = "select [PropertyID], [City], [HomeState], [Zip], [RoomPriceRangeLow],[RoomPriceRangeHigh] from[dbo].[Property] where upper([City]) like '" + cityString + "' AND upper([HomeState]) like '" + state + "';";
+                String query = filter();
                 System.Data.SqlClient.SqlCommand sqlComm = new System.Data.SqlClient.SqlCommand(query, sqlConn);
+                sqlComm.Parameters.Add(new SqlParameter("@City", cityString));
+                sqlComm.Parameters.Add(new SqlParameter("@State", state));
                 System.Data.SqlClient.SqlDataReader reader = sqlComm.ExecuteReader();
+
+
 
                 Card1.Text = "";
                 int resultCount = 0;
@@ -182,5 +188,355 @@ public partial class Search : System.Web.UI.Page
         {
             txtSearch.Text = "That Search Did Not Display Results";
         }
+    }
+
+    protected string filter()
+    {
+        string queryFilter = "SELECT P.PropertyID, P.City, P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images " +
+            "FROM Account A FULL OUTER JOIN Characteristics C ON A.AccountID = C.AccountID FULL OUTER JOIN Host H ON A.AccountID = H.HostID FULL OUTER JOIN " +
+            "PropertyImages I FULL OUTER JOIN Property P ON I.PropertyID = P.PropertyID ON H.HostID = P.HostID " +
+            "WHERE P.City = @City AND P.HomeState = @State   ";
+
+        int qualityCount = 0;
+
+        if (cbHomeShareYES.Checked == true)
+        {
+            queryFilter += "AND P.HomeShareSmarter = 1   ";
+        }
+        if (cbHomeShareNO.Checked == true)
+        {
+            queryFilter += "AND P.HomeShareSmarter = 0   ";
+        }
+        if (cbExtrovert.Checked == true)
+        {
+            if(qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.Extrovert DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.Extrovert DESC, ";
+            }
+        }
+
+        if (cbIntrovert.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.Introvert DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.Introvert DESC, ";
+            }
+        }
+        if (cbNonSmoker.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.NonSmoker DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.NonSmoker DESC, ";
+            }
+        }
+        if (cbEarlyRiser.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.EarlyRiser DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.EarlyRiser DESC, ";
+            }
+        }
+        if (cbNightOwl.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.NightOwl DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.NightOwl DESC, ";
+            }
+        }
+        if (cbTechSavvy.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.TechSavvy DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.TechSavvy DESC, ";
+            }
+        }
+        if (cbFamily.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.FamilyOriented DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.FamilyOriented DESC, ";
+            }
+        }
+        if (cbKitchen.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY R.Kitchen DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "R.Kitchen DESC, ";
+            }
+        }
+        if (cbHVAC.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY R.HVAC DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "R.HVAC DESC, ";
+            }
+        }
+        if (cbWifi.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY R.Wifi DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "R.Wifi DESC, ";
+            }
+        }
+        if (cbPrivateBath.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY R.PrivateBR DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "R.PrivateBR DESC, ";
+            }
+        }
+        if (cbWalkInCloset.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY R.WalkInCloset DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "R.WalkInCloset DESC, ";
+            }
+        }
+        if (cbWashDry.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY R.WashAndDry DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "R.WashAndDry DESC, ";
+            }
+        }
+
+        if (cbStreetPark.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY P.StreetParking DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "P.StreetParking DESC, ";
+            }
+        }
+        if (cbGarPark.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY P.GarageParking DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += " P.GarageParking DESC, ";
+            }
+        }
+        if (cbBackyard.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY P.Backyard DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "P.Backyard DESC, ";
+            }
+        }
+        if (cbPorch.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY P.PorchOrDeck DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "P.PorchOrDeck DESC, ";
+            }
+        }
+        if (cbPool.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY P.Pool DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "P.Pool DESC, ";
+            }
+        }
+        if (cbEnglish.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.English DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.English DESC, ";
+            }
+        }
+        if (cbSpanish.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.Spanish DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.Spanish DESC, ";
+            }
+        }
+        if (cbMandarin.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.Mandarin DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.Mandarin DESC, ";
+            }
+        }
+        if (cbJapanese.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.Japanese DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.Japanese DESC, ";
+            }
+        }
+        if (cbGerman.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.German DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.German DESC, ";
+            }
+        }
+        if (cbFrench.Checked == true)
+        {
+            if (qualityCount == 0)
+            {
+                queryFilter += " ORDER BY C.French DESC, ";
+                qualityCount++;
+            }
+            else
+            {
+                queryFilter += "C.French DESC, ";
+            }
+        }
+
+        int size = queryFilter.Length;
+        queryFilter = queryFilter.Substring(0, queryFilter.Length - 2);
+        return queryFilter;
+    }
+
+    [System.Web.Services.WebMethod]
+    public static string queryToJSON(string query)
+    {
+        // connect to database perform query
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+        conn.Open();
+        SqlCommand sc = conn.CreateCommand();
+        sc.CommandText = query;
+        SqlDataReader sdr = sc.ExecuteReader();
+
+        // read data into a 2D array
+        ArrayList data = new ArrayList();
+        // get column headers
+        object[] fieldnames = new object[sdr.FieldCount];
+        for (int i = 0; i < sdr.FieldCount; i++)
+        {
+            fieldnames[i] = sdr.GetName(i);
+        }
+        data.Add(fieldnames);
+        // get row values
+        while (sdr.Read())
+        {
+            // create array from a row of data
+            object[] values = new object[sdr.FieldCount];
+            sdr.GetValues(values);
+            data.Add(values);
+        }
+
+        // serialize to JSON
+        JavaScriptSerializer jss = new JavaScriptSerializer();
+        String jsonResult = jss.Serialize(data);
+
+
+        // return the json string
+        return jsonResult;
     }
 }

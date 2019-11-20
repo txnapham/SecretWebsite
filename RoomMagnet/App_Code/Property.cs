@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,25 +9,29 @@ using System.Web;
 /// </summary>
 public class Property
 {
+    private int propertyType;
     private String houseNumber;
     private String street;
     private String city;
     private String homeState;
     private String country;
     private String zip;
-    private String localPriceRangeLow;
-    private String localPriceRangeHigh;
-    private String roomPriceRangeLow;
-    private String roomPriceRangeHigh;
+    private String houseRule;
     private int streetParking;
     private int garageParking;
     private int backyard;
     private int porchOrDeck;
     private int pool;
+    private int petsAllowed;
+    private int guestAllowed;
     private int nonSmoking;
     private int homeShareSmarter;
     private DateTime modifiedDate;
     private int hostID;
+    private double roomPrice;
+    private double lowPrice;
+    private double highPrice;
+
 
     public Property(String houseNumber, String street, String city, String homeState, String zip, String country)
     {
@@ -34,10 +39,31 @@ public class Property
         setStreet(street);
         setCity(city);
         setHomeState(homeState);
-        setZip(zip);
         setCountry(country);
-        //setHostID(hostID);
+        setZip(zip);
         setModDate(DateTime.Now);
+    }
+
+    //RoomPrices
+    public double getRoomPrice()
+    {
+        return this.roomPrice;
+    }
+
+    public void setRoomPrices(double roomPrice)
+    {
+        this.roomPrice = roomPrice;
+    }
+
+    //propertyType
+    public int getPropertyType()
+    {
+        return this.propertyType;
+    }
+
+    public void setPropertyType(int propertyType)
+    {
+        this.propertyType = propertyType;
     }
 
     //hostID
@@ -103,47 +129,6 @@ public class Property
     public String getZip()
     {
         return this.zip;
-    }
-
-    //localPriceRangeLow
-    public String getLocalPriceRangeLow()
-    {
-        return this.localPriceRangeLow;
-    }
-
-    public void setLocalPriceRangeLow(String localPriceRangeLow)
-    {
-        this.localPriceRangeLow = localPriceRangeLow;
-    }
-    //localPriceRangeHigh
-    public String getLocalPriceRangeHigh()
-    {
-        return this.localPriceRangeHigh;
-    }
-
-    public void setLocalPriceRangeHigh(String localPriceRangeHigh)
-    {
-        this.localPriceRangeHigh = localPriceRangeHigh;
-    }
-    //roomPriceRangeLow
-    public String getRoomPriceRangeLow()
-    {
-        return this.roomPriceRangeLow;
-    }
-
-    public void setRoomPriceRangeLow(String roomPriceRangeLow)
-    {
-        this.roomPriceRangeLow = roomPriceRangeLow;
-    }
-    //roomPriceRangeHigh
-    public String getRoomPriceRangeHigh()
-    {
-        return this.roomPriceRangeHigh;
-    }
-
-    public void setRoomPriceRangeHigh(String roomPriceRangeHigh)
-    {
-        this.roomPriceRangeHigh = roomPriceRangeHigh;
     }
 
     //modifiedDate
@@ -232,6 +217,28 @@ public class Property
     public int getHomeShareSmarter()
     {
         return this.homeShareSmarter;
+    }
+
+    //PetsAllowed
+    public void setPets(int petsAllowed)
+    {
+        this.petsAllowed = petsAllowed;
+    }
+
+    public int getPets()
+    {
+        return this.petsAllowed;
+    }
+
+    //GuestAllowed
+    public void setGuest(int guestAllowed)
+    {
+        this.guestAllowed = guestAllowed;
+    }
+
+    public int getGuest()
+    {
+        return this.petsAllowed;
     }
     
 }

@@ -7,16 +7,15 @@
 <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
  </asp:ScriptManager>
 <script>
-    function showMessage(tenantID) {
-        PageMethods.MessageShower(tenantID);
+    function createLease() {
+        PageMethods.CreateLease();
     };
 </script>
     <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
-                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
-                Welcome USER,
+                            <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
             </p>
 
 
@@ -25,19 +24,6 @@
             </div>
         </div>
 
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="pl-3">
-                    <button class="btn btn-sm personality-outline">English</button>
-                    <button class="btn btn-sm personality-outline">Active</button>
-                    <button class="btn btn-sm personality-outline">Non-Smoker</button>
-                    <button class="btn btn-sm personality-outline">Adventurous</button>
-                    <button class="btn btn-sm personality-outline">Early Riser</button>
-                </div>
-            </div>
-
-        </div>
     </div>
     <!--END OF USER DASH-NAV-->
 
@@ -126,11 +112,11 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                  <div class="chat-img">
-                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/rebeccajames.png" class="rounded-circle img-fluid" CustomParameter="15" onClick= "btnSubmit_Click"/>
+                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/alex-knight-2EJCSULRwC8-unsplash.jpg" class="rounded-circle img-fluid" CustomParameter="15" onClick= "btnSubmit_Click"/>
                             </div>  
                         <div class="chat-ib">
-                        <h5>chase miller<span class="chat-date">11/18/2019</span></h5>
-                                     <p>text</p>
+                        <h5>Chat Bot</h5>
+                                     <p>Hi I'm the Chat Bot I'm here for any questions you might have!</p>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +143,8 @@
                     <asp:LinkButton id="LinkButton1" runat="server" class="msg-send-btn" type="button" Text ="Send" OnClick="messagebtn_Click"/>
 
                     <div>
-                        <button type="button" class="btn btn-light createLeaseButton btn-block" href="HostCreateLease.aspx">Create Lease with TENANT NAME</button>
+                        <a href="HostCreateLease.aspx" class="btn btn-light createLeaseButton btn-block">Create Lease</a>
+                        
 
                         <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
                     </div>

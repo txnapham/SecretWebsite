@@ -32,7 +32,6 @@
                         </div>
                         <div class="d-flex ">
                             <div class="btn btn-rounded float-left">
-                                <span>Add photo</span>
                                 <input type="file">
                             </div>
                         </div>

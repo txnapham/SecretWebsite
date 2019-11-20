@@ -28,11 +28,11 @@
                 <div class="sm-form md-form lg-form ">
                     <div class="file-field">
                         <div class="mb-4">
-                            <img src="images/rebeccajames.png" class="rounded-circle img-fluid" alt="...">
+                            <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
+<%--                            <img src="images/rebeccajames.png" class="rounded-circle img-fluid" alt="...">--%>
                         </div>
                         <div class="d-flex ">
                             <div class="btn btn-rounded float-left">
-                                <span>Add photo</span>
                                 <input type="file">
                             </div>
                         </div>

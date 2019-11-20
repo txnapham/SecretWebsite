@@ -9,12 +9,11 @@
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
-                <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
-                Welcome USER,
-                <ul>
-                    <asp:literal id="Card" runat="server" mode="Transform"></asp:literal>
-
-                </ul>
+<%--                <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
+                Welcome USER,--%>
+<%--                <ul>--%>
+                    <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
+<%--                </ul>--%>
             </p>
 
 
@@ -71,7 +70,7 @@
 
                             <ul>
                                 <div class="row px-4 py-3">
-                                    <asp:literal id="Card2" runat="server" mode="Transform"></asp:literal>
+                                    <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
                                 </div>
                             </ul>
 
@@ -89,17 +88,8 @@
                         <div class="card-body">
                             <h5 class="card-title dash-card-titles">Message Center</h5>
 
-                            <div class="chat-list">
-                                <div class="chat-people">
-                                    <div class="chat-img">
-                                        <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
-                                    </div>
-                                    <div class="chat-ib">
-                                        <h5>Karen Smith <span class="chat-date">Nov 12</span></h5>
-                                        <p>Hello, I would like to set up a meeting.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <asp:Literal ID="Card3" runat="server" Mode="Transform"></asp:Literal>
+
 
                             <div class=" text-center pt-3">
                                 <a href="TenantMessageCenter.aspx" class="btn btn-info">View Messages</a>
@@ -475,8 +465,8 @@
                             </div>
 
 
-                            <button class="nav-item btn btn-block createAppointment" type="button" data-toggle="modal" data-target="#createAppointment">
-                                <a class="btn btn-md btn-info " href="#">Create Appointment</a>
+                            <button class="nav-item btn createAppointment" type="button" data-toggle="modal" data-target="#createAppointment">
+                                <a class="btn btn-md btn-info btn-block" href="#">Create Appointment</a>
                             </button>
                             <div class="modal" id="createAppointment">
                                 <div class="modal-dialog">
@@ -484,20 +474,20 @@
 
                                         <div class="modal-body">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                             
+                                                <div class="form-group">
+                                                    <asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>
+                                                </div>
 
-                                            <div class="form-group">
-                                                <asp:textbox id="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:textbox>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <asp:textbox id="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYY"></asp:textbox>
-                                            </div>
-
-
-                                            <asp:button id="btnCreateAppt" runat="server" text="Create Appointment " class="btn btn-md btn-info btn-block" />
+                                                <div class="form-group">
+                                                    <asp:TextBox ID="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYYY"></asp:TextBox>
+                                                </div>
 
 
+                                                <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" />
 
+
+                                             
 
 
                                         </div>
@@ -518,6 +508,27 @@
 
     </div>
     <!--END OF DASHBOARD CARDS-->
+       <script src="https://static.opentok.com/v2/js/opentok.js" charset="utf-8"></script>
+    <script charset="utf-8">
+      var apiKey = '45828062';
+      var sessionId = '2_MX40NTgyODA2Mn5-MTU3NDIyNTcyMDMxMn51WENZdlQ5Y0NRY0xJdk8rdS9ud0lGZkR-UH4';
+      var token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9ZThhNGUyODllZWQyZGUzYTUwMjEzODJjOTQzNDdjMmVjMjJhNTZlZjpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTNOREl5TlRjeU1ETXhNbjUxV0VOWmRsUTVZME5SWTB4SmRrOHJkUzl1ZDBsR1prUi1VSDQmY3JlYXRlX3RpbWU9MTU3NDIyNTc5MiZub25jZT0wLjY2MDkzOTkxNTkwOTI3OTMmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTU3NDMxMjE5Mg==';
 
+// connect to session
+var session = OT.initSession(apiKey, sessionId);
+
+// create publisher
+var publisher = OT.initPublisher();
+session.connect(token, function(err) {
+   // publish publisher
+   session.publish(publisher); 
+})
+
+  
+// create subscriber
+session.on('streamCreated', function(event) {
+   session.subscribe(event.stream);
+});
+    </script>
 </asp:Content>
 

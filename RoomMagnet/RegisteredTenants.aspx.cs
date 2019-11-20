@@ -11,7 +11,14 @@ public partial class RegisteredTenants : System.Web.UI.Page
     System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 1)
+        {
 
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
+        }
     }
 
     protected void btnUpdate_Click(object sender, EventArgs e)

@@ -32,29 +32,36 @@ public partial class TenantEditProfile : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (IsPostBack != true)
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
-            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
-            sc.Open();
-            int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
-            System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
-            search.Connection = sc;
-            search.CommandText = "SELECT HomeNumber, Street, City, HomeState, Country, Zip, PhoneNumber, Email FROM Account WHERE AccountID = " + accountID + ";";
-            SqlDataReader searching = search.ExecuteReader();
-
-            //checks the database for matches
-            if (searching.Read())
+            if (IsPostBack != true)
             {
-                txtHouseNum.Text = searching.GetString(0);
-                txtStreet.Text = searching.GetString(1);
-                txtCity.Text = searching.GetString(2);
-                ddState.SelectedValue = searching.GetString(3);
-                ddCountry.SelectedValue = searching.GetString(4);
-                txtZip.Text = searching.GetString(5);
-                txtPhone.Text = searching.GetString(6);
-                txtEmail.Text = searching.GetString(7);
+                System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+                sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+                sc.Open();
+                int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
+                System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
+                search.Connection = sc;
+                search.CommandText = "SELECT HomeNumber, Street, City, HomeState, Country, Zip, PhoneNumber, Email FROM Account WHERE AccountID = " + accountID + ";";
+                SqlDataReader searching = search.ExecuteReader();
+
+                //checks the database for matches
+                if (searching.Read())
+                {
+                    txtHouseNum.Text = searching.GetString(0);
+                    txtStreet.Text = searching.GetString(1);
+                    txtCity.Text = searching.GetString(2);
+                    ddState.SelectedValue = searching.GetString(3);
+                    ddCountry.SelectedValue = searching.GetString(4);
+                    txtZip.Text = searching.GetString(5);
+                    txtPhone.Text = searching.GetString(6);
+                    txtEmail.Text = searching.GetString(7);
+                }
             }
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
         }
     }
     protected void btnSave_Click(object sender, EventArgs e)
@@ -130,4 +137,5 @@ public partial class TenantEditProfile : System.Web.UI.Page
 
             sc.Close();
     }
+
 }

@@ -5,9 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Text;
+using System.Configuration;
 
 public partial class HostEditProfile : System.Web.UI.Page
 {
+    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+
     protected void Page_PreInit(object sender, EventArgs e)
     {
         if (Session["type"] != null)
@@ -32,29 +36,59 @@ public partial class HostEditProfile : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (IsPostBack != true)
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
-            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
-            sc.Open();
-            int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
-            System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
-            search.Connection = sc;
-            search.CommandText = "SELECT HomeNumber, Street, City, HomeState, Country, Zip, PhoneNumber, Email FROM Account WHERE AccountID = " + accountID + ";";
-            SqlDataReader searching = search.ExecuteReader();
-
-            //checks the database for matches
-            if (searching.Read())
+            if (IsPostBack != true)
             {
-                txtHouseNum.Text = searching.GetString(0);
-                txtStreet.Text = searching.GetString(1);
-                txtCity.Text = searching.GetString(2);
-                ddState.SelectedValue = searching.GetString(3);
-                ddCountry.SelectedValue = searching.GetString(4);
-                txtZip.Text = searching.GetString(5);
-                txtPhone.Text = searching.GetString(6);
-                txtEmail.Text = searching.GetString(7);
+                int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
+
+                //Select Statements properties
+                System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
+                selectHost.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
+                //Connections
+                selectHost.Connection = sc;
+                sc.Open();
+
+                //Populating Tenant Part of Host Dashboard
+                System.Data.SqlClient.SqlDataReader readerHostImage = selectHost.ExecuteReader();
+                while (readerHostImage.Read())
+                {
+                    String tenantName = readerHostImage["FirstName"].ToString();
+                    String filename = readerHostImage["AccountImage"].ToString();
+                    // No image uploaded (currently default image in S3)
+                    if (filename == "") filename = "defaulttenantimg.jpg";
+                    // User dashboard dynamically updated using S3
+                    StringBuilder hostImage = new StringBuilder();
+                    hostImage
+                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">");
+                    HostCard.Text += hostImage.ToString();
+                }
+                sc.Close();
+
+                sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+                sc.Open();
+                System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
+                search.Connection = sc;
+                search.CommandText = "SELECT HomeNumber, Street, City, HomeState, Country, Zip, PhoneNumber, Email FROM Account WHERE AccountID = " + accountID + ";";
+                SqlDataReader searching = search.ExecuteReader();
+
+                //checks the database for matches
+                if (searching.Read())
+                {
+                    txtHouseNum.Text = searching.GetString(0);
+                    txtStreet.Text = searching.GetString(1);
+                    txtCity.Text = searching.GetString(2);
+                    ddState.SelectedValue = searching.GetString(3);
+                    ddCountry.SelectedValue = searching.GetString(4);
+                    txtZip.Text = searching.GetString(5);
+                    txtPhone.Text = searching.GetString(6);
+                    txtEmail.Text = searching.GetString(7);
+                }
             }
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
         }
     }
 
