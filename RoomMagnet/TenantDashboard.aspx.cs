@@ -37,7 +37,7 @@ public partial class TenantDashboard : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(Session["AccountId"] != null)
+        if (Session["AccountId"] != null)
         { 
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
             //Selecting from Property
