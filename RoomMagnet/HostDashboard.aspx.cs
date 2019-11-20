@@ -35,16 +35,15 @@ public partial class HostDashboard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (string.IsNullOrEmpty(HttpContext.Current.Session["AccountId"].ToString()))
+        if (Session["AccountId"]!=null )
         {
-        }
-        else
-        {
+            //&& Convert.ToInt16(Session["AccountType"]) == 2
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
             //Select Statements for tenant and properties
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectProp = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand favoriteTenant = new System.Data.SqlClient.SqlCommand();
+            //System.Data.SqlClient.SqlCommand selectName = new System.Data.SqlClient.SqlCommand();
             //Tenant Select
             select.CommandText = "SELECT FirstName,LastName FROM Account WHERE AccountID in " +
             "(SELECT TOP(5) tenantID FROM Lease WHERE HostID = " + accountID + ");";
@@ -53,11 +52,23 @@ public partial class HostDashboard : System.Web.UI.Page
             //Message Center Tenant Populating once they favorite the current host's room
             favoriteTenant.CommandText = "select firstName, LastName from account where AccountID in (select tenantID from tenant where TenantID in " +
                 "(select tenantID from FavoritedProperties where PropertyID in (select PropertyID from property where hostID =" + accountID + ")));";
+            //USERNAME AT TOP 
+            //selectName.CommandText = "SELECT FirstName FROM Account WHERE AccountID = " + accountID + ";";
+            
             //Connections
             select.Connection = sc;
             selectProp.Connection = sc;
             favoriteTenant.Connection = sc;
+            //selectName.Connection = sc;
             sc.Open();
+
+            //Execute Query for Name at Top 
+            //string name = selectName.ExecuteScalar().ToString();
+            //StringBuilder myHostNameCard = new StringBuilder();
+            ////myHostNameCard.Append("<li> Welcome, " + name + "</li>");
+            //myHostNameCard.Append("<p> Welcome, " + name + "</p>");
+            //UserNameCard.Text += myHostNameCard.ToString();
+
 
             //Populating Tenant Part of Host Dashboard
             System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
@@ -112,6 +123,12 @@ public partial class HostDashboard : System.Web.UI.Page
 
                 Card3.Text += myCard.ToString();
             }
+
+             
+
+
+
+
             drd.Close();
             sc.Close();
         }
