@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
 
 public partial class HostDashboard : System.Web.UI.Page
 {
@@ -132,5 +133,28 @@ public partial class HostDashboard : System.Web.UI.Page
             drd.Close();
             sc.Close();
         }
+    }
+    protected void btnCreateAppt_Click(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.Open();
+        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+        System.Data.SqlClient.SqlCommand favTen = new System.Data.SqlClient.SqlCommand();
+        insert.Connection = sc;
+        favTen.Connection = sc;
+        int dd = ddRecipient.SelectedIndex + 1;
+
+        int favTenID;
+        favTen.CommandText = "SELECT * FROM(SELECT FavTenantID, rownum = row_number() over (order by FavTenantID) FROM FavoritedTenants WHERE HostID =" + Session["AccountId"] +") as FavTenant where rownum = " + dd+";"; 
+        favTenID = Convert.ToInt32(favTen.ExecuteScalar());
+        favTen.ExecuteNonQuery();
+
+        Appointment newAppt = new Appointment(DateTime.Parse(txtDate.Text), favTenID);
+        insert.CommandText = "INSERT into Appointment VALUES (@date, favTenID) ; ";
+        insert.Parameters.Add(new SqlParameter("@date", newAppt.getDate()));
+
+        //insert.ExecuteNonQuery();
+        sc.Close();
     }
 }

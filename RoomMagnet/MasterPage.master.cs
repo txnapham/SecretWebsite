@@ -65,10 +65,18 @@ public partial class MasterPage : System.Web.UI.MasterPage
                         Response.Redirect("TenantDashboard.aspx");
                     }
                 }
+                else
+                {
+                    lblPass.Text = "Invalid Password";
+                    lblEmail.Text = "";
+                }
             }
         }
         else // if the email doesn't exist, it will show failure
-
+        {
+            lblEmail.Text = "Invalid Email";
+            lblPass.Text = "";
+        }
             sc.Close();
     }
 }

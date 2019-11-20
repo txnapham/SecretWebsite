@@ -12,7 +12,7 @@
                 <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
                 Welcome USER,
                 <ul>
-                    <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
+                    <asp:literal id="Card" runat="server" mode="Transform"></asp:literal>
 
                 </ul>
             </p>
@@ -71,7 +71,7 @@
 
                             <ul>
                                 <div class="row px-4 py-3">
-                                    <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
+                                    <asp:literal id="Card2" runat="server" mode="Transform"></asp:literal>
                                 </div>
                             </ul>
 
@@ -484,20 +484,20 @@
 
                                         <div class="modal-body">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                             
-                                                <div class="form-group">
-                                                    <asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>
-                                                </div>
 
-                                                <div class="form-group">
-                                                    <asp:TextBox ID="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYY"></asp:TextBox>
-                                                </div>
+                                            <div class="form-group">
+                                                <asp:textbox id="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:textbox>
+                                            </div>
 
-
-                                                <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" />
+                                            <div class="form-group">
+                                                <asp:textbox id="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYY"></asp:textbox>
+                                            </div>
 
 
-                                             
+                                            <asp:button id="btnCreateAppt" runat="server" text="Create Appointment " class="btn btn-md btn-info btn-block" />
+
+
+
 
 
                                         </div>
@@ -518,5 +518,6 @@
 
     </div>
     <!--END OF DASHBOARD CARDS-->
+
 </asp:Content>
 
