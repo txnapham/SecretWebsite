@@ -14,14 +14,14 @@
     <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
-            <p>
+            
 <%--                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">--%>
                 <%--Welcome USER,--%>
                 <p>
                     <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
                 </p>
 
-            </p>
+            
 
 
 <%--            <div class="progress" style="height: 30px;">
@@ -29,7 +29,7 @@
             </div>--%>
             <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
         </div>
-
+        </div>
     </div>
     <!--END OF USER DASH-NAV-->
 
@@ -75,7 +75,7 @@
                                 <h5 class="card-title dash-card-titles">Properties</h5>
 
                                 <div class="text-center" style="padding-left: 90%;">
-                                    <a class="dropdown-toggle btn-info " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">+</a>
+                                    <a class="dropdown-toggle btn-info addmorePropButton" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">+</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item js-scroll-trigger" href="ListPropertyForm.aspx">Add Property</a>
                                         <button style="color: #000;" type="button" class="btn  dropdown-item js-scroll-trigger" data-toggle="modal" data-dismiss="modal" data-target="#addRoom">
