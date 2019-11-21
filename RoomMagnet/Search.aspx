@@ -220,7 +220,7 @@
                                                 <!--end of amenities-->
 
                                        <!--start of homesharesmarter-->
-                                                <h6>HomeshareSmarter® Living</h6>
+                                                <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housing">®</a> Living</h6>
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
@@ -427,19 +427,7 @@
         </section>
 
 
-        <!--PAGINATION-->
-        <section>
-            <nav aria-label="Search results pages">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a></li>
-                    <li class="page-item page-active"><a class="page-link" href="#">1<span class="sr-only"></span></a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
-        </section>
-        <!--END OF PAGINATION-->
+        
 
     </div>
 
