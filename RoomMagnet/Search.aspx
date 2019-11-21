@@ -16,9 +16,6 @@
         }
     </style>
 
-   
-
-
     <script>
         var map;
         function initMap()
@@ -31,19 +28,6 @@
                     zoom: 8
                 });
         }
-
-        function recenter() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                zoom: 6
-            });
-
-            var latlng = new google.maps.LatLng(100, -78.9);
-            map.setCenter(latlng);
-        });
-
-        $('<%=btnSearch.ClientID %>').addEventListener('click', recenter() {
-        });
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNcHEQpOGd14rKFMgFTgbH-fZS2dD1UBw&callback=initMap"
@@ -412,19 +396,7 @@
         </section>
 
 
-        <!--PAGINATION-->
-        <section>
-            <nav aria-label="Search results pages">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a></li>
-                    <li class="page-item page-active"><a class="page-link" href="#">1<span class="sr-only"></span></a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
-        </section>
-        <!--END OF PAGINATION-->
+        
 
     </div>
 

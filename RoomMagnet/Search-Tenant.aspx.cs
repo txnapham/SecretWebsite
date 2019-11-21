@@ -42,6 +42,7 @@ public partial class Search_Tenant : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Card1.Text = String.Empty;
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
             if (Session["Search"] != null)
@@ -85,48 +86,53 @@ public partial class Search_Tenant : System.Web.UI.Page
             sqlComm.Parameters.Add(new SqlParameter("@City", cityString));
             sqlComm.Parameters.Add(new SqlParameter("@State", state));
             System.Data.SqlClient.SqlDataReader reader = sqlComm.ExecuteReader();
-
-            Card1.Text = "";
             int resultCount = 0;
-
-            while (reader.Read())
+            if (!reader.HasRows)
             {
-                int PropID = Convert.ToInt32(reader["PropertyID"]);
-                String city = reader["City"].ToString();
-                String homeState = reader["HomeState"].ToString();
-                String priceRangeLow = reader["RoomPriceRangeLow"].ToString();
-                String priceRangeHigh = reader["RoomPriceRangeHigh"].ToString();
-                double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
-                double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
-
-                StringBuilder myCard = new StringBuilder();
-                myCard
-                .Append("<div class=\"col-xs-4 col-md-3\">")
-                .Append("   <div class=\"card  shadow-sm  mb-4\" >")
-                .Append("       <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
-                .Append("       <a href=\"PropertyDetails.aspx\" class=\"cardLinks\">")
-                .Append("   <div class=\"card-body\">")
-                .Append("       <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
-                .Append("       <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
-                .Append("   </div>")
-                .Append("       </a>")
-                .Append("       <div>")
-                .Append("           <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
-                                    "\'" + homeState + "\'" + "," + priceLowRounded + "," + priceHighRounded + ")\" " +
-                                    "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
-                .Append("       </div>")
-                .Append("   </div>")
-                .Append("</div>");
-
-                Card1.Text += myCard.ToString();
-                resultCount++;
+                StringBuilder noResult = new StringBuilder();
+                noResult
+                    .Append("<div class=\"col-xs-4 col-md-3\">")
+                    .Append("<h5>No Results<h5>")
+                    .Append("</div>");
+                Card1.Text += noResult.ToString(); 
             }
-            reader.Close();
-            Session["Search"] = null;
-        }
-        else
-        {
-            txtSearch.Text = "That Search Query Did Not Display Results";
+            else
+            {
+                while (reader.Read())
+                {
+                    int PropID = Convert.ToInt32(reader["PropertyID"]);
+                    String city = reader["City"].ToString();
+                    String homeState = reader["HomeState"].ToString();
+                    String priceRangeLow = reader["RoomPriceRangeLow"].ToString();
+                    String priceRangeHigh = reader["RoomPriceRangeHigh"].ToString();
+                    double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
+                    double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
+
+                    StringBuilder myCard = new StringBuilder();
+                    myCard
+                    .Append("<div class=\"col-xs-4 col-md-3\">")
+                    .Append("   <div class=\"card  shadow-sm  mb-4\" >")
+                    .Append("       <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                    .Append("       <a href=\"PropertyDetails.aspx\" class=\"cardLinks\">")
+                    .Append("   <div class=\"card-body\">")
+                    .Append("       <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
+                    .Append("       <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                    .Append("   </div>")
+                    .Append("       </a>")
+                    .Append("       <div>")
+                    .Append("           <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
+                                        "\'" + homeState + "\'" + "," + priceLowRounded + "," + priceHighRounded + ")\" " +
+                                        "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
+                    .Append("       </div>")
+                    .Append("   </div>")
+                    .Append("</div>");
+
+                    Card1.Text += myCard.ToString();
+                    resultCount++;
+                }
+                reader.Close();
+                Session["Search"] = null;
+            }
         }
     }
 
@@ -202,10 +208,6 @@ public partial class Search_Tenant : System.Web.UI.Page
                 reader.Close();
                 Session["Search"] = null;
             }
-        }
-        else
-        {
-            txtSearch.Text = "That Search Did Not Display Results";
         }
     }
 

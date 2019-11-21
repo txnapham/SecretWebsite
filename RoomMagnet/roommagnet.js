@@ -48,10 +48,3 @@ function onGeocodeResponse(response, status) {
     }
     // else alert("error in geocoding: " + status);// typically this will mean exceed query limit
 }
-
-
-
-
-
-
-

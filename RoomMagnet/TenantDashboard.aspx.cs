@@ -45,7 +45,7 @@ public partial class TenantDashboard : System.Web.UI.Page
         progressBar.Text = String.Empty;
 
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
-        { 
+        {
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
             //Selecting from Account
@@ -77,7 +77,7 @@ public partial class TenantDashboard : System.Web.UI.Page
 
             int charCheck = (int)alert1Comm.ExecuteScalar();
             int backStatusCheck = (int)alert2Comm.ExecuteScalar();
-            
+
             //Populating Tenant Part of Host Dashboard
             System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
             while (reader.Read())
@@ -98,7 +98,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             StringBuilder alert1Text = new StringBuilder();
             alert1Text
                 .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
-                .Append("   <strong>Complete profile now! (Select Welcome and Edit Profile to Complete Profile)</strong>")
+                .Append("   <strong>Complete profile now! (Welcome -> Edit Profile to Complete Profile)</strong>")
                 .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
@@ -107,7 +107,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             StringBuilder alert2Text = new StringBuilder();
             alert2Text
                 .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
-                .Append("   <strong>Begin background check now! (Select Welcome and Edit Profile to Begin Background Check)</strong>")
+                .Append("   <strong>Begin background check now! (Welcome -> Edit Profile to Begin Background Check)</strong>")
                 .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
@@ -146,12 +146,12 @@ public partial class TenantDashboard : System.Web.UI.Page
             {
                 if (charCheck == 1 || backStatusCheck == 1)
                 {
-                    alert1.Text += alert1Text.ToString();
+                    alert1.Text += alert2Text.ToString();
                     progressBar.Text += progressTwoThird.ToString();
                 }
                 else if (charCheck == 1 || backStatusCheck == 1)
                 {
-                    alert2.Text += alert2Text.ToString();
+                    alert1.Text += alert1Text.ToString();
                     progressBar.Text += progressTwoThird.ToString();
                 }
             }
@@ -170,59 +170,63 @@ public partial class TenantDashboard : System.Web.UI.Page
             select.Connection = sc;
             messageSelect.Connection = sc;
             sc.Open();
+
             System.Data.SqlClient.SqlDataReader readerProperty = select.ExecuteReader();
-
             //Populating Dashboard
-            while (readerProperty.Read())
+            if (readerProperty.HasRows)
             {
-                String city = reader["City"].ToString();
-                String homeState = reader["HomeState"].ToString();
-                String priceRangeLow = reader["RoomPriceRangeLow"].ToString();
-                String priceRangeHigh = reader["RoomPriceRangeHigh"].ToString();
-                double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
-                double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
+                while (readerProperty.Read())
+                {
+                    String city = readerProperty["City"].ToString();
+                    String homeState = readerProperty["HomeState"].ToString();
+                    String priceRangeLow = readerProperty["RoomPriceRangeLow"].ToString();
+                    String priceRangeHigh = readerProperty["RoomPriceRangeHigh"].ToString();
+                    double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
+                    double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
 
-                StringBuilder myCard = new StringBuilder();
-                myCard
-                .Append("<div class=\"col-xs-4 col-md-3\">")
-                .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
-                .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
-                .Append("                            <div class=\"card-body\">")
-                .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
-                .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
-                .Append("                            </div>")
-                .Append("                        </a>")
-                .Append("")
-                .Append("                    </div>")
-                .Append("</div>");
-                Card2.Text += myCard.ToString();
+                    StringBuilder myCard = new StringBuilder();
+                    myCard
+                    .Append("<div class=\"col-xs-4 col-md-3\">")
+                    .Append("<div class=\"card  shadow-sm  mb-4\" >")
+                    .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                    .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
+                    .Append("                            <div class=\"card-body\">")
+                    .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
+                    .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                    .Append("                            </div>")
+                    .Append("                        </a>")
+                    .Append("")
+                    .Append("                    </div>")
+                    .Append("</div>");
+                    Card2.Text += myCard.ToString();
+                }
             }
-            reader.Close();
-            sc.Close();
+            readerProperty.Close();
 
-            sc.Open();
             System.Data.SqlClient.SqlDataReader rdr = messageSelect.ExecuteReader();
-            while (rdr.Read())
+            if (rdr.HasRows)
             {
-                String firstName = rdr["FirstName"].ToString();
-                String LastName = rdr["LastName"].ToString();
-                String date = rdr["Date"].ToString();
+                while (rdr.Read())
+                {
+                    String firstName = rdr["FirstName"].ToString();
+                    String LastName = rdr["LastName"].ToString();
+                    String date = rdr["Date"].ToString();
 
-                StringBuilder myCard = new StringBuilder();
-                myCard
-                    .Append(" <div class=\"chat-list\">")
-                    .Append("            <div class=\"chat-people\">")
-                    .Append("                <div class=\"chat-img\">")
-                    .Append("                    <img src = \"images/bettyBrown.png\" class=\"rounded-circle img-fluid\">")
-                    .Append("                </div>")
-                    .Append("                <div class=\"chat-ib\">")
-                    .Append("                    <h5>" + firstName + " " + LastName + "</h5>")
-                    .Append("                    <p>" + date + "</p>")
-                    .Append("                </div>")
-                    .Append("            </div>")
-                    .Append("        </div>");
-                Card3.Text += myCard.ToString();
+                    StringBuilder myCard = new StringBuilder();
+                    myCard
+                        .Append(" <div class=\"chat-list\">")
+                        .Append("            <div class=\"chat-people\">")
+                        .Append("                <div class=\"chat-img\">")
+                        .Append("                    <img src = \"images/bettyBrown.png\" class=\"rounded-circle img-fluid\">")
+                        .Append("                </div>")
+                        .Append("                <div class=\"chat-ib\">")
+                        .Append("                    <h5>" + firstName + " " + LastName + "</h5>")
+                        .Append("                    <p>" + date + "</p>")
+                        .Append("                </div>")
+                        .Append("            </div>")
+                        .Append("        </div>");
+                    Card3.Text += myCard.ToString();
+                }
             }
             rdr.Close();
             sc.Close();

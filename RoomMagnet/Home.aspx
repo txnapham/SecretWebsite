@@ -203,6 +203,7 @@
 
                                        <!--start of homesharesmarter-->
                                                 <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housing">®</a>Living</h6>
+
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
