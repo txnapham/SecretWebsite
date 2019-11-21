@@ -347,10 +347,7 @@
 
 
 
-                                                <button type="button" class="btn btn-info btn-block">
-                                                    Apply Filters
-                                           
-                                                </button>
+                                                <button type="button" class="btn btn-info btn-block" data-dismiss="modal"> Apply Filters</button>
 
 
                                             </div>
