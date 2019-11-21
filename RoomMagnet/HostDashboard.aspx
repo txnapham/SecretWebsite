@@ -12,8 +12,8 @@
     };
 </script>
     <!--USER DASH-NAV-->
-    <div class="container-fluid userDash mb-2 pb-3">
-        <div class="navbar navbar-light">
+    <div class="container-fluid userDash  mb-2 pb-3">
+        <div class="navbar navbar-light ">
                 <p>
                     <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
                 </p>
@@ -210,6 +210,11 @@
                         </div>
                     </div>
                     <!--END OF MESSAGE MOD-->
+                
+
+                
+                    <!--END OF APPOINTMENT MOD-->
+                </div>
                     <div class="col-md-6">
                     <!--TENANT/HOST MOD-->
                     <div class="col-md-12">
@@ -637,10 +642,6 @@
                         </div>
                     </div>
             </div>
-
-                
-                    <!--END OF APPOINTMENT MOD-->
-                </div>
             </div>
         </section>
     </div>

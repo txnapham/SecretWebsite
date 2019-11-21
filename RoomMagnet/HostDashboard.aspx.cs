@@ -242,8 +242,7 @@ public partial class HostDashboard : System.Web.UI.Page
                         .Append("                    <p>Hello I'm interested in your property!</p>")
                         .Append("                  </div>")
                         .Append("               </div>")
-                        .Append("            </div>")
-                        .Append("       </div>");
+                        .Append("            </div>");
 
                     Card3.Text += myCard.ToString();
                     count++;
