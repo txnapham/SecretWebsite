@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <!--USER DASH-NAV-->
-    <div class="container-fluid userDash mb-2 pb-3">
+<%--    <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
                 <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
@@ -19,7 +19,7 @@
         </div>
 
 
-    </div>
+    </div>--%>
     <!--END OF USER DASH-NAV-->
 
 

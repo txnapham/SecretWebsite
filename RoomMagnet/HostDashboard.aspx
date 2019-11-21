@@ -231,7 +231,7 @@
                                 
 
                                 <!--BUTTON-->
-                                <div class=" text-center pt-3">
+                                <div class=" text-center pt-3 pb-3">
                                     <a href="HostMessageCenter.aspx" class="btn btn-info">View Messages</a>
                                 </div>
                                 <!--END OF BUTTON-->
@@ -239,8 +239,6 @@
                         </div>
                     </div>
                     <!--END OF MESSAGE MOD-->
-
-                </div>
 
 
 
