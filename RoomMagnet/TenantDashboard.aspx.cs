@@ -177,10 +177,10 @@ public partial class TenantDashboard : System.Web.UI.Page
             {
                 while (readerProperty.Read())
                 {
-                    String city = reader["City"].ToString();
-                    String homeState = reader["HomeState"].ToString();
-                    String priceRangeLow = reader["RoomPriceRangeLow"].ToString();
-                    String priceRangeHigh = reader["RoomPriceRangeHigh"].ToString();
+                    String city = readerProperty["City"].ToString();
+                    String homeState = readerProperty["HomeState"].ToString();
+                    String priceRangeLow = readerProperty["RoomPriceRangeLow"].ToString();
+                    String priceRangeHigh = readerProperty["RoomPriceRangeHigh"].ToString();
                     double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                     double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
 
@@ -201,7 +201,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                     Card2.Text += myCard.ToString();
                 }
             }
-            reader.Close();
+            readerProperty.Close();
 
             System.Data.SqlClient.SqlDataReader rdr = messageSelect.ExecuteReader();
             if (rdr.HasRows)
