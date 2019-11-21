@@ -40,7 +40,7 @@ public partial class FavoritedProperties : System.Web.UI.Page
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
             //Selecting from Property
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT City, HomeState, LocalPriceRangeLow, LocalPriceRangeHigh FROM Property WHERE PropertyID in " +
+            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh FROM Property WHERE PropertyID in " +
             "(SELECT PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
             select.Connection = sc;
             sc.Open();
