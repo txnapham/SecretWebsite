@@ -40,7 +40,7 @@ public partial class FavoritedProperties : System.Web.UI.Page
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
             //Selecting from Property
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh FROM Property WHERE PropertyID in " +
+            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh, I.images FROM Property LEFT OUTER JOIN PropertyImages I ON Property.PropertyID = I.PropertyID WHERE Property.PropertyID in " +
             "(SELECT PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
             select.Connection = sc;
             sc.Open();
@@ -48,10 +48,12 @@ public partial class FavoritedProperties : System.Web.UI.Page
             //Populating Dashboard
             while (reader.Read())
             {
+                String filename = reader["images"].ToString();
+                if (filename == "") filename = "imagenotfound.png";
                 String city = reader["City"].ToString();
                 String homeState = reader["HomeState"].ToString();
-                String priceRangeLow = reader["LocalPriceRangeLow"].ToString();
-                String priceRangeHigh = reader["LocalPriceRangeHigh"].ToString();
+                String priceRangeLow = reader["RoomPriceRangeLow"].ToString();
+                String priceRangeHigh = reader["RoomPriceRangeHigh"].ToString();
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
 
@@ -59,7 +61,7 @@ public partial class FavoritedProperties : System.Web.UI.Page
                 myCard
                 .Append("<div class=\"col-md-3\">")
                 .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                .Append("<img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
                 .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
                 .Append("                            <div class=\"card-body\">")
                 .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")

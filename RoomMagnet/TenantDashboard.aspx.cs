@@ -89,7 +89,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder tenantImage = new StringBuilder();
                 tenantImage
-                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">")
+                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-header img-fluid\" width=\"30%\" height=\"auto\">")
                 .Append("                Welcome " + tenantName + "!");
                 Card.Text += tenantImage.ToString();
             }
@@ -160,7 +160,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             //Selecting from Property
             // System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand messageSelect = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh FROM Property WHERE PropertyID in " +
+            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh, I.images FROM Property LEFT OUTER JOIN PropertyImages I ON Property.PropertyID = I.PropertyID WHERE Property.PropertyID in " +
             "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
             messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, max(Message.Date) as Date FROM Message INNER JOIN FavoritedProperties ON " +
                 "Message.FavPropID = FavoritedProperties.FavPropID INNER JOIN Property ON FavoritedProperties.PropertyID = Property.PropertyID INNER JOIN Host ON " +
@@ -177,6 +177,8 @@ public partial class TenantDashboard : System.Web.UI.Page
             {
                 while (readerProperty.Read())
                 {
+                    String filename = readerProperty["images"].ToString();
+                    if (filename == "") filename = "imagenotfound.png";
                     String city = readerProperty["City"].ToString();
                     String homeState = readerProperty["HomeState"].ToString();
                     String priceRangeLow = readerProperty["RoomPriceRangeLow"].ToString();
@@ -188,7 +190,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                     myCard
                     .Append("<div class=\"col-xs-4 col-md-3\">")
                     .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                    .Append("                        <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" class=\"card-img-top\" alt=\"image\">")
+                    .Append("<img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
                     .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
                     .Append("                            <div class=\"card-body\">")
                     .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")

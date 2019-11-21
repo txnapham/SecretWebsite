@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <!--USER DASH-NAV-->
-    <div class="container-fluid userDash mb-2 pb-3">
+<%--    <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
                 <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
@@ -19,7 +19,7 @@
         </div>
 
 
-    </div>
+    </div>--%>
     <!--END OF USER DASH-NAV-->
 
 
@@ -78,7 +78,7 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                  <div class="chat-img">
-                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/alex-knight-2EJCSULRwC8-unsplash.jpg" class="rounded-circle img-fluid" CustomParameter="0" onClick= "btnSubmit_Click"/>
+                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/robot-man.png" class="rounded-circle img-fluid" CustomParameter="0" onClick= "btnSubmit_Click"/>
                             </div>  
                         <div class="chat-ib">
                        <h5>Chat Bot</h5>

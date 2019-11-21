@@ -12,25 +12,16 @@
     };
 </script>
     <!--USER DASH-NAV-->
-    <div class="container-fluid userDash mb-2 pb-3">
-        <div class="navbar navbar-light">
-            
-<%--                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">--%>
-                <%--Welcome USER,--%>
+    <div class="container-fluid userDash  mb-2 pb-3">
+        <div class="navbar navbar-light ">
                 <p>
                     <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
                 </p>
-
-            
-
-
-<%--            <div class="progress" style="height: 30px;">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 66%; color: #fff; font-size: 15px; font-weight: bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Profile Completion</div>
-            </div>--%>
-            <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
+                <div class="progress" style="height: 30px;">
+                    <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
+                </div>
+            </div>
         </div>
-        </div>
-
     <!--END OF USER DASH-NAV-->
 
     <!--reminders-->
@@ -38,23 +29,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
-<%--                    <div class="alert alert-light alert-dismissible fade show" role="alert">
-                        <strong>Complete profile now!</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>--%>
                         <asp:Literal ID="alert1" runat="server" Mode="Transform"></asp:Literal>
-                    
                 </div>
 
                 <div class="col-md-12">
-<%--                    <div class="alert alert-light alert-dismissible fade show" role="alert">
-                        <strong>Complete background check now!</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>--%>
                     <asp:Literal ID="alert2" runat="server" Mode="Transform"></asp:Literal>
                 </div>
             </div>
@@ -99,9 +77,6 @@
                                                 <div class="pb-3">
                                                     <h5 class="modal-title">Add Your Room:</h5>
                                                 </div>
-                                                <%--<asp:DropDownList ID="ddProperty" runat="server" AppendDataBoundItems="True" class="form-control">
-                                                        <asp:ListItem>Please Select a Property</asp:ListItem>
-                                                </asp:DropDownList>--%>
                                                 <br />
                                                 <br />
                                                 <asp:TextBox ID="txtPrice" runat="server" class="form-control form-control-lg" placeholder="Price"></asp:TextBox>
@@ -209,16 +184,12 @@
                                     <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>
                                 <!--BUTTON-->
-
-                                <%--<div class=" text-center">
-                                    <a href="ListedProperties.aspx" class="btn btn-info">View more</a>
-                                </div>--%>
-
                                 <!--END OF BUTTON-->
                             </div>
                         </div>
                     </div>
                     <!--END OF PROPERTIES MOD-->
+
 
                     <!--message mod-->
                     <div class="col-md-12">
@@ -231,7 +202,7 @@
                                 
 
                                 <!--BUTTON-->
-                                <div class=" text-center pt-3">
+                                <div class=" text-center pt-3 pb-3">
                                     <a href="HostMessageCenter.aspx" class="btn btn-info">View Messages</a>
                                 </div>
                                 <!--END OF BUTTON-->
@@ -239,12 +210,12 @@
                         </div>
                     </div>
                     <!--END OF MESSAGE MOD-->
+                
 
+                
+                    <!--END OF APPOINTMENT MOD-->
                 </div>
-
-
-
-                <div class="col-md-6">
+                    <div class="col-md-6">
                     <!--TENANT/HOST MOD-->
                     <div class="col-md-12">
                         <div class="card  shadow-sm  mb-4">
@@ -661,10 +632,6 @@
                                                 </div>
 
                                                 <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" OnClick="btnCreateAppt_Click "/>
-
-
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -674,11 +641,9 @@
                             </div>
                         </div>
                     </div>
-                    <!--END OF APPOINTMENT MOD-->
-                </div>
+            </div>
             </div>
         </section>
-        
     </div>
     <!--END OF DASHBOARD CARDS-->
     
