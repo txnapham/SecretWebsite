@@ -15,7 +15,7 @@
     <table width="50%">
         <tr>
             <td align="center" style="background-color: #bdd5ea">
-                <span style="font-size: 25px;">Welcome to roommagnet!  </span>
+                <span style="font-size: 25px;">Start your roommagnet background check!  </span>
                 <br />
                 <br />
             </td>
@@ -31,7 +31,7 @@
                 <br />
                 Thank you for registering with us!  
                 <br />
-                <a href="http://roommagnetjmu.com/Home.aspx">Click here to Login  
+                <a href="">Click here to begin your background check
                 </a>
                 <br />
                 Regards,  

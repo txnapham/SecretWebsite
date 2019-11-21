@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Text;
+using System.Data.SqlClient;
 
 public partial class AdminDashboard : System.Web.UI.Page
 {
@@ -35,8 +36,8 @@ public partial class AdminDashboard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["AccountId"] != null)
-        {
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 1)
+            {
             //Select Statement for Host and Tenant to Populate on Dash
             System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectTenant = new System.Data.SqlClient.SqlCommand();
@@ -157,6 +158,47 @@ public partial class AdminDashboard : System.Web.UI.Page
             //    UserNameCard.Text += nameCard.ToString();
             //}
             //nameReader.Close();
+        }
+    }
+
+    protected void btnCreateAdmin_Click(object sender, EventArgs e)
+    {
+
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        System.Data.SqlClient.SqlCommand checkEmailCount = new System.Data.SqlClient.SqlCommand();
+        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        checkEmailCount.Parameters.Add(new SqlParameter("@email", HttpUtility.HtmlEncode(txtEmail.Text)));
+        checkEmailCount.CommandText = "SELECT COUNT(*) FROM ACCOUNT WHERE EMAIL = @email";
+        checkEmailCount.Connection = sc;
+        sc.Open();
+
+        int emailCount = (int)checkEmailCount.ExecuteScalar();
+
+        if(emailCount < 1)
+        {
+            System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+            insert.Connection = sc;
+
+            insert.CommandText = "INSERT into Account VALUES (@fName, NULL, @lName, NULL, NULL, @email, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '" + DateTime.Now + "', 1); " +
+                    "INSERT into Admin VALUES(@@Identity);" +
+                    "INSERT into Password VALUES((SELECT MAX(AdminID) from Admin), @email, @password);";
+
+            insert.Parameters.Add(new SqlParameter("@fName", HttpUtility.HtmlEncode(txtFN.Text)));
+            insert.Parameters.Add(new SqlParameter("@lName", HttpUtility.HtmlEncode(txtLN.Text)));
+            insert.Parameters.Add(new SqlParameter("@email", HttpUtility.HtmlEncode(txtEmail.Text)));
+            insert.Parameters.Add(new SqlParameter("@password", PasswordHash.HashPassword(HttpUtility.HtmlEncode(txtPassword.Text))));
+
+            insert.ExecuteNonQuery();
+            sc.Close();
+
+            txtFN.Text = "";
+            txtLN.Text = "";
+            txtEmail.Text = "";
+            txtPassword.Text = "";
+        }
+        else
+        {
+            sc.Close();
         }
     }
 }

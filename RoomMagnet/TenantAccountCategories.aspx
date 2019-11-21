@@ -26,9 +26,12 @@
         </section>
 
         <section>
-            <div class="btn">
-                <span>Add photo</span>
-                <input type="file"/>
+           <div class="form-group">
+                <asp:FileUpload ID="TenantImageUpload" runat="server" AllowMultiple="True" />
+                <asp:Button runat="server" ID="FilesUpload" Text="Upload profile image" AutoPostBack="false" OnClick="TenantImageUpload_Click" />
+                <br />
+                <br />
+                <asp:Label runat="server" ID="StatusLabel" Text="Upload Status: " />
             </div>
         </section>
 
@@ -194,7 +197,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
-                                <asp:CheckBox ID="fbFamily" runat="server" />
+                                <asp:CheckBox ID="cbFamily" runat="server" />
                                 <span class="slider round"></span>
                             </label>
                             <div>Family-Oriented</div>
@@ -236,7 +239,7 @@
         </section>
 
 
-        <asp:Button ID="btnSet" runat="server" Text="Set Now" class="btn btn-info btn-block" href="TenantDashboard.aspx" />
+        <asp:Button ID="btnSet" runat="server" Text="Set Now" class="btn btn-info btn-block" href="TenantDashboard.aspx" OnClick="btnSet_Click" />
 
 
 

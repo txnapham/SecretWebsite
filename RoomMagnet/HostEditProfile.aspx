@@ -4,7 +4,7 @@
     <title>RoomMagnet | Edit Profile</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container-fluid px-5">
+    <div class="container-fluid px-5 mt-4">
 
         <!--BREADCRUMBS-->
         <section>
@@ -28,11 +28,11 @@
                 <div class="sm-form md-form lg-form ">
                     <div class="file-field">
                         <div class="mb-4">
-                            <img src="images/rebeccajames.png" class="rounded-circle img-fluid" alt="...">
+                            <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
+<%--                            <img src="images/rebeccajames.png" class="rounded-circle img-fluid" alt="...">--%>
                         </div>
                         <div class="d-flex ">
                             <div class="btn btn-rounded float-left">
-                                <span>Add photo</span>
                                 <input type="file">
                             </div>
                         </div>
@@ -137,39 +137,39 @@
                     <%--<div class="form-group">
                         <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" placeholder="Password" TextMode="Password" MaxLength="256"></asp:TextBox>
                     </div>--%>
-                    
 
-                     <button class="btn btn-info" type="button" data-toggle="modal" data-target="updatePassword">
+                    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#updatePassword">
                         Change Password
                     </button>
 
-                        <div class="modal" id="updatePassword">
+                    <div class="modal" id="updatePassword">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <div class="form-group">
 
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <button type="button" class="close" data-dimiss="modal">&times;</button>
-                                    
+                                        <asp:TextBox ID="txtPrevPassword" runat="server" class="form-control form-control-lg" placeholder="Enter Previous Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="PrevPassReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Enter new password" ControlToValidate="txtPrevPassword" ForeColor="Red" ValidationGroup='passwordGroup'></asp:RequiredFieldValidator>
+                                  
+                                        <asp:TextBox ID="txtNewPassword" runat="server" class="form-control form-control-lg" placeholder="Enter New Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="newPassReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Enter new password" ControlToValidate="txtNewPassword" ForeColor="Red" ValidationGroup='passwordGroup'></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="passwordValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid password" Text="*Please enter a password (8-15 characters) with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character (example: !#&%) " ControlToValidate="txtNewPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$" ForeColor="Red" ValidationGroup='passwordGroup'></asp:RegularExpressionValidator>
 
-                                    <form>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Previous Password">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-lg" id="exampleInputPassword2" placeholder="Previous Password">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-lg" id="exampleInputPassword3" placeholder="Previous Password">
-                                        </div>
-
-                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>
-                                    </form>
+                                        <asp:TextBox ID="txtReenterPassword" runat="server" class="form-control form-control-lg" placeholder="Re-Enter New Password" TextMode="Password" MaxLength="256"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" runat="server" ErrorMessage="Re-Enter password" ControlToValidate="txtReenterPassword" ForeColor="Red" ValidationGroup='passwordGroup'></asp:RequiredFieldValidator>
+                                        <asp:CompareValidator ID="CompareValidator1" Display="Dynamic" runat="server" ErrorMessage="Passwords do no match" ControlToValidate="txtReenterPassword" ControlToCompare="txtNewPassword" ForeColor="Red" ValidationGroup='passwordGroup'></asp:CompareValidator>
 
                                     </div>
+                                    <%--<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>--%>
+                                    <asp:Button ID="btnChangePassword" class="btn btn-info btn-block" runat="server" Text="Change Password" ValidationGroup='passwordGroup' OnClick="btnChangePassword_Click"/>
+                                    <asp:Label ID="lblPrev" runat="server" ForeColor="Red"></asp:Label>
                                 </div>
                             </div>
-
                         </div>
+                    </div>
+
+
 
                 </div>
             </div>
@@ -284,7 +284,7 @@
                 <!--PERSONALITY FILTER START HERE-->
 
 
-               <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="col-sm-4 col-md-4 col-lg-4">
 
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
@@ -348,6 +348,20 @@
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
+                                <asp:CheckBox ID="cbReligious" runat="server" />
+                                <span class="slider round"></span>
+                            </label>
+                            <div>Religious</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="switchwrapper">
+                            <label class="switch">
                                 <asp:CheckBox ID="cbTechSavy" runat="server" />
                                 <span class="slider round"></span>
                             </label>
@@ -355,13 +369,43 @@
                         </div>
                     </div>
 
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="switchwrapper">
+                            <label class="switch">
+                                <asp:CheckBox ID="cbSportsFan" runat="server" />
+                                <span class="slider round"></span>
+                            </label>
+                            <div>Sports Fan</div>
+                        </div>
+                    </div>
+
                 </div>
 
-               
-
-               
-
                 <div class="col-sm-4 col-md-4 col-lg-4">
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="switchwrapper">
+                            <label class="switch">
+                                <asp:CheckBox ID="cbAdventurous" runat="server" />
+                                <span class="slider round"></span>
+                            </label>
+                            <div>Adventurous</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="switchwrapper">
+                            <label class="switch">
+                                <asp:CheckBox ID="cbMusicAf" runat="server" />
+                                <span class="slider round"></span>
+                            </label>
+                            <div>Music Aficionado</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-3 col-md-3 col-lg-3">
 
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
@@ -373,7 +417,15 @@
                         </div>
                     </div>
 
-                    
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="switchwrapper">
+                            <label class="switch">
+                                <asp:CheckBox ID="cbHomebody" runat="server" />
+                                <span class="slider round"></span>
+                            </label>
+                            <div>Homebody</div>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -390,7 +442,7 @@
 
     </div>
 
-    <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-info btn-lg btn-block" OnClick="btnSave_Click"/>
+    <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-info btn-lg btn-block" OnClick="btnSave_Click" />
 
 
 </asp:Content>

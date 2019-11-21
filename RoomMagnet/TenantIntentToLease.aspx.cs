@@ -32,6 +32,13 @@ public partial class TenantIntentToLease : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
+        {
 
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
+        }
     }
 }

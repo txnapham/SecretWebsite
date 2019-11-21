@@ -5,11 +5,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <style>
         #map {
-            height: 500px;
+            height: 300px;
             width: 100%;
             box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
             -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
             -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
+            margin-bottom: 3%;
         }
     </style>
 
@@ -48,7 +49,7 @@
     <div class="container-fluid searchPageBodyContent">
         <section>
 
-        <div align="center">
+        <div align="center" class>
             <div id="map">
             </div>
           </div>
@@ -124,7 +125,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbTechSavy" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbTechSavvy" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterSportsFan">Tech-Savvy</label>
                                                             </div>
                                                         </div>
@@ -156,7 +157,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbHeating" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbHVAC" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterSportsFan">Heating / Air Conditioning</label>
                                                             </div>
                                                         </div>
@@ -180,7 +181,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbConBath" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbPrivateBath" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterPetFriendly">Private Bathroom</label>
                                                             </div>
                                                         </div>
@@ -194,7 +195,7 @@
 
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
-                                                                <asp:CheckBox ID="cbDryer" runat="server" class="form-check-input" />
+                                                                <asp:CheckBox ID="cbWashDry" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterSportsFan">Washer / Dryer</label>
                                                             </div>
                                                         </div>
@@ -205,7 +206,9 @@
                                                 <!--end of amenities-->
 
                                        <!--start of homesharesmarter-->
-                                                <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housing">®</a> Living</h6>
+
+                                      <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housing">®</a>Living</h6>
+
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">

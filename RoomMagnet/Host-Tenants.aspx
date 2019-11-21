@@ -8,8 +8,7 @@
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
-                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
-                Welcome USER,
+                            <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
             </p>
 
 
@@ -45,7 +44,7 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <h6>Notification</h6>
                     <div class="alert alert-light alert-dismissible fade show" role="alert">
-                        Someone favorited your room!
+                        Someone favorited your property!
                            
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

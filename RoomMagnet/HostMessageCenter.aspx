@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="HostMessageCenter.aspx.cs" Inherits="HostMessageCenter" %>
+﻿<%@ Page MaintainScrollPositionOnPostback="true" Title="" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="HostMessageCenter.aspx.cs" Inherits="HostMessageCenter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>RoomMagnet | Message Center</title>
@@ -7,16 +7,15 @@
 <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
  </asp:ScriptManager>
 <script>
-    function showMessage(tenantID) {
-        PageMethods.MessageShower(tenantID);
+    function createLease() {
+        PageMethods.CreateLease();
     };
 </script>
     <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
-                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
-                Welcome USER,
+                            <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
             </p>
 
 
@@ -25,7 +24,6 @@
             </div>
         </div>
 
-        
     </div>
     <!--END OF USER DASH-NAV-->
 
@@ -111,6 +109,17 @@
                     </div>
 
                     <div class="inbox-chat">
+                        <div class="chat-list">
+                            <div class="chat-people">
+                                 <div class="chat-img">
+                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/alex-knight-2EJCSULRwC8-unsplash.jpg" class="rounded-circle img-fluid" CustomParameter="15" onClick= "btnSubmit_Click"/>
+                            </div>  
+                        <div class="chat-ib">
+                        <h5>Chat Bot</h5>
+                                     <p>Hi I'm the Chat Bot I'm here for any questions you might have!</p>
+                                    </div>
+                                </div>
+                            </div>
                         <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
                     </div>
                 </div>
@@ -119,28 +128,23 @@
                     <div class="msg-history">
                         <div class="incoming-msg">
                             <!--Put card here -->
-                            <asp:Literal ID="tenMessage" runat="server" Mode="Transform"></asp:Literal>
+                            
+                            <asp:Literal ID="Message" runat="server" Mode="Transform"></asp:Literal>
                         <!--End card here -->
-                        </div>
-                        <!--Put Card here-->
-                        <asp:Literal ID="hosMessage" runat="server" Mode="Transform"></asp:Literal>
-
-
                     </div>
+                        </div>
                     <div class="type-msg">
                         <div class="input-msg-write">
                             <%--<input type="text" class="write-msg" placeholder="Type a message">--%>
                             <asp:TextBox ID="txtMessage" runat="server" class="write-msg" placeholder="Please DO NOT Share Any Personal Information"></asp:TextBox>
-                            <button class="msg-send-btn" type="button"><i class="fas fa-paper-plane"></i></button>
-                            <%--<asp:Button ID="btnMessage" runat="server" class="msg-send-btn" Text="Enter" />--%>
-                            <%--not sure how to do the button in aspx to make it look like the html. might have to rededign it to fit aspx--%>
+                            <asp:LinkButton id="LinkButton2" runat="server" class="msg-send-btn" type="button" Text ="Send" OnClick="messagebtn_Click"/>
                         </div>
                     </div>
+                    <asp:LinkButton id="LinkButton1" runat="server" class="msg-send-btn" type="button" Text ="Send" OnClick="messagebtn_Click"/>
 
                     <div>
-                        <button type="button" class="btn btn-light createLeaseButton btn-block" >Create Lease with TENANT NAME
-                            <%--<a href="HostCreateLease.aspx" />--%>
-                        </button>
+                        <a href="HostCreateLease.aspx" class="btn btn-light createLeaseButton btn-block">Create Lease</a>
+                        
 
                         <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
                     </div>

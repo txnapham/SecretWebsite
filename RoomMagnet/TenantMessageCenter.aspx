@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TenantPage.master" AutoEventWireup="true" CodeFile="TenantMessageCenter.aspx.cs" Inherits="TenantMessageCenter" %>
+﻿<%@ Page Title="" MaintainScrollPositionOnPostback="true" Language="C#" MasterPageFile="~/TenantPage.master" AutoEventWireup="true" CodeFile="TenantMessageCenter.aspx.cs" Inherits="TenantMessageCenter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>RoomMagnet | Message Center</title>
@@ -77,182 +77,32 @@
                     <div class="inbox-chat">
                         <div class="chat-list">
                             <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Karen Smith<span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
+                                 <div class="chat-img">
+                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/alex-knight-2EJCSULRwC8-unsplash.jpg" class="rounded-circle img-fluid" CustomParameter="0" onClick= "btnSubmit_Click"/>
+                            </div>  
+                        <div class="chat-ib">
+                       <h5>Chat Bot</h5>
+                                     <p>Hi I'm the Chat Bot I'm here for any questions you might have!</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                <div class="chat-img">
-                                    <img src="images/bettyBrown.png" class="rounded-circle img-fluid"></div>
-                                <div class="chat-ib">
-                                    <h5>Name <span class="chat-date">Nov 12</span></h5>
-                                    <p>text</p>
-                                </div>
-                            </div>
-                        </div>
+                        <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
                     </div>
                 </div>
 
                 <div class="mesgs">
                     <div class="msg-history">
                         <div class="incoming-msg">
-                            <div class="incoming-msg-img">
-                                <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
-                            </div>
-                            <div class="recieved-msg">
-                                <div class="recieved-withd-msg">
-                                    <p>Message sent to property owner</p>
-                                    <span class="time-date">11:21 AM   |   Nov 11</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing-msg">
-                            <div class="sent-msg">
-                                <p>Test of outgoing message</p>
-                                <span class="time-date">11:30 AM    |   Nov 11</span>
-                            </div>
-                        </div>
-                        <div class="incoming-msg">
-                            <div class="incoming-msg-img">
-                                <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
-                            </div>
-                            <div class="recieved-msg">
-                                <div class="recieved-withd-msg">
-                                    <p>Message sent to property owner</p>
-                                    <span class="time-date">11:21 AM   |   Nov 11</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing-msg">
-                            <div class="sent-msg">
-                                <p>Test of outgoing message</p>
-                                <span class="time-date">11:30 AM    |   Nov 11</span>
-                            </div>
-                        </div>
-                        <div class="incoming-msg">
-                            <div class="incoming-msg-img">
-                                <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
-                            </div>
-                            <div class="recieved-msg">
-                                <div class="recieved-withd-msg">
-                                    <p>Message sent to property owner</p>
-                                    <span class="time-date">11:21 AM   |   Nov 11</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing-msg">
-                            <div class="sent-msg">
-                                <p>Test of outgoing message</p>
-                                <span class="time-date">11:30 AM    |   Nov 11</span>
-                            </div>
-                        </div>
-                        <div class="incoming-msg">
-                            <div class="incoming-msg-img">
-                                <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
-                            </div>
-                            <div class="recieved-msg">
-                                <div class="recieved-withd-msg">
-                                    <p>Message sent to property owner</p>
-                                    <span class="time-date">11:21 AM   |   Nov 11</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing-msg">
-                            <div class="sent-msg">
-                                <p>Test of outgoing message</p>
-                                <span class="time-date">11:30 AM    |   Nov 11</span>
-                            </div>
-                        </div>
-                        <div class="incoming-msg">
-                            <div class="incoming-msg-img">
-                                <img src="images/bettyBrown.png" class="rounded-circle img-fluid">
-                            </div>
-                            <div class="recieved-msg">
-                                <div class="recieved-withd-msg">
-                                    <p>Message sent to property owner</p>
-                                    <span class="time-date">11:21 AM   |   Nov 11</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing-msg">
-                            <div class="sent-msg">
-                                <p>Test of outgoing message</p>
-                                <span class="time-date">11:30 AM    |   Nov 11</span>
-                            </div>
-                        </div>
+                            <!--Put card here -->
+                            <asp:Literal ID="Message" runat="server" Mode="Transform"></asp:Literal>
+                        <!--End card here -->
+                    </div>
 
                     </div>
                     <div class="type-msg">
                         <div class="input-msg-write">
                             <asp:TextBox ID="txtMessage" runat="server" class="write-msg" placeholder="Type a message"></asp:TextBox>
-                            <button class="msg-send-btn" type="button"><i class="fas fa-paper-plane"></i></button>
-                            <%--<asp:Button ID="btnMessage" runat="server" class="msg-send-btn" Text="Enter" />--%>
-                            <%--not sure how to do the button in aspx to make it look like the html. might have to rededign it to fit aspx--%>
+                            <asp:LinkButton id="LinkButton2" runat="server" class="msg-send-btn" type="button" Text ="Send" OnClick="messagebtn_Click"/>
                         </div>
                     </div>
                     <div>
