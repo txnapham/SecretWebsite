@@ -21,19 +21,16 @@
                     <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
                 </p>
 
-            
-
+                <div class="progress" style="height: 30px;">
+                    <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
+                </div>
 
 <%--            <div class="progress" style="height: 30px;">
                 <div class="progress-bar bg-info" role="progressbar" style="width: 66%; color: #fff; font-size: 15px; font-weight: bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Profile Completion</div>
             </div>--%>
-
-            <div class="progress" style="height: 30px;">
-                <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
             </div>
         </div>
-        </div>
-
+    </div>
     <!--END OF USER DASH-NAV-->
 
     <!--reminders-->
@@ -250,7 +247,7 @@
                     <div class="col-md-12">
                         <div class="card  shadow-sm  mb-4">
                             <div class="card-body">
-                                <h5 class="card-title dash-card-titles">Tenants</h5>
+                                <h5 class="card-title dash-card-titles">Current Tenants</h5>
                                 <ul>
                                     <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>
