@@ -61,12 +61,18 @@
             <!--address of the home-->
             <h3>1. Home Address</h3>
             <div class="form-row">
-                <div class="form-group col-sm-7 col-md-7 col-lg-7">
+                <div class="form-group col-sm-2 col-md-2 col-lg-2">
+                    <asp:TextBox ID="txtHouseNum" runat="server" class="form-control form-control-lg" placeholder="House Number" MaxLength="30"></asp:TextBox>
+                </div>
+                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                    <asp:TextBox ID="txtStreet" runat="server" class="form-control form-control-lg" placeholder="Street" MaxLength="30"></asp:TextBox>
+                </div>
+                <div class="form-group col-sm-3 col-md-3 col-lg-3">
                     <asp:TextBox ID="txtCity" runat="server" class="form-control form-control-lg" placeholder="City" MaxLength="30"></asp:TextBox>
                 </div>
 
 
-                <div class="form-group col-sm-3 col-md-3 col-lg-3">
+                <div class="form-group col-sm-1 col-md-1 col-lg-1">
                     <asp:DropDownList ID="ddState" runat="server" class="form-control  form-control-lg">
                         <asp:ListItem Value="">State</asp:ListItem>
                         <asp:ListItem>AL</asp:ListItem>
@@ -181,7 +187,7 @@
                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
                     <h3>3. Start Date</h3>
                     <label>The start Date of this lease is:</label>
-                    <asp:TextBox ID="txtDate" runat="server" class="form-control form-control-lg"></asp:TextBox>
+                    <asp:TextBox ID="txtStartDate" runat="server" class="form-control form-control-lg" placeholder="YYYY/MM/DD"></asp:TextBox>
                 </div>
             </div>
 
@@ -190,9 +196,9 @@
             <!--4. Length of Agreement-->
             <div class="form-row ">
                 <div class="form-group col-sm-12 col-md-12 col-lg-12">
-                    <h3>4. Length of Agreement</h3>
+                    <h3>4. Lease End Date</h3>
                     <p>
-                        <asp:TextBox ID="txtLength" runat="server" placeholder="Length of Agreement"></asp:TextBox>
+                        <asp:TextBox ID="txtEndDate" runat="server" placeholder="YYYY/MM/DD"></asp:TextBox>
                         The Tenant must provide at least 30 days written notice, signed by both parties, to cancel or change the Agreement.
                     </p>
                 </div>
@@ -403,7 +409,12 @@
                     </div>
                 </div>
 
-                <asp:Button ID="btnCreateLease" runat="server" Text="Create Lease" class="btn btn-info btn-lg btn-block" />
+                <asp:Button ID="btnCreateLease" runat="server" Text="Create Lease" class="btn btn-info btn-lg btn-block" OnClick="btnCreateLease_Click" />
             </div>
+ <script>
+    function MyFunction() {
+        alert("hello!")
+    }
+</script>
 </asp:Content>
 

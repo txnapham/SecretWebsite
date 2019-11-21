@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -172,11 +173,11 @@ public partial class HostMessageCenter : System.Web.UI.Page
         insert.Connection = sc;
         sc.Open();
         insert.CommandText = "INSERT INTO MESSAGE VALUES(@MessageContent,@MessageType,@Date,@FavPropID,@FavTenantID);";
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MessageContent", message));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MessageType", "0"));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Date", date));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@FavPropID", favPropID));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@FavTenantID",favTenantID ));
+        insert.Parameters.Add(new SqlParameter("@MessageContent", message));
+        insert.Parameters.Add(new SqlParameter("@MessageType", "0"));
+        insert.Parameters.Add(new SqlParameter("@Date", date));
+        insert.Parameters.Add(new SqlParameter("@FavPropID", favPropID));
+        insert.Parameters.Add(new SqlParameter("@FavTenantID",favTenantID ));
 
         insert.ExecuteNonQuery();
         sc.Close();
