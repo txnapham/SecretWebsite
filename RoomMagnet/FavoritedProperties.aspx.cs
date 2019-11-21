@@ -77,5 +77,9 @@ public partial class FavoritedProperties : System.Web.UI.Page
             reader.Close();
             sc.Close();
         }
+        else
+        {
+            Response.Redirect("Home.aspx");
+        }
     }
 }

@@ -28,7 +28,8 @@
                 <div class="sm-form md-form lg-form ">
                     <div class="file-field">
                         <div class="mb-4">
-                            <img src="images/rebeccajames.png" class="rounded-circle img-fluid" alt="...">
+                            <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
+<%--                            <img src="images/rebeccajames.png" class="rounded-circle img-fluid" alt="...">--%>
                         </div>
                         <div class="d-flex ">
                             <div class="btn btn-rounded float-left">
@@ -149,19 +150,19 @@
                                     <div class="form-group">
 
                                         <asp:TextBox ID="txtPrevPassword" runat="server" class="form-control form-control-lg" placeholder="Enter Previous Password" TextMode="Password" MaxLength="256"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="PrevPassReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Enter new password" ControlToValidate="txtPrevPassword" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="PrevPassReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Enter new password" ControlToValidate="txtPrevPassword" ForeColor="Red" ValidationGroup='passwordGroup'></asp:RequiredFieldValidator>
                                   
                                         <asp:TextBox ID="txtNewPassword" runat="server" class="form-control form-control-lg" placeholder="Enter New Password" TextMode="Password" MaxLength="256"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="newPassReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Enter new password" ControlToValidate="txtNewPassword" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="passwordValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid password" Text="*Please enter a password (8-15 characters) with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character (example: !#&%) " ControlToValidate="txtNewPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$" ForeColor="Red"></asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="newPassReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Enter new password" ControlToValidate="txtNewPassword" ForeColor="Red" ValidationGroup='passwordGroup'></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="passwordValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid password" Text="*Please enter a password (8-15 characters) with at least 1 uppercase, 1 lowercase, 1 number, and 1 special character (example: !#&%) " ControlToValidate="txtNewPassword" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$" ForeColor="Red" ValidationGroup='passwordGroup'></asp:RegularExpressionValidator>
 
                                         <asp:TextBox ID="txtReenterPassword" runat="server" class="form-control form-control-lg" placeholder="Re-Enter New Password" TextMode="Password" MaxLength="256"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" runat="server" ErrorMessage="Re-Enter password" ControlToValidate="txtReenterPassword" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        <asp:CompareValidator ID="CompareValidator1" Display="Dynamic" runat="server" ErrorMessage="Passwords do no match" ControlToValidate="txtReenterPassword" ControlToCompare="txtNewPassword" ForeColor="Red"></asp:CompareValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" runat="server" ErrorMessage="Re-Enter password" ControlToValidate="txtReenterPassword" ForeColor="Red" ValidationGroup='passwordGroup'></asp:RequiredFieldValidator>
+                                        <asp:CompareValidator ID="CompareValidator1" Display="Dynamic" runat="server" ErrorMessage="Passwords do no match" ControlToValidate="txtReenterPassword" ControlToCompare="txtNewPassword" ForeColor="Red" ValidationGroup='passwordGroup'></asp:CompareValidator>
 
                                     </div>
                                     <%--<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>--%>
-                                    <asp:Button ID="btnChangePassword" class="btn btn-info btn-block" runat="server" Text="Change Password" OnClick="btnChangePassword_Click"/>
+                                    <asp:Button ID="btnChangePassword" class="btn btn-info btn-block" runat="server" Text="Change Password" ValidationGroup='passwordGroup' OnClick="btnChangePassword_Click"/>
                                     <asp:Label ID="lblPrev" runat="server" ForeColor="Red"></asp:Label>
                                 </div>
                             </div>

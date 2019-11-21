@@ -7,6 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
 
 public partial class HostDashboard : System.Web.UI.Page
 {
@@ -39,13 +40,108 @@ public partial class HostDashboard : System.Web.UI.Page
         Card.Text = String.Empty;
         Card2.Text = String.Empty;
         Card3.Text = String.Empty;
+        alert1.Text = String.Empty;
+        alert2.Text = String.Empty;
+        progressBar.Text = String.Empty;
 
-        if (string.IsNullOrEmpty(HttpContext.Current.Session["AccountId"].ToString()))
-        {
-        }
-        else
+        if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
+
+            //Select Statements properties
+            System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand alert1Comm = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand alert2Comm = new System.Data.SqlClient.SqlCommand();
+            selectHost.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
+            alert1Comm.CommandText = "SELECT COUNT(*) FROM Characteristics WHERE AccountID = " + accountID;
+            alert2Comm.CommandText = "SELECT BackgroundCheckStatus FROM Host WHERE HostID = " + accountID;
+
+            //Connections
+            selectHost.Connection = sc;
+            alert1Comm.Connection = sc;
+            alert2Comm.Connection = sc;
+            sc.Open();
+
+            int charCheck = (int)alert1Comm.ExecuteScalar();
+            int backStatusCheck = (int)alert2Comm.ExecuteScalar();
+
+            //Populating Tenant Part of Host Dashboard
+            System.Data.SqlClient.SqlDataReader readerHostImage = selectHost.ExecuteReader();
+            while (readerHostImage.Read())
+            {
+                String tenantName = readerHostImage["FirstName"].ToString();
+                String filename = readerHostImage["AccountImage"].ToString();
+                // No image uploaded (currently default image in S3)
+                if (filename == "") filename = "defaulttenantimg.jpg";
+                // User dashboard dynamically updated using S3
+                StringBuilder hostImage = new StringBuilder();
+                hostImage
+                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">")
+                    .Append("                Welcome " + tenantName + "!");
+                HostCard.Text += hostImage.ToString();
+            }
+            sc.Close();
+
+            StringBuilder alert1Text = new StringBuilder();
+            alert1Text
+                .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
+                .Append("   <strong>Complete profile now! (Select Welcome and Edit Profile to Complete Profile)</strong>")
+                .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
+                .Append("       <span aria-hidden=\"true\">&times;</span>")
+                .Append("   </button>")
+                .Append("</div>");
+
+            StringBuilder alert2Text = new StringBuilder();
+            alert2Text
+                .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
+                .Append("   <strong>Begin background check now! (Select Welcome and Edit Profile to Begin Background Check)</strong>")
+                .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
+                .Append("       <span aria-hidden=\"true\">&times;</span>")
+                .Append("   </button>")
+                .Append("</div>");
+
+            StringBuilder progressOneThird = new StringBuilder();
+            progressOneThird
+                .Append("<div class=\"progress\" style=\"height: 30px; \">")
+                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:33%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("</div");
+
+            StringBuilder progressTwoThird = new StringBuilder();
+            progressTwoThird
+                .Append("<div class=\"progress\" style=\"height: 30px; \">")
+                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:66%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("</div");
+
+            StringBuilder progressFull = new StringBuilder();
+            progressFull
+                .Append("<div class=\"progress\" style=\"height: 30px; \">")
+                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:100%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("</div");
+
+            if (charCheck == 0 && backStatusCheck == 0)
+            {
+                alert1.Text += alert1Text.ToString();
+                alert2.Text += alert2Text.ToString();
+                progressBar.Text += progressOneThird.ToString();
+            }
+            else if (charCheck == 1 && backStatusCheck == 1)
+            {
+                progressBar.Text += progressFull.ToString();
+            }
+            else if (charCheck == 1 || backStatusCheck == 1)
+            {
+                if (charCheck == 1 || backStatusCheck == 1)
+                {
+                    alert1.Text += alert1Text.ToString();
+                    progressBar.Text += progressTwoThird.ToString();
+                }
+                else if (charCheck == 1 || backStatusCheck == 1)
+                {
+                    alert2.Text += alert2Text.ToString();
+                    progressBar.Text += progressTwoThird.ToString();
+                }
+            }
+
             //Select Statements for tenant and properties
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectProp = new System.Data.SqlClient.SqlCommand();
@@ -86,7 +182,7 @@ public partial class HostDashboard : System.Web.UI.Page
 
                 StringBuilder myCard = new StringBuilder();
                 myCard
-                .Append("<li><a href=\"#\" class=\"tenantdashlist\">" + firstName + " " + lastName + "</a></li>");
+                .Append("<li><a href=\"PropertyDetails.aspx\" class=\"tenantdashlist\">" + firstName + " " + lastName + "</a></li>");
                 Card.Text += myCard.ToString();
             }
             reader.Close();
@@ -157,6 +253,10 @@ public partial class HostDashboard : System.Web.UI.Page
             drd.Close();
             sc.Close();
         }
+        else
+        {
+            Response.Redirect("Home.aspx");
+        }
     }
     [System.Web.Services.WebMethod]
     [System.Web.Script.Services.ScriptMethod]
@@ -172,5 +272,28 @@ public partial class HostDashboard : System.Web.UI.Page
         conn.Open();
         insert.ExecuteNonQuery();
         conn.Close();
+    }
+    protected void btnCreateAppt_Click(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.Open();
+        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+        System.Data.SqlClient.SqlCommand favTen = new System.Data.SqlClient.SqlCommand();
+        insert.Connection = sc;
+        favTen.Connection = sc;
+        int dd = ddRecipient.SelectedIndex + 1;
+
+        int favTenID;
+        favTen.CommandText = "SELECT * FROM(SELECT FavTenantID, rownum = row_number() over (order by FavTenantID) FROM FavoritedTenants WHERE HostID =" + Session["AccountId"] +") as FavTenant where rownum = " + dd+";"; 
+        favTenID = Convert.ToInt32(favTen.ExecuteScalar());
+        favTen.ExecuteNonQuery();
+
+        Appointment newAppt = new Appointment(DateTime.Parse(txtDate.Text), favTenID);
+        insert.CommandText = "INSERT into Appointment VALUES (@date, favTenID) ; ";
+        insert.Parameters.Add(new SqlParameter("@date", newAppt.getDate()));
+
+        //insert.ExecuteNonQuery();
+        sc.Close();
     }
 }
