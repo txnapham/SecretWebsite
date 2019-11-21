@@ -413,7 +413,7 @@
             </div>
  <script>
     function MyFunction() {
-        alert("hello!")
+        alert("ENTITIES NOT FOUND")
     }
 </script>
 </asp:Content>
