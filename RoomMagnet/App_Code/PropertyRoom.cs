@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ public class PropertyRoom
     private int roomID;
     private int propertyID;
     private String monthlyPrice;
+    public static ArrayList roomArray = new ArrayList();
     public PropertyRoom(int roomID, int propertyID, String monthlyPrice)
     {
         setRoomID(roomID);

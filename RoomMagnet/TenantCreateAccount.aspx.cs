@@ -253,7 +253,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
                         ddState.ClearSelection();
                         txtZip.Text = "";
 
-                        Response.Redirect("HostAccountCategories.aspx");
+                        Response.Redirect("TenantAccountCategories.aspx");
                     }
 
                     //Clear text boxes
