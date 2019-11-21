@@ -78,7 +78,7 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                  <div class="chat-img">
-                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/alex-knight-2EJCSULRwC8-unsplash.jpg" class="rounded-circle img-fluid" CustomParameter="0" onClick= "btnSubmit_Click"/>
+                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/robot-man.png" class="rounded-circle img-fluid" CustomParameter="0" onClick= "btnSubmit_Click"/>
                             </div>  
                         <div class="chat-ib">
                        <h5>Chat Bot</h5>
