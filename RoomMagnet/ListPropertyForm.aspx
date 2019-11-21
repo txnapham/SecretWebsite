@@ -24,8 +24,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
-<%--                    <li class="breadcrumb-item"><a href="ListedProperties.aspx" class="breadLink">Rooms</a></li>--%>
-                    <li class="breadcrumb-item active" aria-current="page">List Room</li>
+<%--                    <li class="breadcrumb-item"><a href="ListedProperties.aspx" class="breadLink">Properties</a></li>--%>
+                    <li class="breadcrumb-item active" aria-current="page">List Property</li>
                 </ol>
             </nav>
         </section>
@@ -37,7 +37,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>List Room</h3>
+                        <h3>List Property</h3>
                     </div>
                 </div>
             </section>
