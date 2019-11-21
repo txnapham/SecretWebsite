@@ -164,6 +164,7 @@
                                     <%--<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>--%>
                                     <asp:Button ID="btnChangePassword" class="btn btn-info btn-block" runat="server" Text="Change Password" ValidationGroup='passwordGroup' OnClick="btnChangePassword_Click"/>
                                     <asp:Label ID="lblPrev" runat="server" ForeColor="Red"></asp:Label>
+                                
                                 </div>
                             </div>
                         </div>
@@ -177,6 +178,7 @@
 
 
         <section>
+            
             <div class="row pt-3">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <h5>Please select your preferred language:</h5>
