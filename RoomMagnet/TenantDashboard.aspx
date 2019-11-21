@@ -22,7 +22,7 @@
             </div>--%>
             <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
         </div>
-
+        </div>
     </div>
     <!--END OF USER DASH-NAV-->
 
