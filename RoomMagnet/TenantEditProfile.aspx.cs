@@ -57,6 +57,8 @@ public partial class TenantEditProfile : System.Web.UI.Page
                     txtPhone.Text = searching.GetString(6);
                     txtEmail.Text = searching.GetString(7);
                 }
+
+
             }
         }
         else

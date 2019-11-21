@@ -56,7 +56,7 @@ public partial class ListedProperties : System.Web.UI.Page
                 String priceHigh = reader["RoomPriceRangeHigh"].ToString();
                 String filename = reader["images"].ToString();
                 // No image uploaded (currently default image in S3)
-                if (filename == "") filename = "rmdefaultimg.jpg";
+                if (filename == "") filename = "imagenotfound.png";
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceHigh), 0, MidpointRounding.ToEven);
  

@@ -28,7 +28,8 @@
                 <div class="sm-form md-form lg-form ">
                     <div class="file-field">
                         <div class="mb-4">
-                            <img src="images/rebeccajames.png" class="rounded-circle img-fluid" alt="...">
+<%--                            <img src="images/rebeccajames.png" class="rounded-circle img-fluid" alt="...">--%>
+                            <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
                         </div>
                         <div class="d-flex ">
                             <div class="btn btn-rounded float-left">
