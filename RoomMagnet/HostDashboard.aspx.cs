@@ -85,7 +85,7 @@ public partial class HostDashboard : System.Web.UI.Page
             StringBuilder alert1Text = new StringBuilder();
             alert1Text
                 .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
-                .Append("   <strong>Complete profile now! (Select Welcome and Edit Profile to Complete Profile)</strong>")
+                .Append("   <strong>Complete profile now! (Welcome -> Edit Profile to Complete Profile)</strong>")
                 .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
@@ -94,7 +94,7 @@ public partial class HostDashboard : System.Web.UI.Page
             StringBuilder alert2Text = new StringBuilder();
             alert2Text
                 .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
-                .Append("   <strong>Begin background check now! (Select Welcome and Edit Profile to Begin Background Check)</strong>")
+                .Append("   <strong>Begin background check now! (Welcome -> Edit Profile to Begin Background Check)</strong>")
                 .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
@@ -132,12 +132,12 @@ public partial class HostDashboard : System.Web.UI.Page
             {
                 if (charCheck == 1 || backStatusCheck == 1)
                 {
-                    alert1.Text += alert1Text.ToString();
+                    alert1.Text += alert2Text.ToString();
                     progressBar.Text += progressTwoThird.ToString();
                 }
                 else if (charCheck == 1 || backStatusCheck == 1)
                 {
-                    alert2.Text += alert2Text.ToString();
+                    alert1.Text += alert1Text.ToString();
                     progressBar.Text += progressTwoThird.ToString();
                 }
             }
@@ -239,7 +239,7 @@ public partial class HostDashboard : System.Web.UI.Page
                         .Append("           <div class=\"chat-people\">")
                         .Append("               <div class=\"chat-img\"> <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\"></div>")
                         .Append("                <div class=\"chat-ib\">")
-                        .Append("                    <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + "Age: " + age + "</a></h5>")
+                        .Append("                    <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + ", Age: " + age + "</a></h5>")
                         .Append("                    <p>Hello I'm interested in your property!</p>")
                         .Append("                  </div>")
                         .Append("               </div>")
