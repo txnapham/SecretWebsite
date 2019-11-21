@@ -163,7 +163,7 @@
             </section>--%>
 
             <div>
-                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#addRoom">
+                <button type="button" class="btnbtn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#addRoom">
                     Add Rooms
                 </button>
             </div>
@@ -186,7 +186,7 @@
                             <asp:TextBox ID="txtPrice" runat="server" class="form-control form-control-lg" placeholder="Price"></asp:TextBox>
                             <br />
                             <br />
-                            <asp:TextBox ID="txtDescription" runat="server" class="form-control form-control-lg" placeholder="Description" Height="100px"></asp:TextBox>
+                            <asp:TextBox ID="txtDescription" name="txtDescription" runat="server" class="form-control form-control-lg" placeholder="Description" Height="100px"></asp:TextBox>
 
                             <section>
                                 <div class="row pt-3">
@@ -203,7 +203,7 @@
                                         <div class="col-md-12">
                                             <div class="switchwrapper">
                                                 <label class="switch">
-                                                    <asp:CheckBox ID="cbConnBath" runat="server" />
+                                                    <asp:CheckBox ID="cbPrivateBR" runat="server" />
                                                     <span class="slider round"></span>
                                                 </label>
                                                 <div>Private Bathroom</div>
@@ -223,7 +223,7 @@
                                         <div class="col-md-12">
                                             <div class="switchwrapper">
                                                 <label class="switch">
-                                                    <asp:CheckBox ID="cbDryer" runat="server" />
+                                                    <asp:CheckBox ID="cbWashDry" runat="server" />
                                                     <span class="slider round"></span>
                                                 </label>
                                                 <div>Washer / Dryer</div>
@@ -231,7 +231,7 @@
                                         </div>
 
 
-<asp:Button ID="Button1" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="true" OnClick="btnListProperty_Click" />
+                                        <asp:Button ID="btnAddRoom" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="false" OnClick="btnAddRoom_Click" />
 
                                     </div>
 
@@ -261,7 +261,7 @@
                                         <div class="col-md-12">
                                             <div class="switchwrapper">
                                                 <label class="switch">
-                                                    <asp:CheckBox ID="cbHeating" runat="server" />
+                                                    <asp:CheckBox ID="cbHVAC" runat="server" />
                                                     <span class="slider round"></span>
                                                 </label>
                                                 <div>Heating / Air Conditioning</div>

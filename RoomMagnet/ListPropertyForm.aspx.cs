@@ -92,16 +92,6 @@ public partial class ListPropertyForm : System.Web.UI.Page
         if (cbHSS.Checked == true) newProperty.setHomeShareSmarter(1);
         else newProperty.setHomeShareSmarter(0);
 
-        double roomPrice;
-        if (txtPrice.Text == "") 
-        {
-             roomPrice = 0;
-        }
-        else
-        roomPrice = Convert.ToDouble(txtPrice.Text);
-
-        newProperty.setRoomPrices(roomPrice);
-
         int propertyType = Convert.ToInt16(RadioButtonList.SelectedIndex);
         if (propertyType == 0) newProperty.setPropertyType(1);
         else if (propertyType == 1) newProperty.setPropertyType(2);
@@ -166,8 +156,6 @@ public partial class ListPropertyForm : System.Web.UI.Page
         sc.Open();
         int arrayImageId = 0;
 
-
-
         for (int i = 0; i < PropertyRoomImages.propertyRoomImagesArray.Count; i++)
         {
             arrayImageId = Convert.ToInt32(PropertyRoomImages.propertyRoomImagesArray[i].ToString());
@@ -178,6 +166,21 @@ public partial class ListPropertyForm : System.Web.UI.Page
         }
 
         PropertyRoomImages.propertyRoomImagesArray.Clear();
+        sc.Close();
+
+        System.Data.SqlClient.SqlCommand linkRooms = new System.Data.SqlClient.SqlCommand();
+        linkRooms.Connection = sc;
+        sc.Open();
+        int arrayRoomID = 0;
+
+        for (int i = 0; i < PropertyRoom.roomArray.Count; i++)
+        {
+            arrayRoomID = Convert.ToInt32(PropertyRoom.roomArray[i].ToString());
+            linkRooms.CommandText = "UPDATE PropertyRoom SET PropertyID = @propID WHERE RoomID = @roomID";
+            linkRooms.Parameters.Add(new System.Data.SqlClient.SqlParameter("@roomID", arrayRoomID));
+            linkRooms.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propID", propertyID));
+            linkRooms.ExecuteNonQuery();
+        }
         sc.Close();
 
         Response.Redirect("HostDashboard.aspx");
@@ -226,6 +229,56 @@ public partial class ListPropertyForm : System.Web.UI.Page
         {
             StatusLabel.Text = "";
         }
+    }
+
+    protected void btnAddRoom_Click(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.Open();
+        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+        insert.Connection = sc;
+
+        insert.CommandText = "INSERT INTO PropertyRoom Values(@price, @aboutProperty, @kitchen, @HVAC, @Wifi, @privateBR, @washAndDry, @walkInCloset, NULL)";
+
+        int kitchen;
+        int HVAC;
+        int Wifi;
+        int PrivateBR;
+        int WashAndDry;
+        int WalkInCloset;
+
+        if (cbKitchen.Checked == true) { kitchen = 1; }
+        else { kitchen = 0; }
+        if (cbHVAC.Checked == true) { HVAC = 1; }
+        else { HVAC = 0; }
+        if (cbWifi.Checked == true) { Wifi = 1; }
+        else { Wifi = 0; }
+        if (cbPrivateBR.Checked == true) { PrivateBR = 1; }
+        else { PrivateBR = 0; }
+        if (cbWashDry.Checked == true) { WashAndDry = 1; }
+        else { WashAndDry = 0; }
+        if (cbWalkInClos.Checked == true) { WalkInCloset = 1; }
+        else { WalkInCloset = 0; }
+        string description = txtDescription.Text;
+
+        insert.Parameters.Add(new SqlParameter("@price", txtPrice.Text));
+        insert.Parameters.Add(new SqlParameter("@aboutProperty", description));
+        insert.Parameters.Add(new SqlParameter("@kitchen", kitchen));
+        insert.Parameters.Add(new SqlParameter("@HVAC", HVAC));
+        insert.Parameters.Add(new SqlParameter("@Wifi", Wifi));
+        insert.Parameters.Add(new SqlParameter("@privateBR", PrivateBR));
+        insert.Parameters.Add(new SqlParameter("@washAndDry", WashAndDry));
+        insert.Parameters.Add(new SqlParameter("@walkInCloset", WalkInCloset));
+
+        insert.ExecuteNonQuery();
+
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
+        select.Connection = sc;
+
+        select.CommandText = "SELECT MAX(RoomID) FROM PropertyRoom";
+        int roomID = (int)select.ExecuteScalar();
+        PropertyRoom.roomArray.Add(roomID);
     }
 }
 
