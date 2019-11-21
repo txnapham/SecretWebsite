@@ -2,6 +2,11 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap");
 
 
+.card-img-small {
+    width:auto;
+    height:7%;
+}
+
 .btn-termsandConditions label {
     color: #fe5f55;
 }
