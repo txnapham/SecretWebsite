@@ -19,7 +19,7 @@
                             <div class="carousel-caption">
                                 <h1 class="caption-headline-main">Age in place without worrying about the financial strain.</h1>                                
                                 </div>
-                                <img class="d-block w-100 img-fluid" src="images/senior-woman-learning-on-computer.jpg" alt="First slide">
+                                <img class="d-block w-100 img-fluid" src="images/senior-woman-learning-on-computer.jpg" alt="First slide" style="opacity:0.9;">
                         </div>
 
                         <div class="carousel-item" data-interval="10000">
