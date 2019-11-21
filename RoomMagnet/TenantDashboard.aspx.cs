@@ -37,68 +37,144 @@ public partial class TenantDashboard : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Card.Text = String.Empty;
+        Card2.Text = String.Empty;
+        Card3.Text = String.Empty;
+        alert1.Text = String.Empty;
+        alert2.Text = String.Empty;
+        progressBar.Text = String.Empty;
+
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
-            Card2.Text = String.Empty;
-            Card3.Text = String.Empty;
+            int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
-            if (Session["AccountId"] != null)
+            //Selecting from Account
+            System.Data.SqlClient.SqlCommand selectAccount = new System.Data.SqlClient.SqlCommand();
+            string accountNameQuery = "SELECT FirstName FROM Account WHERE AccountID = @AccountID";
+            System.Data.SqlClient.SqlCommand accountNameGrab = new SqlCommand(accountNameQuery, sc);
+
+            string accountImageQuery = "SELECT AccountImage FROM Account WHERE AccountID = @AccountID";
+            System.Data.SqlClient.SqlCommand accountImageGrab = new SqlCommand(accountImageQuery, sc);
+
+
+            //string propertyIdQuery = "SELECT MAX(PropertyID) from Property";
+            //System.Data.SqlClient.SqlCommand propertyIdGrab = new System.Data.SqlClient.SqlCommand(propertyIdQuery, sc);
+
+
+            //Select Statements properties
+            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand alert1Comm = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand alert2Comm = new System.Data.SqlClient.SqlCommand();
+            select.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
+            alert1Comm.CommandText = "SELECT COUNT(*) FROM Characteristics WHERE AccountID = " + accountID;
+            alert2Comm.CommandText = "SELECT BackgroundCheckStatus FROM Tenant WHERE TenantID = " + accountID;
+
+            //Connections
+            select.Connection = sc;
+            alert1Comm.Connection = sc;
+            alert2Comm.Connection = sc;
+            sc.Open();
+
+            int charCheck = (int)alert1Comm.ExecuteScalar();
+            int backStatusCheck = (int)alert2Comm.ExecuteScalar();
+
+            //Populating Tenant Part of Host Dashboard
+            System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
+            while (reader.Read())
             {
-                int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
+                String tenantName = reader["FirstName"].ToString();
+                String filename = reader["AccountImage"].ToString();
+                // No image uploaded (currently default image in S3)
+                if (filename == "") filename = "defaulttenantimg.jpg";
+                // User dashboard dynamically updated using S3
+                StringBuilder tenantImage = new StringBuilder();
+                tenantImage
+                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">")
+                .Append("                Welcome " + tenantName + "!");
+                Card.Text += tenantImage.ToString();
+            }
+            sc.Close();
 
-                //Selecting from Account
-                System.Data.SqlClient.SqlCommand selectAccount = new System.Data.SqlClient.SqlCommand();
-                string accountNameQuery = "SELECT FirstName FROM Account WHERE AccountID = @AccountID";
-                System.Data.SqlClient.SqlCommand accountNameGrab = new SqlCommand(accountNameQuery, sc);
+            StringBuilder alert1Text = new StringBuilder();
+            alert1Text
+                .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
+                .Append("   <strong>Complete profile now! (Welcome -> Edit Profile to Complete Profile)</strong>")
+                .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
+                .Append("       <span aria-hidden=\"true\">&times;</span>")
+                .Append("   </button>")
+                .Append("</div>");
 
-                string accountImageQuery = "SELECT AccountImage FROM Account WHERE AccountID = @AccountID";
-                System.Data.SqlClient.SqlCommand accountImageGrab = new SqlCommand(accountImageQuery, sc);
+            StringBuilder alert2Text = new StringBuilder();
+            alert2Text
+                .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
+                .Append("   <strong>Begin background check now! (Welcome -> Edit Profile to Begin Background Check)</strong>")
+                .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
+                .Append("       <span aria-hidden=\"true\">&times;</span>")
+                .Append("   </button>")
+                .Append("</div>");
 
+            StringBuilder progressOneThird = new StringBuilder();
+            progressOneThird
+                .Append("<div class=\"progress\" style=\"height: 30px; \">")
+                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:33%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("</div");
 
-                //string propertyIdQuery = "SELECT MAX(PropertyID) from Property";
-                //System.Data.SqlClient.SqlCommand propertyIdGrab = new System.Data.SqlClient.SqlCommand(propertyIdQuery, sc);
+            StringBuilder progressTwoThird = new StringBuilder();
+            progressTwoThird
+                .Append("<div class=\"progress\" style=\"height: 30px; \">")
+                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:66%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("</div");
 
+            StringBuilder progressFull = new StringBuilder();
+            progressFull
+                .Append("<div class=\"progress\" style=\"height: 30px; \">")
+                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:100%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("</div");
 
-                //Select Statements properties
-                System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-                select.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
-                //Connections
-                select.Connection = sc;
-                sc.Open();
+            if (charCheck == 0 && backStatusCheck == 0)
+            {
+                alert1.Text += alert1Text.ToString();
+                alert2.Text += alert2Text.ToString();
+                progressBar.Text += progressOneThird.ToString();
+            }
+            else if (charCheck == 1 && backStatusCheck == 1)
+            {
+                progressBar.Text += progressFull.ToString();
 
-                //Populating Tenant Part of Host Dashboard
-                System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
-                while (reader.Read())
+            }
+            else if (charCheck == 1 || backStatusCheck == 1)
+            {
+                if (charCheck == 1 || backStatusCheck == 1)
                 {
-                    String tenantName = reader["FirstName"].ToString();
-                    String filename = reader["AccountImage"].ToString();
-                    // No image uploaded (currently default image in S3)
-                    if (filename == "") filename = "defaulttenantimg.jpg";
-                    // User dashboard dynamically updated using S3
-                    StringBuilder tenantImage = new StringBuilder();
-                    tenantImage
-                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">")
-                    .Append("                Welcome " + tenantName + "!");
-                    Card.Text += tenantImage.ToString();
+                    alert1.Text += alert2Text.ToString();
+                    progressBar.Text += progressTwoThird.ToString();
                 }
-                sc.Close();
+                else if (charCheck == 1 || backStatusCheck == 1)
+                {
+                    alert1.Text += alert1Text.ToString();
+                    progressBar.Text += progressTwoThird.ToString();
+                }
+            }
 
-                //Selecting from Property
-                // System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-                System.Data.SqlClient.SqlCommand messageSelect = new System.Data.SqlClient.SqlCommand();
-                select.CommandText = "SELECT City, HomeState, LocalPriceRangeLow, LocalPriceRangeHigh FROM Property WHERE PropertyID in " +
-                "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
-                messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, max(Message.Date) as Date FROM Message INNER JOIN FavoritedProperties ON " +
-                    "Message.FavPropID = FavoritedProperties.FavPropID INNER JOIN Property ON FavoritedProperties.PropertyID = Property.PropertyID INNER JOIN Host ON " +
-                    "Property.HostID = Host.HostID INNER JOIN Account ON Host.HostID = Account.AccountID INNER JOIN FavoritedTenants ON Message.FavTenantID = " +
-                    "FavoritedTenants.FavTenantID AND Host.HostID = FavoritedTenants.HostID where MessageType = 0 and FavoritedTenants.TenantID = " + accountID + " group by " +
-                    "Account.FirstName, Account.LastName";
-                select.Connection = sc;
-                messageSelect.Connection = sc;
-                sc.Open();
-                System.Data.SqlClient.SqlDataReader readerProperty = select.ExecuteReader();
 
-                //Populating Dashboard
+            //Selecting from Property
+            // System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand messageSelect = new System.Data.SqlClient.SqlCommand();
+            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh FROM Property WHERE PropertyID in " +
+            "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
+            messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, max(Message.Date) as Date FROM Message INNER JOIN FavoritedProperties ON " +
+                "Message.FavPropID = FavoritedProperties.FavPropID INNER JOIN Property ON FavoritedProperties.PropertyID = Property.PropertyID INNER JOIN Host ON " +
+                "Property.HostID = Host.HostID INNER JOIN Account ON Host.HostID = Account.AccountID INNER JOIN FavoritedTenants ON Message.FavTenantID = " +
+                "FavoritedTenants.FavTenantID AND Host.HostID = FavoritedTenants.HostID where MessageType = 0 and FavoritedTenants.TenantID = " + accountID + " group by " +
+                "Account.FirstName, Account.LastName";
+            select.Connection = sc;
+            messageSelect.Connection = sc;
+            sc.Open();
+
+            System.Data.SqlClient.SqlDataReader readerProperty = select.ExecuteReader();
+            //Populating Dashboard
+            if (readerProperty.HasRows)
+            {
                 while (readerProperty.Read())
                 {
                     String city = reader["City"].ToString();
@@ -124,8 +200,12 @@ public partial class TenantDashboard : System.Web.UI.Page
                     .Append("</div>");
                     Card2.Text += myCard.ToString();
                 }
-                reader.Close();
-                System.Data.SqlClient.SqlDataReader rdr = messageSelect.ExecuteReader();
+            }
+            reader.Close();
+
+            System.Data.SqlClient.SqlDataReader rdr = messageSelect.ExecuteReader();
+            if (rdr.HasRows)
+            {
                 while (rdr.Read())
                 {
                     String firstName = rdr["FirstName"].ToString();
@@ -147,9 +227,9 @@ public partial class TenantDashboard : System.Web.UI.Page
                         .Append("        </div>");
                     Card3.Text += myCard.ToString();
                 }
-                rdr.Close();
-                sc.Close();
             }
+            rdr.Close();
+            sc.Close();
         }
         else
         {

@@ -8,10 +8,10 @@ using System.Web;
 /// </summary>
 public class Host : Account
 {
-    private string BackCheck;
+    private int BackCheck;
     private string HostReason;
 
-    public Host(Account account, string BackCheck, string HostReason)
+    public Host(Account account, int BackCheck, string HostReason)
         : base(account.getFirstName(), account.getMiddleName(), account.getLastName(), account.getPhone(), 
             account.getBday(), account.getEmail(), account.getHouseNumber(), account.getStreet(), account.getCity(), 
             account.getState(), account.getZip(), account.getCountry(), account.getAccType(), account.getPID())
@@ -21,7 +21,7 @@ public class Host : Account
     }
     
     //Setters
-    public void setBackCheck(string BackCheck)
+    public void setBackCheck(int BackCheck)
     {
         this.BackCheck = BackCheck;
     }
@@ -31,7 +31,7 @@ public class Host : Account
     }
 
     //getter
-    public string getBackCheck()
+    public int getBackCheck()
     {
         return this.BackCheck;
     }

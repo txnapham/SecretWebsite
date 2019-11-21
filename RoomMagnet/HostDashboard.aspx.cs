@@ -40,6 +40,9 @@ public partial class HostDashboard : System.Web.UI.Page
         Card.Text = String.Empty;
         Card2.Text = String.Empty;
         Card3.Text = String.Empty;
+        alert1.Text = String.Empty;
+        alert2.Text = String.Empty;
+        progressBar.Text = String.Empty;
 
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
@@ -47,10 +50,20 @@ public partial class HostDashboard : System.Web.UI.Page
 
             //Select Statements properties
             System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand alert1Comm = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand alert2Comm = new System.Data.SqlClient.SqlCommand();
             selectHost.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
+            alert1Comm.CommandText = "SELECT COUNT(*) FROM Characteristics WHERE AccountID = " + accountID;
+            alert2Comm.CommandText = "SELECT BackgroundCheckStatus FROM Host WHERE HostID = " + accountID;
+
             //Connections
             selectHost.Connection = sc;
+            alert1Comm.Connection = sc;
+            alert2Comm.Connection = sc;
             sc.Open();
+
+            int charCheck = (int)alert1Comm.ExecuteScalar();
+            int backStatusCheck = (int)alert2Comm.ExecuteScalar();
 
             //Populating Tenant Part of Host Dashboard
             System.Data.SqlClient.SqlDataReader readerHostImage = selectHost.ExecuteReader();
@@ -63,12 +76,71 @@ public partial class HostDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder hostImage = new StringBuilder();
                 hostImage
-                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">")
-                .Append("                Welcome " + tenantName + "!");
+                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">")
+                    .Append("                Welcome " + tenantName + "!");
                 HostCard.Text += hostImage.ToString();
             }
             sc.Close();
 
+            StringBuilder alert1Text = new StringBuilder();
+            alert1Text
+                .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
+                .Append("   <strong>Complete profile now! (Welcome -> Edit Profile to Complete Profile)</strong>")
+                .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
+                .Append("       <span aria-hidden=\"true\">&times;</span>")
+                .Append("   </button>")
+                .Append("</div>");
+
+            StringBuilder alert2Text = new StringBuilder();
+            alert2Text
+                .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
+                .Append("   <strong>Begin background check now! (Welcome -> Edit Profile to Begin Background Check)</strong>")
+                .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
+                .Append("       <span aria-hidden=\"true\">&times;</span>")
+                .Append("   </button>")
+                .Append("</div>");
+
+            StringBuilder progressOneThird = new StringBuilder();
+            progressOneThird
+                .Append("<div class=\"progress\" style=\"height: 30px; \">")
+                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:33%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("</div");
+
+            StringBuilder progressTwoThird = new StringBuilder();
+            progressTwoThird
+                .Append("<div class=\"progress\" style=\"height: 30px; \">")
+                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:66%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("</div");
+
+            StringBuilder progressFull = new StringBuilder();
+            progressFull
+                .Append("<div class=\"progress\" style=\"height: 30px; \">")
+                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:100%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("</div");
+
+            if (charCheck == 0 && backStatusCheck == 0)
+            {
+                alert1.Text += alert1Text.ToString();
+                alert2.Text += alert2Text.ToString();
+                progressBar.Text += progressOneThird.ToString();
+            }
+            else if (charCheck == 1 && backStatusCheck == 1)
+            {
+                progressBar.Text += progressFull.ToString();
+            }
+            else if (charCheck == 1 || backStatusCheck == 1)
+            {
+                if (charCheck == 1 || backStatusCheck == 1)
+                {
+                    alert1.Text += alert2Text.ToString();
+                    progressBar.Text += progressTwoThird.ToString();
+                }
+                else if (charCheck == 1 || backStatusCheck == 1)
+                {
+                    alert1.Text += alert1Text.ToString();
+                    progressBar.Text += progressTwoThird.ToString();
+                }
+            }
 
             //Select Statements for tenant and properties
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
@@ -167,7 +239,7 @@ public partial class HostDashboard : System.Web.UI.Page
                         .Append("           <div class=\"chat-people\">")
                         .Append("               <div class=\"chat-img\"> <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\"></div>")
                         .Append("                <div class=\"chat-ib\">")
-                        .Append("                    <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + "Age: " + age + "</a></h5>")
+                        .Append("                    <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + ", Age: " + age + "</a></h5>")
                         .Append("                    <p>Hello I'm interested in your property!</p>")
                         .Append("                  </div>")
                         .Append("               </div>")

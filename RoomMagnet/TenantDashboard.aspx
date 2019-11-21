@@ -17,10 +17,10 @@
             </p>
 
 
-            <div class="progress" style="height: 30px;">
+<%--            <div class="progress" style="height: 30px;">
                 <div class="progress-bar bg-info" role="progressbar" style="width: 66%; color: #fff; font-size: 15px; font-weight: bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Profile Completion</div>
-            </div>
-
+            </div>--%>
+            <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
         </div>
 
     </div>
@@ -33,21 +33,23 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
-                    <div class="alert alert-light alert-dismissible fade show" role="alert">
+<%--                    <div class="alert alert-light alert-dismissible fade show" role="alert">
                         <strong>Complete profile now!</strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>
+                    </div>--%>
+                    <asp:Literal ID="alert1" runat="server" Mode="Transform"></asp:Literal>
                 </div>
 
                 <div class="col-md-12">
-                    <div class="alert alert-light alert-dismissible fade show" role="alert">
+<%--                    <div class="alert alert-light alert-dismissible fade show" role="alert">
                         <strong>Complete background check now!</strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>
+                    </div>--%>
+                    <asp:Literal ID="alert2" runat="server" Mode="Transform"></asp:Literal>
                 </div>
             </div>
         </div>

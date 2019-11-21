@@ -78,7 +78,7 @@ public partial class HostCreateAccount : System.Web.UI.Page
                     HttpUtility.HtmlEncode(txtPhone.Text), DateTime.Parse(txtBday.Text, new System.Globalization.CultureInfo("pt-BR")), HttpUtility.HtmlEncode(txtEmail.Text),
                     HttpUtility.HtmlEncode(txtHouseNum.Text), HttpUtility.HtmlEncode(txtStreet.Text), HttpUtility.HtmlEncode(txtCity.Text), ddState.SelectedValue,
                     HttpUtility.HtmlEncode(txtZip.Text), "US", Int32.Parse("2"), Int32.Parse("2"));
-                Host newHost = new Host(newAccount, "N", "Retiree");
+                Host newHost = new Host(newAccount, Int32.Parse("0"), "Retiree");
 
                 checkEmailCount.CommandText = "SELECT COUNT(*) FROM ACCOUNT WHERE EMAIL = @emailCheck";
                 checkEmailCount.Parameters.Add(new SqlParameter("@emailCheck", newAccount.getEmail()));
