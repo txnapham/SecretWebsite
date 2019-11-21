@@ -10,11 +10,6 @@
             <p>
                 <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
             </p>
-
-
-            <div class="progress" style="height: 30px;">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 66%; color: #fff; font-size: 15px; font-weight: bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Profile Completion</div>
-            </div>
         </div>
 
     </div>
@@ -29,7 +24,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="ListedProperties.aspx" class="breadLink">Rooms</a></li>
+<%--                    <li class="breadcrumb-item"><a href="ListedProperties.aspx" class="breadLink">Rooms</a></li>--%>
                     <li class="breadcrumb-item active" aria-current="page">List Room</li>
                 </ol>
             </nav>
@@ -236,7 +231,7 @@
                                         </div>
 
 
-
+<asp:Button ID="Button1" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="true" OnClick="btnListProperty_Click" />
 
                                     </div>
 
@@ -478,6 +473,16 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12">
+                            <div class="switchwrapper">
+                                <label class="switch">
+                                    <asp:CheckBox ID="cbPorch" runat="server" />
+                                    <span class="slider round"></span>
+                                </label>
+                                <div>Porch / Deck</div>
+                            </div>
+                        </div>
+
 
                     </div>
 
@@ -501,16 +506,6 @@
                                     <span class="slider round"></span>
                                 </label>
                                 <div>Backyard</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="switchwrapper">
-                                <label class="switch">
-                                    <asp:CheckBox ID="cbPorch" runat="server" />
-                                    <span class="slider round"></span>
-                                </label>
-                                <div>Porch / Deck</div>
                             </div>
                         </div>
 
@@ -571,10 +566,10 @@
 
 
 
-                        <h6>Don't see one that applies to you? Fill out the form below:</h6>
+<%--                        <h6>Don't see one that applies to you? Fill out the form below:</h6>
                         <div class="form-group">
                             <asp:TextBox ID="txtOtherRules" runat="server" class="form-control" aria-describedby="HouseRule" placeholder="Type your house rule here"></asp:TextBox>
-                        </div>
+                        </div>--%>
 
 
 
@@ -635,11 +630,8 @@
 
 
             <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="true" OnClick="btnListProperty_Click" />
-
-
-
-
         </div>
+        
         <script>
         function validateTerms(source, arguments) {
             var $c = $('#<%= cbAgreement.ClientID %>');

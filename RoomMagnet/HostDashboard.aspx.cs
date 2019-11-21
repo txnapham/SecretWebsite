@@ -37,12 +37,12 @@ public partial class HostDashboard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        Card.Text = String.Empty;
-        Card2.Text = String.Empty;
-        Card3.Text = String.Empty;
-        alert1.Text = String.Empty;
-        alert2.Text = String.Empty;
-        progressBar.Text = String.Empty;
+        Card.Text = "";
+        Card2.Text = "";
+        Card3.Text = "";
+        alert1.Text = "";
+        alert2.Text = "";
+        progressBar.Text = "";
 
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
@@ -72,7 +72,7 @@ public partial class HostDashboard : System.Web.UI.Page
                 String tenantName = readerHostImage["FirstName"].ToString();
                 String filename = readerHostImage["AccountImage"].ToString();
                 // No image uploaded (currently default image in S3)
-                if (filename == "") filename = "defaulttenantimg.jpg";
+                if (filename == "") filename = "noprofileimage.png";
                 // User dashboard dynamically updated using S3
                 StringBuilder hostImage = new StringBuilder();
                 hostImage
@@ -295,5 +295,48 @@ public partial class HostDashboard : System.Web.UI.Page
 
         //insert.ExecuteNonQuery();
         sc.Close();
+    }
+
+    protected void btnAddRoom_Click(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.Open();
+        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+        insert.Connection = sc;
+
+        insert.CommandText = "INSERT INTO PropertyRoom Values(@price, @aboutProperty, @kitchen, @HVAC, @Wifi, @privateBR, @washAndDry, @WalkInCloset, NULL)";
+
+        int kitchen;
+        int HVAC;
+        int Wifi;
+        int PrivateBR;
+        int WashAndDry;
+        int WalkInCloset;
+
+        if (cbKitchen.Checked == true) { kitchen = 1; }
+        else { kitchen = 0; }
+        if (cbHVAC.Checked == true) { HVAC = 1; }
+        else { HVAC = 0; }
+        if (cbWifi.Checked == true) { Wifi = 1; }
+        else { Wifi = 0; }
+        if (cbPrivateBR.Checked == true) { PrivateBR = 1; }
+        else { PrivateBR = 0; }
+        if (cbWashDry.Checked == true) { WashAndDry = 1; }
+        else { WashAndDry = 0; }
+        if (cbWalkInClos.Checked == true) { WalkInCloset = 1; }
+        else { WalkInCloset = 0; }
+
+        insert.Parameters.Add(new SqlParameter("@price", txtPrice.Text));
+        insert.Parameters.Add(new SqlParameter("@price", Request.Form["txtDescription"]));
+        insert.Parameters.Add(new SqlParameter("@price", kitchen));
+        insert.Parameters.Add(new SqlParameter("@price", HVAC));
+        insert.Parameters.Add(new SqlParameter("@price", Wifi));
+        insert.Parameters.Add(new SqlParameter("@price", PrivateBR));
+        insert.Parameters.Add(new SqlParameter("@price", WashAndDry));
+        insert.Parameters.Add(new SqlParameter("@price", WalkInCloset));
+        insert.Parameters.Add(new SqlParameter("@price", txtPrice.Text));
+
+        insert.ExecuteNonQuery();
     }
 }

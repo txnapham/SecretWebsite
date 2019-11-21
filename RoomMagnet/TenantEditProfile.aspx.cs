@@ -46,7 +46,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
                 SqlDataReader searching = search.ExecuteReader();
 
                 //checks the database for matches
-                if (searching.Read())
+                while (searching.Read())
                 {
                     txtHouseNum.Text = searching.GetString(0);
                     txtStreet.Text = searching.GetString(1);
@@ -57,8 +57,72 @@ public partial class TenantEditProfile : System.Web.UI.Page
                     txtPhone.Text = searching.GetString(6);
                     txtEmail.Text = searching.GetString(7);
                 }
-
-
+                searching.Close();
+                sc.Close();
+                //Checks for characterisitcs
+                System.Data.SqlClient.SqlCommand character = new System.Data.SqlClient.SqlCommand();
+                character.Connection = sc;
+                character.CommandText = "SELECT * from [Characteristics] where AccountID =" + Session["AccountId"] + ";";
+                sc.Open();
+                SqlDataReader rdr = character.ExecuteReader();
+                while (rdr.Read())
+                {
+                    if (rdr["Extrovert"].ToString() == "1")
+                    {
+                        cbExtrovert.Checked = true;
+                    }
+                    if (rdr["Introvert"].ToString() == "1")
+                    {
+                        cbIntrovert.Checked = true;
+                    }
+                    if (rdr["NonSmoker"].ToString() == "1")
+                    {
+                        cbNonSmoker.Checked = true;
+                    }
+                    if (rdr["EarlyRiser"].ToString() == "1")
+                    {
+                        cbEarlyRiser.Checked = true;
+                    }
+                    if (rdr["NightOwl"].ToString() == "1")
+                    {
+                        cbNightOwl.Checked = true;
+                    }
+                    if (rdr["TechSavvy"].ToString() == "1")
+                    {
+                        cbTechSavy.Checked = true;
+                    }
+                    if (rdr["FamilyOriented"].ToString() == "1")
+                    {
+                        fbFamily.Checked = true;
+                    }
+                    if (rdr["English"].ToString() == "1")
+                    {
+                        cbEnglish.Checked = true;
+                    }
+                    if (rdr["Spanish"].ToString() == "1")
+                    {
+                        cbSpanish.Checked = true;
+                    }
+                    if (rdr["Mandarin"].ToString() == "1")
+                    {
+                        cbMandarin.Checked = true;
+                    }
+                    if (rdr["Japanese"].ToString() == "1")
+                    {
+                        cbJapanese.Checked = true;
+                    }
+                    if (rdr["German"].ToString() == "1")
+                    {
+                        cbGerman.Checked = true;
+                    }
+                    if (rdr["French"].ToString() == "1")
+                    {
+                        cbFrench.Checked = true;
+                    }
+                    
+                }
+                rdr.Close();
+                sc.Close();
             }
         }
         else
@@ -88,6 +152,137 @@ public partial class TenantEditProfile : System.Web.UI.Page
 
         update.ExecuteNonQuery();
         sc.Close();
+
+        int English;
+        int Mandarin;
+        int German;
+        int Spanish;
+        int Japanese;
+        int French;
+        int EarlyR;
+        int Introvert;
+        int Family;
+        int Night;
+        int Extrovert;
+        int TechSavvy;
+        int NonSmoker;
+
+        if (cbEnglish.Checked == true)
+        {
+            English = 1;
+        }
+        else
+        {
+            English = 0;
+        }
+        if (cbMandarin.Checked == true)
+        {
+            Mandarin = 1;
+        }
+        else
+        {
+            Mandarin = 0;
+        }
+        if (cbGerman.Checked == true)
+        {
+            German = 1;
+        }
+        else
+        {
+            German = 0;
+        }
+        if (cbSpanish.Checked == true)
+        {
+            Spanish = 1;
+        }
+        else
+        {
+            Spanish = 0;
+        }
+        if (cbJapanese.Checked == true)
+        {
+            Japanese = 1;
+        }
+        else
+        {
+            Japanese = 0;
+        }
+        if (cbFrench.Checked == true)
+        {
+            French = 1;
+        }
+        else
+        {
+            French = 0;
+        }
+        if (cbEarlyRiser.Checked == true)
+        {
+            EarlyR = 1;
+        }
+        else
+        {
+            EarlyR = 0;
+        }
+        if (cbIntrovert.Checked == true)
+        {
+            Introvert = 1;
+        }
+        else
+        {
+            Introvert = 0;
+        }
+        if (fbFamily.Checked == true)
+        {
+            Family = 1;
+        }
+        else
+        {
+            Family = 0;
+        }
+        if (cbNightOwl.Checked == true)
+        {
+            Night = 1;
+        }
+        else
+        {
+            Night = 0;
+        }
+        if (cbExtrovert.Checked == true)
+        {
+            Extrovert = 1;
+        }
+        else
+        {
+            Extrovert = 0;
+        }
+        if (cbTechSavy.Checked == true)
+        {
+            TechSavvy = 1;
+        }
+        else
+        {
+            TechSavvy = 0;
+        }
+        if (cbNonSmoker.Checked == true)
+        {
+            NonSmoker = 1;
+        }
+        else
+        {
+            NonSmoker = 0;
+        }
+        sc.Open();
+        System.Data.SqlClient.SqlCommand updateChar = new System.Data.SqlClient.SqlCommand();
+        updateChar.Connection = sc;
+
+        updateChar.CommandText = "Update Characteristics SET " +"Extrovert="+ Extrovert + ", " + "Introvert="+
+            Introvert + ", " +"NonSmoker="+ NonSmoker + ", " + "EarlyRiser="+EarlyR + ", " +"NightOwl="+ Night + ", " +"TechSavvy="+ TechSavvy + ", " +"FamilyOriented="
+            + Family +", " +"English="+ English + ", " +"Spanish="+ Spanish + ", " +"Mandarin="+ Mandarin + ", " +"Japanese=" +Japanese + ", " +"German=" +German + 
+            ", " +"French=" +French +"Where "+"AccountID=" + Session["AccountId"].ToString() + ";";
+
+        updateChar.ExecuteNonQuery();
+        sc.Close();
+        Response.Redirect("TenantDashboard.aspx");
 
 
 

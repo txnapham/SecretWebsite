@@ -14,14 +14,14 @@
     <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
-            <p>
+            
 <%--                <img src="images/bettyBrown.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">--%>
                 <%--Welcome USER,--%>
                 <p>
                     <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
                 </p>
 
-            </p>
+            
 
 
 <%--            <div class="progress" style="height: 30px;">
@@ -29,7 +29,7 @@
             </div>--%>
             <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
         </div>
-
+        </div>
     </div>
     <!--END OF USER DASH-NAV-->
 
@@ -75,11 +75,11 @@
                                 <h5 class="card-title dash-card-titles">Properties</h5>
 
                                 <div class="text-center" style="padding-left: 90%;">
-                                    <a class="dropdown-toggle btn-info " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">+</a>
+                                    <a class="dropdown-toggle btn-info addmorePropButton" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">+</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item js-scroll-trigger" href="ListPropertyForm.aspx">Add Property</a>
                                         <button style="color: #000;" type="button" class="btn  dropdown-item js-scroll-trigger" data-toggle="modal" data-dismiss="modal" data-target="#addRoom">
-                                            Add Room</button>
+                                            Add Room</>
                                     </div>
 
                                 </div>
@@ -106,7 +106,6 @@
                                                 <br />
                                                 <asp:TextBox ID="txtPrice" runat="server" class="form-control form-control-lg" placeholder="Price"></asp:TextBox>
                                                 <br />
-                                                <br />
                                                 <asp:TextBox ID="txtDescription" runat="server" class="form-control form-control-lg" placeholder="Description" Height="100px"></asp:TextBox>
 
                                                 <section>
@@ -124,7 +123,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="switchwrapper">
                                                                     <label class="switch">
-                                                                        <asp:CheckBox ID="cbConnBath" runat="server" />
+                                                                        <asp:CheckBox ID="cbPrivateBR" runat="server" />
                                                                         <span class="slider round"></span>
                                                                     </label>
                                                                     <div>Private Bathroom</div>
@@ -144,7 +143,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="switchwrapper">
                                                                     <label class="switch">
-                                                                        <asp:CheckBox ID="cbDryer" runat="server" />
+                                                                        <asp:CheckBox ID="cbWashDry" runat="server" />
                                                                         <span class="slider round"></span>
                                                                     </label>
                                                                     <div>Washer / Dryer</div>
@@ -182,7 +181,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="switchwrapper">
                                                                     <label class="switch">
-                                                                        <asp:CheckBox ID="cbHeating" runat="server" />
+                                                                        <asp:CheckBox ID="cbHVAC" runat="server" />
                                                                         <span class="slider round"></span>
                                                                     </label>
                                                                     <div>Heating / Air Conditioning</div>
@@ -195,7 +194,7 @@
                                                 </section>
                                                 <!--end of amenities-->
 
-                                                <button class="btn btn-info btn-block">Add Room</button>
+                                                <asp:Button ID="btnAddRoom" runat="server" Text="Add Room" class="btn btn-md btn-info btn-block" OnClick="btnAddRoom_Click" />
 
                                             </div>
                                         </div>

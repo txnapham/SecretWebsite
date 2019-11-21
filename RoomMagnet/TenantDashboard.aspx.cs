@@ -37,12 +37,12 @@ public partial class TenantDashboard : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Card.Text = String.Empty;
-        Card2.Text = String.Empty;
-        Card3.Text = String.Empty;
-        alert1.Text = String.Empty;
-        alert2.Text = String.Empty;
-        progressBar.Text = String.Empty;
+        Card.Text = "";
+        Card2.Text = "";
+        Card3.Text = "";
+        alert1.Text = "";
+        alert2.Text = "";
+        progressBar.Text = "";
 
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
@@ -85,7 +85,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                 String tenantName = reader["FirstName"].ToString();
                 String filename = reader["AccountImage"].ToString();
                 // No image uploaded (currently default image in S3)
-                if (filename == "") filename = "defaulttenantimg.jpg";
+                if (filename == "") filename = "noprofileimage.png";
                 // User dashboard dynamically updated using S3
                 StringBuilder tenantImage = new StringBuilder();
                 tenantImage

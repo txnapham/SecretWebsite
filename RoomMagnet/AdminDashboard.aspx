@@ -74,7 +74,7 @@
         
         <section>
             <div class="card-deck row">
-                <div class="col-sm-8 col-md-8 col-lg-8">
+                <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="card shadow-sm  mb-4">
                         <div class="card-body">
                             <h5 class="card-title">RoomMagnet Data</h5>

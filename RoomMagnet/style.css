@@ -2,9 +2,56 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap");
 
 
+
+.addmorePropButton {
+padding: 10%;
+}
+
+#ContentPlaceHolder1_RadioButtonList {
+    border: none;
+}
+
+    #ContentPlaceHolder1_RadioButtonList > tbody > tr:nth-child(1) > td:nth-child(1) > label {
+    font-size: 15px;
+    }
+
+
+
+
+#ContentPlaceHolder1_RadioButtonList > tbody > tr:nth-child(1) > td:nth-child(1) {
+    border-bottom: none;
+    padding-right: 50%;
+    margin-right: 60%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+}
+
+    #ContentPlaceHolder1_RadioButtonList > tbody > tr:nth-child(2) > td:nth-child(2) {
+        border-bottom: none;
+        padding-right: 60%;
+        font-family: "Montserrat", sans-serif;
+        font-size: 15px;
+    }
+
+    #ContentPlaceHolder1_RadioButtonList > tbody > tr:nth-child(2) > td:nth-child(1) {
+        border-bottom: none;
+        font-family: "Montserrat", sans-serif;
+        font-size: 15px;
+    }
+
+    #ContentPlaceHolder1_RadioButtonList > tbody > tr:nth-child(1) > td:nth-child(2) {
+        border-bottom: none;
+        font-family: "Montserrat", sans-serif;
+        font-size: 15px;
+    }
+
+
+
+
+
 .card-img-small {
-    width:auto;
-    height:7%;
+    width: auto;
+    height: 7%;
 }
 
 .btn-termsandConditions label {
@@ -111,7 +158,7 @@ div.container-fluid.homepageAbove {
 }
 
 .caption-headline-main {
-    padding-top: 170px;
+    padding-top: 185px;
     font-size: 50px;
     font-weight: bold;
     color: #577399;
@@ -654,7 +701,7 @@ input:checked + .slider:before {
     }
 
 .progress {
-    width: 60%;
+    width: 45%;
 }
 
 body > div.container-fluid.userDash.mb-5.pb-3 > div > div > div {
