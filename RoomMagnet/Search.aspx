@@ -16,9 +16,6 @@
         }
     </style>
 
-   
-
-
     <script>
         var map;
         function initMap()
@@ -31,19 +28,6 @@
                     zoom: 8
                 });
         }
-
-        function recenter() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                zoom: 6
-            });
-
-            var latlng = new google.maps.LatLng(100, -78.9);
-            map.setCenter(latlng);
-        });
-
-        $('<%=btnSearch.ClientID %>').addEventListener('click', recenter() {
-        });
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNcHEQpOGd14rKFMgFTgbH-fZS2dD1UBw&callback=initMap"
