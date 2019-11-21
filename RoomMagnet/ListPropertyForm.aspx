@@ -614,7 +614,7 @@
             <div class="form-group">
                 <h5>Upload room images here:</h5>
                 <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="False" />
-                <asp:Button runat="server" ID="FilesUpload" Text="Save to Room" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
+                <asp:Button runat="server" ID="FilesUpload" Text="Save to Property" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
                 <br />
                 <br />
                 <asp:Label runat="server" ID="StatusLabel" Text="Upload status: " />
@@ -629,7 +629,7 @@
 
 
 
-            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="true" OnClick="btnListProperty_Click" />
+            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Property" CausesValidation="true" OnClick="btnListProperty_Click" />
         </div>
         
         <script>
