@@ -52,29 +52,6 @@ public partial class ListPropertyForm : System.Web.UI.Page
 
             txtCountry.Text = "US";
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-
-
-            //Select Statements properties
-            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
-            //Connections
-            select.Connection = sc;
-            sc.Open();
-            //Populating Tenant Part of Host Dashboard
-            System.Data.SqlClient.SqlDataReader readerHost = select.ExecuteReader();
-            while (readerHost.Read())
-            {
-                String tenantName = readerHost["FirstName"].ToString();
-                String filename = readerHost["AccountImage"].ToString();
-                // No image uploaded (currently default image in S3)
-                if (filename == "") filename = "defaulttenantimg.jpg";
-                // User dashboard dynamically updated using S3
-                StringBuilder tenantImage = new StringBuilder();
-                tenantImage
-                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">");
-                HostCard.Text += tenantImage.ToString();
-            }
-            sc.Close();
         }
         else
         {
@@ -187,11 +164,14 @@ public partial class ListPropertyForm : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand imageLink = new System.Data.SqlClient.SqlCommand();
         imageLink.Connection = sc;
         sc.Open();
+        int arrayImageId = 0;
+
+
 
         for (int i = 0; i < PropertyRoomImages.propertyRoomImagesArray.Count; i++)
         {
+            arrayImageId = Convert.ToInt32(PropertyRoomImages.propertyRoomImagesArray[i].ToString());
             imageLink.CommandText = "UPDATE PropertyImages SET PropertyID = @propID WHERE ImagesID = @insertImage";
-            string arrayImageId = PropertyRoomImages.propertyRoomImagesArray[i].ToString();
             imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@insertImage", arrayImageId));
             imageLink.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propID", propertyID));
             imageLink.ExecuteNonQuery();
