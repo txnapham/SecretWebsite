@@ -236,7 +236,7 @@
                                         </div>
 
 
-
+<asp:Button ID="Button1" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="true" OnClick="btnListProperty_Click" />
 
                                     </div>
 
@@ -635,11 +635,8 @@
 
 
             <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="true" OnClick="btnListProperty_Click" />
-
-
-
-
         </div>
+        
         <script>
         function validateTerms(source, arguments) {
             var $c = $('#<%= cbAgreement.ClientID %>');
