@@ -109,6 +109,8 @@
                         <button type="button" class="btn btn-light createLeaseButton btn-block" href="HostCreateLease.aspx">Create Lease with TENANT NAME</button>
 
                         <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
+                        <a href="TenantVideoChat.aspx" class="btn btn-light vidChat btn-block">Video Chat</a>
+
                     </div>
                 </div>
             </div>
