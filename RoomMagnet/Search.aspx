@@ -391,7 +391,11 @@
         <!--BEGINNING OF HOUSE LISTINGS-->
         <section>
             <div class="row px-3 py-3">
-                <asp:Literal ID="Card1" runat="server" Mode="Transform"></asp:Literal>
+                <asp:Literal ID="mainResults" runat="server" Mode="Transform"></asp:Literal>
+            </div>
+            <asp:Literal ID="divider" runat="server" Mode="Transform"></asp:Literal>
+            <div class="row px-3 py-3">
+                <asp:Literal ID="otherResults" runat="server" Mode="Transform"></asp:Literal>
             </div>
         </section>
 

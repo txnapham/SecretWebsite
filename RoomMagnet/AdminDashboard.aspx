@@ -19,8 +19,6 @@
         <!--END OF USER DASH-NAV-->
     </div>
 
-
-
     <div class="container-fluid">
         <!--Cards start here-->
         <section>
@@ -29,7 +27,7 @@
                     <div class="card  shadow-sm  mb-4">
                         <div class="card-body">
                             <h5 class="card-title">Registered Hosts</h5>
-                            <ul><asp:literal id="Card" runat="server" mode="Transform"></asp:literal></ul>
+                            <ul><asp:literal id="RegHost" runat="server" mode="Transform"></asp:literal></ul>
                             <a href="RegisteredHosts.aspx" class="btn btn-info">View more</a>
                         </div>
                     </div>
@@ -40,7 +38,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Registered Tenants</h5>
                             <ul>
-                                <asp:literal id="Card2" runat="server" mode="Transform"></asp:literal>
+                                <asp:literal id="RegTenant" runat="server" mode="Transform"></asp:literal>
                             </ul>
                             <a href="RegisteredTenants.aspx" class="btn btn-info">View more</a>
                         </div>
@@ -51,27 +49,14 @@
                     <div class="card  shadow-sm  mb-4">
                         <div class="card-body">
                             <h5 class="card-title">Intended Leases</h5>
-                            <ul><asp:literal id="Card3" runat="server" mode="Transform"></asp:literal></ul>
+                            <ul><asp:literal id="IntLease" runat="server" mode="Transform"></asp:literal></ul>
                             <a href="ViewLeases.aspx" class="btn btn-info">View more</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <%--<section>
-            <div class="card  shadow-sm  mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">RoomMagnet Data</h5>
-                    <ul>
-                        <asp:literal id="Card4" runat="server" mode="Transform"></asp:literal>
-                        <asp:literal id="Card5" runat="server" mode="Transform"></asp:literal>
-                    </ul>
-                    <a href="#" class="btn btn-info">View more</a>
-                </div>
-            </div>
-        </section>--%>
-        
+     
         <section>
             <div class="card-deck row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
@@ -79,8 +64,8 @@
                         <div class="card-body">
                             <h5 class="card-title">RoomMagnet Data</h5>
                             <ul>
-                                <asp:literal id="Card4" runat="server" mode="Transform"></asp:literal>
-                                <asp:literal id="Card5" runat="server" mode="Transform"></asp:literal>
+                                <asp:literal id="UserCount" runat="server" mode="Transform"></asp:literal>
+                                <asp:literal id="LeaseCount" runat="server" mode="Transform"></asp:literal>
                             </ul>
 
                             <a href="#" class="btn btn-info">View more</a>
@@ -105,7 +90,8 @@
                                     <param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' />
                                     <param name='display_count' value='yes' /><param name='filter' value='publish=yes' />
                                 </object>
-                            </div>                
+                            </div>
+                            
                             <script type='text/javascript'>                    
                                 var divElement = document.getElementById('viz1574151971348');
                                 var vizElement = divElement.getElementsByTagName('object')[0];
@@ -152,15 +138,7 @@
                     </div>
                 </div>
             </div>
-
         </section>
-
-                <div>
-            
-        </div>
-
-
-
     </div>
     <!--END OF DASHBOARD CARDS-->
 </asp:Content>

@@ -139,7 +139,8 @@ public partial class TenantEditProfile : System.Web.UI.Page
 
         System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
         update.Connection = sc;
-        update.CommandText = "UPDATE Account SET PhoneNumber = @number, Email = @email, HomeNumber = @HouseNbr, Street = @street, City = @city, HomeState = @state, Country = @country, Zip = @zip WHERE AccountID = @accountID;";
+        update.CommandText = "UPDATE Account SET PhoneNumber = @number, Email = @email, HomeNumber = @HouseNbr, Street = @street, City = @city, HomeState = @state, " +
+            "Country = @country, Zip = @zip WHERE AccountID = @accountID;";
         update.Parameters.Add(new SqlParameter("@number", txtPhone.Text));
         update.Parameters.Add(new SqlParameter("@email", txtEmail.Text));
         update.Parameters.Add(new SqlParameter("@HouseNbr", this.txtHouseNum.Text));
@@ -272,20 +273,28 @@ public partial class TenantEditProfile : System.Web.UI.Page
             NonSmoker = 0;
         }
         sc.Open();
-        System.Data.SqlClient.SqlCommand updateChar = new System.Data.SqlClient.SqlCommand();
-        updateChar.Connection = sc;
 
-        updateChar.CommandText = "Update Characteristics SET " +"Extrovert="+ Extrovert + ", " + "Introvert="+
-            Introvert + ", " +"NonSmoker="+ NonSmoker + ", " + "EarlyRiser="+EarlyR + ", " +"NightOwl="+ Night + ", " +"TechSavvy="+ TechSavvy + ", " +"FamilyOriented="
-            + Family +", " +"English="+ English + ", " +"Spanish="+ Spanish + ", " +"Mandarin="+ Mandarin + ", " +"Japanese=" +Japanese + ", " +"German=" +German + 
-            ", " +"French=" +French +"Where "+"AccountID=" + Session["AccountId"].ToString() + ";";
+        System.Data.SqlClient.SqlCommand charCheck = new System.Data.SqlClient.SqlCommand();
+        System.Data.SqlClient.SqlCommand charInsertUpdate = new System.Data.SqlClient.SqlCommand();
+        charCheck.Connection = sc;
+        charInsertUpdate.Connection = sc;
 
-        updateChar.ExecuteNonQuery();
-        sc.Close();
-        Response.Redirect("TenantDashboard.aspx");
+        charCheck.CommandText = "SELECT COUNT(*) FROM Characteristics WHERE AccountID =" + Session["AccountId"].ToString();
+        int charExist = (int)charCheck.ExecuteScalar();
 
-
-
+        if (charExist == 0)
+        {
+            charInsertUpdate.CommandText = "INSERT into Characteristics Values(" + Convert.ToInt32(HttpContext.Current.Session["AccountId"].ToString())
+            + ", " + Extrovert + ", " + Introvert + ", " + NonSmoker + ", " + EarlyR + ", " + Night + ", " + TechSavvy + ", " + Family +
+            ", " + English + ", " + Spanish + ", " + Mandarin + ", " + Japanese + ", " + German + ", " + French + ");";
+        }
+        else if (charExist == 1)
+        {
+            charInsertUpdate.CommandText = "Update Characteristics SET " + "Extrovert=" + Extrovert + ", " + "Introvert=" +
+            Introvert + ", " + "NonSmoker=" + NonSmoker + ", " + "EarlyRiser=" + EarlyR + ", " + "NightOwl=" + Night + ", " + "TechSavvy=" + TechSavvy + ", " + "FamilyOriented="
+            + Family + ", " + "English=" + English + ", " + "Spanish=" + Spanish + ", " + "Mandarin=" + Mandarin + ", " + "Japanese=" + Japanese + ", " + "German=" + German +
+            ", " + "French=" + French + "Where " + "AccountID=" + Session["AccountId"].ToString() + ";";
+        }
     }
 
     protected void btnChangePassword_Click(object sender, EventArgs e)
