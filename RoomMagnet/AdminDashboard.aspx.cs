@@ -78,7 +78,13 @@ public partial class AdminDashboard : System.Web.UI.Page
             selectLeases.CommandText = "SELECT COUNT(*) FROM Lease;";
             int leaseCount = (int)selectLeases.ExecuteScalar();
 
+            //Populate Dashboard with Admin Name
+            string userName = selectUserName.ExecuteScalar().ToString();
 
+            //StringBuilder
+            StringBuilder nameCard = new StringBuilder();
+            nameCard.Append("<a href =\"#\" class=\"tenantdashlist\">" + "Welcome, " + userName + "</a>");
+            UserNameCard.Text += nameCard.ToString();
 
             //Populate Dashboard with Host Info 
             System.Data.SqlClient.SqlDataReader reader = selectHost.ExecuteReader();
@@ -133,20 +139,6 @@ public partial class AdminDashboard : System.Web.UI.Page
             StringBuilder myCard5 = new StringBuilder();
             myCard5.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Number of Leases: " + leaseCount + "</a></li>");
             LeaseCount.Text += myCard5.ToString();
-
-
-            ////Populate Dashboard with Admin Name
-            //System.Data.SqlClient.SqlDataReader nameReader = selectUserName.ExecuteReader();
-            //while (nameReader.Read())
-            //{
-            //    String firstName = nameReader["FirstName"].ToString();
-
-            //    //StringBuilder
-            //    StringBuilder nameCard = new StringBuilder();
-            //    nameCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Welcome, " + firstName + "</a></li>");
-            //    UserNameCard.Text += nameCard.ToString();
-            //}
-            //nameReader.Close();
         }
         else
         {
