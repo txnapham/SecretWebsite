@@ -130,9 +130,13 @@ public partial class Search_Tenant : System.Web.UI.Page
                 .Append("   </div>")
                 .Append("</div>");
 
+
                 name.Text += myCard.ToString();
                 resultCount++;
-            }
+                reader.Close();
+                Session["Search"] = null;            
+                }
+                
             reader.Close();
             Session["Search"] = null;
         }

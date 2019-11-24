@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -76,7 +75,7 @@ public partial class HostDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder hostImage = new StringBuilder();
                 hostImage
-                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">")
+                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-header img-fluid\" width=\"30%\" height=\"auto\">")
                     .Append("                Welcome " + tenantName + "!");
                 HostCard.Text += hostImage.ToString();
             }
@@ -243,8 +242,7 @@ public partial class HostDashboard : System.Web.UI.Page
                         .Append("                    <p>Hello I'm interested in your property!</p>")
                         .Append("                  </div>")
                         .Append("               </div>")
-                        .Append("            </div>")
-                        .Append("       </div>");
+                        .Append("            </div>");
 
                     Card3.Text += myCard.ToString();
                     count++;

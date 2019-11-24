@@ -24,8 +24,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
-<%--                    <li class="breadcrumb-item"><a href="ListedProperties.aspx" class="breadLink">Rooms</a></li>--%>
-                    <li class="breadcrumb-item active" aria-current="page">List Room</li>
+<%--                    <li class="breadcrumb-item"><a href="ListedProperties.aspx" class="breadLink">Properties</a></li>--%>
+                    <li class="breadcrumb-item active" aria-current="page">List Property</li>
                 </ol>
             </nav>
         </section>
@@ -37,7 +37,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>List Room</h3>
+                        <h3>List Property</h3>
                     </div>
                 </div>
             </section>
@@ -614,7 +614,7 @@
             <div class="form-group">
                 <h5>Upload room images here:</h5>
                 <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="False" />
-                <asp:Button runat="server" ID="FilesUpload" Text="Save to Room" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
+                <asp:Button runat="server" ID="FilesUpload" Text="Save to Property" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
                 <br />
                 <br />
                 <asp:Label runat="server" ID="StatusLabel" Text="Upload status: " />
@@ -629,7 +629,7 @@
 
 
 
-            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="true" OnClick="btnListProperty_Click" />
+            <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Property" CausesValidation="true" OnClick="btnListProperty_Click" />
         </div>
         
         <script>

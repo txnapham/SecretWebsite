@@ -112,7 +112,7 @@
                         <div class="chat-list">
                             <div class="chat-people">
                                  <div class="chat-img">
-                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/alex-knight-2EJCSULRwC8-unsplash.jpg" class="rounded-circle img-fluid" CustomParameter="15" onClick= "btnSubmit_Click"/>
+                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/robot-man.png" class="rounded-circle img-fluid" CustomParameter="15" onClick= "btnSubmit_Click"/>
                             </div>  
                         <div class="chat-ib">
                         <h5>Chat Bot</h5>
@@ -147,6 +147,8 @@
                         
 
                         <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
+                        
+                        <a href="HostVideoChat.aspx" class="btn btn-light vidChat btn-block">Video Chat</a>
                     </div>
                 </div>
             </div>
