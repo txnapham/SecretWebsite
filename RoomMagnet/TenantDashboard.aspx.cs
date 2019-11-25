@@ -37,15 +37,15 @@ public partial class TenantDashboard : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Card.Text = "";
-        Card2.Text = "";
-        Card3.Text = "";
-        alert1.Text = "";
-        alert2.Text = "";
-        progressBar.Text = "";
-
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
+            TenantCard.Text = "";
+            favProp.Text = "";
+            hostMsg.Text = "";
+            alert1.Text = "";
+            alert2.Text = "";
+            progressBar.Text = "";
+
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
             //Selecting from Account
@@ -91,7 +91,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                 tenantImage
                 .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-header img-fluid\" width=\"30%\" height=\"auto\">")
                 .Append("                Welcome " + tenantName + "!");
-                Card.Text += tenantImage.ToString();
+                TenantCard.Text += tenantImage.ToString();
             }
             sc.Close();
 
@@ -162,11 +162,13 @@ public partial class TenantDashboard : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand messageSelect = new System.Data.SqlClient.SqlCommand();
             select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh, I.images FROM Property LEFT OUTER JOIN PropertyImages I ON Property.PropertyID = I.PropertyID WHERE Property.PropertyID in " +
             "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
-            messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, max(Message.Date) as Date FROM Message INNER JOIN FavoritedProperties ON " +
-                "Message.FavPropID = FavoritedProperties.FavPropID INNER JOIN Property ON FavoritedProperties.PropertyID = Property.PropertyID INNER JOIN Host ON " +
-                "Property.HostID = Host.HostID INNER JOIN Account ON Host.HostID = Account.AccountID INNER JOIN FavoritedTenants ON Message.FavTenantID = " +
-                "FavoritedTenants.FavTenantID AND Host.HostID = FavoritedTenants.HostID where MessageType = 0 and FavoritedTenants.TenantID = " + accountID + " group by " +
-                "Account.FirstName, Account.LastName";
+            messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, Account.AccountImage, MAX(Message.Date) as Date FROM FavoritedTenants FULL OUTER JOIN Message " +
+                 "ON FavoritedTenants.FavTenantID = Message.FavTenantID FULL OUTER JOIN Host ON FavoritedTenants.HostID = Host.HostID FULL OUTER JOIN Account " +
+                 "ON Host.HostID = Account.AccountID FULL OUTER JOIN Tenant " +
+                 "ON FavoritedTenants.TenantID = Tenant.TenantID AND Account.AccountID = Tenant.TenantID " +
+                 "WHERE MessageType = 0 and FavoritedTenants.TenantID = " + accountID + " " +
+                 "GROUP BY Account.FirstName, Account.LastName, Account.AccountImage";
+
             select.Connection = sc;
             messageSelect.Connection = sc;
             sc.Open();
@@ -200,7 +202,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                     .Append("")
                     .Append("                    </div>")
                     .Append("</div>");
-                    Card2.Text += myCard.ToString();
+                    favProp.Text += myCard.ToString();
                 }
             }
             readerProperty.Close();
@@ -213,13 +215,15 @@ public partial class TenantDashboard : System.Web.UI.Page
                     String firstName = rdr["FirstName"].ToString();
                     String LastName = rdr["LastName"].ToString();
                     String date = rdr["Date"].ToString();
+                    String filename = rdr["AccountImage"].ToString();
+                    if (filename == "") filename = "noprofileimage.png";
 
                     StringBuilder myCard = new StringBuilder();
                     myCard
                         .Append(" <div class=\"chat-list\">")
                         .Append("            <div class=\"chat-people\">")
                         .Append("                <div class=\"chat-img\">")
-                        .Append("                    <img src = \"images/bettyBrown.png\" class=\"rounded-circle img-fluid\">")
+                        .Append("                    <img src = \"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\"rounded-circle img-fluid\">")
                         .Append("                </div>")
                         .Append("                <div class=\"chat-ib\">")
                         .Append("                    <h5>" + firstName + " " + LastName + "</h5>")
@@ -227,7 +231,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                         .Append("                </div>")
                         .Append("            </div>")
                         .Append("        </div>");
-                    Card3.Text += myCard.ToString();
+                    hostMsg.Text += myCard.ToString();
                 }
             }
             rdr.Close();

@@ -164,21 +164,16 @@
                                     <%--<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#updatePassword">Change Password</button>--%>
                                     <asp:Button ID="btnChangePassword" class="btn btn-info btn-block" runat="server" Text="Change Password" ValidationGroup='passwordGroup' OnClick="btnChangePassword_Click"/>
                                     <asp:Label ID="lblPrev" runat="server" ForeColor="Red"></asp:Label>
-                                
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </section>
 
-
+        <br />
         <section>
-            
             <div class="row pt-3">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <h5>Please select your preferred language:</h5>
@@ -186,13 +181,11 @@
             </div>
         </section>
 
-
         <section>
             <div class="row px-5 py-3">
                 <!--LANGUAGE FILTER START HERE-->
 
                 <div class="col-sm-4 col-md-4 col-lg-4">
-
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
@@ -212,12 +205,10 @@
                             <div>Spanish</div>
                         </div>
                     </div>
-
                 </div>
 
 
                 <div class="col-sm-4 col-md-4 col-lg-4">
-
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
@@ -237,11 +228,9 @@
                             <div>Japanese</div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-sm-4 col-md-4 col-lg-4">
-
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
@@ -261,16 +250,10 @@
                             <div>French</div>
                         </div>
                     </div>
-
                 </div>
-
-
-
-
                 <!--END OF LANGUAGE FILTER-->
             </div>
         </section>
-
 
         <section>
             <div class="row">
@@ -356,15 +339,9 @@
                             <div>Tech-Savvy</div>
                         </div>
                     </div>
-
                 </div>
 
-
-
-
-
                 <div class="col-sm-4 col-md-4 col-lg-4">
-
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="switchwrapper">
                             <label class="switch">
@@ -374,26 +351,11 @@
                             <div>Non-Smoker</div>
                         </div>
                     </div>
-
-
-
                 </div>
-
-
-
                 <!--END OF PERSONALITY FILTER-->
             </div>
         </section>
-
-
-
-
-
-
     </div>
-
     <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-info btn-lg btn-block" OnClick="btnSave_Click" />
-
-
 </asp:Content>
 

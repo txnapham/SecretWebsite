@@ -125,7 +125,7 @@ public partial class Search : System.Web.UI.Page
 
         else
         {
-            txtSearch.Text = "That Search Did Not Display Results";
+            //Label for no search results
         }
 
         return cardString;

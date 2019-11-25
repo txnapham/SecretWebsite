@@ -36,15 +36,16 @@ public partial class HostDashboard : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        Card.Text = "";
-        Card2.Text = "";
-        Card3.Text = "";
-        alert1.Text = "";
-        alert2.Text = "";
-        progressBar.Text = "";
-
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
+            HostCard.Text = "";
+            properties.Text = "";
+            currTen.Text = "";
+            favTen.Text = "";
+            alert1.Text = "";
+            alert2.Text = "";
+            progressBar.Text = "";
+
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
             //Select Statements properties
@@ -152,7 +153,7 @@ public partial class HostDashboard : System.Web.UI.Page
             //Property Select
             selectProp.CommandText = "SELECT HouseNumber, Street FROM Property WHERE PropertyID in (SELECT propertyID FROM Property WHERE HostID = " + accountID + ");";
             //Message Center Tenant Populating once they favorite the current host's room
-            favoriteTenant.CommandText = "select firstName, LastName,AccountID,BirthDate from account where AccountID in (select tenantID from tenant where TenantID in " +
+            favoriteTenant.CommandText = "select firstName, LastName,AccountID,BirthDate, AccountImage from account where AccountID in (select tenantID from tenant where TenantID in " +
                 "(select tenantID from FavoritedProperties where PropertyID in (select PropertyID from property where hostID =" + accountID + ")));";
             //Select statement to get fsvorite tenantID to check if they exist already
             tenantDash.CommandText = "select accountID from account where AccountID in (select tenantID from Tenant where TenantID in (select tenantID from " +
@@ -182,7 +183,7 @@ public partial class HostDashboard : System.Web.UI.Page
                 StringBuilder myCard = new StringBuilder();
                 myCard
                 .Append("<li><a href=\"PropertyDetails.aspx\" class=\"tenantdashlist\">" + firstName + " " + lastName + "</a></li>");
-                Card.Text += myCard.ToString();
+                currTen.Text += myCard.ToString();
             }
             reader.Close();
             //Populating Property Part of Host Dashboard
@@ -192,10 +193,10 @@ public partial class HostDashboard : System.Web.UI.Page
                 String HouseNum = rdr["HouseNumber"].ToString();
                 String Street = rdr["Street"].ToString();
 
-                StringBuilder myCard2 = new StringBuilder();
-                myCard2
+                StringBuilder currentTenant = new StringBuilder();
+                currentTenant
                 .Append("<li><a href=\"#\" class=\"tenantdashlist\">" + HouseNum + " " + Street + "</a></li>");
-                Card2.Text += myCard2.ToString();
+                properties.Text += currentTenant.ToString();
             }
             rdr.Close();
             //Populating Message Center Matches
@@ -207,6 +208,8 @@ public partial class HostDashboard : System.Web.UI.Page
                 String lastName = drd["LastName"].ToString();
                 int tenantID = Convert.ToInt16(drd["AccountID"].ToString());
                 String bday = drd["BirthDate"].ToString();
+                String imgURL = drd["AccountImage"].ToString();
+                if (imgURL == "") imgURL = "noprofileimage.png";
 
                 //Get Age
                 DateTime birthDay = Convert.ToDateTime(bday);
@@ -236,7 +239,7 @@ public partial class HostDashboard : System.Web.UI.Page
                     myCard
                         .Append("<div class=\"chat-list\">")
                         .Append("           <div class=\"chat-people\">")
-                        .Append("               <div class=\"chat-img\"> <img src = \"images/rebeccajames.png\" class=\"rounded-circle img-fluid\"></div>")
+                        .Append("               <div class=\"chat-img\"> <img src =\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + imgURL + "\" class=\"rounded-circle img-fluid\"></div>")
                         .Append("                <div class=\"chat-ib\">")
                         .Append("                    <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + ", Age: " + age + "</a></h5>")
                         .Append("                    <p>Hello I'm interested in your property!</p>")
@@ -244,7 +247,7 @@ public partial class HostDashboard : System.Web.UI.Page
                         .Append("               </div>")
                         .Append("            </div>");
 
-                    Card3.Text += myCard.ToString();
+                    favTen.Text += myCard.ToString();
                     count++;
                 }
             }
