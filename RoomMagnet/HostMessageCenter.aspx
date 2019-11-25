@@ -11,16 +11,6 @@
         PageMethods.CreateLease();
     };
 </script>
-    <!--USER DASH-NAV-->
-    <div class="container-fluid userDash mb-2 pb-3">
-        <div class="navbar navbar-light">
-            <p><asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal></p>
-            <div class="progress" style="height: 30px;">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 66%; color: #fff; font-size: 15px; font-weight: bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Profile Completion</div>
-            </div>
-        </div>
-    </div>
-    <!--END OF USER DASH-NAV-->
 
     <div class="container-fluid px-5">
         <!--BREADCRUMBS-->
@@ -155,8 +145,6 @@
                 </div>
             </div>
         </section>
-
     </div>
-
 </asp:Content>
 

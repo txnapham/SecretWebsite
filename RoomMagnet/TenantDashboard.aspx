@@ -8,10 +8,10 @@
     <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
-            <p>
+            <u1>
                 <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>
-            </p>
-            <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
+                <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
+            </u1>
         </div>
     </div>
     <!--END OF USER DASH-NAV-->

@@ -14,14 +14,12 @@
     <!--USER DASH-NAV-->
     <div class="container-fluid userDash  mb-2 pb-3">
         <div class="navbar navbar-light ">
-                <p>
+            <u1>
                     <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
-                </p>
-<%--                <div class="progress" style="height: 30px;">--%>
                     <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
-               <%-- </div>--%>
-            </div>
+            </u1>
         </div>
+    </div>
     <!--END OF USER DASH-NAV-->
 
     <!--reminders-->
@@ -124,15 +122,10 @@
                                                                     <div>Washer / Dryer</div>
                                                                 </div>
                                                             </div>
-
-
-
-
                                                         </div>
 
 
                                                         <div class="col-md-6">
-
                                                             <div class="col-md-12">
                                                                 <div class="switchwrapper">
                                                                     <label class="switch">
@@ -162,15 +155,12 @@
                                                                     <div>Heating / Air Conditioning</div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
-
                                                 </section>
                                                 <!--end of amenities-->
 
                                                 <asp:Button ID="btnAddRoom" runat="server" Text="Add Room" class="btn btn-md btn-info btn-block" OnClick="btnAddRoom_Click" />
-
                                             </div>
                                         </div>
                                     </div>
@@ -201,9 +191,7 @@
                         </div>
                     </div>
                     <!--END OF MESSAGE MOD-->
-                
-
-                
+                                
                     <!--END OF APPOINTMENT MOD-->
                 </div>
                     <div class="col-md-6">
@@ -225,8 +213,6 @@
                     </div>
                     <!--END OF TENANT/HOST MOD-->
 
-
-
                     <!--APPOINTMENT MOD-->
                     <div class="col-md-12">
                         <div class="card  shadow-sm  mb-4">
@@ -242,9 +228,7 @@
                                             <p class="col-sm p-1 text-center">Wed</p>
                                             <p class="col-sm p-1 text-center">Thurs</p>
                                             <p class="col-sm p-1 text-center">Fri</p>
-                                            <p class="col-sm p-1 text-center">
-                                                Sat</>
-                           
+                                            <p class="col-sm p-1 text-center">Sat</p>
                                         </div>
                                     </div>
                                     <div class="row border border-right-0 border-bottom-0">
@@ -632,7 +616,7 @@
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
             </div>
         </section>
     </div>

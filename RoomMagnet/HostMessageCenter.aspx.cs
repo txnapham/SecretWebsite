@@ -96,10 +96,10 @@ public partial class HostMessageCenter : System.Web.UI.Page
 
         //Message
         selectMessage.CommandText = "select messageContent, date,MessageType from message where (messageType = 1) and FavTenantID in " +
-            "(select FavTenantID from FavoritedTenants where TenantID = " + tenantID + ")" +
+            "(select FavTenantID from FavoritedTenants where TenantID = " + tenantID + " AND HostID = " + Session["AccountId"].ToString() + ")" +
             " Union " +
             "select messageContent, date,MessageType from message where (messageType = 0) and FavTenantID in " +
-            "(select FavTenantID from FavoritedTenants where TenantID =" + tenantID + ")" +
+            "(select FavTenantID from FavoritedTenants where TenantID =" + tenantID + " AND HostID = " + Session["AccountId"].ToString() + ")" +
             " order by date; ";
         imgSelect.CommandText = "SELECT AccountImage FROM Account WHERE AccountID = " + tenantID;
 
@@ -107,7 +107,15 @@ public partial class HostMessageCenter : System.Web.UI.Page
         imgSelect.Connection = sc;
         sc.Open();
 
-        String accountImg = (String)imgSelect.ExecuteScalar();
+        String accountImg = "";
+        if(imgSelect.ExecuteScalar() is System.DBNull)
+        {
+            accountImg = "noprofileimage.png";
+        }
+        else
+        {
+            accountImg = (string)imgSelect.ExecuteScalar();
+        }
 
         System.Data.SqlClient.SqlDataReader reader = selectMessage.ExecuteReader();
         while (reader.Read())
