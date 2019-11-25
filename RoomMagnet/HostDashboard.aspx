@@ -12,7 +12,7 @@
     };
 </script>
     <!--USER DASH-NAV-->
-    <div class="container-fluid userDash  mb-2 pb-3">
+    <div class="container-fluid  userDash mb-2 pb-3">
         <div class="navbar navbar-light ">
                 <p>
                     <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
@@ -21,7 +21,7 @@
                     <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
                 </div>
             </div>
-        </div>
+    </div>
     <!--END OF USER DASH-NAV-->
 
     <!--reminders-->
