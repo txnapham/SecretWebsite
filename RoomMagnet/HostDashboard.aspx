@@ -17,9 +17,9 @@
                 <p>
                     <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
                 </p>
-                <div class="progress" style="height: 30px;">
+<%--                <div class="progress" style="height: 30px;">--%>
                     <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
-                </div>
+               <%-- </div>--%>
             </div>
     </div>
     <!--END OF USER DASH-NAV-->
@@ -176,12 +176,8 @@
                                     </div>
                                 </div>
 
-
-
-
-
                                 <ul>
-                                    <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
+                                    <asp:Literal ID="properties" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>
                                 <!--BUTTON-->
                                 <!--END OF BUTTON-->
@@ -190,17 +186,12 @@
                     </div>
                     <!--END OF PROPERTIES MOD-->
 
-
                     <!--message mod-->
                     <div class="col-md-12">
                         <div class="card shadow-sm  mb-4">
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">Message Center</h5>
-
-                                
-                                    <asp:Literal ID="Card3" runat="server" Mode="Transform"></asp:Literal>
-                                
-
+                                    <asp:Literal ID="favTen" runat="server" Mode="Transform"></asp:Literal>
                                 <!--BUTTON-->
                                 <div class=" text-center pt-3 pb-3">
                                     <a href="HostMessageCenter.aspx" class="btn btn-info">View Messages</a>
@@ -222,7 +213,7 @@
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">Current Tenants</h5>
                                 <ul>
-                                    <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
+                                    <asp:Literal ID="currTen" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>
                                 <!--BUTTON-->
                                 <div class=" text-center">

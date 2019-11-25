@@ -37,23 +37,22 @@ public partial class AdminDashboard : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 1)
-            {
+        {
             //Select Statement for Host and Tenant to Populate on Dash
+            System.Data.SqlClient.SqlCommand selectUserName = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectTenant = new System.Data.SqlClient.SqlCommand();
-            System.Data.SqlClient.SqlCommand selectIntendedHostLease = new System.Data.SqlClient.SqlCommand();
-            System.Data.SqlClient.SqlCommand selectIntendedTenantLease = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand selectIntendedLease = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectUsers = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectLeases = new System.Data.SqlClient.SqlCommand();
-            System.Data.SqlClient.SqlCommand selectUserName = new System.Data.SqlClient.SqlCommand();
+
             //Connections
+            selectUserName.Connection = sc;
             selectHost.Connection = sc;
             selectTenant.Connection = sc;
-            selectIntendedHostLease.Connection = sc;
-            selectIntendedTenantLease.Connection = sc;
+            selectIntendedLease.Connection = sc;
             selectUsers.Connection = sc;
             selectLeases.Connection = sc;
-            selectUserName.Connection = sc;
             sc.Open();
 
             //User Name Select
@@ -65,12 +64,11 @@ public partial class AdminDashboard : System.Web.UI.Page
             //Tenant Select 
             selectTenant.CommandText = "SELECT TOP(5) FirstName, LastName FROM Account WHERE (AccountType = 3);";
 
-            //Intended Host Lease Select
-            selectIntendedHostLease.CommandText = "SELECT TOP(5) firstName, LastName from account where AccountID in " +
-                "(select hostID from Host where hostID in (select HostID from lease)); ";
-            //Intended Tenant Lease Select
-            selectIntendedTenantLease.CommandText = "SELECT TOP(5) firstName, LastName from account where AccountID in " +
-                "(select tenantId from Tenant where tenantID in (select tenantID from lease));";
+            //Intented Lease: Hosts and Tenants
+            selectIntendedLease.CommandText = "SELECT TOP(5) A.FirstName as hostF, A.LastName as hostL, B.FirstName as tenantF, B.LastName as tenantL " +
+                "FROM Account A, Account B " +
+                "WHERE A.AccountID in (select hostID from Host where hostID in (select HostID from lease)) " +
+                "AND B.AccountID in (select tenantId from Tenant where tenantID in (select tenantID from lease))";
 
             //Select Number of Users 
             selectUsers.CommandText = "SELECT COUNT(*) FROM Account;";
@@ -80,7 +78,13 @@ public partial class AdminDashboard : System.Web.UI.Page
             selectLeases.CommandText = "SELECT COUNT(*) FROM Lease;";
             int leaseCount = (int)selectLeases.ExecuteScalar();
 
+            //Populate Dashboard with Admin Name
+            string userName = selectUserName.ExecuteScalar().ToString();
 
+            //StringBuilder
+            StringBuilder nameCard = new StringBuilder();
+            nameCard.Append("<a href =\"#\" class=\"tenantdashlist\">" + "Welcome, " + userName + "</a>");
+            UserNameCard.Text += nameCard.ToString();
 
             //Populate Dashboard with Host Info 
             System.Data.SqlClient.SqlDataReader reader = selectHost.ExecuteReader();
@@ -91,7 +95,7 @@ public partial class AdminDashboard : System.Web.UI.Page
                 //StringBuilder
                 StringBuilder myCard = new StringBuilder();
                 myCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + firstName + " " + lastName + "</a></li>");
-                Card.Text += myCard.ToString();
+                RegHost.Text += myCard.ToString();
             }
             reader.Close();
 
@@ -104,60 +108,41 @@ public partial class AdminDashboard : System.Web.UI.Page
                 //StringBuilder
                 StringBuilder myCard2 = new StringBuilder();
                 myCard2.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + firstName + " " + lastName + "</a></li>");
-                Card2.Text += myCard2.ToString();
+                RegTenant.Text += myCard2.ToString();
             }
             rdr.Close();
 
             //Reader to select intended leases
-            System.Data.SqlClient.SqlDataReader hostRdr = selectIntendedHostLease.ExecuteReader();
-            while (hostRdr.Read())
+            System.Data.SqlClient.SqlDataReader intLeaseRdr = selectIntendedLease.ExecuteReader();
+            while (intLeaseRdr.Read())
             {
-                String firstName = hostRdr["FirstName"].ToString();
-                String lastName = hostRdr["LastName"].ToString();
-                //StringBuilder
-                StringBuilder myCard3 = new StringBuilder();
-                myCard3.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Host: " + firstName + " " + lastName);
-                Card3.Text += myCard3.ToString();
-            }
-            hostRdr.Close();
+                String hostFName = intLeaseRdr["hostF"].ToString();
+                String hostLName = intLeaseRdr["hostL"].ToString();
+                String tenantFName = intLeaseRdr["tenantF"].ToString();
+                String tenantLName = intLeaseRdr["tenantL"].ToString();
 
-            System.Data.SqlClient.SqlDataReader tenantRdr = selectIntendedTenantLease.ExecuteReader();
-            while (tenantRdr.Read())
-            {
-                String firstName = tenantRdr["FirstName"].ToString();
-                String lastName = tenantRdr["LastName"].ToString();
                 //StringBuilder
                 StringBuilder myCard3 = new StringBuilder();
-                myCard3.Append(", Tenant: " + firstName + " " + lastName + "</a></li>");
-                Card3.Text += myCard3.ToString();
+                myCard3.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Host: " + hostFName + " " + hostLName + ", Tenant: " + tenantFName + " " + tenantLName);
+                IntLease.Text += myCard3.ToString();
             }
-            tenantRdr.Close();
+            intLeaseRdr.Close();
             sc.Close();
 
             //StringBuilder for Amount of Users
             StringBuilder myCard4 = new StringBuilder();
             myCard4.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Number of Users: " + userCount + "</a></li>");
-            Card4.Text += myCard4.ToString();
+            UserCount.Text += myCard4.ToString();
 
 
             //StringBuilder
             StringBuilder myCard5 = new StringBuilder();
             myCard5.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Number of Leases: " + leaseCount + "</a></li>");
-            Card5.Text += myCard5.ToString();
-
-
-            ////Populate Dashboard with Admin Name
-            //System.Data.SqlClient.SqlDataReader nameReader = selectUserName.ExecuteReader();
-            //while (nameReader.Read())
-            //{
-            //    String firstName = nameReader["FirstName"].ToString();
-
-            //    //StringBuilder
-            //    StringBuilder nameCard = new StringBuilder();
-            //    nameCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Welcome, " + firstName + "</a></li>");
-            //    UserNameCard.Text += nameCard.ToString();
-            //}
-            //nameReader.Close();
+            LeaseCount.Text += myCard5.ToString();
+        }
+        else
+        {
+            Response.Redirect("Home.aspx");
         }
     }
 
