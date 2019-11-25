@@ -9,19 +9,9 @@
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
-<%--                <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
-                Welcome USER,--%>
-<%--                <ul>--%>
-                    <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
-<%--                </ul>--%>
+                <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>
             </p>
-
-
-<%--            <div class="progress" style="height: 30px;">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 66%; color: #fff; font-size: 15px; font-weight: bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Profile Completion</div>
-            </div>--%>
             <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
-        </div>
         </div>
     </div>
     <!--END OF USER DASH-NAV-->
@@ -33,22 +23,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
-<%--                    <div class="alert alert-light alert-dismissible fade show" role="alert">
-                        <strong>Complete profile now!</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>--%>
                     <asp:Literal ID="alert1" runat="server" Mode="Transform"></asp:Literal>
                 </div>
 
                 <div class="col-md-12">
-<%--                    <div class="alert alert-light alert-dismissible fade show" role="alert">
-                        <strong>Complete background check now!</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>--%>
                     <asp:Literal ID="alert2" runat="server" Mode="Transform"></asp:Literal>
                 </div>
             </div>
@@ -56,15 +34,11 @@
     </div>
     <!--end of reminders-->
 
-
     <!--DASHBOARD CARDS-->
     <div class="container-fluid px-5">
-
         <section>
             <div class="row">
-
                 <div class="col-md-8">
-
                     <!--PROPERTIES-->
                     <div class="card  shadow-sm  mb-4">
                         <div class="card-body">
@@ -72,34 +46,28 @@
 
                             <ul>
                                 <div class="row px-4 py-3">
-                                    <asp:Literal ID="Card2" runat="server" Mode="Transform"></asp:Literal>
+                                    <asp:Literal ID="favProp" runat="server" Mode="Transform"></asp:Literal>
                                 </div>
                             </ul>
 
                             <div class=" text-center">
                                 <a href="FavoritedProperties.aspx" class="btn btn-info text-center">View more</a>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-md-4">
                     <div class="card  shadow-sm  mb-4">
                         <div class="card-body">
                             <h5 class="card-title dash-card-titles">Message Center</h5>
-
-                            <asp:Literal ID="Card3" runat="server" Mode="Transform"></asp:Literal>
-
+                            <asp:Literal ID="hostMsg" runat="server" Mode="Transform"></asp:Literal>
 
                             <div class=" text-center pt-3">
                                 <a href="TenantMessageCenter.aspx" class="btn btn-info">View Messages</a>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
 
