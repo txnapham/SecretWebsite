@@ -72,6 +72,7 @@ public partial class HostCreateLease : System.Web.UI.Page
             //Insert Statements
             System.Data.SqlClient.SqlCommand insertLease = new System.Data.SqlClient.SqlCommand();
             insertLease.Connection = sc;
+            //Insert into SQL Lease Table
             insertLease.CommandText = "INSERT INTO Lease Values(@MonthlyPrice, @EffectiveDate,@TerminationDate, @ModifiedDate, @TenantID, @HostID, @RoomID);";
             insertLease.Parameters.Add(new SqlParameter("@MonthlyPrice", rent));
             insertLease.Parameters.Add(new SqlParameter("@EffectiveDate", startDate));

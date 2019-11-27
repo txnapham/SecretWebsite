@@ -13,6 +13,7 @@ public partial class Home : System.Web.UI.Page
     SqlConnection sc = new SqlConnection(connection);
     protected void Page_PreInit(object sender, EventArgs e)
     {
+        //Allows which type of user to have access
         if (Session["type"] != null)
         {
             if ((int)Session["type"] == 1)
@@ -40,6 +41,7 @@ public partial class Home : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
+        //Search button for registered tenants
         Session["Search"] = txtSearch.Text;
         if (Session["type"] != null)
         {
@@ -50,6 +52,7 @@ public partial class Home : System.Web.UI.Page
         }
         else
         {
+            //Search for browsing 
             Response.Redirect("Search.aspx");
         }
     }

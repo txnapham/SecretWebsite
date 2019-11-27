@@ -148,10 +148,12 @@ public partial class AdminDashboard : System.Web.UI.Page
 
     protected void btnCreateAdmin_Click(object sender, EventArgs e)
     {
-
+        //SQL Statements
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         System.Data.SqlClient.SqlCommand checkEmailCount = new System.Data.SqlClient.SqlCommand();
+        //Connection
         sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        //Check email to see if what was entered is in database
         checkEmailCount.Parameters.Add(new SqlParameter("@email", HttpUtility.HtmlEncode(txtEmail.Text)));
         checkEmailCount.CommandText = "SELECT COUNT(*) FROM ACCOUNT WHERE EMAIL = @email";
         checkEmailCount.Connection = sc;
@@ -161,9 +163,10 @@ public partial class AdminDashboard : System.Web.UI.Page
 
         if(emailCount < 1)
         {
+            //SQL Insert Statement
             System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
             insert.Connection = sc;
-
+            //SQL Inserting new admin name, email, password into database
             insert.CommandText = "INSERT into Account VALUES (@fName, NULL, @lName, NULL, NULL, @email, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '" + DateTime.Now + "', 1); " +
                     "INSERT into Admin VALUES(@@Identity);" +
                     "INSERT into Password VALUES((SELECT MAX(AdminID) from Admin), @email, @password);";
@@ -172,10 +175,10 @@ public partial class AdminDashboard : System.Web.UI.Page
             insert.Parameters.Add(new SqlParameter("@lName", HttpUtility.HtmlEncode(txtLN.Text)));
             insert.Parameters.Add(new SqlParameter("@email", HttpUtility.HtmlEncode(txtEmail.Text)));
             insert.Parameters.Add(new SqlParameter("@password", PasswordHash.HashPassword(HttpUtility.HtmlEncode(txtPassword.Text))));
-
+            //Execute and Close SQL 
             insert.ExecuteNonQuery();
             sc.Close();
-
+            //Clearing fields back out
             txtFN.Text = "";
             txtLN.Text = "";
             txtEmail.Text = "";

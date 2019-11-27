@@ -37,12 +37,13 @@ public partial class HostMessageCenter : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Host Session 
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
             Message.Text = String.Empty;
-
+            //Connection 
             System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
-
+            //SQL Statement to Select Favorited Tenant onto Message Center
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             select.CommandText = "select accountID, firstName, LastName, AccountImage from account where AccountID in (select tenantID from tenant where TenantID in " +
                 "(select tenantID from FavoritedTenants where HostID = " + Session["AccountId"] + "));";
@@ -179,6 +180,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
         insert.Connection = sc;
         sc.Open();
+
         insert.CommandText = "INSERT INTO MESSAGE VALUES(@MessageContent,@MessageType,@Date,@FavTenantID);";
         insert.Parameters.Add(new SqlParameter("@MessageContent", message));
         insert.Parameters.Add(new SqlParameter("@MessageType", "0"));

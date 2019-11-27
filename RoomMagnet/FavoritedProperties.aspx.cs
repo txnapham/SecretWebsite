@@ -57,6 +57,7 @@ public partial class FavoritedProperties : System.Web.UI.Page
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
 
+                //String Builder and Adding Content to it 
                 StringBuilder myCard = new StringBuilder();
                 myCard
                 .Append("<div class=\"col-md-3\">")
