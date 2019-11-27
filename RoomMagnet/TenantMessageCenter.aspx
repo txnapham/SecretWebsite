@@ -4,24 +4,6 @@
     <title>RoomMagnet | Message Center</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <!--USER DASH-NAV-->
-<%--    <div class="container-fluid userDash mb-2 pb-3">
-        <div class="navbar navbar-light">
-            <p>
-                <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
-                Welcome USER,</p>
-
-
-            <div class="progress" style="height: 30px;">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 66%; color: #fff; font-size: 15px; font-weight: bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Profile Completion</div>
-            </div>
-
-        </div>
-
-
-    </div>--%>
-    <!--END OF USER DASH-NAV-->
-
 
     <div class="container-fluid px-5">
         <!--BREADCRUMBS-->
@@ -34,7 +16,6 @@
             </nav>
         </section>
         <!--END OF BREADCRUMBS-->
-
 
         <div>
             <h3>Messages</h3>
@@ -73,32 +54,39 @@
                             <h4>Recent</h4>
                         </div>
                     </div>
-
+                    
                     <div class="inbox-chat">
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                 <div class="chat-img">
-                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/robot-man.png" class="rounded-circle img-fluid" CustomParameter="0" onClick= "btnSubmit_Click"/>
-                            </div>  
-                        <div class="chat-ib">
-                       <h5>Chat Bot</h5>
-                                     <p>Hi I'm the Chat Bot I'm here for any questions you might have!</p>
+                        <asp:Repeater id="inboxRepeater" runat="server">
+                            <ItemTemplate>
+                                <div class="chat-list">
+                                    <div class="chat-people">
+                                        <div class="chat-img">
+                                            <asp:ImageButton 
+                                                id="imageButton" 
+                                                runat="server" 
+                                                ImageUrl='<%# Eval("imageURL") %>' 
+                                                class="rounded-circle img-fluid" 
+                                                CustomParameter='<%# Eval("messagerID") %>' 
+                                                onClick= "btnSubmit_Click"/>
+                                        </div>
+                                        
+                                            <div class="chat-ib">
+                                                <h5><%# Eval("messagerName") %></h5>
+                                                <p><%# Eval("latestMessage") %></p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </div>
+
+                    <div class="mesgs">
+                        <div class="msg-history">
+                            <div class="incoming-msg">
+                                <asp:Literal ID="Message" runat="server" Mode="Transform"></asp:Literal>
                             </div>
-                        <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
-                    </div>
-                </div>
-
-                <div class="mesgs">
-                    <div class="msg-history">
-                        <div class="incoming-msg">
-                            <!--Put card here -->
-                            <asp:Literal ID="Message" runat="server" Mode="Transform"></asp:Literal>
-                        <!--End card here -->
-                    </div>
-
-                    </div>
+                        </div>
                     <div class="type-msg">
                         <div class="input-msg-write">
                             <asp:TextBox ID="txtMessage" runat="server" class="write-msg" placeholder="Type a message"></asp:TextBox>
@@ -107,18 +95,12 @@
                     </div>
                     <div>
                         <button type="button" class="btn btn-light createLeaseButton btn-block" href="HostCreateLease.aspx">Create Lease with TENANT NAME</button>
-
                         <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
                         <a href="TenantVideoChat.aspx" class="btn btn-light vidChat btn-block">Video Chat</a>
-
                     </div>
                 </div>
             </div>
         </section>
-
-
-
     </div>
-
 </asp:Content>
 

@@ -11,23 +11,6 @@
         PageMethods.CreateLease();
     };
 </script>
-    <!--USER DASH-NAV-->
-    <div class="container-fluid userDash mb-2 pb-3">
-        <div class="navbar navbar-light">
-            <p>
-                            <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
-            </p>
-
-
-            <div class="progress" style="height: 30px;">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 66%; color: #fff; font-size: 15px; font-weight: bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Profile Completion</div>
-            </div>
-        </div>
-
-    </div>
-    <!--END OF USER DASH-NAV-->
-
-
 
     <div class="container-fluid px-5">
         <!--BREADCRUMBS-->
@@ -109,18 +92,28 @@
                     </div>
 
                     <div class="inbox-chat">
-                        <div class="chat-list">
-                            <div class="chat-people">
-                                 <div class="chat-img">
-                                <asp:ImageButton id= "btnSubmit0" runat="server" ImageUrl="images/robot-man.png" class="rounded-circle img-fluid" CustomParameter="15" onClick= "btnSubmit_Click"/>
-                            </div>  
-                        <div class="chat-ib">
-                        <h5>Chat Bot</h5>
-                                     <p>Hi I'm the Chat Bot I'm here for any questions you might have!</p>
+                        <asp:Repeater id="inboxRepeater" runat="server">
+                            <ItemTemplate>
+                                <div class="chat-list">
+                                    <div class="chat-people">
+                                        <div class="chat-img">
+                                            <asp:ImageButton 
+                                                id="imageButton" 
+                                                runat="server" 
+                                                ImageUrl='<%# Eval("imageURL") %>' 
+                                                class="rounded-circle img-fluid" 
+                                                CustomParameter='<%# Eval("messagerID") %>' 
+                                                onClick= "btnSubmit_Click"/>
+                                        </div>
+                                        
+                                        <div class="chat-ib">
+                                            <h5><%# Eval("messagerName") %></h5>
+                                            <p><%# Eval("latestMessage") %></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
                 </div>
 
@@ -140,7 +133,6 @@
                             <asp:LinkButton id="LinkButton2" runat="server" class="msg-send-btn" type="button" Text ="Send" OnClick="messagebtn_Click"/>
                         </div>
                     </div>
-                    <asp:LinkButton id="LinkButton1" runat="server" class="msg-send-btn" type="button" Text ="Send" OnClick="messagebtn_Click"/>
 
                     <div>
                         <a href="HostCreateLease.aspx" class="btn btn-light createLeaseButton btn-block">Create Lease</a>
@@ -153,8 +145,6 @@
                 </div>
             </div>
         </section>
-
     </div>
-
 </asp:Content>
 

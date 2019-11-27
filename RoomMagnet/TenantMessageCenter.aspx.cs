@@ -36,49 +36,44 @@ public partial class TenantMessageCenter : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Card.Text = String.Empty;
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
-
         {
+            Message.Text = String.Empty;
+
+            System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
 
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "select accountID, firstName, LastName from account where AccountID in (select HostID from Host where HostID in " +
+            select.CommandText = "select accountID, firstName, LastName, AccountImage from account where AccountID in (select HostID from Host where HostID in " +
                 "(select HostID from FavoritedTenants where TenantID = " + Session["AccountId"] + "));";
             select.Connection = sc;
             sc.Open();
-            //Get Month and Day
-            String sDate = DateTime.Now.ToString();
-            DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
-            String dy = datevalue.Day.ToString();
-            String mn = datevalue.Month.ToString();
-            String yy = datevalue.Year.ToString();
-            //Reader to populate card 
-            int count = 0;
+
+            System.Data.SqlClient.SqlCommand messageC = new System.Data.SqlClient.SqlCommand();
+            messageC.Connection = sqlConn;
+            sqlConn.Open();
+
+            List<MessageInbox> lst = new List<MessageInbox>();
+
             System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
             while (reader.Read())
             {
-                String firstName = reader["FirstName"].ToString();
-                String lastName = reader["LastName"].ToString();
-                String HostID = reader["AccountID"].ToString();
+                String imgURL = reader["AccountImage"].ToString();
+                if (imgURL == "") imgURL = "noprofileimage.png";
+                int hostID = Convert.ToInt32(reader["accountID"].ToString());
+                String hostName = reader["firstName"].ToString() + " " + reader["lastName"].ToString();
+                messageC.CommandText = "select top(1) MessageContent from Message where FavTenantID in " +
+                   "(select FavTenantID from FavoritedTenants where tenantID=" + Session["AccountId"].ToString() + "and hostID=" + hostID + ")" +
+                   "order by messageID desc";
+                String latestMsg = (string)messageC.ExecuteScalar();
 
-                StringBuilder myCard = new StringBuilder();
-                myCard
-                    .Append("<div class=\"chat-list\">")
-                    .Append("               <div class=\"chat-people\">")
-                    .Append("                   <div class=\"chat-img\">")
-                    .Append("<input type=\"image\" name=\"ctl00$ContentPlaceHolder1$btnSubmit" + count + "\" id=\"ContentPlaceHolder1_btnSubmit" + count + "\" class=\"rounded-circle img-fluid\" customparameter=\"" + HostID + "\" src=\"images/bettyBrown.png\">")
-                    .Append("                       </div>")
-                    .Append("                   <div class=\"chat-ib\">")
-                    .Append("                       <h5>" + firstName + " " + lastName + "<span class=\"chat-date\">" + mn + "/" + dy + "/" + yy + "</span></h5>")
-                    .Append("                        <p>text</p>")
-                    .Append("                    </div>")
-                    .Append("                </div>")
-                    .Append("            </div>");
-                Card.Text += myCard.ToString();
-                count++;
+                lst.Add(new MessageInbox() {imageURL = "https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + imgURL, messagerID = hostID, messagerName = hostName, latestMessage = latestMsg});
             }
             reader.Close();
             sc.Close();
+            sqlConn.Close();
+
+            inboxRepeater.DataSource = lst;
+            inboxRepeater.DataBind();
         }
         else
         {
@@ -88,21 +83,40 @@ public partial class TenantMessageCenter : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, ImageClickEventArgs e)
     {
         ImageButton lnk = sender as ImageButton;
-        String HostID = lnk.Attributes["CustomParameter"].ToString();
+        int hostID = Convert.ToInt32(lnk.Attributes["CustomParameter"].ToString());
+        Session["msgHostID"] = hostID;
+        loadMessages(hostID);
+    }
 
+    public void loadMessages(int hostID)
+    {
         System.Data.SqlClient.SqlCommand selectMessage = new System.Data.SqlClient.SqlCommand();
+        System.Data.SqlClient.SqlCommand imgSelect = new System.Data.SqlClient.SqlCommand();
+
         //Message
-        selectMessage.CommandText = "select messageContent, date,MessageType from message where (messageType = 1) and FavPropID in (select FavPropID " +
-            "from FavoritedProperties where PropertyID in (select PropertyID from Property where HostID =" + HostID + ")) and FavTenantID in (select FavTenantID from " +
-            "FavoritedTenants where TenantID = " + Session["AccountId"] + ")" +
-            "Union " +
-            "select messageContent, date,MessageType from message where(messageType = 0) and FavPropID in (select FavPropID from FavoritedProperties where " +
-            "PropertyID in (select PropertyID from Property where HostID=" + HostID + ")) and FavTenantID in (select FavTenantID from FavoritedTenants where TenantID=" + Session["AccountId"] + ")" +
+        selectMessage.CommandText = "select messageContent, date, MessageType from message where (messageType = 1) and FavTenantID in " +
+            "(select FavTenantID from FavoritedTenants where HostID = " + hostID + " AND TenantID = " + Session["AccountId"].ToString() + ")" +
+            " Union " +
+            "select messageContent, date, MessageType from message where (messageType = 0) and FavTenantID in " +
+            "(select FavTenantID from FavoritedTenants where HostID = " + hostID + " AND TenantID = " + Session["AccountId"].ToString() + ")" +
             " order by date; ";
+        imgSelect.CommandText = "SELECT AccountImage FROM Account WHERE AccountID = " + hostID;
+
         selectMessage.Connection = sc;
+        imgSelect.Connection = sc;
         sc.Open();
+
+        String accountImg = "";
+        if (imgSelect.ExecuteScalar() is System.DBNull)
+        {
+            accountImg = "noprofileimage.png";
+        }
+        else
+        {
+            accountImg = (string)imgSelect.ExecuteScalar();
+        }
+
         System.Data.SqlClient.SqlDataReader reader = selectMessage.ExecuteReader();
-        Message.Text = String.Empty;
         while (reader.Read())
         {
             String message = reader["MessageContent"].ToString();
@@ -114,11 +128,11 @@ public partial class TenantMessageCenter : System.Web.UI.Page
                 StringBuilder myCard = new StringBuilder();
                 myCard
                 .Append("<div class=\"outgoing-msg\">")
-                .Append("                <div class=\"sent-msg\">")
-                .Append("                   <p>" + message + "</p>")
-                .Append("                   <span class=\"time-date\">" + date + "</span>")
-                .Append("                </div>")
-                .Append("            </div>");
+                .Append("   <div class=\"sent-msg\">")
+                .Append("       <p>" + message + "</p>")
+                .Append("       <span class=\"time-date\">" + date + "</span>")
+                .Append("   </div>")
+                .Append("</div>");
 
 
                 Message.Text += myCard.ToString();
@@ -128,15 +142,15 @@ public partial class TenantMessageCenter : System.Web.UI.Page
                 StringBuilder myCard = new StringBuilder();
                 myCard
                 .Append("<div>")
-                .Append("    <div class=\"incoming-msg-img\">")
-                .Append("                    <img src = \"images/bettyBrown.png\" class=\"rounded-circle img-fluid\">")
-                .Append("                </div>")
-                .Append("                <div class=\"recieved-msg\">")
-                .Append("                    <div class=\"recieved-withd-msg\">")
-                .Append("                        <p>" + message + "</p>")
-                .Append("                        <span class=\"time-date\">" + date + "</span>")
-                .Append("                    </div>")
-                .Append("                </div>")
+                .Append("   <div class=\"incoming-msg-img\">")
+                .Append("       <img src = \"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + accountImg + "\" class=\"rounded-circle img-fluid\">")
+                .Append("   </div>")
+                .Append("   <div class=\"recieved-msg\">")
+                .Append("       <div class=\"recieved-withd-msg\">")
+                .Append("           <p>" + message + "</p>")
+                .Append("           <span class=\"time-date\">" + date + "</span>")
+                .Append("       </div>")
+                .Append("   </div>")
                 .Append("</div>");
                 Message.Text += myCard.ToString();
             }
@@ -147,17 +161,14 @@ public partial class TenantMessageCenter : System.Web.UI.Page
 
     protected void messagebtn_Click(object sender, EventArgs e)
     {
+        int hostID = Convert.ToInt32(Session["msgHostID"].ToString());
+        int tenantID = Convert.ToInt32(Session["AccountId"].ToString());
+
         //Selecting FavProp and FavTenant
         System.Data.SqlClient.SqlCommand favTenant = new System.Data.SqlClient.SqlCommand();
-        System.Data.SqlClient.SqlCommand favProp = new System.Data.SqlClient.SqlCommand();
-        favProp.Connection = sc;
         favTenant.Connection = sc;
-        sc.Open();
-        favProp.CommandText = "SELECT Message.FavPropID FROM Message INNER JOIN FavoritedProperties ON Message.FavPropID = FavoritedProperties.FavPropID AND " +
-            "FavoritedProperties.TenantID =" + Session["AccountId"] + ";";
-        int favPropID = Convert.ToInt16(favProp.ExecuteScalar());
-        sc.Close();
-        favTenant.CommandText = "SELECT FavTenantID FROM Message where FavPropID = " + favPropID + ";";
+
+        favTenant.CommandText = "SELECT FavTenantID FROM FavoritedTenants where TenantID = " + tenantID + "AND HostID=" + hostID;
         sc.Open();
         int favTenantID = Convert.ToInt16(favTenant.ExecuteScalar());
         sc.Close();
@@ -169,17 +180,16 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
         insert.Connection = sc;
         sc.Open();
-        insert.CommandText = "INSERT INTO MESSAGE VALUES(@MessageContent,@MessageType,@Date,@FavPropID,@FavTenantID);";
+        insert.CommandText = "INSERT INTO MESSAGE VALUES(@MessageContent,@MessageType,@Date,@FavTenantID);";
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MessageContent", message));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MessageType", "1"));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@Date", date));
-        insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@FavPropID", favPropID));
         insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@FavTenantID", favTenantID));
 
         insert.ExecuteNonQuery();
         sc.Close();
         txtMessage.Text = String.Empty;
-        //e as ImageClickEventArgs;
-        //btnSubmit_Click(sender,e);
+
+        loadMessages(hostID);
     }
 }

@@ -69,6 +69,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                 {
                     lblPass.Text = "Invalid Password";
                     lblEmail.Text = "";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
                 }
             }
         }
@@ -76,7 +77,8 @@ public partial class MasterPage : System.Web.UI.MasterPage
         {
             lblEmail.Text = "Invalid Email";
             lblPass.Text = "";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
         }
-            sc.Close();
+        sc.Close();
     }
 }
