@@ -33,7 +33,11 @@
                         </div>
                         <div class="d-flex ">
                             <div class="btn btn-rounded float-left">
-                                <input type="file">
+                                <asp:FileUpload ID="TenantImageUpload" runat="server" AllowMultiple="True" />
+                                <asp:Button runat="server" ID="FilesUpload" Text="Upload profile image" AutoPostBack="false" OnClick="TenantImageUpload_Click" />
+                                <br />
+                                <br />
+                                <asp:Label runat="server" ID="StatusLabel" Text="Upload Status: " />
                             </div>
                         </div>
                     </div>

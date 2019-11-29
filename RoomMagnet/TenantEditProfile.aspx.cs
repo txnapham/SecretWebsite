@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.IO;
+using awsTestUpload;
 
 public partial class TenantEditProfile : System.Web.UI.Page
 {
@@ -342,6 +344,47 @@ public partial class TenantEditProfile : System.Web.UI.Page
         else // if the account doesn't exist, it will show failure
 
             sc.Close();
+    }
+
+    protected void TenantImageUpload_Click(object sender, EventArgs e)
+    {
+        if (TenantImageUpload.HasFile)
+        {
+            // Upload image to S3
+            Random rnd = new Random();
+            int imageUniqueID = rnd.Next(1, 10000);
+            Stream st = TenantImageUpload.PostedFile.InputStream;
+            string name = Path.GetFileName(TenantImageUpload.FileName);
+            string myBucketName = "elasticbeanstalk-us-east-1-606091308774"; //your s3 bucket name goes here  
+            string s3DirectoryName = "UserImages";
+            string s3FileName = imageUniqueID.ToString() + @name;
+            bool a;
+            AmazonUploader myUploader = new AmazonUploader();
+            a = myUploader.sendMyFileToS3(st, myBucketName, s3DirectoryName, s3FileName);
+
+            // Grab AccountID to update correct account
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+            System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
+            update.Connection = sc;
+            sc.Open();
+
+            update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TenantID", Session["AccountID"]));
+            update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@imagefilename", s3FileName));
+            update.CommandText = "UPDATE Account SET AccountImage = @imagefilename WHERE AccountID = @TenantID";
+
+            string check = update.CommandText;
+            Console.Write(check);
+            update.ExecuteNonQuery();
+
+            sc.Close();
+
+            StatusLabel.Text = "Looking good!";
+        }
+        else
+        {
+            StatusLabel.Text = "";
+        }
     }
 
 }

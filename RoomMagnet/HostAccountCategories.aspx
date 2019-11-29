@@ -27,7 +27,11 @@
         <section>
             <div class="btn">
                 <span>Add photo</span>
-                <input type="file"/>
+                <asp:FileUpload ID="HostImageUpload" runat="server" AllowMultiple="True" />
+                <asp:Button runat="server" ID="FilesUpload" Text="Upload profile image" AutoPostBack="false" OnClick="HostImageUpload_Click" />
+                <br />
+                <br />
+                <asp:Label runat="server" ID="StatusLabel" Text="Upload Status: " />
             </div>
             
         </section>
