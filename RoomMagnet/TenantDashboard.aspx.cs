@@ -40,6 +40,7 @@ public partial class TenantDashboard : System.Web.UI.Page
     {
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
+            //Empty Card
             TenantCard.Text = "";
             favProp.Text = "";
             hostMsg.Text = "";
@@ -95,7 +96,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                 TenantCard.Text += tenantImage.ToString();
             }
             sc.Close();
-
+            //Complete Profile Pop-Up
             StringBuilder alert1Text = new StringBuilder();
             alert1Text
                 .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
@@ -104,7 +105,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
                 .Append("</div>");
-
+            //Background Check Pop Up
             StringBuilder alert2Text = new StringBuilder();
             alert2Text
                 .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
@@ -113,36 +114,38 @@ public partial class TenantDashboard : System.Web.UI.Page
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
                 .Append("</div>");
-
+            //Progress Bar 1/3
             StringBuilder progressOneThird = new StringBuilder();
             progressOneThird
                 .Append("<div class=\"progress\" style=\"height: 30px; \">")
                 .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:33%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
                 .Append("</div");
-
+            //Prpgress Bar 2/3
             StringBuilder progressTwoThird = new StringBuilder();
             progressTwoThird
                 .Append("<div class=\"progress\" style=\"height: 30px; \">")
                 .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:66%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
                 .Append("</div");
-
+            //Completed Progress
             StringBuilder progressFull = new StringBuilder();
             progressFull
                 .Append("<div class=\"progress\" style=\"height: 30px; \">")
                 .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:100%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
                 .Append("</div");
-
+            //Give the profile completion and background check alert to pop up
             if (charCheck == 0 && backStatusCheck == 0)
             {
                 alert1.Text += alert1Text.ToString();
                 alert2.Text += alert2Text.ToString();
                 progressBar.Text += progressOneThird.ToString();
             }
+            //Move progress bar to fully complete 
             else if (charCheck == 1 && backStatusCheck == 1)
             {
                 progressBar.Text += progressFull.ToString();
 
             }
+            //2/3 Progress Bar and Give Alert 
             else if (charCheck == 1 || backStatusCheck == 1)
             {
                 if (charCheck == 1 || backStatusCheck == 1)
@@ -150,6 +153,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                     alert1.Text += alert2Text.ToString();
                     progressBar.Text += progressTwoThird.ToString();
                 }
+                //2/3 Progress Bar and Give Alert to Complete Profile
                 else if (charCheck == 1 || backStatusCheck == 1)
                 {
                     alert1.Text += alert1Text.ToString();
@@ -188,7 +192,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                     String priceRangeHigh = readerProperty["RoomPriceRangeHigh"].ToString();
                     double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                     double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
-
+                    //String Builder
                     StringBuilder myCard = new StringBuilder();
                     myCard
                     .Append("<div class=\"col-xs-4 col-md-3\">")
@@ -213,12 +217,13 @@ public partial class TenantDashboard : System.Web.UI.Page
             {
                 while (rdr.Read())
                 {
+                    //Profile at top (first, last, date, account image)
                     String firstName = rdr["FirstName"].ToString();
                     String LastName = rdr["LastName"].ToString();
                     String date = rdr["Date"].ToString();
                     String filename = rdr["AccountImage"].ToString();
                     if (filename == "") filename = "noprofileimage.png";
-
+                    //Show chat 
                     StringBuilder myCard = new StringBuilder();
                     myCard
                         .Append(" <div class=\"chat-list\">")

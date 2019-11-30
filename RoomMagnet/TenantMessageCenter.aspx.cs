@@ -13,6 +13,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
 
     protected void Page_PreInit(object sender, EventArgs e)
     {
+        //Access to Page for Certain Account Types
         if (Session["type"] != null)
         {
             if ((int)Session["type"] == 1)
@@ -36,6 +37,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Tenant Access
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
             Message.Text = String.Empty;
@@ -57,10 +59,13 @@ public partial class TenantMessageCenter : System.Web.UI.Page
             System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
             while (reader.Read())
             {
+                //Profile Image 
                 String imgURL = reader["AccountImage"].ToString();
                 if (imgURL == "") imgURL = "noprofileimage.png";
                 int hostID = Convert.ToInt32(reader["accountID"].ToString());
+                //Show Host Name
                 String hostName = reader["firstName"].ToString() + " " + reader["lastName"].ToString();
+                //Latest Message
                 messageC.CommandText = "select top(1) MessageContent from Message where FavTenantID in " +
                    "(select FavTenantID from FavoritedTenants where tenantID=" + Session["AccountId"].ToString() + "and hostID=" + hostID + ")" +
                    "order by messageID desc";
