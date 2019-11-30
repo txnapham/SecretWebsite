@@ -12,6 +12,7 @@ public partial class ListedProperties : System.Web.UI.Page
     System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
     protected void Page_PreInit(object sender, EventArgs e)
     {
+        //Allows certain profile types to see this page
         if (Session["type"] != null)
         {
             if ((int)Session["type"] == 1)

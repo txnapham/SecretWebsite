@@ -12,6 +12,7 @@ using System.IO;
 
 public partial class TenantCreateAccount : System.Web.UI.Page
 {
+    //Access to Pages with Certain Profile 
     protected void Page_PreInit(object sender, EventArgs e)
     {
         if (Session["type"] != null)
@@ -41,6 +42,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
 
     protected void btnCreateAccount_Click(object sender, EventArgs e)
     {
+        //Birthday 
         DateTime bday = new DateTime();
         if (txtBday.Text == "")
         {
@@ -72,7 +74,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
 
                 int emailCount;
 
-                //create new account and host object
+                //create new account and tenant object
                 Account newAccount = new Account(HttpUtility.HtmlEncode(txtFN.Text), HttpUtility.HtmlEncode(txtMN.Text), HttpUtility.HtmlEncode(txtLN.Text),
                     HttpUtility.HtmlEncode(txtPhone.Text), DateTime.Parse(txtBday.Text, new System.Globalization.CultureInfo("pt-BR")), HttpUtility.HtmlEncode(txtEmail.Text),
                     HttpUtility.HtmlEncode(txtHouseNum.Text), HttpUtility.HtmlEncode(txtStreet.Text), HttpUtility.HtmlEncode(txtCity.Text), ddState.SelectedValue,
@@ -83,7 +85,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
                 checkEmailCount.Parameters.Add(new SqlParameter("@emailCheck", newAccount.getEmail()));
 
                 emailCount = (int)checkEmailCount.ExecuteScalar();
-
+                //Insert into Account
                 if (emailCount < 1)
                 {
                     insert.CommandText = "INSERT into Account VALUES(@fName, NULLIF(@mName, ''), @lName, @phone, @bday, @email, @HouseNbr, @street, @city, @state, @zip, @country, NULL, @AccType, @ModDate, @PID); " +
@@ -107,7 +109,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
                     insert.Parameters.Add(new SqlParameter("@ModDate", newTenant.getModDate()));
                     insert.Parameters.Add(new SqlParameter("@PID", newTenant.getPID()));
 
-                    //Insert into HOST
+                    //Insert into TENANT
                     insert.Parameters.Add(new SqlParameter("@BackCheck", newTenant.getBackgroundStatus()));
                     insert.Parameters.Add(new SqlParameter("@TenantReason", newTenant.getTenantReason()));
 
@@ -115,7 +117,7 @@ public partial class TenantCreateAccount : System.Web.UI.Page
                     insert.Parameters.Add(new SqlParameter("@password", PasswordHash.HashPassword(txtPassword.Text))); // hash entered password
 
                     insert.ExecuteNonQuery();
-
+                    //Tenant Access
                     Session["type"] = 3;
 
                     System.Data.SqlClient.SqlCommand getAcctID = new System.Data.SqlClient.SqlCommand();

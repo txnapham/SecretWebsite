@@ -17,6 +17,7 @@ public partial class Search_Tenant : System.Web.UI.Page
 {
     protected void Page_PreInit(object sender, EventArgs e)
     {
+        //Access for certain account types on this page
         if (Session["type"] != null)
         {
             if ((int)Session["type"] == 1)
@@ -40,10 +41,11 @@ public partial class Search_Tenant : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Tenant Access
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
             divider.Text = String.Empty;
-
+            //Search for Home 
             if (Session["Search"] != null)
             {
                 String homeSearch = "";
@@ -60,6 +62,7 @@ public partial class Search_Tenant : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
+        //Shows the search results with the sorting and ones of main interest
         cardBuilder(mainResults, filter(), txtSearch.Text);
         divider.Text = "<hr/>" +
             "<strong>Other Results in State That May Interest You:</strong> ";
@@ -110,7 +113,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 if (filename == "") filename = "imagenotfound.png";
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
-
+                //Displays property on card 
                 StringBuilder myCard = new StringBuilder();
                 myCard
                 .Append("<div class=\"col-xs-4 col-md-3\">")
@@ -157,7 +160,7 @@ public partial class Search_Tenant : System.Web.UI.Page
 
         System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
         sqlConn.Open();
-
+        //Show the amount of properties that have been favorited 
         System.Data.SqlClient.SqlCommand check = new System.Data.SqlClient.SqlCommand();
         check.Connection = sqlConn;
         check.CommandText = "SELECT COUNT(*) FROM [dbo].[FavoritedProperties] WHERE (TenantID = @tenantID) AND (PropertyID = @propertyID)";
@@ -189,13 +192,17 @@ public partial class Search_Tenant : System.Web.UI.Page
     
     protected string filter()
     {
+        //SQL for amount of filters that match 
         string queryFilter = "SELECT P.PropertyID, P.City, P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images " +
             "FROM Account A FULL OUTER JOIN Characteristics C ON A.AccountID = C.AccountID FULL OUTER JOIN Host H ON A.AccountID = H.HostID FULL OUTER JOIN " +
             "PropertyImages I FULL OUTER JOIN Property P ON I.PropertyID = P.PropertyID ON H.HostID = P.HostID  FULL OUTER JOIN PropertyRoom R ON R.PropertyID = P.PropertyID " +
             "WHERE P.City = @City AND P.HomeState = @State   ";
-
+        //Counter for amount of matching filters
         int qualityCount = 0;
-
+        //Checked HomeShare
+        //Showing the results in a sorted way by number of matches to filters
+        //Shows the main result 
+        //HomeShare Filter
         if (cbHomeShareYES.Checked == true)
         {
             queryFilter += "AND P.HomeShareSmarter = 1   ";
@@ -204,6 +211,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         {
             queryFilter += "AND P.HomeShareSmarter = 0   ";
         }
+        //Extrovert Filter
         if (cbExtrovert.Checked == true)
         {
             if (qualityCount == 0)
@@ -216,7 +224,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.Extrovert DESC, ";
             }
         }
-
+        //Introvert Filter
         if (cbIntrovert.Checked == true)
         {
             if (qualityCount == 0)
@@ -229,6 +237,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.Introvert DESC, ";
             }
         }
+        //NonSmoking Filter
         if (cbNonSmoker.Checked == true)
         {
             if (qualityCount == 0)
@@ -241,6 +250,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.NonSmoker DESC, ";
             }
         }
+        //Early Riser Filter
         if (cbEarlyRiser.Checked == true)
         {
             if (qualityCount == 0)
@@ -253,6 +263,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.EarlyRiser DESC, ";
             }
         }
+        //Night Owl Filter
         if (cbNightOwl.Checked == true)
         {
             if (qualityCount == 0)
@@ -265,6 +276,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.NightOwl DESC, ";
             }
         }
+        //TechSavvy Filter
         if (cbTechSavvy.Checked == true)
         {
             if (qualityCount == 0)
@@ -277,6 +289,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.TechSavvy DESC, ";
             }
         }
+        //Family Oriented Filter 
         if (cbFamily.Checked == true)
         {
             if (qualityCount == 0)
@@ -289,6 +302,8 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.FamilyOriented DESC, ";
             }
         }
+        //Property Ammenities 
+        //Kitchen 
         if (cbKitchen.Checked == true)
         {
             if (qualityCount == 0)
@@ -301,6 +316,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.Kitchen DESC, ";
             }
         }
+        //Heating/ AC Filter
         if (cbHVAC.Checked == true)
         {
             if (qualityCount == 0)
@@ -313,6 +329,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.HVAC DESC, ";
             }
         }
+        //Wifi Filter
         if (cbWifi.Checked == true)
         {
             if (qualityCount == 0)
@@ -325,6 +342,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.Wifi DESC, ";
             }
         }
+        //Private Bathroom Filter 
         if (cbPrivateBath.Checked == true)
         {
             if (qualityCount == 0)
@@ -337,6 +355,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.PrivateBR DESC, ";
             }
         }
+        //Walk In Closet Filter
         if (cbWalkInCloset.Checked == true)
         {
             if (qualityCount == 0)
@@ -349,6 +368,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.WalkInCloset DESC, ";
             }
         }
+        //Washer Dryer Filter
         if (cbWashDry.Checked == true)
         {
             if (qualityCount == 0)
@@ -361,7 +381,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.WashAndDry DESC, ";
             }
         }
-
+        //Street Parking Filter
         if (cbStreetPark.Checked == true)
         {
             if (qualityCount == 0)
@@ -374,6 +394,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "P.StreetParking DESC, ";
             }
         }
+        //Garage Parking Filter
         if (cbGarPark.Checked == true)
         {
             if (qualityCount == 0)
@@ -386,6 +407,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += " P.GarageParking DESC, ";
             }
         }
+        //Backyard Filter
         if (cbBackyard.Checked == true)
         {
             if (qualityCount == 0)
@@ -398,6 +420,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "P.Backyard DESC, ";
             }
         }
+        //Porch Filter
         if (cbPorch.Checked == true)
         {
             if (qualityCount == 0)
@@ -410,6 +433,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "P.PorchOrDeck DESC, ";
             }
         }
+        //Pool Filter
         if (cbPool.Checked == true)
         {
             if (qualityCount == 0)
@@ -422,6 +446,8 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "P.Pool DESC, ";
             }
         }
+        //Languages Filters
+        //English 
         if (cbEnglish.Checked == true)
         {
             if (qualityCount == 0)
@@ -434,6 +460,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.English DESC, ";
             }
         }
+        //Spanish
         if (cbSpanish.Checked == true)
         {
             if (qualityCount == 0)
@@ -446,6 +473,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.Spanish DESC, ";
             }
         }
+        //Mandarin
         if (cbMandarin.Checked == true)
         {
             if (qualityCount == 0)
@@ -458,6 +486,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.Mandarin DESC, ";
             }
         }
+        //Japanese
         if (cbJapanese.Checked == true)
         {
             if (qualityCount == 0)
@@ -470,6 +499,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.Japanese DESC, ";
             }
         }
+        //German
         if (cbGerman.Checked == true)
         {
             if (qualityCount == 0)
@@ -482,6 +512,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.German DESC, ";
             }
         }
+        //French 
         if (cbFrench.Checked == true)
         {
             if (qualityCount == 0)
@@ -494,7 +525,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.French DESC, ";
             }
         }
-
+        //Number of attributes that are a match 
         int size = queryFilter.Length;
         queryFilter = queryFilter.Substring(0, queryFilter.Length - 2);
         return queryFilter;
@@ -508,7 +539,10 @@ public partial class Search_Tenant : System.Web.UI.Page
             "WHERE P.City != @City AND P.HomeState = @State   ";
 
         int qualityCount = 0;
-
+        //Showing the results in a sorted way by number of matches to filters
+        //Shows the other results 
+        //Filters
+        //HomeShare
         if (cbHomeShareYES.Checked == true)
         {
             queryFilter += "AND P.HomeShareSmarter = 1   ";
@@ -517,6 +551,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         {
             queryFilter += "AND P.HomeShareSmarter = 0   ";
         }
+        //Extrovert Filter
         if (cbExtrovert.Checked == true)
         {
             if (qualityCount == 0)
@@ -529,7 +564,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.Extrovert DESC, ";
             }
         }
-
+        //Introvert Filter
         if (cbIntrovert.Checked == true)
         {
             if (qualityCount == 0)
@@ -542,6 +577,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.Introvert DESC, ";
             }
         }
+        //Nonsmoking Filter
         if (cbNonSmoker.Checked == true)
         {
             if (qualityCount == 0)
@@ -554,6 +590,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.NonSmoker DESC, ";
             }
         }
+        //Early Riser Filter
         if (cbEarlyRiser.Checked == true)
         {
             if (qualityCount == 0)
@@ -566,6 +603,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.EarlyRiser DESC, ";
             }
         }
+        //NightOwl Filter
         if (cbNightOwl.Checked == true)
         {
             if (qualityCount == 0)
@@ -578,6 +616,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.NightOwl DESC, ";
             }
         }
+        //TechSavvy Filter
         if (cbTechSavvy.Checked == true)
         {
             if (qualityCount == 0)
@@ -590,6 +629,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.TechSavvy DESC, ";
             }
         }
+        //Family Oriented Filter
         if (cbFamily.Checked == true)
         {
             if (qualityCount == 0)
@@ -602,6 +642,8 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.FamilyOriented DESC, ";
             }
         }
+        //Property Ammenities Filters
+        //Kitchen 
         if (cbKitchen.Checked == true)
         {
             if (qualityCount == 0)
@@ -614,6 +656,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.Kitchen DESC, ";
             }
         }
+        //Heating/AC Filter
         if (cbHVAC.Checked == true)
         {
             if (qualityCount == 0)
@@ -626,6 +669,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.HVAC DESC, ";
             }
         }
+        //Wifi Filter
         if (cbWifi.Checked == true)
         {
             if (qualityCount == 0)
@@ -638,6 +682,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.Wifi DESC, ";
             }
         }
+        //Private Bathroom Filter
         if (cbPrivateBath.Checked == true)
         {
             if (qualityCount == 0)
@@ -650,6 +695,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.PrivateBR DESC, ";
             }
         }
+        //Walk In Closet Filter
         if (cbWalkInCloset.Checked == true)
         {
             if (qualityCount == 0)
@@ -662,6 +708,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.WalkInCloset DESC, ";
             }
         }
+        //Washer-Dryer Filter
         if (cbWashDry.Checked == true)
         {
             if (qualityCount == 0)
@@ -674,7 +721,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "R.WashAndDry DESC, ";
             }
         }
-
+        //Street Parking Filter
         if (cbStreetPark.Checked == true)
         {
             if (qualityCount == 0)
@@ -687,6 +734,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "P.StreetParking DESC, ";
             }
         }
+        //Garage Parking Filter
         if (cbGarPark.Checked == true)
         {
             if (qualityCount == 0)
@@ -699,6 +747,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += " P.GarageParking DESC, ";
             }
         }
+        //Backyard Filter
         if (cbBackyard.Checked == true)
         {
             if (qualityCount == 0)
@@ -711,6 +760,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "P.Backyard DESC, ";
             }
         }
+        //Porch Filter
         if (cbPorch.Checked == true)
         {
             if (qualityCount == 0)
@@ -723,6 +773,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "P.PorchOrDeck DESC, ";
             }
         }
+        //Pool Filter
         if (cbPool.Checked == true)
         {
             if (qualityCount == 0)
@@ -735,6 +786,8 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "P.Pool DESC, ";
             }
         }
+        //Languages Filters
+        //English 
         if (cbEnglish.Checked == true)
         {
             if (qualityCount == 0)
@@ -747,6 +800,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.English DESC, ";
             }
         }
+        //Spanish
         if (cbSpanish.Checked == true)
         {
             if (qualityCount == 0)
@@ -759,6 +813,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.Spanish DESC, ";
             }
         }
+        //Mandarin 
         if (cbMandarin.Checked == true)
         {
             if (qualityCount == 0)
@@ -771,6 +826,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.Mandarin DESC, ";
             }
         }
+        //Japanese
         if (cbJapanese.Checked == true)
         {
             if (qualityCount == 0)
@@ -783,6 +839,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.Japanese DESC, ";
             }
         }
+        //German
         if (cbGerman.Checked == true)
         {
             if (qualityCount == 0)
@@ -795,6 +852,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.German DESC, ";
             }
         }
+        //French
         if (cbFrench.Checked == true)
         {
             if (qualityCount == 0)
@@ -807,7 +865,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 queryFilter += "C.French DESC, ";
             }
         }
-
+        //Shows the search with the amount of the most attributes selected first
         int size = queryFilter.Length;
         queryFilter = queryFilter.Substring(0, queryFilter.Length - 2);
         return queryFilter;

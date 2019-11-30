@@ -14,6 +14,7 @@ public partial class RegisteredTenants : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Admin access
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 1)
         {
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
@@ -21,7 +22,7 @@ public partial class RegisteredTenants : System.Web.UI.Page
             sc.Open();
             select.CommandText = "";
 
-
+            //Searching for background check status 
             if (searchCheck == 0)
             {
                 select.CommandText += "SELECT AccountID, CONCAT(FirstName, ' ', LastName) AS Name, BackgroundCheckStatus " +
@@ -44,6 +45,7 @@ public partial class RegisteredTenants : System.Web.UI.Page
             System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
             while (reader.Read())
             {
+                //Change incomplete status to complete status 
                 String tenantName = reader["Name"].ToString();
                 int tenantID = Convert.ToInt16(reader["AccountID"].ToString());
                 int backCheckStatus = Convert.ToInt16(reader["BackgroundCheckStatus"].ToString());
@@ -86,7 +88,7 @@ public partial class RegisteredTenants : System.Web.UI.Page
 
         int currentBC = (int)backCheck.ExecuteScalar();
 
-
+        //Change current background status from incomplete to complete or visa versa 
         if (currentBC == 1)
         {
             update.Parameters.AddWithValue("@BackStatus", 0);

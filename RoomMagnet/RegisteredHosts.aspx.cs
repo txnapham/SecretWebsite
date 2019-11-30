@@ -14,13 +14,14 @@ public partial class RegisteredHosts : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Admin access 
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 1)
         {
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             select.Connection = sc;
             sc.Open();
 
-
+            //Search the background check status of individuals
             if (searchCheck == 0)
             {
                 select.CommandText = "SELECT AccountID, CONCAT(FirstName, ' ', LastName) AS Name, BackgroundCheckStatus " +
@@ -43,6 +44,7 @@ public partial class RegisteredHosts : System.Web.UI.Page
             System.Data.SqlClient.SqlDataReader reader = select.ExecuteReader();
             while (reader.Read())
             {
+                //Change background check status from incomplete to complete 
                 String hostName = reader["Name"].ToString();
                 int hostID = Convert.ToInt16(reader["AccountID"].ToString());
                 int backCheckStatus = Convert.ToInt16(reader["BackgroundCheckStatus"].ToString());

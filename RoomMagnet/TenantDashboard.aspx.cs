@@ -14,6 +14,7 @@ public partial class TenantDashboard : System.Web.UI.Page
 
     protected void Page_PreInit(object sender, EventArgs e)
     {
+        //Access for Certain Profile Types 
         if (Session["type"] != null)
         {
             if ((int)Session["type"] == 1)

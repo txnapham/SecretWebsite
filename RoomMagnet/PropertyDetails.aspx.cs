@@ -9,6 +9,7 @@ public partial class PropertyDetails : System.Web.UI.Page
 {
     protected void Page_PreInit(object sender, EventArgs e)
     {
+        //Access to certain profile types to see who can view this page
         if (Session["type"] != null)
         {
             if ((int)Session["type"] == 1)
@@ -31,6 +32,7 @@ public partial class PropertyDetails : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Tenant access to view
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
 
