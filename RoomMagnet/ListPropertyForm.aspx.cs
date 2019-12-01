@@ -144,6 +144,10 @@ public partial class ListPropertyForm : System.Web.UI.Page
             insert.ExecuteNonQuery();
 
             sc.Close();
+            //Label for Successful Addition of Property
+            resultLabel.Visible = true;
+            resultLabel.Text = "Successfully Added New Property!";
+
             //Clear form
             txtHouseNum.Text = "";
             txtStreet.Text = "";
@@ -285,6 +289,9 @@ public partial class ListPropertyForm : System.Web.UI.Page
         insert.Parameters.Add(new SqlParameter("@walkInCloset", WalkInCloset));
 
         insert.ExecuteNonQuery();
+        //Label for Ammenities Added
+        resultLabel.Visible = true;
+        resultLabel.Text = "Property and Ammenities Successfully Added!";
 
         System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
         select.Connection = sc;

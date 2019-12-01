@@ -616,6 +616,7 @@
                 <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="False" />
                 <asp:Button runat="server" ID="FilesUpload" Text="Save to Property" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
                 <br />
+                <asp:Label ID="resultLabel" runat="server" Visible="false" Text="Successfully Uploaded Property"></asp:Label>
                 <br />
                 <asp:Label runat="server" ID="StatusLabel" Text="Upload status: " />
             </div>
