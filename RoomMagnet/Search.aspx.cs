@@ -81,12 +81,12 @@ public partial class Search : System.Web.UI.Page
         {
             SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
             sqlConn.Open();
-
+            //City
             String tSearch = HttpUtility.HtmlEncode(searchString);
             int commaSplit = tSearch.IndexOf(",");
             String cityString = tSearch.Substring(0, commaSplit).ToUpper();
             String state = tSearch.Substring(commaSplit + 2).ToUpper();
-
+            //Show Results with City/State 
             System.Data.SqlClient.SqlCommand sqlComm = new System.Data.SqlClient.SqlCommand(cardQuery, sqlConn);
             sqlComm.Parameters.Add(new SqlParameter("@City", cityString));
             sqlComm.Parameters.Add(new SqlParameter("@State", state));
@@ -97,6 +97,7 @@ public partial class Search : System.Web.UI.Page
 
             while (reader.Read())
             {
+                //Get data from database with City, State, Price, Image
                 String city = reader["City"].ToString();
                 String homeState = reader["HomeState"].ToString();
                 String priceRangeLow = reader["RoomPriceRangeLow"].ToString();
@@ -105,7 +106,7 @@ public partial class Search : System.Web.UI.Page
                 if (filename == "") filename = "imagenotfound.png";
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
-                //Display property profile on card 
+                //Display property profile that matches result on card 
                 StringBuilder myCard = new StringBuilder();
                 myCard
                 .Append("<div class=\"col-xs-4 col-md-3\">")
@@ -128,6 +129,8 @@ public partial class Search : System.Web.UI.Page
         else
         {
             //Label for no search results
+            resultLabel.Visible = true;
+            resultLabel.Text = "No searches match your criteria.";
         }
 
         return cardString;
@@ -386,6 +389,7 @@ public partial class Search : System.Web.UI.Page
             }
         }
         //Languages Filters 
+        //English
         if (cbEnglish.Checked == true)
         {
             if (qualityCount == 0)
@@ -398,6 +402,7 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "C.English DESC, ";
             }
         }
+        //Spanish
         if (cbSpanish.Checked == true)
         {
             if (qualityCount == 0)
@@ -410,6 +415,7 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "C.Spanish DESC, ";
             }
         }
+        //Mandarin
         if (cbMandarin.Checked == true)
         {
             if (qualityCount == 0)
@@ -422,6 +428,7 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "C.Mandarin DESC, ";
             }
         }
+        //Japanese
         if (cbJapanese.Checked == true)
         {
             if (qualityCount == 0)
@@ -434,6 +441,7 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "C.Japanese DESC, ";
             }
         }
+        //German
         if (cbGerman.Checked == true)
         {
             if (qualityCount == 0)
@@ -446,6 +454,7 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "C.German DESC, ";
             }
         }
+        //French
         if (cbFrench.Checked == true)
         {
             if (qualityCount == 0)
@@ -717,7 +726,8 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "P.Pool DESC, ";
             }
         }
-        //Languages Filters
+        //Languages Filters///////
+        //English
         if (cbEnglish.Checked == true)
         {
             if (qualityCount == 0)
@@ -730,6 +740,7 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "C.English DESC, ";
             }
         }
+        //Spanish
         if (cbSpanish.Checked == true)
         {
             if (qualityCount == 0)
@@ -742,6 +753,7 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "C.Spanish DESC, ";
             }
         }
+        //Mandarin
         if (cbMandarin.Checked == true)
         {
             if (qualityCount == 0)
@@ -754,6 +766,7 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "C.Mandarin DESC, ";
             }
         }
+        //Japanese
         if (cbJapanese.Checked == true)
         {
             if (qualityCount == 0)
@@ -766,6 +779,7 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "C.Japanese DESC, ";
             }
         }
+        //German
         if (cbGerman.Checked == true)
         {
             if (qualityCount == 0)
@@ -778,6 +792,7 @@ public partial class Search : System.Web.UI.Page
                 queryFilter += "C.German DESC, ";
             }
         }
+        //French
         if (cbFrench.Checked == true)
         {
             if (qualityCount == 0)

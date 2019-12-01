@@ -356,6 +356,7 @@
             </div>
         </section>
         <!--END OF FILTER, SEARCH BAR, AND SEARCH BUTTON -->
+                        <asp:Label ID="resultLabel" runat="server" Visible="false" Text="Sorry, no results match your search criteria."></asp:Label>
 
 
 
@@ -363,6 +364,8 @@
         <section>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                    </li>
                     <li class="breadcrumb-item"><a href="Home.aspx" class="breadLink">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Search</li>
                 </ol>
