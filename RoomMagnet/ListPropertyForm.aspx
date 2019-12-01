@@ -61,7 +61,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-7">
                         <asp:RequiredFieldValidator ID="cityReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a city." ControlToValidate="txtCity" Text="*Please enter a city"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[a-zA-Z_ ]+$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[0-9a-zA-Z_ -]+$"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtCity" runat="server" class="form-control form-control-lg" placeholder="City"></asp:TextBox>
                     </div>
 

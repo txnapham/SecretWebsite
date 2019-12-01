@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group">
                         <asp:RequiredFieldValidator ID="streetReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter a street." ControlToValidate="txtStreet" Text="*Please enter a street" ForeColor="Red"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[a-zA-Z_ ]+$" ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[0-9a-zA-Z_ -]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtStreet" runat="server" class="form-control form-control-lg" placeholder="Street" MaxLength="30"></asp:TextBox>
                     </div>
                     <div class="form-group">
