@@ -15,6 +15,6 @@
         <div id="publisher"></div>
     </div>
 
-    <script type="text/javascript" src="js/apps.js"></script>
+    <script type="text/javascript" src="js/TenantApp.js"></script>
 </body>
 </html>
