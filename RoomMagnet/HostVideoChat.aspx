@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HostPage.master" AutoEventWireup="true" CodeFile="HostVideoChat.aspx.cs" Inherits="HostVideoChat" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-     <!-- OpenTok.js library -->
+    <%-- <!-- OpenTok.js library -->
             <script src="https://static.opentok.com/v2/js/opentok.js"></script>
             <script>
 
@@ -28,11 +28,18 @@
                 });
 
 
-            </script>
+            </script>--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <link href="css/app.css" rel="stylesheet" type="text/css">
+    <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
 
+    <div id="videos">
+        <div id="subscriber"></div>
+        <div id="publisher"></div>
+    </div>
 
+    <script type="text/javascript" src="js/apps.js"></script>
     
 </asp:Content>
 

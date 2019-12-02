@@ -140,7 +140,7 @@
 
                         <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
                         
-                        <a href="HostVideoChat.aspx" class="btn btn-light vidChat btn-block">Video Chat</a>
+                        <a href="Default.aspx" class="btn btn-light vidChat btn-block">Video Chat</a>
                     </div>
                 </div>
             </div>
