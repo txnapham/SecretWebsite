@@ -282,7 +282,7 @@ public partial class HostDashboard : System.Web.UI.Page
         //SQL Statement
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         //Connection
-        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
         System.Data.SqlClient.SqlCommand favTen = new System.Data.SqlClient.SqlCommand();
@@ -311,7 +311,7 @@ public partial class HostDashboard : System.Web.UI.Page
         //SQl Statement
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         //Connection
-        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
         insert.Connection = sc;
