@@ -15,8 +15,8 @@
     <div class="container-fluid userDash  mb-2 pb-3">
         <div class="navbar navbar-light ">
             <u1>
-                    <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
-                    <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
+                <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
+                <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
             </u1>
         </div>
     </div>
@@ -75,11 +75,22 @@
                                                 <div class="pb-3">
                                                     <h5 class="modal-title">Add Your Room:</h5>
                                                 </div>
-                                                <br />
-                                                <br />
+
+                                                <div class="form-group">
+                                                    <%--<asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>--%>
+                                                    <asp:DropDownList ID="ddProperty" runat="server" AppendDataBoundItems="True" class="form-control" DataSourceID="propertyDataSource" DataTextField="Address" DataValueField="PropertyID">
+                                                        <asp:ListItem>Please Select a Property</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                    <asp:SqlDataSource ID="propertyDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:roommagnetdbConnectionString %>" SelectCommand="SELECT PropertyID, (HouseNumber + ' ' + Street + ', ' + City + ', ' + HomeState) AS Address FROM PROPERTY WHERE HostID = @AccountId">
+                                                        <SelectParameters>
+                                                            <asp:SessionParameter Name="AccountId" SessionField="AccountId"/>
+                                                        </SelectParameters>
+                                                    </asp:SqlDataSource>
+                                                </div>
+
                                                 <asp:TextBox ID="txtPrice" runat="server" class="form-control form-control-lg" placeholder="Price"></asp:TextBox>
                                                 <br />
-                                                <asp:TextBox ID="txtDescription" runat="server" class="form-control form-control-lg" placeholder="Description" Height="100px"></asp:TextBox>
+                                                <asp:TextBox ID="txtDescription" name="txtDescription" runat="server" class="form-control form-control-lg" placeholder="Description" Height="100px"></asp:TextBox>
 
                                                 <section>
                                                     <div class="row pt-3">
@@ -160,7 +171,7 @@
                                                 </section>
                                                 <!--end of amenities-->
 
-                                                <asp:Button ID="btnAddRoom" runat="server" Text="Add Room" class="btn btn-md btn-info btn-block" OnClick="btnAddRoom_Click" />
+                                                <asp:Button ID="btnAddRoom" runat="server" Text="Add Room" class="btn btn-md btn-info btn-block" CausesValidation="true" OnClick="btnAddRoom_Click" />
                                             </div>
                                         </div>
                                     </div>
@@ -192,7 +203,6 @@
                     </div>
                     <!--END OF MESSAGE MOD-->
                                 
-                    <!--END OF APPOINTMENT MOD-->
                 </div>
                     <div class="col-md-6">
                     <!--TENANT/HOST MOD-->
@@ -218,7 +228,7 @@
                         <div class="card  shadow-sm  mb-4">
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">My Appointments</h5>
-                                <div class="container-fluid cal pb-3">
+                               <!-- <div class="container-fluid cal pb-3">
                                     <div>
                                         <h4 class="mb-4 text-center">November 2019</h4>
                                         <div class="row d-none d-sm-flex p-1 bg-dark text-white">
@@ -574,6 +584,9 @@
                                             <p class="d-sm-none">No events</p>
                                         </div>
                                     </div>
+                                </div>-->
+                                <div class="container-fluid cal pb-3">
+                                    <asp:Calendar id="apptCal" runat="server"></asp:Calendar>
                                 </div>
                                 <!--BUTTON-->
                                 <button class="nav-item btn btn-block createAppointment" type="button" data-toggle="modal" data-target="#createAppointment">
@@ -590,20 +603,19 @@
 
                                                 <div class="form-group">
                                                     <%--<asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>--%>
-                                                    <asp:DropDownList ID="ddRecipient" runat="server" AppendDataBoundItems="True" class="form-control" DataSourceID="SqlDataSource1" DataTextField="NAME" DataValueField="NAME">
+                                                    <asp:DropDownList ID="ddRecipient" runat="server" AppendDataBoundItems="True" class="form-control" DataSourceID="tenantDataSource" DataTextField="NAME" DataValueField="AccountID">
                                                         <asp:ListItem>Please Select a Recipient</asp:ListItem>
                                                     </asp:DropDownList>
-                                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:roommagnetdbConnectionString %>" SelectCommand="SELECT (FirstName + ' ' + LastName) AS NAME FROM Account WHERE AccountID IN (SELECT TenantID FROM FavoritedTenants WHERE HostID = @AccountId )">
+                                                    <asp:SqlDataSource ID="tenantDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:roommagnetdbConnectionString %>" SelectCommand="SELECT AccountID, (FirstName + ' ' + LastName) AS NAME FROM Account WHERE AccountID IN (SELECT TenantID FROM FavoritedTenants WHERE HostID = @AccountId ) ORDER BY (FirstName + ' ' + LastName)">
                                                         <SelectParameters>
                                                             <asp:SessionParameter Name="AccountId" SessionField="AccountId"/>
                                                         </SelectParameters>
                                                     </asp:SqlDataSource>
-
                                                 </div>
 
                                                 <div class="form-group">
                                                     <%--<input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text">--%>
-                                                    <asp:TextBox ID="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYY"></asp:TextBox>
+                                                    <asp:TextBox type="date" ID="txtDate" runat="server" class="form-control form-control-lg" placeholder="Birthdate (MM/DD/YYYY)" MaxLength="10"></asp:TextBox>
                                                 </div>
 
                                                 <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" OnClick="btnCreateAppt_Click "/>
