@@ -186,7 +186,7 @@
                             <asp:TextBox ID="txtPrice" runat="server" class="form-control form-control-lg" placeholder="Price"></asp:TextBox>
                             <br />
                             <br />
-                            <asp:TextBox ID="txtDescription" name="txtDescription" runat="server" class="form-control form-control-lg" placeholder="Description" Height="100px"></asp:TextBox>
+                            <asp:TextBox ID="txtDescription" runat="server" class="form-control form-control-lg" placeholder="Description" Height="100px"></asp:TextBox>
 
                             <section>
                                 <div class="row pt-3">
@@ -231,7 +231,7 @@
                                         </div>
 
 
-                                        <asp:Button ID="btnAddRoom" runat="server" class="btn btn-info btn-block" Text="List Room" CausesValidation="false" OnClick="btnAddRoom_Click" />
+                                        <asp:Button ID="btnAddRoom" runat="server" class="btn btn-md btn-info btn-block" Text="List Room" CausesValidation="true" OnClick="btnAddRoom_Click" />
 
                                     </div>
 

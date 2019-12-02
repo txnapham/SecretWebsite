@@ -38,6 +38,8 @@ public partial class HostDashboard : System.Web.UI.Page
     {
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
+            apptCal.SelectedDate = DateTime.Today;
+
             HostCard.Text = "";
             properties.Text = "";
             currTen.Text = "";
@@ -286,19 +288,22 @@ public partial class HostDashboard : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand favTen = new System.Data.SqlClient.SqlCommand();
         insert.Connection = sc;
         favTen.Connection = sc;
-        int dd = ddRecipient.SelectedIndex + 1;
 
         int favTenID;
-        favTen.CommandText = "SELECT * FROM(SELECT FavTenantID, rownum = row_number() over (order by FavTenantID) FROM FavoritedTenants WHERE HostID =" + Session["AccountId"] +") as FavTenant where rownum = " + dd+";"; 
+        favTen.CommandText = "SELECT FavTenantID FROM FavoritedTenants WHERE HostID =" + Session["AccountId"] + "AND TenantID=" + ddRecipient.SelectedValue; 
         favTenID = Convert.ToInt32(favTen.ExecuteScalar());
-        favTen.ExecuteNonQuery();
+
         //Appointment added into Database
         Appointment newAppt = new Appointment(DateTime.Parse(txtDate.Text), favTenID);
-        insert.CommandText = "INSERT into Appointment VALUES (@date, favTenID) ; ";
+        insert.CommandText = "INSERT into Appointment VALUES (@date, @favTenID) ; ";
         insert.Parameters.Add(new SqlParameter("@date", newAppt.getDate()));
+        insert.Parameters.Add(new SqlParameter("@favTenID", favTenID));
 
-        //insert.ExecuteNonQuery();
+        insert.ExecuteNonQuery();
         sc.Close();
+
+        txtDate.Text = "";
+        ddRecipient.ClearSelection();
     }
 
     protected void btnAddRoom_Click(object sender, EventArgs e)
@@ -311,7 +316,8 @@ public partial class HostDashboard : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
         insert.Connection = sc;
 
-        insert.CommandText = "INSERT INTO PropertyRoom Values(@price, @aboutProperty, @kitchen, @HVAC, @Wifi, @privateBR, @washAndDry, @WalkInCloset, NULL)";
+        insert.CommandText = "INSERT INTO PropertyRoom Values(@price, @aboutProperty, @kitchen, @HVAC, @Wifi, @privateBR, @washAndDry, @WalkInCloset, @PropertyID)";
+        
         //Variables for types of ammentites
         int kitchen;
         int HVAC;
@@ -332,17 +338,18 @@ public partial class HostDashboard : System.Web.UI.Page
         else { WashAndDry = 0; }
         if (cbWalkInClos.Checked == true) { WalkInCloset = 1; }
         else { WalkInCloset = 0; }
-        //Adding fields into the database
+
+        string description = txtDescription.Text;
+
         insert.Parameters.Add(new SqlParameter("@price", txtPrice.Text));
-        insert.Parameters.Add(new SqlParameter("@price", Request.Form["txtDescription"]));
-        insert.Parameters.Add(new SqlParameter("@price", kitchen));
-        insert.Parameters.Add(new SqlParameter("@price", HVAC));
-        insert.Parameters.Add(new SqlParameter("@price", Wifi));
-        insert.Parameters.Add(new SqlParameter("@price", PrivateBR));
-        insert.Parameters.Add(new SqlParameter("@price", WashAndDry));
-        insert.Parameters.Add(new SqlParameter("@price", WalkInCloset));
-        insert.Parameters.Add(new SqlParameter("@price", txtPrice.Text));
-        //Execute the Statement
+        insert.Parameters.Add(new SqlParameter("@aboutProperty", description));
+        insert.Parameters.Add(new SqlParameter("@kitchen", kitchen));
+        insert.Parameters.Add(new SqlParameter("@HVAC", HVAC));
+        insert.Parameters.Add(new SqlParameter("@Wifi", Wifi));
+        insert.Parameters.Add(new SqlParameter("@privateBR", PrivateBR));
+        insert.Parameters.Add(new SqlParameter("@washAndDry", WashAndDry));
+        insert.Parameters.Add(new SqlParameter("@walkInCloset", WalkInCloset));
+
         insert.ExecuteNonQuery();
         //Close 
     }
