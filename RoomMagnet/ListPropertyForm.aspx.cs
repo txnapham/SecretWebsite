@@ -42,7 +42,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
         }
     }
 
-    SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+    SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
 
     protected void Page_Load(object sender, EventArgs e)
     {

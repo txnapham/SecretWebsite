@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 public partial class AdminDashboard : System.Web.UI.Page
 {
     //sc Connection
-    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
     protected void Page_PreInit(object sender, EventArgs e)
     {
         if (Session["type"] != null)
