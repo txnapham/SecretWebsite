@@ -61,7 +61,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-7">
                         <asp:RequiredFieldValidator ID="cityReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a city." ControlToValidate="txtCity" Text="*Please enter a city"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[a-zA-Z_ ]+$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[0-9a-zA-Z_ -]+$"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtCity" runat="server" class="form-control form-control-lg" placeholder="City"></asp:TextBox>
                     </div>
 
@@ -616,6 +616,7 @@
                 <asp:FileUpload ID="FileUploadControl" runat="server" AllowMultiple="False" />
                 <asp:Button runat="server" ID="FilesUpload" Text="Save to Property" AutoPostBack="false" OnClientClick="FileUpload1_Click" />
                 <br />
+                <asp:Label ID="resultLabel" runat="server" Visible="false" Text="Successfully Uploaded Property"></asp:Label>
                 <br />
                 <asp:Label runat="server" ID="StatusLabel" Text="Upload status: " />
             </div>

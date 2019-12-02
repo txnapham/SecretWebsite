@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Text;
 using System.Configuration;
+using awsTestUpload;
+using System.IO;
 
 public partial class HostEditProfile : System.Web.UI.Page
 {
@@ -36,6 +38,7 @@ public partial class HostEditProfile : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Only Hosts Allowed to Do This 
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
             if (IsPostBack != true)
@@ -67,6 +70,7 @@ public partial class HostEditProfile : System.Web.UI.Page
 
                 sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
                 sc.Open();
+                //Search Query 
                 System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
                 search.Connection = sc;
                 search.CommandText = "SELECT HomeNumber, Street, City, HomeState, Country, Zip, PhoneNumber, Email FROM Account WHERE AccountID = " + accountID + ";";
@@ -84,11 +88,14 @@ public partial class HostEditProfile : System.Web.UI.Page
                     txtPhone.Text = searching.GetString(6);
                     txtEmail.Text = searching.GetString(7);
                 }
+                //SQL Statement
                 System.Data.SqlClient.SqlCommand character = new System.Data.SqlClient.SqlCommand();
+                //Connection
                 character.Connection = sc;
                 sc.Close();
                 character.CommandText = "SELECT * from [Characteristics] where AccountID =" + Session["AccountId"] + ";";
                 sc.Open();
+                //Seeing if any matches with the characteristics
                 SqlDataReader rdr = character.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -162,7 +169,7 @@ public partial class HostEditProfile : System.Web.UI.Page
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
-
+        //Save  all updated information 
         System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
         update.Connection = sc;
         update.CommandText = "UPDATE Account SET PhoneNumber = @number, Email = @email, HomeNumber = @HouseNbr, Street = @street, City = @city, HomeState = @state, " +
@@ -179,7 +186,7 @@ public partial class HostEditProfile : System.Web.UI.Page
 
         update.ExecuteNonQuery();
         sc.Close();
-
+        //Variables for characteristics
         int English;
         int Mandarin;
         int German;
@@ -193,7 +200,7 @@ public partial class HostEditProfile : System.Web.UI.Page
         int Extrovert;
         int TechSavvy;
         int NonSmoker;
-
+        //Change value in database if checked 
         if (cbEnglish.Checked == true)
         {
             English = 1;
@@ -299,15 +306,16 @@ public partial class HostEditProfile : System.Web.UI.Page
             NonSmoker = 0;
         }
         sc.Open();
-
+        //SQL Statement
         System.Data.SqlClient.SqlCommand charCheck = new System.Data.SqlClient.SqlCommand();
         System.Data.SqlClient.SqlCommand charInsertUpdate = new System.Data.SqlClient.SqlCommand();
+        //Connection 
         charCheck.Connection = sc;
         charInsertUpdate.Connection = sc;
 
         charCheck.CommandText = "SELECT COUNT(*) FROM Characteristics WHERE AccountID=" + Session["AccountId"].ToString();
         int charExist = (int)charCheck.ExecuteScalar();
-
+        //Seeing what characteristics the host has, and putting them into the database
         if(charExist == 0)
         {
             charInsertUpdate.CommandText = "INSERT into Characteristics Values(" + Convert.ToInt32(HttpContext.Current.Session["AccountId"].ToString())
@@ -328,8 +336,10 @@ public partial class HostEditProfile : System.Web.UI.Page
 
     protected void btnChangePassword_Click(object sender, EventArgs e)
     {
+        //SQL Statement
         int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        //Connection
         System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection();
         sqlConn.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
@@ -343,14 +353,16 @@ public partial class HostEditProfile : System.Web.UI.Page
         findPass.Parameters.Add(new SqlParameter("@AccountID", accountID));
 
         SqlDataReader reader = findPass.ExecuteReader(); // create a reader
-
-        if (reader.HasRows) // if the email exists, it will continue
+        // If the email exists, it will continue
+        if (reader.HasRows) 
         {
-            while (reader.Read()) // this will read the single record that matches the entered email
+            // this will read the single record that matches the entered email
+            while (reader.Read()) 
             {
-                string storedHash = reader["PasswordHash"].ToString(); // store the database password into this variable
-
-                if (PasswordHash.ValidatePassword(txtPrevPassword.Text, storedHash)) // if the entered password matches what is stored, it will allow for password change
+                // store the database password into this variable
+                string storedHash = reader["PasswordHash"].ToString();
+                // If the entered password matches what is stored, it will allow for password change
+                if (PasswordHash.ValidatePassword(txtPrevPassword.Text, storedHash)) 
                 {
                     System.Data.SqlClient.SqlCommand newPass = new System.Data.SqlClient.SqlCommand();
                     newPass.Connection = sqlConn;
@@ -370,7 +382,50 @@ public partial class HostEditProfile : System.Web.UI.Page
         }
         else // if the account doesn't exist, it will show failure
 
+            //LABEL FOR FAILURE
         sc.Close();
     }
+
+    protected void HostImageUpload_Click(object sender, EventArgs e)
+    {
+        if (HostImageUpload.HasFile)
+        {
+            // Upload image to S3
+            Random rnd = new Random();
+            int imageUniqueID = rnd.Next(1, 10000);
+            Stream st = HostImageUpload.PostedFile.InputStream;
+            string name = Path.GetFileName(HostImageUpload.FileName);
+            string myBucketName = "elasticbeanstalk-us-east-1-606091308774"; //your s3 bucket name goes here  
+            string s3DirectoryName = "UserImages";
+            string s3FileName = imageUniqueID.ToString() + @name;
+            bool a;
+            AmazonUploader myUploader = new AmazonUploader();
+            a = myUploader.sendMyFileToS3(st, myBucketName, s3DirectoryName, s3FileName);
+
+            // Grab AccountID to update correct account
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+            System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
+            update.Connection = sc;
+            sc.Open();
+
+            update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@HostID", Session["AccountID"]));
+            update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@imagefilename", s3FileName));
+            update.CommandText = "UPDATE Account SET AccountImage = @imagefilename WHERE AccountID = @HostID";
+
+            string check = update.CommandText;
+            Console.Write(check);
+            update.ExecuteNonQuery();
+
+            sc.Close();
+
+            StatusLabel.Text = "Looking good!";
+        }
+        else
+        {
+            StatusLabel.Text = "";
+        }
+    }
+
 
 }

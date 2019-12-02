@@ -10,6 +10,7 @@ public partial class TenantIntentToLease : System.Web.UI.Page
 {
     protected void Page_PreInit(object sender, EventArgs e)
     {
+        //Access to Certain Account Types
         if (Session["type"] != null)
         {
             if ((int)Session["type"] == 1)
@@ -32,6 +33,7 @@ public partial class TenantIntentToLease : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Tenant Access
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
 

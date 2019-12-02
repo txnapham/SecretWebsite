@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 public partial class TenantAccountCategories : System.Web.UI.Page
 {
+    //Access to Page
     protected void Page_PreInit(object sender, EventArgs e)
     {
         if (Session["type"] != null)
@@ -32,6 +33,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Tenant Access
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
 
@@ -44,6 +46,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
 
     protected void btnSet_Click(object sender, EventArgs e)
     {
+        //Variables for Personality Characteristics
         int English;
         int Mandarin;
         int German;
@@ -57,7 +60,8 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         int Extrovert;
         int TechSavvy;
         int NonSmoker;
-
+        //Shows Which Attributes Are Selected 
+        //English
         if (cbEnglish.Checked == true)
         {
             English = 1;
@@ -66,6 +70,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             English = 0;
         }
+        //Mandarin
         if (cbMandarin.Checked == true)
         {
             Mandarin = 1;
@@ -74,6 +79,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             Mandarin = 0;
         }
+        //German
         if (cbGerman.Checked == true)
         {
             German = 1;
@@ -82,6 +88,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             German = 0;
         }
+        //Spanish
         if (cbSpanish.Checked == true)
         {
             Spanish = 1;
@@ -90,6 +97,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             Spanish = 0;
         }
+        //Japanese
         if (cbJapanese.Checked == true)
         {
             Japanese = 1;
@@ -98,6 +106,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             Japanese = 0;
         }
+        //French
         if (cbFrench.Checked == true)
         {
             French = 1;
@@ -106,6 +115,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             French = 0;
         }
+        //Early Riser
         if (cbEarlyRiser.Checked == true)
         {
             EarlyR = 1;
@@ -114,6 +124,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             EarlyR = 0;
         }
+        //Introvert
         if (cbIntrovert.Checked == true)
         {
             Introvert = 1;
@@ -122,6 +133,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             Introvert = 0;
         }
+        //Family Oriented
         if (cbFamily.Checked == true)
         {
             Family = 1;
@@ -130,6 +142,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             Family = 0;
         }
+        //Night Owl
         if (cbNightOwl.Checked == true)
         {
             Night = 1;
@@ -138,6 +151,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             Night = 0;
         }
+        //Extrovert
         if (cbExtrovert.Checked == true)
         {
             Extrovert = 1;
@@ -146,6 +160,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             Extrovert = 0;
         }
+        //TechSavvy
         if (cbTechSavy.Checked == true)
         {
             TechSavvy = 1;
@@ -154,6 +169,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         {
             TechSavvy = 0;
         }
+        //NonSmoking
         if (cbNonSmoker.Checked == true)
         {
             NonSmoker = 1;
@@ -168,7 +184,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         sc.Open();
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
         insert.Connection = sc;
-
+        //Add Personality Characteristic Values Inserted
         insert.CommandText = "INSERT into Characteristics Values(" + Convert.ToInt32(HttpContext.Current.Session["AccountId"].ToString())
             + ", " + Extrovert + ", " + Introvert + ", " + NonSmoker + ", " + EarlyR + ", " + Night + ", " + TechSavvy + ", " + Family +
             ", " + English + ", " + Spanish + ", " + Mandarin + ", " + Japanese + ", " + German + ", " + French + ");";
@@ -200,7 +216,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
             update.Connection = sc;
             sc.Open();
-
+            //Set Account Image
             update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TenantID", Session["AccountID"]));
             update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@imagefilename", s3FileName));
             update.CommandText = "UPDATE Account SET AccountImage = @imagefilename WHERE AccountID = @TenantID" ;

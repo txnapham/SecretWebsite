@@ -20,6 +20,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
 {
     protected void Page_PreInit(object sender, EventArgs e)
     {
+        //Gives access to certain profile types to see this page
         if (Session["type"] != null)
         {
             if ((int)Session["type"] == 1)
@@ -45,6 +46,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Allows hosts to see content
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
@@ -68,9 +70,10 @@ public partial class ListPropertyForm : System.Web.UI.Page
         }
         else
         {
+            //Creates a new property for that host
             Property newProperty = new Property(HttpUtility.HtmlEncode(txtHouseNum.Text), HttpUtility.HtmlEncode(txtStreet.Text), HttpUtility.HtmlEncode(txtCity.Text),
                 ddState.SelectedValue, HttpUtility.HtmlEncode(txtZip.Text), HttpUtility.HtmlEncode(txtCountry.Text));
-
+            //Different property ammenties
             if (cbStPark.Checked == true) newProperty.setStreetParking(1);
             else newProperty.setStreetParking(0);
 
@@ -98,6 +101,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
             if (cbHSS.Checked == true) newProperty.setHomeShareSmarter(1);
             else newProperty.setHomeShareSmarter(0);
 
+            //Type of property 
             int propertyType = Convert.ToInt16(RadioButtonList.SelectedIndex);
             if (propertyType == 0) newProperty.setPropertyType(1);
             else if (propertyType == 1) newProperty.setPropertyType(2);
@@ -113,7 +117,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
             sc.Open();
 
             string description = HttpUtility.HtmlEncode(Request.Form["descriptionBox"]);
-
+            //Add values into the property/to database
             insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propertyType", newProperty.getPropertyType()));
             insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@houseNum", newProperty.getHouseNumber()));
             insert.Parameters.Add(new System.Data.SqlClient.SqlParameter("@street", newProperty.getStreet()));
@@ -140,7 +144,11 @@ public partial class ListPropertyForm : System.Web.UI.Page
             insert.ExecuteNonQuery();
 
             sc.Close();
+            //Label for Successful Addition of Property
+            resultLabel.Visible = true;
+            resultLabel.Text = "Successfully Added New Property!";
 
+            //Clear form
             txtHouseNum.Text = "";
             txtStreet.Text = "";
             txtCity.Text = "";
@@ -161,7 +169,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
             imageLink.Connection = sc;
             sc.Open();
             int arrayImageId = 0;
-
+            //Images for property
             for (int i = 0; i < PropertyRoomImages.propertyRoomImagesArray.Count; i++)
             {
                 arrayImageId = Convert.ToInt32(PropertyRoomImages.propertyRoomImagesArray[i].ToString());
@@ -181,6 +189,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
 
             for (int i = 0; i < PropertyRoom.roomArray.Count; i++)
             {
+                //Add room to property
                 arrayRoomID = Convert.ToInt32(PropertyRoom.roomArray[i].ToString());
                 linkRooms.CommandText = "UPDATE PropertyRoom SET PropertyID = @propID WHERE RoomID = @roomID";
                 linkRooms.Parameters.Add(new System.Data.SqlClient.SqlParameter("@roomID", arrayRoomID));
@@ -207,7 +216,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
             bool a;
             AmazonUploader myUploader = new AmazonUploader();
             a = myUploader.sendMyFileToS3(st, myBucketName, s3DirectoryName, s3FileName);
-
+            //Insert image to property
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
             sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
             System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
@@ -240,6 +249,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
 
     protected void btnAddRoom_Click(object sender, EventArgs e)
     {
+        //Add a room to property
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
@@ -247,14 +257,14 @@ public partial class ListPropertyForm : System.Web.UI.Page
         insert.Connection = sc;
 
         insert.CommandText = "INSERT INTO PropertyRoom Values(@price, @aboutProperty, @kitchen, @HVAC, @Wifi, @privateBR, @washAndDry, @walkInCloset, NULL)";
-
+        //Variables for ammenities
         int kitchen;
         int HVAC;
         int Wifi;
         int PrivateBR;
         int WashAndDry;
         int WalkInCloset;
-
+        //Add certain ammenities picked to the proeprty profile
         if (cbKitchen.Checked == true) { kitchen = 1; }
         else { kitchen = 0; }
         if (cbHVAC.Checked == true) { HVAC = 1; }
@@ -268,7 +278,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
         if (cbWalkInClos.Checked == true) { WalkInCloset = 1; }
         else { WalkInCloset = 0; }
         string description = txtDescription.Text;
-
+        //Insert selected ammenities into property
         insert.Parameters.Add(new SqlParameter("@price", txtPrice.Text));
         insert.Parameters.Add(new SqlParameter("@aboutProperty", description));
         insert.Parameters.Add(new SqlParameter("@kitchen", kitchen));
@@ -279,6 +289,9 @@ public partial class ListPropertyForm : System.Web.UI.Page
         insert.Parameters.Add(new SqlParameter("@walkInCloset", WalkInCloset));
 
         insert.ExecuteNonQuery();
+        //Label for Ammenities Added
+        resultLabel.Visible = true;
+        resultLabel.Text = "Property and Ammenities Successfully Added!";
 
         System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
         select.Connection = sc;

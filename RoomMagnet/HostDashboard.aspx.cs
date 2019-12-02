@@ -265,6 +265,7 @@ public partial class HostDashboard : System.Web.UI.Page
     [System.Web.Script.Services.ScriptMethod]
     public static void MessageInsert(int tenantID, int hostID)
     {
+        //Add favorited tenants into the Host Message Dashboard
         System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
 
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
@@ -278,7 +279,9 @@ public partial class HostDashboard : System.Web.UI.Page
     }
     protected void btnCreateAppt_Click(object sender, EventArgs e)
     {
+        //SQL Statement
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        //Connection
         sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
@@ -290,6 +293,7 @@ public partial class HostDashboard : System.Web.UI.Page
         favTen.CommandText = "SELECT FavTenantID FROM FavoritedTenants WHERE HostID =" + Session["AccountId"] + "AND TenantID=" + ddRecipient.SelectedValue; 
         favTenID = Convert.ToInt32(favTen.ExecuteScalar());
 
+        //Appointment added into Database
         Appointment newAppt = new Appointment(DateTime.Parse(txtDate.Text), favTenID);
         insert.CommandText = "INSERT into Appointment VALUES (@date, @favTenID) ; ";
         insert.Parameters.Add(new SqlParameter("@date", newAppt.getDate()));
@@ -304,21 +308,24 @@ public partial class HostDashboard : System.Web.UI.Page
 
     protected void btnAddRoom_Click(object sender, EventArgs e)
     {
+        //SQl Statement
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+        //Connection
         sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
         insert.Connection = sc;
 
         insert.CommandText = "INSERT INTO PropertyRoom Values(@price, @aboutProperty, @kitchen, @HVAC, @Wifi, @privateBR, @washAndDry, @WalkInCloset, @PropertyID)";
-
+        
+        //Variables for types of ammentites
         int kitchen;
         int HVAC;
         int Wifi;
         int PrivateBR;
         int WashAndDry;
         int WalkInCloset;
-
+        //Changing the Status of these ammentities in Database
         if (cbKitchen.Checked == true) { kitchen = 1; }
         else { kitchen = 0; }
         if (cbHVAC.Checked == true) { HVAC = 1; }
@@ -331,6 +338,7 @@ public partial class HostDashboard : System.Web.UI.Page
         else { WashAndDry = 0; }
         if (cbWalkInClos.Checked == true) { WalkInCloset = 1; }
         else { WalkInCloset = 0; }
+
         string description = txtDescription.Text;
 
         insert.Parameters.Add(new SqlParameter("@price", txtPrice.Text));
@@ -343,5 +351,6 @@ public partial class HostDashboard : System.Web.UI.Page
         insert.Parameters.Add(new SqlParameter("@walkInCloset", WalkInCloset));
 
         insert.ExecuteNonQuery();
+        //Close 
     }
 }

@@ -5,11 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.IO;
+using awsTestUpload;
 
 public partial class TenantEditProfile : System.Web.UI.Page
 {
     protected void Page_PreInit(object sender, EventArgs e)
     {
+        //Access to Page for Certain Account Types
         if (Session["type"] != null)
         {
             if ((int)Session["type"] == 1)
@@ -32,6 +35,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Tenant Access
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
             if (IsPostBack != true)
@@ -62,59 +66,74 @@ public partial class TenantEditProfile : System.Web.UI.Page
                 //Checks for characterisitcs
                 System.Data.SqlClient.SqlCommand character = new System.Data.SqlClient.SqlCommand();
                 character.Connection = sc;
+                //Show Current Characteristics Query
                 character.CommandText = "SELECT * from [Characteristics] where AccountID =" + Session["AccountId"] + ";";
                 sc.Open();
                 SqlDataReader rdr = character.ExecuteReader();
+                //Show Current Characteristics Results
                 while (rdr.Read())
                 {
+                    //Extrovert 
                     if (rdr["Extrovert"].ToString() == "1")
                     {
                         cbExtrovert.Checked = true;
                     }
+                    //Introvert
                     if (rdr["Introvert"].ToString() == "1")
                     {
                         cbIntrovert.Checked = true;
                     }
+                    //NonSmoking
                     if (rdr["NonSmoker"].ToString() == "1")
                     {
                         cbNonSmoker.Checked = true;
                     }
+                    //Early Riser
                     if (rdr["EarlyRiser"].ToString() == "1")
                     {
                         cbEarlyRiser.Checked = true;
                     }
+                    //Night Owl
                     if (rdr["NightOwl"].ToString() == "1")
                     {
                         cbNightOwl.Checked = true;
                     }
+                    //TechSavvy
                     if (rdr["TechSavvy"].ToString() == "1")
                     {
                         cbTechSavy.Checked = true;
                     }
+                    //FamilyOriented
                     if (rdr["FamilyOriented"].ToString() == "1")
                     {
                         fbFamily.Checked = true;
                     }
+                    //English
                     if (rdr["English"].ToString() == "1")
                     {
                         cbEnglish.Checked = true;
                     }
+                    //Spanish
                     if (rdr["Spanish"].ToString() == "1")
                     {
                         cbSpanish.Checked = true;
                     }
+                    //Mandarin
                     if (rdr["Mandarin"].ToString() == "1")
                     {
                         cbMandarin.Checked = true;
                     }
+                    //Japanese
                     if (rdr["Japanese"].ToString() == "1")
                     {
                         cbJapanese.Checked = true;
                     }
+                    //German
                     if (rdr["German"].ToString() == "1")
                     {
                         cbGerman.Checked = true;
                     }
+                    //French
                     if (rdr["French"].ToString() == "1")
                     {
                         cbFrench.Checked = true;
@@ -137,6 +156,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
 
+        //Update the Account Address
         System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
         update.Connection = sc;
         update.CommandText = "UPDATE Account SET PhoneNumber = @number, Email = @email, HomeNumber = @HouseNbr, Street = @street, City = @city, HomeState = @state, " +
@@ -153,7 +173,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
 
         update.ExecuteNonQuery();
         sc.Close();
-
+        //Characteristic Variables
         int English;
         int Mandarin;
         int German;
@@ -167,7 +187,9 @@ public partial class TenantEditProfile : System.Web.UI.Page
         int Extrovert;
         int TechSavvy;
         int NonSmoker;
-
+        //Changing Characteristic Preferences//////////////
+        //Languages
+        //English
         if (cbEnglish.Checked == true)
         {
             English = 1;
@@ -176,6 +198,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             English = 0;
         }
+        //Mandarin
         if (cbMandarin.Checked == true)
         {
             Mandarin = 1;
@@ -184,6 +207,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             Mandarin = 0;
         }
+        //German
         if (cbGerman.Checked == true)
         {
             German = 1;
@@ -192,6 +216,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             German = 0;
         }
+        //Spanish
         if (cbSpanish.Checked == true)
         {
             Spanish = 1;
@@ -200,6 +225,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             Spanish = 0;
         }
+        //Japanese
         if (cbJapanese.Checked == true)
         {
             Japanese = 1;
@@ -208,6 +234,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             Japanese = 0;
         }
+        //French
         if (cbFrench.Checked == true)
         {
             French = 1;
@@ -216,6 +243,8 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             French = 0;
         }
+        //LifeStyle Characteristics
+        //Early Riser
         if (cbEarlyRiser.Checked == true)
         {
             EarlyR = 1;
@@ -224,6 +253,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             EarlyR = 0;
         }
+        //Introvert
         if (cbIntrovert.Checked == true)
         {
             Introvert = 1;
@@ -232,6 +262,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             Introvert = 0;
         }
+        //Family Oriented
         if (fbFamily.Checked == true)
         {
             Family = 1;
@@ -240,6 +271,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             Family = 0;
         }
+        //Night Owl
         if (cbNightOwl.Checked == true)
         {
             Night = 1;
@@ -248,6 +280,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             Night = 0;
         }
+        //Extrovert
         if (cbExtrovert.Checked == true)
         {
             Extrovert = 1;
@@ -256,6 +289,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             Extrovert = 0;
         }
+        //Tech Savvy
         if (cbTechSavy.Checked == true)
         {
             TechSavvy = 1;
@@ -264,6 +298,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
         {
             TechSavvy = 0;
         }
+        //NonSmoker
         if (cbNonSmoker.Checked == true)
         {
             NonSmoker = 1;
@@ -312,16 +347,18 @@ public partial class TenantEditProfile : System.Web.UI.Page
         // SELECT PASSWORD STRING WHERE THE ENTERED USERNAME MATCHES
         findPass.CommandText = "SELECT PasswordHash from Password where AccountID = @AccountID";
         findPass.Parameters.Add(new SqlParameter("@AccountID", accountID));
-
-        SqlDataReader reader = findPass.ExecuteReader(); // create a reader
-
-        if (reader.HasRows) // if the email exists, it will continue
+        // create a reader
+        SqlDataReader reader = findPass.ExecuteReader(); 
+        // if the email exists, it will continue
+        if (reader.HasRows)
         {
-            while (reader.Read()) // this will read the single record that matches the entered email
+            // this will read the single record that matches the entered email
+            while (reader.Read()) 
             {
-                string storedHash = reader["PasswordHash"].ToString(); // store the database password into this variable
-
-                if (PasswordHash.ValidatePassword(txtPrevPassword.Text, storedHash)) // if the entered password matches what is stored, it will allow for password change
+                // store the database password into this variable
+                string storedHash = reader["PasswordHash"].ToString();
+                // if the entered password matches what is stored, it will allow for password change
+                if (PasswordHash.ValidatePassword(txtPrevPassword.Text, storedHash)) 
                 {
                     System.Data.SqlClient.SqlCommand newPass = new System.Data.SqlClient.SqlCommand();
                     newPass.Connection = sqlConn;
@@ -342,6 +379,47 @@ public partial class TenantEditProfile : System.Web.UI.Page
         else // if the account doesn't exist, it will show failure
 
             sc.Close();
+    }
+
+    protected void TenantImageUpload_Click(object sender, EventArgs e)
+    {
+        if (TenantImageUpload.HasFile)
+        {
+            // Upload image to S3
+            Random rnd = new Random();
+            int imageUniqueID = rnd.Next(1, 10000);
+            Stream st = TenantImageUpload.PostedFile.InputStream;
+            string name = Path.GetFileName(TenantImageUpload.FileName);
+            string myBucketName = "elasticbeanstalk-us-east-1-606091308774"; //your s3 bucket name goes here  
+            string s3DirectoryName = "UserImages";
+            string s3FileName = imageUniqueID.ToString() + @name;
+            bool a;
+            AmazonUploader myUploader = new AmazonUploader();
+            a = myUploader.sendMyFileToS3(st, myBucketName, s3DirectoryName, s3FileName);
+
+            // Grab AccountID to update correct account
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+            sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+            System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
+            update.Connection = sc;
+            sc.Open();
+
+            update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@TenantID", Session["AccountID"]));
+            update.Parameters.Add(new System.Data.SqlClient.SqlParameter("@imagefilename", s3FileName));
+            update.CommandText = "UPDATE Account SET AccountImage = @imagefilename WHERE AccountID = @TenantID";
+
+            string check = update.CommandText;
+            Console.Write(check);
+            update.ExecuteNonQuery();
+
+            sc.Close();
+
+            StatusLabel.Text = "Looking good!";
+        }
+        else
+        {
+            StatusLabel.Text = "";
+        }
     }
 
 }
