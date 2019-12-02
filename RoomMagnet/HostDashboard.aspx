@@ -181,7 +181,9 @@
                                     <asp:Literal ID="properties" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>
                                 <!--BUTTON-->
-                                <!--END OF BUTTON-->
+                                <div class=" text-center">
+                                    <a href="EditProperty.aspx" class="btn btn-info">Edit Properties</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -633,7 +635,7 @@
         </section>
     </div>
     <!--END OF DASHBOARD CARDS-->
-    <!-- OpenTok.js library -->
+   <%-- <!-- OpenTok.js library -->
             <script src="https://static.opentok.com/v2/js/opentok.js"></script>
             <script>
 
@@ -660,6 +662,6 @@
                 });
 
 
-            </script>
+            </script>--%>
 </asp:Content>
 

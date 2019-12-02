@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 public partial class TenantMessageCenter : System.Web.UI.Page
 {
-    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
 
     protected void Page_PreInit(object sender, EventArgs e)
     {
@@ -42,7 +42,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         {
             Message.Text = String.Empty;
 
-            System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+            System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
 
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             select.CommandText = "select accountID, firstName, LastName, AccountImage from account where AccountID in (select HostID from Host where HostID in " +

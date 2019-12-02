@@ -1,16 +1,23 @@
-﻿using System;
+﻿using PdfSharp;
+using PdfSharp.Pdf;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 public partial class HostMessageCenter : System.Web.UI.Page
 {
-    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
 
     protected void Page_PreInit(object sender, EventArgs e)
     {
@@ -42,7 +49,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
         {
             Message.Text = String.Empty;
             //Connection 
-            System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+            System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
             //SQL Statement to Select Favorited Tenant onto Message Center
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             select.CommandText = "select accountID, firstName, LastName, AccountImage from account where AccountID in (select tenantID from tenant where TenantID in " +
@@ -199,5 +206,62 @@ public partial class HostMessageCenter : System.Web.UI.Page
     public static void CreateLease()
     {
 
+    }
+
+    protected void createLeaseBtn_Click(object sender, EventArgs e)
+    {
+        //Generates PDF and uploads to aws
+        PdfDocument pdf = PdfGenerator.GeneratePdf("<p><h1>Hello World</h1>This is html rendered text</p>", PageSize.A4);
+        pdf.Save("Lease.pdf");//NEED PATH FOR LEASE FOLDER
+
+        //Fetching Settings from WEB.CONFIG file.  
+        string emailSender = ConfigurationManager.AppSettings["username"].ToString();
+        string emailSenderPassword = ConfigurationManager.AppSettings["password"].ToString();
+        string emailSenderHost = ConfigurationManager.AppSettings["smtp"].ToString();
+        int emailSenderPort = Convert.ToInt16(ConfigurationManager.AppSettings["portnumber"]);
+        Boolean emailIsSSL = Convert.ToBoolean(ConfigurationManager.AppSettings["IsSSL"]);
+        string subject = "Roommagnet Intent to Lease";
+
+        //Base class for sending email  
+        MailMessage _mailmsg = new MailMessage();
+
+        //Make TRUE because our body text is html  
+        _mailmsg.IsBodyHtml = true;
+
+        //Set From Email ID  
+        _mailmsg.From = new MailAddress(emailSender);
+
+        //Set To Email ID  
+        _mailmsg.To.Add("kylermsnell@gmail.com");
+        //_mailmsg.To.Add(hostEmail);
+
+        //Set Subject  
+        _mailmsg.Subject = subject;
+
+        //Set Body Text of Email   
+        _mailmsg.Body = "Please review attached Intent to Lease form.";
+
+        //Add Lease PDF to email
+        Attachment data = new Attachment(pdf.ToString(), MediaTypeNames.Application.Octet);
+        _mailmsg.Attachments.Add(data);
+
+        //Now set your SMTP   
+        SmtpClient _smtp = new SmtpClient();
+
+        //Set HOST server SMTP detail  
+        _smtp.Host = emailSenderHost;
+
+        //Set PORT number of SMTP  
+        _smtp.Port = emailSenderPort;
+
+        //Set SSL --> True / False  
+        _smtp.EnableSsl = emailIsSSL;
+
+        //Set Sender UserEmailID, Password  
+        NetworkCredential _network = new NetworkCredential(emailSender, emailSenderPassword);
+        _smtp.Credentials = _network;
+
+        //Send Method will send your MailMessage create above.  
+        _smtp.Send(_mailmsg);
     }
 }

@@ -8,7 +8,7 @@ using System.Configuration;
 
 public partial class RegisteredTenants : System.Web.UI.Page
 {
-    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
     List<BackgroundStatus> backStatusL = new List<BackgroundStatus>();
     int searchCheck = 0;
 

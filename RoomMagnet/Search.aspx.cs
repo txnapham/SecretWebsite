@@ -16,7 +16,7 @@ using System.Web.Script.Serialization;
 
 public partial class Search : System.Web.UI.Page
 {
-    System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+    System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
     protected void Page_PreInit(object sender, EventArgs e)
     {
         //Gives access to certain account types
@@ -79,7 +79,7 @@ public partial class Search : System.Web.UI.Page
 
         if (searchCheck == true)
         {
-            SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+            SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
             sqlConn.Open();
             //City
             String tSearch = HttpUtility.HtmlEncode(searchString);

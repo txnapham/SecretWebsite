@@ -41,11 +41,11 @@ function initializeSession() {
     });
 
     // Create a publisher
-    var publisher = OT.initPublisher('publisher', {
-        insertMode: 'append',
-        width: '100%',
-        height: '100%'
-    }, handleError);
+    //var publisher = OT.initPublisher('publisher', {
+    //    insertMode: 'append',
+    //    width: '100%',
+    //    height: '100%'
+    //}, handleError);
 
     // Connect to the session
     session.connect(token, function (error) {
@@ -56,7 +56,6 @@ function initializeSession() {
             session.publish(publisher, handleError);
         }
     });
-
 }
 
 //Use the session ID in an OpenTok client library to connect to an OpenTok session.
