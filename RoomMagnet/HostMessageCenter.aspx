@@ -4,7 +4,7 @@
     <title>RoomMagnet | Message Center</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
  </asp:ScriptManager>
 <script>
     function createLease() {
@@ -151,7 +151,7 @@
                     </div>
 
                     <div>
-                        <a href="HostCreateLease.aspx" class="btn btn-light createLeaseButton btn-block">Create Lease</a>
+                        <asp:Button ID="createLeaseBtn" runat="server" Text="Create Lease" class="btn btn-light createLeaseButton btn-block" OnClick="createLeaseBtn_Click"></asp:Button>
                         
 
                         <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
