@@ -65,7 +65,16 @@ public partial class HostDashboard : System.Web.UI.Page
             sc.Open();
 
             int charCheck = (int)alert1Comm.ExecuteScalar();
-            int backStatusCheck = (int)alert2Comm.ExecuteScalar();
+            int backStatusCheck = 0;
+
+            if(alert2Comm.ExecuteScalar() is DBNull)
+            {
+
+            }
+            else
+            {
+                backStatusCheck = (int)alert2Comm.ExecuteScalar();
+            }
 
             //Populating Tenant Part of Host Dashboard
             System.Data.SqlClient.SqlDataReader readerHostImage = selectHost.ExecuteReader();

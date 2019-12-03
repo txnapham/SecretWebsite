@@ -80,6 +80,26 @@ public partial class EditProperty : System.Web.UI.Page
                 //HostCard.Text += hostImage.ToString();
             }
             sc.Close();
+
+            sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
+            sc.Open();
+            //Search Query 
+            System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
+            search.Connection = sc;
+            search.CommandText = "SELECT HouseNumber, Street, City, HomeState, Zip, Country, RoomPriceRangeLow, RoomPriceRangeHigh," +
+                "StreetParking, GarageParking, PorchOrDeck, Pool, NonSmoking FROM Property WHERE HostID = " + accountID + ";";
+            SqlDataReader searching = search.ExecuteReader();
+
+            //checks the database for matches
+            if (searching.Read())
+            {
+                txtHouseNum.Text = searching.GetString(0);
+                txtStreet.Text = searching.GetString(1);
+                txtCity.Text = searching.GetString(2);
+                ddState.SelectedValue = searching.GetString(3);
+                txtZip.Text = searching.GetString(4);
+                txtCountry.Text = searching.GetString(5);
+            }
         }
         else
         {

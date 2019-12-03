@@ -212,7 +212,19 @@ public partial class HostMessageCenter : System.Web.UI.Page
     {
         //Generates PDF and uploads to aws
         PdfDocument pdf = PdfGenerator.GeneratePdf("<p><h1>Hello World</h1>This is html rendered text</p>", PageSize.A4);
-        pdf.Save("Lease.pdf");//NEED PATH FOR LEASE FOLDER
+        pdf.Save("UserLease/Lease.pdf");//NEED PATH FOR LEASE FOLDER
+
+        // Upload image to S3
+        //Random rnd = new Random();
+        //int imageUniqueID = rnd.Next(1, 10000);
+        //Stream st = pdf;
+        //string name = Path.GetFileName(HostImageUpload.FileName);
+        //string myBucketName = "elasticbeanstalk-us-east-1-606091308774"; //your s3 bucket name goes here  
+        //string s3DirectoryName = "UserImages";
+        //string s3FileName = imageUniqueID.ToString() + @name;
+        //bool a;
+        //AmazonUploader myUploader = new AmazonUploader();
+        //a = myUploader.sendMyFileToS3(myBucketName, s3DirectoryName, s3FileName);
 
         //Fetching Settings from WEB.CONFIG file.  
         string emailSender = ConfigurationManager.AppSettings["username"].ToString();

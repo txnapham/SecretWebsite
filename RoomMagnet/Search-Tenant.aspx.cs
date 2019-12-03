@@ -136,7 +136,6 @@ public partial class Search_Tenant : System.Web.UI.Page
 
                 name.Text += myCard.ToString();
                 resultCount++;
-                reader.Close();
                 Session["Search"] = null;            
                 }
                 
