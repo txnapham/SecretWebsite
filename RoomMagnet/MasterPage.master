@@ -58,7 +58,7 @@
                         </li>
                         <li>
                             <button class="nav-item btn loginBUTTON" type="button" data-toggle="modal" data-target="#loginModal">
-                                <a class="nav-link" href="#">Login</a>
+                                <a class="nav-link" href="#">Login/Create Account</a>
                             </button>
                         </li>
                     </ul>
