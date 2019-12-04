@@ -118,6 +118,10 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         {
             viewLeaseBtn.Visible = true;
         }
+        else if(agreed == 1)
+        {
+            viewLeaseBtn.Text = "Intent to Lease Signed";
+        }
     }
 
     public void loadMessages(int hostID)
