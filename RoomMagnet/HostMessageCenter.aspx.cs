@@ -225,11 +225,12 @@ public partial class HostMessageCenter : System.Web.UI.Page
         SqlCommand insertLease = new SqlCommand();
         insertLease.Connection = sc;
         sc.Open();
-        insertLease.CommandText = "INSERT INTO LEASE VALUES(@Date,@Tenant,@Host,@Agreed);";
+        insertLease.CommandText = "INSERT INTO LEASE VALUES(@Date,@Tenant,@Host,@Agreed,@PropertyID);";
         insertLease.Parameters.Add(new SqlParameter("@Date",DateTime.Now.ToString()));
         insertLease.Parameters.Add(new SqlParameter("@Tenant",tenantID));
         insertLease.Parameters.Add(new SqlParameter("@Host",hostID));
         insertLease.Parameters.Add(new SqlParameter("@Agreed", "0"));
+        insertLease.Parameters.Add(new SqlParameter("@PropertyID", ));
         insertLease.ExecuteNonQuery();
         sc.Close();
     }
