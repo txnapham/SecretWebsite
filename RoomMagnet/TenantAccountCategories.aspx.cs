@@ -180,7 +180,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
         }
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.ConnectionString = "server=aays89wgdclvqs.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
         insert.Connection = sc;
@@ -212,7 +212,7 @@ public partial class TenantAccountCategories : System.Web.UI.Page
 
             // Grab AccountID to update correct account
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
+            sc.ConnectionString = "server=aays89wgdclvqs.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
             System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
             update.Connection = sc;
             sc.Open();

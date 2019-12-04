@@ -63,7 +63,7 @@ public partial class HostCreateAccount : System.Web.UI.Page
             else
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
+                sc.ConnectionString = "server=aays89wgdclvqs.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
                 sc.Open();
                 System.Data.SqlClient.SqlCommand checkEmailCount = new System.Data.SqlClient.SqlCommand();
                 System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
