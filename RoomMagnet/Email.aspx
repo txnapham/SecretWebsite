@@ -34,6 +34,8 @@
                 <a href="http://roommagnetjmu.com/Home.aspx">Click here to Login  
                 </a>
                 <br />
+                Be on the look out for background check from roommagent and intellicorp
+                <br />
                 Regards,  
                 <br />
                 <br />

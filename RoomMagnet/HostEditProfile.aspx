@@ -46,7 +46,15 @@
 
             <div class="row ">
                 <div class="col-sm-12 col-md-12 col-lg-12">
-
+                    <div class="form-group">
+                        <asp:TextBox ID="txtFN" runat="server" class="form-control form-control-lg" placeholder="First Name" MaxLength="10"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <asp:TextBox ID="txtMN" runat="server" class="form-control form-control-lg" placeholder="Middle Name" MaxLength="10"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <asp:TextBox ID="txtLN" runat="server" class="form-control form-control-lg" placeholder="Last Name" MaxLength="10"></asp:TextBox>
+                    </div>
                     <div class="form-group">
                         <asp:TextBox ID="txtHouseNum" runat="server" class="form-control form-control-lg" placeholder="House Number" MaxLength="10"></asp:TextBox>
                     </div>

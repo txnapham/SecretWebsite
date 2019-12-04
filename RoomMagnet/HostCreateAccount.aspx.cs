@@ -191,74 +191,74 @@ public partial class HostCreateAccount : System.Web.UI.Page
 
 
                     //send email if user has check the background checkbox
-                    if (cbBackCheck.Checked == true)
-                    {
-                        //Fetching Email Body Text from EmailTemplate File.  
-                        string FilePath2 = Server.MapPath("~/BackgroundEmail.aspx");
-                        StreamReader str2 = new StreamReader(FilePath);
-                        string MailText2 = str2.ReadToEnd();
-                        str2.Close();
+                    //if (cbBackCheck.Checked == true)
+                    //{
+                    //    //Fetching Email Body Text from EmailTemplate File.  
+                    //    string FilePath2 = Server.MapPath("~/BackgroundEmail.aspx");
+                    //    StreamReader str2 = new StreamReader(FilePath);
+                    //    string MailText2 = str2.ReadToEnd();
+                    //    str2.Close();
 
-                        //Replace [newusername] = signup user name   
-                        MailText2 = MailText.Replace("[newusername]", txtFN.Text.Trim());
-
-
-                        string subject2 = "Begin your Background Check!";
-
-                        //Base class for sending email  
-                        MailMessage _mailmsg2 = new MailMessage();
-
-                        //Make TRUE because our body text is html  
-                        _mailmsg2.IsBodyHtml = true;
-
-                        //Set From Email ID  
-                        _mailmsg2.From = new MailAddress(emailSender);
-
-                        //Set To Email ID  
-                        _mailmsg2.To.Add(txtEmail.Text.ToString());
-
-                        //Set Subject  
-                        _mailmsg2.Subject = subject2;
-
-                        //Set Body Text of Email   
-                        _mailmsg2.Body = MailText;
+                    //    //Replace [newusername] = signup user name   
+                    //    MailText2 = MailText.Replace("[newusername]", txtFN.Text.Trim());
 
 
-                        //Now set your SMTP   
-                        SmtpClient _smtp2 = new SmtpClient();
+                    //    string subject2 = "Begin your Background Check!";
 
-                        //Set HOST server SMTP detail  
-                        _smtp2.Host = emailSenderHost;
+                    //    //Base class for sending email  
+                    //    MailMessage _mailmsg2 = new MailMessage();
 
-                        //Set PORT number of SMTP  
-                        _smtp2.Port = emailSenderPort;
+                    //    //Make TRUE because our body text is html  
+                    //    _mailmsg2.IsBodyHtml = true;
 
-                        //Set SSL --> True / False  
-                        _smtp2.EnableSsl = emailIsSSL;
+                    //    //Set From Email ID  
+                    //    _mailmsg2.From = new MailAddress(emailSender);
 
-                        //Set Sender UserEmailID, Password  
-                        NetworkCredential _network2 = new NetworkCredential(emailSender, emailSenderPassword);
-                        _smtp2.Credentials = _network2;
+                    //    //Set To Email ID  
+                    //    _mailmsg2.To.Add(txtEmail.Text.ToString());
 
-                        //Send Method will send your MailMessage create above.  
-                        _smtp2.Send(_mailmsg2);
+                    //    //Set Subject  
+                    //    _mailmsg2.Subject = subject2;
 
-                        //Clear text boxes
-                        txtFN.Text = "";
-                        txtMN.Text = "";
-                        txtLN.Text = "";
-                        txtBday.Text = "";
-                        txtEmail.Text = "";
-                        txtPhone.Text = "";
-                        txtPassword.Text = "";
-                        txtHouseNum.Text = "";
-                        txtStreet.Text = "";
-                        txtCity.Text = "";
-                        ddState.ClearSelection();
-                        txtZip.Text = "";
+                    //    //Set Body Text of Email   
+                    //    _mailmsg2.Body = MailText;
 
-                        Response.Redirect("HostAccountCategories.aspx");
-                    }
+
+                    //    //Now set your SMTP   
+                    //    SmtpClient _smtp2 = new SmtpClient();
+
+                    //    //Set HOST server SMTP detail  
+                    //    _smtp2.Host = emailSenderHost;
+
+                    //    //Set PORT number of SMTP  
+                    //    _smtp2.Port = emailSenderPort;
+
+                    //    //Set SSL --> True / False  
+                    //    _smtp2.EnableSsl = emailIsSSL;
+
+                    //    //Set Sender UserEmailID, Password  
+                    //    NetworkCredential _network2 = new NetworkCredential(emailSender, emailSenderPassword);
+                    //    _smtp2.Credentials = _network2;
+
+                    //    //Send Method will send your MailMessage create above.  
+                    //    _smtp2.Send(_mailmsg2);
+
+                    //    //Clear text boxes
+                    //    txtFN.Text = "";
+                    //    txtMN.Text = "";
+                    //    txtLN.Text = "";
+                    //    txtBday.Text = "";
+                    //    txtEmail.Text = "";
+                    //    txtPhone.Text = "";
+                    //    txtPassword.Text = "";
+                    //    txtHouseNum.Text = "";
+                    //    txtStreet.Text = "";
+                    //    txtCity.Text = "";
+                    //    ddState.ClearSelection();
+                    //    txtZip.Text = "";
+
+                    //    Response.Redirect("HostAccountCategories.aspx");
+                    //}
 
 
                     //Clear text boxes

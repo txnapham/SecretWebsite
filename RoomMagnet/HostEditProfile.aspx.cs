@@ -73,20 +73,23 @@ public partial class HostEditProfile : System.Web.UI.Page
                 //Search Query 
                 System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
                 search.Connection = sc;
-                search.CommandText = "SELECT HomeNumber, Street, City, HomeState, Country, Zip, PhoneNumber, Email FROM Account WHERE AccountID = " + accountID + ";";
+                search.CommandText = "SELECT FirstName, ISNULL(MiddleName,''), LastName, HomeNumber, Street, City, HomeState, Country, Zip, PhoneNumber, Email FROM Account WHERE AccountID = " + accountID + ";";
                 SqlDataReader searching = search.ExecuteReader();
 
                 //checks the database for matches
                 if (searching.Read())
                 {
-                    txtHouseNum.Text = searching.GetString(0);
-                    txtStreet.Text = searching.GetString(1);
-                    txtCity.Text = searching.GetString(2);
-                    ddState.SelectedValue = searching.GetString(3);
-                    ddCountry.SelectedValue = searching.GetString(4);
-                    txtZip.Text = searching.GetString(5);
-                    txtPhone.Text = searching.GetString(6);
-                    txtEmail.Text = searching.GetString(7);
+                    txtFN.Text = searching.GetString(0);
+                    txtMN.Text = searching.GetString(1);
+                    txtLN.Text = searching.GetString(2);
+                    txtHouseNum.Text = searching.GetString(3);
+                    txtStreet.Text = searching.GetString(4);
+                    txtCity.Text = searching.GetString(5);
+                    ddState.SelectedValue = searching.GetString(6);
+                    ddCountry.SelectedValue = searching.GetString(7);
+                    txtZip.Text = searching.GetString(8);
+                    txtPhone.Text = searching.GetString(9);
+                    txtEmail.Text = searching.GetString(10);
                 }
                 //SQL Statement
                 System.Data.SqlClient.SqlCommand character = new System.Data.SqlClient.SqlCommand();
@@ -172,8 +175,11 @@ public partial class HostEditProfile : System.Web.UI.Page
         //Save  all updated information 
         System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
         update.Connection = sc;
-        update.CommandText = "UPDATE Account SET PhoneNumber = @number, Email = @email, HomeNumber = @HouseNbr, Street = @street, City = @city, HomeState = @state, " +
+        update.CommandText = "UPDATE Account SET FirstName = @fn, MiddleName = NULLIF(@mn,''), LastName = @ln, PhoneNumber = @number, Email = @email, HomeNumber = @HouseNbr, Street = @street, City = @city, HomeState = @state, " +
             "Country = @country, Zip = @zip WHERE AccountID = @accountID;";
+        update.Parameters.Add(new SqlParameter("@fn", txtFN.Text));
+        update.Parameters.Add(new SqlParameter("@mn", txtMN.Text));
+        update.Parameters.Add(new SqlParameter("@ln", txtLN.Text));
         update.Parameters.Add(new SqlParameter("@number", txtPhone.Text));
         update.Parameters.Add(new SqlParameter("@email", txtEmail.Text));
         update.Parameters.Add(new SqlParameter("@HouseNbr", this.txtHouseNum.Text));
