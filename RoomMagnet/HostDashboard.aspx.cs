@@ -87,8 +87,8 @@ public partial class HostDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder hostImage = new StringBuilder();
                 hostImage
-                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-header img-fluid\" width=\"30%\" height=\"auto\">")
-                    .Append("                Welcome " + tenantName + "!");
+                    .Append("<div> <img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-header img-fluid\" width=\"30%\" height=\"auto\">")
+                    .Append("                Welcome " + tenantName + "! </div>");
                 HostCard.Text += hostImage.ToString();
             }
             sc.Close();
@@ -113,20 +113,20 @@ public partial class HostDashboard : System.Web.UI.Page
 
             StringBuilder progressOneThird = new StringBuilder();
             progressOneThird
-                .Append("<div class=\"progress\" style=\"height: 30px; \">")
-                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:33%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("<div class=\"progress\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar1.png\" \">")
                 .Append("</div");
 
             StringBuilder progressTwoThird = new StringBuilder();
             progressTwoThird
-                .Append("<div class=\"progress\" style=\"height: 30px; \">")
-                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:66%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("<div class=\"progress\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar2.png\" \">")
                 .Append("</div");
 
             StringBuilder progressFull = new StringBuilder();
             progressFull
-                .Append("<div class=\"progress\" style=\"height: 30px; \">")
-                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:100%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("<div class=\"progress\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar3.png\" \">")
                 .Append("</div");
 
             if (charCheck == 0 && backStatusCheck == 0)
@@ -358,6 +358,7 @@ public partial class HostDashboard : System.Web.UI.Page
         insert.Parameters.Add(new SqlParameter("@privateBR", PrivateBR));
         insert.Parameters.Add(new SqlParameter("@washAndDry", WashAndDry));
         insert.Parameters.Add(new SqlParameter("@walkInCloset", WalkInCloset));
+        insert.Parameters.Add(new SqlParameter("@PropertyID", ddProperty.SelectedValue));
 
         insert.ExecuteNonQuery();
         //Close 

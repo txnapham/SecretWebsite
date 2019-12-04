@@ -191,11 +191,13 @@ public partial class ListPropertyForm : System.Web.UI.Page
             {
                 //Add room to property
                 arrayRoomID = Convert.ToInt32(PropertyRoom.roomArray[i].ToString());
-                linkRooms.CommandText = "UPDATE PropertyRoom SET PropertyID = @propID WHERE RoomID = @roomID";
-                linkRooms.Parameters.Add(new System.Data.SqlClient.SqlParameter("@roomID", arrayRoomID));
+                linkRooms.CommandText = "UPDATE PropertyRoom SET PropertyID = @propID WHERE RoomID = @insertRoom";
+                linkRooms.Parameters.Add(new System.Data.SqlClient.SqlParameter("@insertRoom", arrayRoomID));
                 linkRooms.Parameters.Add(new System.Data.SqlClient.SqlParameter("@propID", propertyID));
                 linkRooms.ExecuteNonQuery();
             }
+
+            PropertyRoom.roomArray.Clear();
             sc.Close();
 
             Response.Redirect("HostDashboard.aspx");
