@@ -48,7 +48,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
         if (!IsPostBack)
         {
             txtMessage.Visible = false;
-            aptBtn.Visible = false;
+            //aptBtn.Visible = false;
             videoChat.Visible = false;
             LinkButton2.Visible = false;
             createLeaseBtn.Visible = false;
@@ -106,7 +106,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
 
         loadMessages(tenantID);
         txtMessage.Visible = true;
-        aptBtn.Visible = true;
+        //aptBtn.Visible = true;
         videoChat.Visible = true;
         LinkButton2.Visible = true;
         createLeaseBtn.Visible = true;

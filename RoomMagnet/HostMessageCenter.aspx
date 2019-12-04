@@ -28,7 +28,7 @@
     </div>
     <!--END OF USER DASH-NAV-->--%>
 
-    <div class="container-fluid px-5">
+    <div class="container-fluid mt-5 px-5">
         <!--BREADCRUMBS-->
         <section>
             <nav aria-label="breadcrumb">
@@ -45,7 +45,7 @@
             <h3>Messages</h3>
         </div>
 
-        <section>
+<%--        <section>
             <div class="row">
                 <div class="col-md-12">
                     <h6>Notifications</h6>
@@ -66,7 +66,7 @@
                     <h5>Messages</h5>
                 </div>
             </div>
-        </section>
+        </section>--%>
 
         <!-- <section class=" shadow-sm ">
                 
@@ -152,8 +152,8 @@
 
                     <div>
                         <asp:Button ID="createLeaseBtn" runat="server" Text="Create Lease" class="btn btn-light createLeaseButton btn-block" OnClick="createLeaseBtn_Click"></asp:Button>
-                        <asp:Button ID="aptBtn" runat="server" Text="Create Appointment" class="btn createAppointmentButton btn-block"></asp:Button>
-                        <asp:Button ID="videoChat" runat="server" Text="Video Chat" class="btn btn-light vidChat btn-block" OnClick="videoChat_Click"></asp:Button>
+<%--                        <asp:Button ID="aptBtn" runat="server" Text="Create Appointment" class="btn createAppointmentButton btn-block"></asp:Button>--%>
+                        <asp:Button ID="videoChat" runat="server" Text="Video Chat" class="btn btn-light vidChat btn-block mb-4" OnClick="videoChat_Click"></asp:Button>
                     </div>
                 </div>
             </div>

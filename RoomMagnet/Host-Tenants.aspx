@@ -4,7 +4,7 @@
     <title>RoomMagnet | Dashboard | Tenants</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <!--USER DASH-NAV-->
+<%--    <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
@@ -18,11 +18,10 @@
         </div>
 
     </div>
-    <!--END OF USER DASH-NAV-->
+    <!--END OF USER DASH-NAV-->--%>
 
 
-
-    <div class="container-fluid px-5">
+    <div class="container-fluid mt-5 px-5">
         <!--BREADCRUMBS-->
         <section>
             <nav aria-label="breadcrumb">
@@ -39,7 +38,7 @@
             <h3>Tenants</h3>
         </div>
 
-        <section>
+<%--        <section>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <h6>Notification</h6>
@@ -52,7 +51,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>--%>
 
 
         <section>

@@ -4,7 +4,7 @@
     <title>RoomMagnet | List Property Form</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <!--USER DASH-NAV-->
+<%--    <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
@@ -13,11 +13,11 @@
         </div>
 
     </div>
-    <!--END OF USER DASH-NAV-->
+    <!--END OF USER DASH-NAV-->--%>
 
 
 
-    <div class="container-fluid px-5">
+    <div class="container-fluid mt-5 px-5">
 
         <!--BREADCRUMBS-->
         <section>
@@ -163,8 +163,8 @@
             </section>--%>
 
             <div>
-                <button type="button" class="btnbtn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#addRoom">
-                    Add Rooms
+                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-dismiss="modal" data-target="#addRoom">
+                    Add Room
                 </button>
             </div>
 

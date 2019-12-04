@@ -42,7 +42,7 @@
                     <!--PROPERTIES-->
                     <div class="card  shadow-sm  mb-4">
                         <div class="card-body">
-                            <h5 class="card-title dash-card-titles">Favorited Properties</h5>
+                            <h5 class="card-title dash-card-titles">Favorite Properties</h5>
 
                             <ul>
                                 <div class="row px-4 py-3">

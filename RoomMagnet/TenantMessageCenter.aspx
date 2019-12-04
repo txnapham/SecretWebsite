@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="container-fluid px-5">
+    <div class="container-fluid mt-5 px-5">
         <!--BREADCRUMBS-->
         <section>
             <nav aria-label="breadcrumb">
@@ -15,13 +15,15 @@
                 </ol>
             </nav>
         </section>
+
+
         <!--END OF BREADCRUMBS-->
 
         <div>
             <h3>Messages</h3>
         </div>
 
-        <section>
+<%--        <section>
             <div class="row">
                 <div class="col-md-12">
                     <h6>Notifications</h6>
@@ -42,7 +44,7 @@
                     <h5>Messages</h5>
                 </div>
             </div>
-        </section>
+        </section>--%>
 
 
 

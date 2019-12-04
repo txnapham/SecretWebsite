@@ -60,8 +60,8 @@
 
                                 </div>
 
-                                <!--HOST OR TENANT MOD-->
-                                <div class="modal justify-content-center" id="addRoom">
+                                <!--ADD ROOM MOD-->
+                                <div class="modal justify-content-center from-control" id="addRoom">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content pb-1">
 
@@ -78,7 +78,7 @@
 
                                                 <div class="form-group">
                                                     <%--<asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>--%>
-                                                    <asp:DropDownList ID="ddProperty" runat="server" AppendDataBoundItems="True" class="form-control" DataSourceID="propertyDataSource" DataTextField="Address" DataValueField="PropertyID">
+                                                    <asp:DropDownList ID="ddProperty" runat="server" AppendDataBoundItems="True" class="form-control form-control-lg" DataSourceID="propertyDataSource" DataTextField="Address" DataValueField="PropertyID">
                                                         <asp:ListItem>Please Select a Property</asp:ListItem>
                                                     </asp:DropDownList>
                                                     <asp:SqlDataSource ID="propertyDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:roommagnetdbConnectionString %>" SelectCommand="SELECT PropertyID, (HouseNumber + ' ' + Street + ', ' + City + ', ' + HomeState) AS Address FROM PROPERTY WHERE HostID = @AccountId">
