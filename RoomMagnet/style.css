@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+﻿h@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap");
 
 
@@ -240,7 +240,8 @@ a.cardLinks {
 }
 
 .favoriteHeartButton {
-    margin-right: 80px;
+    float: right;
+    //margin-right: 10px;
 }
 
 .creatAccountWelcome {
