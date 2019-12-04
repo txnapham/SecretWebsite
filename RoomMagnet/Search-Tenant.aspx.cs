@@ -87,6 +87,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         if (searchCheck == true)
         {
             SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
+            SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
             sqlConn.Open();
 
             String tSearch = HttpUtility.HtmlEncode(searchString);
@@ -111,6 +112,15 @@ public partial class Search_Tenant : System.Web.UI.Page
                 String priceRangeHigh = reader["RoomPriceRangeHigh"].ToString();
                 String filename = reader["images"].ToString();
                 if (filename == "") filename = "imagenotfound.png";
+
+                System.Data.SqlClient.SqlCommand modal = new System.Data.SqlClient.SqlCommand();
+                modal.Connection = sc;
+                modal.CommandText = "SELECT PropertyImages.images, PropertyRoom.AboutPropertyRoom " +
+                    "FROM PropertyImages INNER JOIN" +
+                    " Property ON PropertyImages.PropertyID = Property.PropertyID INNER JOIN" +
+                    "PropertyRoom ON Property.PropertyID = PropertyRoom.PropertyID" +
+                    "WHERE Property.PropertyID = 15";
+
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
                 //Displays property on card 
@@ -119,11 +129,11 @@ public partial class Search_Tenant : System.Web.UI.Page
                 .Append("<div class=\"col-xs-4 col-md-3\">")
                 .Append("   <div class=\"card  shadow-sm  mb-4\" >")
                 .Append("       <img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
-                .Append("       <a href=\"PropertyDetails.aspx\" class=\"cardLinks\">")
-                .Append("       <div class=\"card-body\">")
-                .Append("           <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
-                .Append("           <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
-                .Append("       </div>")
+                .Append("       <a data-toggle=\"modal\" href=\"#propDetailModal\" class=\"cardLinks\">")
+                .Append("           <div class=\"card-body\">")
+                .Append("               <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
+                .Append("               <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                .Append("           </div>")
                 .Append("       </a>")
                 .Append("       <div>")
                 .Append("           <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
@@ -131,8 +141,103 @@ public partial class Search_Tenant : System.Web.UI.Page
                                     "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
                 .Append("       </div>")
                 .Append("   </div>")
+                .Append("</div>")
+                .Append(" ")
+                .Append("<div class=\"modal\" id=\"propDetailModal\">")
+                .Append("    <div class=\"modal-dialog modal-lg\">")
+                .Append("        <div class=\"modal-content\">")
+                .Append("            <div class=\"modal-body\">")
+                .Append("                <div class=\"container-fluid searchpageDetailBodyContent pl-0 pr-0 mt-0\">")
+                .Append("                    <div id=\"carousel-thumb\" class=\"carousel slide carousel-fade carousel-thumbnails\" data-ride=\"carousel\">")
+                .Append("                        <div class=\"carousel-inner\" role=\"listbox\">")
+                .Append("                            <div class=\"carousel-item active\">")
+                .Append("                                <img class=\"d-block w-100\" src=\"images/anthony-rooke--NJO7AF0mUo-unsplash.jpg\"")
+                .Append("                                    alt=\"First slide\">")
+                .Append("                            </div>")
+                .Append("")
+                .Append("                            <div class=\"carousel-item\">")
+                .Append("                                <img class=\"d-block w-100\" src=\"images/loft-style-bedroom.jpg\"")
+                .Append("                                    alt=\"Second slide\">")
+                .Append("                            </div>")
+                .Append("")
+                .Append("                            <div class=\"carousel-item\">")
+                .Append("                                <img class=\"d-block w-100\" src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\"")
+                .Append("                                    alt=\"Third slide\">")
+                .Append("                            </div>")
+                .Append("                        </div>")
+                .Append("")
+                .Append("                        <a class=\"carousel-control-prev\" href=\"#carousel-thumb\" role=\"button\" data-slide=\"prev\">")
+                .Append("                            <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>")
+                .Append("                            <span class=\"sr-only\">Previous</span>")
+                .Append("                        </a>")
+                .Append("")
+                .Append("                        <a class=\"carousel-control-next\" href=\"#carousel-thumb\" role=\"button\" data-slide=\"next\">")
+                .Append("                            <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>")
+                .Append("                            <span class=\"sr-only\">Next</span>")
+                .Append("                        </a>")
+                .Append("")
+                .Append("                        <ol class=\"carousel-indicators\">")
+                .Append("                            <li data-target=\"#carousel-thumb\" data-slide-to=\"0\" class=\"active\">")
+                .Append("                                <img src=\"images/anthony-rooke--NJO7AF0mUo-unsplash.jpg\" width=\"100\">")
+                .Append("                            </li>")
+                .Append("                            <li data-target=\"#carousel-thumb\" data-slide-to=\"1\">")
+                .Append("                                <img src=\"images/loft-style-bedroom.jpg\" width=\"100\">")
+                .Append("                            </li>")
+                .Append("                            <li data-target=\"#carousel-thumb\" data-slide-to=\"2\">")
+                .Append("                                <img src=\"images/scott-webb-1ddol8rgUH8-unsplash.jpg\" width=\"100\">")
+                .Append("                            </li>")
+                .Append("                        </ol>")
+                .Append("                    </div>")
+                .Append("")
+                .Append("                    <section>")
+                .Append("                        <div class=\"row propertyPageDetailTitle pt-3 pb-3\">")
+                .Append("                            <div class=\"col-md-10 pl-5\">")
+                .Append("                                <h2>Kew Gardens</h2>")
+                .Append("                            </div>")
+                .Append("                            <div class=\"col-md-2\">")
+                .Append("                                <button class=\"btn favoriteHeartButton\"><i class=\"far fa-heart\"></i></button>")
+                .Append("                            </div>")
+                .Append("            ")
+                .Append("                            <div class=\"col-md-12\">")
+                .Append("                                <div class=\"pl-3\">")
+                .Append("                                    <button class=\"btn personality-outline btn-sm\">Extrovert</button>")
+                .Append("                                    <button class=\"btn personality-outline btn-sm\">Wifi</button>")
+                .Append("                                    <button class=\"btn personality-outline btn-sm\">Street Parking</button>")
+                .Append("                                </div>")
+                .Append("                            </div>")
+                .Append("            ")
+                .Append("                        </div>")
+                .Append("                    </section>")
+                .Append("            ")
+                .Append("                    <section>")
+                .Append("                        <div class=\"row px-5 py-5\">")
+                .Append("                            <div class=\"col-md-8 \">")
+                .Append("                                <div class=\"col-md-12 card  shadow-sm  px-5 py-5\">")
+                .Append("                                    <div>")
+                .Append("                                        <h4>AboutProperty</h4>")
+                .Append("                                    </div>")
+                .Append("                                </div>")
+                .Append("            ")
+                .Append("                                <div class=\"col-md-12 card  shadow-sm  px-5 py-5\">")
+                .Append("                                    <div>")
+                .Append("                                        <h4>Amenities</h4>")
+                .Append("                                    </div>")
+                .Append("                                </div>")
+                .Append("            ")
+                .Append("                                <div class=\"col-md-12 card  shadow-sm  px-5 py-5\">")
+                .Append("                                    <div>")
+                .Append("                                        <h4>Local Information</h4>")
+                .Append("                                    </div>")
+                .Append("                                </div>")
+                .Append("                            </div>")
+                .Append("                        </div>")
+                .Append("            ")
+                .Append("                    </section>")
+                .Append("                </div>")
+                .Append("            </div>")
+                .Append("        </div>")
+                .Append("    </div>")
                 .Append("</div>");
-
 
                 name.Text += myCard.ToString();
                 resultCount++;

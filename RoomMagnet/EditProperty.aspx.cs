@@ -81,7 +81,7 @@ public partial class EditProperty : System.Web.UI.Page
             }
             sc.Close();
 
-            sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
+            sc.ConnectionString = "server=aays89wgdclvqs.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
             sc.Open();
             //Search Query 
             System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
