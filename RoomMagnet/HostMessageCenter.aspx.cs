@@ -220,7 +220,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
     protected void createLeaseBtn_Click(object sender, EventArgs e)
     {
         int tenantID = Convert.ToInt32(Session["msgTenantID"].ToString());
-        int hostID = Convert.ToInt32(Session["AccountId"].ToString());
+        int hostID = Convert.ToInt32(Session["AccountId"].ToString()); 
 
         SqlCommand insertLease = new SqlCommand();
         insertLease.Connection = sc;
@@ -230,7 +230,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
         insertLease.Parameters.Add(new SqlParameter("@Tenant",tenantID));
         insertLease.Parameters.Add(new SqlParameter("@Host",hostID));
         insertLease.Parameters.Add(new SqlParameter("@Agreed", "0"));
-        insertLease.Parameters.Add(new SqlParameter("@PropertyID", "0"));
+        insertLease.Parameters.Add(new SqlParameter("@PropertyID", ddProperty.SelectedValue));
         insertLease.ExecuteNonQuery();
         sc.Close();
     }

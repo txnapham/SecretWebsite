@@ -114,7 +114,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         //aptBtn.Visible = true;
         videoChat.Visible = true;
         LinkButton2.Visible = true;
-        if(agreed == 1)
+        if(agreed == 0)
         {
             viewLeaseBtn.Visible = true;
         }
