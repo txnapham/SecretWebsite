@@ -6,12 +6,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <!--USER DASH-NAV-->
-    <div class="container-fluid userDash mb-2 pb-3">
-        <div class="navbar navbar-light">
-            <u1>
+    <div class="container-fluid  userDash mb-2 pb-3">
+        <div class="navbar navbar-light ">
+            <ul>
                 <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>
+            
                 <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
-            </u1>
+             </ul>
         </div>
     </div>
     <!--END OF USER DASH-NAV-->
