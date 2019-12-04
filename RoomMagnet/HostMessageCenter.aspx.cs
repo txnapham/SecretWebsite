@@ -1,5 +1,5 @@
-﻿using PdfSharp;
-using PdfSharp.Pdf;
+﻿//using PdfSharp;
+//using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,7 +13,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using TheArtOfDev.HtmlRenderer.PdfSharp;
+//using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 public partial class HostMessageCenter : System.Web.UI.Page
 {
