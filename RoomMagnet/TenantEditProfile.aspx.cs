@@ -41,7 +41,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
             if (IsPostBack != true)
             {
                 System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-                sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+                sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
                 sc.Open();
                 int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
                 System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
@@ -153,7 +153,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
     {
         int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
 
         //Update the Account Address
@@ -337,8 +337,8 @@ public partial class TenantEditProfile : System.Web.UI.Page
         int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection();
-        sqlConn.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
-        sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sqlConn.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
         sqlConn.Open();
 
@@ -399,7 +399,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
 
             // Grab AccountID to update correct account
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-            sc.ConnectionString = "server=aa1evano00xv2xb.cqpnea2xsqc1.us-east-1.rds.amazonaws.com;database=roommagnetdb;uid=admin;password=Skylinejmu2019;";
+            sc.ConnectionString = "server=aa9vyec53lz6c8.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
             System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
             update.Connection = sc;
             sc.Open();

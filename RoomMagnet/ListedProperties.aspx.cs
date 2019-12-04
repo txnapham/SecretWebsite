@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 public partial class ListedProperties : System.Web.UI.Page
 {
-    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
     protected void Page_PreInit(object sender, EventArgs e)
     {
         //Allows certain profile types to see this page

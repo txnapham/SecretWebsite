@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 public partial class Home : System.Web.UI.Page
 {
-    private static string connection = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+    private static string connection = ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ConnectionString;
     SqlConnection sc = new SqlConnection(connection);
     protected void Page_PreInit(object sender, EventArgs e)
     {

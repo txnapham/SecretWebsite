@@ -86,7 +86,7 @@ public partial class Search_Tenant : System.Web.UI.Page
 
         if (searchCheck == true)
         {
-            SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+            SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
             sqlConn.Open();
 
             String tSearch = HttpUtility.HtmlEncode(searchString);
@@ -136,7 +136,6 @@ public partial class Search_Tenant : System.Web.UI.Page
 
                 name.Text += myCard.ToString();
                 resultCount++;
-                reader.Close();
                 Session["Search"] = null;            
                 }
                 
@@ -158,7 +157,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         int propID = propertyID;
         int loginID = Convert.ToInt32(HttpContext.Current.Session["AccountId"].ToString());
 
-        System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+        System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
         sqlConn.Open();
         //Show the amount of properties that have been favorited 
         System.Data.SqlClient.SqlCommand check = new System.Data.SqlClient.SqlCommand();
