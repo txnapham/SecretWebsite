@@ -231,7 +231,7 @@
                                         </div>
 
 
-                                        <asp:Button ID="btnAddRoom" runat="server" class="btn btn-md btn-info btn-block" Text="List Room" CausesValidation="true" OnClick="btnAddRoom_Click" />
+                                        <asp:Button ID="btnAddRoom" runat="server" class="btn btn-md btn-info btn-block" Text="List Room" CausesValidation="false" OnClick="btnAddRoom_Click" />
 
                                     </div>
 
