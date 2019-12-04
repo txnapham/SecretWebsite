@@ -587,12 +587,12 @@ nav .breadcrumb-item.active {
 }
 
 .input-msg-write input {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border: medium none;
+    border-style: none;
+    border-color: inherit;
+    border-width: medium;
     color: #4c4c4c;
     font-size: 15px;
     min-height: 48px;
-    width: 100%;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -3715,7 +3715,6 @@ fieldset:disabled a.btn {
 input[type=submit].btn-block,
 input[type=reset].btn-block,
 input[type=button].btn-block {
-    width: 100%;
 }
 
 .fade {

@@ -51,7 +51,7 @@
                 <div class="col-md-12">
                     <!--FILTER BUTTON AND FILTER FORM-->
                     <div class="form-row justify-content-center">
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterOptions">Filter</button>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterOptions">Sort</button>
                         <!--END OF FILTER BUTTON-->
 
                        <!--filter form starts-->
@@ -332,7 +332,7 @@
                                                 </div>
                                                 <!--end of languages-->
 
-                                                <button type="button" class="btn btn-info btn-block" data-dismiss="modal"> Apply Filters</button>
+                                                <button type="button" class="btn btn-info btn-block" data-dismiss="modal">Apply</button>
 
 
                                             </div>
@@ -343,7 +343,7 @@
 
                         <!--SEARCH BAR-->
                         <div class="col-md-6 searchBar">
-                            <asp:TextBox ID="txtSearch" runat="server" class="form-control form-control-lg" placeholder="Search" ClientIDMode="Static"></asp:TextBox>
+                            <asp:TextBox ID="txtSearch" runat="server" class="form-control form-control-lg" placeholder="Enter City, State" ClientIDMode="Static"></asp:TextBox>
                         </div>
                         <!--END OF SEARCH BAR-->
 

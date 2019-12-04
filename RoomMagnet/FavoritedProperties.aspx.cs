@@ -60,21 +60,15 @@ public partial class FavoritedProperties : System.Web.UI.Page
                 //String Builder and Adding Content to it 
                 StringBuilder myCard = new StringBuilder();
                 myCard
-                .Append("<div class=\"col-md-3\">")
-                .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                .Append("<img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
-                .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
-                .Append("                            <div class=\"card-body\">")
-                .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
-                .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
-                .Append("                            </div>")
-                .Append("                        </a>")
-                .Append("")
-                .Append("                        <div>")
-                .Append("                            <button type=\"button\" id=\"heartbtn\" class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
-                .Append("                        </div>")
-                .Append("                    </div>")
-                .Append("</n 4div>");
+                .Append("<div class=\"col-xs-4 col-md-3\">")
+                .Append("   <div class=\"card  shadow-sm  mb-4\">")
+                .Append("       <img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
+                .Append("       <div class=\"card-body\">")
+                .Append("           <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
+                .Append("           <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                .Append("       </div>")
+                .Append("   </div>")
+                .Append("</div>");
                 Card3.Text += myCard.ToString();
             }
             reader.Close();
