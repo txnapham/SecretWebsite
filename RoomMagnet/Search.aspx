@@ -94,7 +94,7 @@
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
                                                                 <asp:CheckBox ID="cbEarlyRiser" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterPetFriendly">Early Riser</label>
+                                                                <label class="form-check-label" for="filterPetFriendly">Early-Riser</label>
                                                             </div>
                                                         </div>
 

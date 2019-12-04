@@ -98,6 +98,7 @@ public partial class Search : System.Web.UI.Page
             while (reader.Read())
             {
                 //Get data from database with City, State, Price, Image
+                int PropID = Convert.ToInt32(reader["PropertyID"].ToString());
                 String city = reader["City"].ToString();
                 String homeState = reader["HomeState"].ToString();
                 String priceRangeLow = reader["RoomPriceRangeLow"].ToString();
@@ -106,6 +107,8 @@ public partial class Search : System.Web.UI.Page
                 if (filename == "") filename = "imagenotfound.png";
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
+                string chars = addCharacteristics(PropID);
+
                 //Display property profile that matches result on card 
                 StringBuilder myCard = new StringBuilder();
                 myCard
@@ -115,6 +118,7 @@ public partial class Search : System.Web.UI.Page
                 .Append("       <div class=\"card-body\">")
                 .Append("           <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
                 .Append("           <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                .Append(chars)
                 .Append("       </div>")
                 .Append("   </div>")
                 .Append("</div>");
@@ -809,5 +813,233 @@ public partial class Search : System.Web.UI.Page
         int size = queryFilter.Length;
         queryFilter = queryFilter.Substring(0, queryFilter.Length - 2);
         return queryFilter;
+    }
+
+    protected string addCharacteristics(int PropID)
+    {
+        System.Data.SqlClient.SqlConnection charConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
+        string appendChar = "";
+
+        //Showing the other results that are most similar to the attributes selected
+        string charButton = "SELECT * " +
+            "FROM Host FULL OUTER JOIN " +
+            "Property ON Host.HostID = Property.HostID FULL OUTER JOIN Account ON Host.HostID = Account.AccountID FULL OUTER JOIN " +
+            "Characteristics ON Account.AccountID = Characteristics.AccountID FULL OUTER JOIN PropertyRoom ON Property.PropertyID = PropertyRoom.PropertyID " +
+            "WHERE Property.PropertyID = " + PropID;
+
+        int charCount = 0;
+
+        System.Data.SqlClient.SqlCommand charB = new System.Data.SqlClient.SqlCommand(charButton, charConn);
+        charConn.Open();
+        //Seeing if any matches with the characteristics
+        SqlDataReader rdr = charB.ExecuteReader();
+
+        while (rdr.Read())
+        {
+            if (charCount < 3)
+            {
+                if (rdr["HomeShareSmarter"].ToString() == "1" && cbHomeShareYES.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">HomeshareSmarter® Living</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["Extrovert"].ToString() == "1" && cbExtrovert.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Extrovert</button>";
+                    charCount++;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["Introvert"].ToString() == "1" && cbIntrovert.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Introvert</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["NonSmoker"].ToString() == "1" && cbNonSmoker.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Non-Smoker</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["EarlyRiser"].ToString() == "1" && cbEarlyRiser.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Early-Riser</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["NightOwl"].ToString() == "1" && cbNightOwl.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Night Owl</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["TechSavvy"].ToString() == "1" && cbTechSavvy.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Tech-Savvy</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["FamilyOriented"].ToString() == "1" && cbFamily.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Family-Oriented</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["Kitchen"].ToString() == "1" && cbKitchen.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Kitchen</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["HVAC"].ToString() == "1" && cbHVAC.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Heating / Air Conditioning</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["Wifi"].ToString() == "1" && cbWifi.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Wifi</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["PrivateBR"].ToString() == "1" && cbPrivateBath.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Private Bathroom</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["WashAndDry"].ToString() == "1" && cbWashDry.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Washer and Dryer</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["WalkInCloset"].ToString() == "1" && cbWalkInCloset.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Walk-In Closet</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["StreetParking"].ToString() == "1" && cbStreetPark.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Street Parking</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["GarageParking"].ToString() == "1" && cbGarPark.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">GarageParking</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["Backyard"].ToString() == "1" && cbBackyard.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Backyard</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["PorchOrDeck"].ToString() == "1" && cbEnglish.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">English</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["Pool"].ToString() == "1" && cbPool.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Pool</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["English"].ToString() == "1" && cbEnglish.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">English</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["Spanish"].ToString() == "1" && cbSpanish.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Spanish</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["Mandarin"].ToString() == "1" && cbMandarin.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Mandarin</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["Japanese"].ToString() == "1" && cbJapanese.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">Japanese</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["German"].ToString() == "1" && cbGerman.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">German</button>";
+                    charCount++; ;
+                }
+            }
+            if (charCount < 3)
+            {
+                if (rdr["French"].ToString() == "1" && cbFrench.Checked == true)
+                {
+                    appendChar += "<button class=\"btn personality-outline btn-sm\">French</button>";
+                    charCount++; ;
+                }
+            }
+        }
+        rdr.Close();
+        charConn.Close();
+
+        return appendChar;
     }
 }
