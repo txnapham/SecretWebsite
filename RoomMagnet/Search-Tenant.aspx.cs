@@ -90,7 +90,7 @@ public partial class Search_Tenant : System.Web.UI.Page
             SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
             sqlConn.Open();
-
+           
             String tSearch = HttpUtility.HtmlEncode(searchString);
             int commaSplit = tSearch.IndexOf(",");
             String cityString = tSearch.Substring(0, commaSplit).ToUpper();
@@ -103,7 +103,7 @@ public partial class Search_Tenant : System.Web.UI.Page
 
             name.Text = "";
             int resultCount = 0;
-
+            int count = 0;
             while (reader.Read())
             {
                 int PropID = Convert.ToInt32(reader["PropertyID"]);
@@ -112,15 +112,11 @@ public partial class Search_Tenant : System.Web.UI.Page
                 String priceRangeLow = reader["RoomPriceRangeLow"].ToString();
                 String priceRangeHigh = reader["RoomPriceRangeHigh"].ToString();
                 String filename = reader["images"].ToString();
+                String about = reader["AboutPropertyRoom"].ToString();
+
                 if (filename == "") filename = "imagenotfound.png";
 
                 System.Data.SqlClient.SqlCommand modal = new System.Data.SqlClient.SqlCommand();
-                modal.Connection = sc;
-                modal.CommandText = "SELECT PropertyImages.images, PropertyRoom.AboutPropertyRoom " +
-                    "FROM PropertyImages INNER JOIN" +
-                    " Property ON PropertyImages.PropertyID = Property.PropertyID INNER JOIN" +
-                    "PropertyRoom ON Property.PropertyID = PropertyRoom.PropertyID" +
-                    "WHERE Property.PropertyID = "+PropID;
 
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
@@ -130,7 +126,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 .Append("<div class=\"col-xs-4 col-md-3\">")
                 .Append("   <div class=\"card  shadow-sm  mb-4\" >")
                 .Append("       <img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
-                .Append("       <a data-toggle=\"modal\" href=\"#propDetailModal\" class=\"cardLinks\">")
+                .Append("       <a data-toggle=\"modal\" href=\"#propDetailModal"+count+"\" class=\"cardLinks\">")
                 .Append("           <div class=\"card-body\">")
                 .Append("               <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
                 .Append("               <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
@@ -144,7 +140,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 .Append("   </div>")
                 .Append("</div>")
                 .Append(" ")
-                .Append("<div class=\"modal\" id=\"propDetailModal\">")
+                .Append("<div class=\"modal\" id=\"propDetailModal" + count + "\">")
                 .Append("    <div class=\"modal-dialog modal-lg\">")
                 .Append("        <div class=\"modal-content\">")
                 .Append("            <div class=\"modal-body\">")
@@ -193,18 +189,11 @@ public partial class Search_Tenant : System.Web.UI.Page
                 .Append("                    <section>")
                 .Append("                        <div class=\"row propertyPageDetailTitle pt-3 pb-3\">")
                 .Append("                            <div class=\"col-md-10 pl-5\">")
-                .Append("                                <h2>Kew Gardens</h2>")
-                .Append("                            </div>")
-                .Append("                            <div class=\"col-md-2\">")
-                .Append("                                <button class=\"btn favoriteHeartButton\"><i class=\"far fa-heart\"></i></button>")
+                .Append("                                <h2>" + city + ", " + homeState + "</h2>")
+                .Append("                                <p>" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
                 .Append("                            </div>")
                 .Append("            ")
                 .Append("                            <div class=\"col-md-12\">")
-                .Append("                                <div class=\"pl-3\">")
-                .Append("                                    <button class=\"btn personality-outline btn-sm\">Extrovert</button>")
-                .Append("                                    <button class=\"btn personality-outline btn-sm\">Wifi</button>")
-                .Append("                                    <button class=\"btn personality-outline btn-sm\">Street Parking</button>")
-                .Append("                                </div>")
                 .Append("                            </div>")
                 .Append("            ")
                 .Append("                        </div>")
@@ -215,13 +204,15 @@ public partial class Search_Tenant : System.Web.UI.Page
                 .Append("                            <div class=\"col-md-8 \">")
                 .Append("                                <div class=\"col-md-12 card  shadow-sm  px-5 py-5\">")
                 .Append("                                    <div>")
-                .Append("                                        <h4>AboutProperty</h4>")
+                .Append("                                        <h4>AboutProperty</h4>" +
+                "                                                <p>"+about+"</p>")
                 .Append("                                    </div>")
                 .Append("                                </div>")
                 .Append("            ")
                 .Append("                                <div class=\"col-md-12 card  shadow-sm  px-5 py-5\">")
                 .Append("                                    <div>")
                 .Append("                                        <h4>Amenities</h4>")
+                .Append("                                        <p></p>")//amenties from checked
                 .Append("                                    </div>")
                 .Append("                                </div>")
                 .Append("            ")
@@ -239,10 +230,10 @@ public partial class Search_Tenant : System.Web.UI.Page
                 .Append("        </div>")
                 .Append("    </div>")
                 .Append("</div>");
-
                 name.Text += myCard.ToString();
                 resultCount++;
-                Session["Search"] = null;            
+                Session["Search"] = null;
+                count++;
                 }
                 
             reader.Close();
@@ -298,7 +289,7 @@ public partial class Search_Tenant : System.Web.UI.Page
     protected string filter()
     {
         //SQL for amount of filters that match 
-        string queryFilter = "SELECT P.PropertyID, P.City, P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images " +
+        string queryFilter = "SELECT P.PropertyID, P.City, P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images, R.AboutPropertyRoom,r.HVAC,r.Kitchen,r.PrivateBR,r.WalkInCloset,r.WashAndDry,r.Wifi " +
             "FROM Account A FULL OUTER JOIN Characteristics C ON A.AccountID = C.AccountID FULL OUTER JOIN Host H ON A.AccountID = H.HostID FULL OUTER JOIN " +
             "PropertyImages I FULL OUTER JOIN Property P ON I.PropertyID = P.PropertyID ON H.HostID = P.HostID  FULL OUTER JOIN PropertyRoom R ON R.PropertyID = P.PropertyID " +
             "WHERE P.City = @City AND P.HomeState = @State   ";
@@ -667,7 +658,7 @@ public partial class Search_Tenant : System.Web.UI.Page
 
     protected string filterOtherResults()
     {
-        string queryFilter = "SELECT P.PropertyID, P.City, P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images " +
+        string queryFilter = "SELECT P.PropertyID, P.City, P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images, R.AboutPropertyRoom,r.HVAC,r.Kitchen,r.PrivateBR,r.WalkInCloset,r.WashAndDry,r.Wifi" +
             "FROM Account A FULL OUTER JOIN Characteristics C ON A.AccountID = C.AccountID FULL OUTER JOIN Host H ON A.AccountID = H.HostID FULL OUTER JOIN " +
             "PropertyImages I FULL OUTER JOIN Property P ON I.PropertyID = P.PropertyID ON H.HostID = P.HostID  FULL OUTER JOIN PropertyRoom R ON R.PropertyID = P.PropertyID " +
             "WHERE P.City != @City AND P.HomeState = @State   ";
