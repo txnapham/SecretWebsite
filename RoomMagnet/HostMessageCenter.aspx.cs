@@ -230,7 +230,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
         insertLease.Parameters.Add(new SqlParameter("@Tenant",tenantID));
         insertLease.Parameters.Add(new SqlParameter("@Host",hostID));
         insertLease.Parameters.Add(new SqlParameter("@Agreed", "0"));
-        insertLease.Parameters.Add(new SqlParameter("@PropertyID", ));
+        insertLease.Parameters.Add(new SqlParameter("@PropertyID", "0"));
         insertLease.ExecuteNonQuery();
         sc.Close();
     }
