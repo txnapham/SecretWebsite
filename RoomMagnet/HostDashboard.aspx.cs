@@ -358,6 +358,7 @@ public partial class HostDashboard : System.Web.UI.Page
         insert.Parameters.Add(new SqlParameter("@privateBR", PrivateBR));
         insert.Parameters.Add(new SqlParameter("@washAndDry", WashAndDry));
         insert.Parameters.Add(new SqlParameter("@walkInCloset", WalkInCloset));
+        insert.Parameters.Add(new SqlParameter("@PropertyID", ddProperty.SelectedValue));
 
         insert.ExecuteNonQuery();
         //Close 
