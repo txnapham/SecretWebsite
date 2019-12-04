@@ -152,11 +152,8 @@
 
                     <div>
                         <asp:Button ID="createLeaseBtn" runat="server" Text="Create Lease" class="btn btn-light createLeaseButton btn-block" OnClick="createLeaseBtn_Click"></asp:Button>
-                        
-
-                        <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
-                        
-                        <a href="Default.aspx" class="btn btn-light vidChat btn-block">Video Chat</a>
+                        <asp:Button ID="aptBtn" runat="server" Text="Create Appointment" class="btn createAppointmentButton btn-block"></asp:Button>
+                        <asp:Button ID="videoChat" runat="server" Text="Video Chat" class="btn btn-light vidChat btn-block" OnClick="videoChat_Click"></asp:Button>
                     </div>
                 </div>
             </div>

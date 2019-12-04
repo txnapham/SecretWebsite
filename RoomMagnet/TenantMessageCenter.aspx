@@ -94,9 +94,9 @@
                         </div>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-light createLeaseButton btn-block" href="HostCreateLease.aspx">Create Lease with TENANT NAME</button>
-                        <button type="button" class="btn createAppointmentButton btn-block">Create Appointment</button>
-                        <a href="TenantTest.aspx" class="btn btn-light vidChat btn-block">Video Chat</a>
+                        <asp:Button ID="viewLeaseBtn" runat="server" Text="View Lease" class="btn btn-light createLeaseButton btn-block" OnClick="viewLeaseBtn_Click"></asp:Button>
+                        <asp:Button ID="aptBtn" runat="server" Text="Create Appointment" class="btn createAppointmentButton btn-block"></asp:Button>
+                        <asp:Button ID="videoChat" runat="server" Text="Video Chat" class="btn btn-light vidChat btn-block" OnClick="videoChat_Click"></asp:Button>
                     </div>
                 </div>
             </div>

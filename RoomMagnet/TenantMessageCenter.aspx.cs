@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -37,6 +38,15 @@ public partial class TenantMessageCenter : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Set Message Center Compenents to non visbile
+        if(!IsPostBack)
+        {
+            txtMessage.Visible = false;
+            aptBtn.Visible = false;
+            videoChat.Visible = false;
+            LinkButton2.Visible = false;
+            viewLeaseBtn.Visible = false;
+        }
         //Tenant Access
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 3)
         {
@@ -90,7 +100,24 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         ImageButton lnk = sender as ImageButton;
         int hostID = Convert.ToInt32(lnk.Attributes["CustomParameter"].ToString());
         Session["msgHostID"] = hostID;
+        int tenantID = Convert.ToInt32(Session["AccountId"].ToString());
+
+        SqlCommand selectLease = new SqlCommand();
+        selectLease.Connection = sc;
+        selectLease.CommandText = "Select Agreed from lease where TenantID =" + tenantID + " AND " + "HostID =" +hostID;
+        sc.Open();
+        int agreed = Convert.ToInt16(selectLease.ExecuteScalar().ToString());
+        sc.Close();
+
         loadMessages(hostID);
+        txtMessage.Visible = true;
+        aptBtn.Visible = true;
+        videoChat.Visible = true;
+        LinkButton2.Visible = true;
+        if(agreed == 1)
+        {
+            viewLeaseBtn.Visible = true;
+        }
     }
 
     public void loadMessages(int hostID)
@@ -196,5 +223,15 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         txtMessage.Text = String.Empty;
 
         loadMessages(hostID);
+    }
+
+    protected void viewLeaseBtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("ViewLease.aspx");
+    }
+
+    protected void videoChat_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TenantVideoChat.aspx");
     }
 }

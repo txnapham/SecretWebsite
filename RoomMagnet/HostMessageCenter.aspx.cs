@@ -17,7 +17,7 @@ using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 public partial class HostMessageCenter : System.Web.UI.Page
 {
-    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
 
     protected void Page_PreInit(object sender, EventArgs e)
     {
@@ -44,12 +44,21 @@ public partial class HostMessageCenter : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Set Message Center Compenents to non visbile
+        if (!IsPostBack)
+        {
+            txtMessage.Visible = false;
+            aptBtn.Visible = false;
+            videoChat.Visible = false;
+            LinkButton2.Visible = false;
+            createLeaseBtn.Visible = false;
+        }
         //Host Session 
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
             Message.Text = String.Empty;
             //Connection 
-            System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ToString());
+            System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
             //SQL Statement to Select Favorited Tenant onto Message Center
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             select.CommandText = "select accountID, firstName, LastName, AccountImage from account where AccountID in (select tenantID from tenant where TenantID in " +
@@ -94,7 +103,13 @@ public partial class HostMessageCenter : System.Web.UI.Page
         ImageButton lnk = sender as ImageButton;
         int tenantID = Convert.ToInt16(lnk.Attributes["CustomParameter"].ToString());
         Session["msgTenantID"] = tenantID;
+
         loadMessages(tenantID);
+        txtMessage.Visible = true;
+        aptBtn.Visible = true;
+        videoChat.Visible = true;
+        LinkButton2.Visible = true;
+        createLeaseBtn.Visible = true;
     }
 
     public void loadMessages(int tenantID)
@@ -210,9 +225,16 @@ public partial class HostMessageCenter : System.Web.UI.Page
         SqlCommand insertLease = new SqlCommand();
         insertLease.Connection = sc;
         sc.Open();
-        insertLease.CommandText = "INSERT INTO LEASE VALUES(@Date,@Tenant,@Host)";
+        insertLease.CommandText = "INSERT INTO LEASE VALUES(@Date,@Tenant,@Host,@Agreed);";
         insertLease.Parameters.Add(new SqlParameter("@Date",DateTime.Now.ToString()));
         insertLease.Parameters.Add(new SqlParameter("@Tenant",tenantID));
         insertLease.Parameters.Add(new SqlParameter("@Host",hostID));
+        insertLease.Parameters.Add(new SqlParameter("@Agreed", "0"));
+        insertLease.ExecuteNonQuery();
+        sc.Close();
+    }
+    protected void videoChat_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("HostVideoChat.aspx");
     }
 }
