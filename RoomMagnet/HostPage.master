@@ -59,7 +59,6 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item js-scroll-trigger" href="HostDashboard.aspx">View Profile</a>
                                 <a class="dropdown-item js-scroll-trigger" href="HostEditProfile.aspx">Edit Profile</a>
-                                <a class="dropdown-item js-scroll-trigger" href="#">Settings</a>
                                 <a class="dropdown-item js-scroll-trigger" href="HomeLogout.aspx">Logout</a>
                             </div>
                         </li>
