@@ -163,10 +163,10 @@
                         <asp:TextBox ID="txtConPass" runat="server" class="form-control form-control-lg" placeholder="Re-Enter Password" TextMode="Password" MaxLength="256"></asp:TextBox>
                     </div>
 
-                    <div class="form-group form-check">
+                   <%-- <div class="form-group form-check">
                         <asp:CheckBox ID="cbBackCheck" runat="server" class="form-check-input" />
                         <label class="form-check-label" for="exampleCheck1">Perform background check now</label>
-                    </div>
+                    </div>--%>
 
                     <div class="form-group form-check">
                         <asp:CustomValidator ID="cbAgreementValidator" runat="server" Display="Dynamic" ErrorMessage="*Please accept the terms and conditions</br>" ClientValidationFunction="validateTerms" ForeColor="Red"></asp:CustomValidator>
