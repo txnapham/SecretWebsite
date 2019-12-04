@@ -62,6 +62,7 @@ public partial class Search_Tenant : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
+        filterCard.Text = string.Empty;
         //Shows the search results with the sorting and ones of main interest
         cardBuilder(mainResults, filter(), txtSearch.Text);
         divider.Text = "<hr/>" +
@@ -119,7 +120,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                     "FROM PropertyImages INNER JOIN" +
                     " Property ON PropertyImages.PropertyID = Property.PropertyID INNER JOIN" +
                     "PropertyRoom ON Property.PropertyID = PropertyRoom.PropertyID" +
-                    "WHERE Property.PropertyID = 15";
+                    "WHERE Property.PropertyID = "+PropID;
 
                 double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
                 double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
@@ -307,9 +308,12 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Showing the results in a sorted way by number of matches to filters
         //Shows the main result 
         //HomeShare Filter
+        StringBuilder filterBreadCrumbs = new StringBuilder();
+        filterBreadCrumbs.Append("<li class=\"breadcrumb-item active\" aria-current=\"page\"> Filters Applied: ");
         if (cbHomeShareYES.Checked == true)
         {
             queryFilter += "AND P.HomeShareSmarter = 1   ";
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Home Share</button>");
         }
         if (cbHomeShareNO.Checked == true)
         {
@@ -318,6 +322,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Extrovert Filter
         if (cbExtrovert.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Extrovert</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.Extrovert DESC, ";
@@ -331,6 +336,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Introvert Filter
         if (cbIntrovert.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Introvert</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.Introvert DESC, ";
@@ -344,6 +350,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //NonSmoking Filter
         if (cbNonSmoker.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Non Smoker</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.NonSmoker DESC, ";
@@ -357,6 +364,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Early Riser Filter
         if (cbEarlyRiser.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Early Riser</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.EarlyRiser DESC, ";
@@ -370,6 +378,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Night Owl Filter
         if (cbNightOwl.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Night Owl</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.NightOwl DESC, ";
@@ -383,6 +392,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //TechSavvy Filter
         if (cbTechSavvy.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Tech Savvy</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.TechSavvy DESC, ";
@@ -396,6 +406,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Family Oriented Filter 
         if (cbFamily.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Family Oriented</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.FamilyOriented DESC, ";
@@ -410,6 +421,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Kitchen 
         if (cbKitchen.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Kitchen</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY R.Kitchen DESC, ";
@@ -423,6 +435,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Heating/ AC Filter
         if (cbHVAC.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">HVAC</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY R.HVAC DESC, ";
@@ -436,6 +449,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Wifi Filter
         if (cbWifi.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">WiFi</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY R.Wifi DESC, ";
@@ -449,6 +463,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Private Bathroom Filter 
         if (cbPrivateBath.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Private Bath</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY R.PrivateBR DESC, ";
@@ -462,6 +477,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Walk In Closet Filter
         if (cbWalkInCloset.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Walk in Closet</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY R.WalkInCloset DESC, ";
@@ -475,6 +491,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Washer Dryer Filter
         if (cbWashDry.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Washer/Dryer</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY R.WashAndDry DESC, ";
@@ -488,6 +505,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Street Parking Filter
         if (cbStreetPark.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Street Parking</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY P.StreetParking DESC, ";
@@ -501,6 +519,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Garage Parking Filter
         if (cbGarPark.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Garage Parking</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY P.GarageParking DESC, ";
@@ -514,6 +533,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Backyard Filter
         if (cbBackyard.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">BackYard</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY P.Backyard DESC, ";
@@ -527,6 +547,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Porch Filter
         if (cbPorch.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Porch/Deck</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY P.PorchOrDeck DESC, ";
@@ -540,6 +561,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Pool Filter
         if (cbPool.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Pool</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY P.Pool DESC, ";
@@ -554,6 +576,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //English 
         if (cbEnglish.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">English</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.English DESC, ";
@@ -567,6 +590,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Spanish
         if (cbSpanish.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Spanish</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.Spanish DESC, ";
@@ -580,6 +604,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Mandarin
         if (cbMandarin.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Mandarin</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.Mandarin DESC, ";
@@ -593,6 +618,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //Japanese
         if (cbJapanese.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">Japenese</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.Japanese DESC, ";
@@ -606,6 +632,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //German
         if (cbGerman.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">German</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.German DESC, ";
@@ -619,6 +646,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         //French 
         if (cbFrench.Checked == true)
         {
+            filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">French</button>");
             if (qualityCount == 0)
             {
                 queryFilter += " ORDER BY C.French DESC, ";
@@ -630,6 +658,8 @@ public partial class Search_Tenant : System.Web.UI.Page
             }
         }
         //Number of attributes that are a match 
+        filterBreadCrumbs.Append("</li>");
+        filterCard.Text += filterBreadCrumbs.ToString();
         int size = queryFilter.Length;
         queryFilter = queryFilter.Substring(0, queryFilter.Length - 2);
         return queryFilter;

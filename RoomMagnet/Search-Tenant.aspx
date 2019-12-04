@@ -380,6 +380,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="Home.aspx" class="breadLink">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Search</li>
+                    <asp:Literal ID="filterCard" runat="server" Mode="Transform"></asp:Literal>
                 </ol>
             </nav>
         </section>

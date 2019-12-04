@@ -34,6 +34,8 @@ public partial class ViewLease : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        sigErrorMessage.Visible = false;
+
         SqlCommand selectDate = new SqlCommand();
         SqlCommand selectHostName = new SqlCommand();
         SqlCommand selectTenantName = new SqlCommand();
@@ -85,14 +87,21 @@ public partial class ViewLease : System.Web.UI.Page
     }
     protected void submitBtn_Click(object sender, EventArgs e)
     {
-        SqlCommand updateLease = new SqlCommand();
-        updateLease.Connection = sc;
-        updateLease.CommandText = "Update Lease Set Agreed = 1 where TenantID = @tenant;";
-        updateLease.Parameters.Add(new SqlParameter("@tenant", Session["AccountID"]));
-        sc.Open();
-        updateLease.ExecuteNonQuery();
-        sc.Close();
+        if (tenantNametxt.Text.Equals(sigTxt.Text))
+        {
+            SqlCommand updateLease = new SqlCommand();
+            updateLease.Connection = sc;
+            updateLease.CommandText = "Update Lease Set Agreed = 1 where TenantID = @tenant;";
+            updateLease.Parameters.Add(new SqlParameter("@tenant", Session["AccountID"]));
+            sc.Open();
+            updateLease.ExecuteNonQuery();
+            sc.Close();
 
-        Response.Redirect("TenantDashboard.aspx");
+            Response.Redirect("TenantDashboard.aspx");
+        }
+        else
+        {
+            sigErrorMessage.Visible = true;
+        }
     }
 }
