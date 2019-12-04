@@ -121,6 +121,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         else if(agreed == 1)
         {
             viewLeaseBtn.Text = "Intent to Lease Signed";
+            viewLeaseBtn.Visible = true;
         }
     }
 
