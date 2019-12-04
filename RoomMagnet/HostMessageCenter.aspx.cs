@@ -44,6 +44,15 @@ public partial class HostMessageCenter : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Set Message Center Compenents to non visbile
+        if (!IsPostBack)
+        {
+            txtMessage.Visible = false;
+            aptBtn.Visible = false;
+            videoChat.Visible = false;
+            LinkButton2.Visible = false;
+            createLeaseBtn.Visible = false;
+        }
         //Host Session 
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
@@ -94,7 +103,13 @@ public partial class HostMessageCenter : System.Web.UI.Page
         ImageButton lnk = sender as ImageButton;
         int tenantID = Convert.ToInt16(lnk.Attributes["CustomParameter"].ToString());
         Session["msgTenantID"] = tenantID;
+
         loadMessages(tenantID);
+        txtMessage.Visible = true;
+        aptBtn.Visible = true;
+        videoChat.Visible = true;
+        LinkButton2.Visible = true;
+        createLeaseBtn.Visible = true;
     }
 
     public void loadMessages(int tenantID)
@@ -201,79 +216,25 @@ public partial class HostMessageCenter : System.Web.UI.Page
         loadMessages(tenantID);
     }
 
-    [System.Web.Services.WebMethod]
-    [System.Web.Script.Services.ScriptMethod]
-    public static void CreateLease()
-    {
-
-    }
 
     protected void createLeaseBtn_Click(object sender, EventArgs e)
     {
-        //Generates PDF and uploads to aws
-        PdfDocument pdf = PdfGenerator.GeneratePdf("<p><h1>Hello World</h1>This is html rendered text</p>", PageSize.A4);
-        pdf.Save("UserLease/Lease.pdf");//NEED PATH FOR LEASE FOLDER
+        int tenantID = Convert.ToInt32(Session["msgTenantID"].ToString());
+        int hostID = Convert.ToInt32(Session["AccountId"].ToString());
 
-        // Upload image to S3
-        //Random rnd = new Random();
-        //int imageUniqueID = rnd.Next(1, 10000);
-        //Stream st = pdf;
-        //string name = Path.GetFileName(HostImageUpload.FileName);
-        //string myBucketName = "elasticbeanstalk-us-east-1-606091308774"; //your s3 bucket name goes here  
-        //string s3DirectoryName = "UserImages";
-        //string s3FileName = imageUniqueID.ToString() + @name;
-        //bool a;
-        //AmazonUploader myUploader = new AmazonUploader();
-        //a = myUploader.sendMyFileToS3(myBucketName, s3DirectoryName, s3FileName);
-
-        //Fetching Settings from WEB.CONFIG file.  
-        string emailSender = ConfigurationManager.AppSettings["username"].ToString();
-        string emailSenderPassword = ConfigurationManager.AppSettings["password"].ToString();
-        string emailSenderHost = ConfigurationManager.AppSettings["smtp"].ToString();
-        int emailSenderPort = Convert.ToInt16(ConfigurationManager.AppSettings["portnumber"]);
-        Boolean emailIsSSL = Convert.ToBoolean(ConfigurationManager.AppSettings["IsSSL"]);
-        string subject = "Roommagnet Intent to Lease";
-
-        //Base class for sending email  
-        MailMessage _mailmsg = new MailMessage();
-
-        //Make TRUE because our body text is html  
-        _mailmsg.IsBodyHtml = true;
-
-        //Set From Email ID  
-        _mailmsg.From = new MailAddress(emailSender);
-
-        //Set To Email ID  
-        _mailmsg.To.Add("kylermsnell@gmail.com");
-        //_mailmsg.To.Add(hostEmail);
-
-        //Set Subject  
-        _mailmsg.Subject = subject;
-
-        //Set Body Text of Email   
-        _mailmsg.Body = "Please review attached Intent to Lease form.";
-
-        //Add Lease PDF to email
-        Attachment data = new Attachment(pdf.ToString(), MediaTypeNames.Application.Octet);
-        _mailmsg.Attachments.Add(data);
-
-        //Now set your SMTP   
-        SmtpClient _smtp = new SmtpClient();
-
-        //Set HOST server SMTP detail  
-        _smtp.Host = emailSenderHost;
-
-        //Set PORT number of SMTP  
-        _smtp.Port = emailSenderPort;
-
-        //Set SSL --> True / False  
-        _smtp.EnableSsl = emailIsSSL;
-
-        //Set Sender UserEmailID, Password  
-        NetworkCredential _network = new NetworkCredential(emailSender, emailSenderPassword);
-        _smtp.Credentials = _network;
-
-        //Send Method will send your MailMessage create above.  
-        _smtp.Send(_mailmsg);
+        SqlCommand insertLease = new SqlCommand();
+        insertLease.Connection = sc;
+        sc.Open();
+        insertLease.CommandText = "INSERT INTO LEASE VALUES(@Date,@Tenant,@Host,@Agreed);";
+        insertLease.Parameters.Add(new SqlParameter("@Date",DateTime.Now.ToString()));
+        insertLease.Parameters.Add(new SqlParameter("@Tenant",tenantID));
+        insertLease.Parameters.Add(new SqlParameter("@Host",hostID));
+        insertLease.Parameters.Add(new SqlParameter("@Agreed", "0"));
+        insertLease.ExecuteNonQuery();
+        sc.Close();
+    }
+    protected void videoChat_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("HostVideoChat.aspx");
     }
 }

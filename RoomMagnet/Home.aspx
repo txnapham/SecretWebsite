@@ -57,7 +57,7 @@
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <!--FILTER BUTTON AND FILTER FORM-->
                             <div class="form-row">
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterOptions">Filter</button>
+                                <%--<button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterOptions">Filter</button>
                                 <!--END OF FILTER BUTTON-->
 
 
@@ -353,12 +353,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--END OF FILTER FORM-->
+                                <!--END OF FILTER FORM-->--%>
 
 
                                 <!--SEARCH BAR-->
                                 <div class="col-md-6 searchBar">
-                                    <asp:TextBox ID="txtSearch" runat="server" class="form-control form-control-lg " placeholder="Search" ClientIDMode="Static"></asp:TextBox>
+                                    <asp:TextBox ID="txtSearch" runat="server" class="form-control form-control-lg " placeholder="Enter City, State" ClientIDMode="Static"></asp:TextBox>
                                 </div>
                                 <!--END OF SEARCH BAR-->
 
