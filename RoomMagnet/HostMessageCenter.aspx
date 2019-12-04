@@ -151,13 +151,42 @@
                     </div>
 
                     <div>
-                        <asp:Button ID="createLeaseBtn" runat="server" Text="Create Lease" class="btn btn-light createLeaseButton btn-block" OnClick="createLeaseBtn_Click"></asp:Button>
+<%--                        <asp:Button ID="createLeaseBtn" runat="server" Text="Create Lease" class="btn btn-light createLeaseButton btn-block" OnClick="createLeaseBtn_Click"></asp:Button>--%>
+                        <button class="btn btn-light createLeaseButton btn-block" type="button" data-toggle="modal" data-target="#createLease">
+                            <a class="btn btn-md btn-info " href="#">Create Appointment</a>
+                        </button>
 <%--                        <asp:Button ID="aptBtn" runat="server" Text="Create Appointment" class="btn createAppointmentButton btn-block"></asp:Button>--%>
                         <asp:Button ID="videoChat" runat="server" Text="Video Chat" class="btn btn-light vidChat btn-block mb-4" OnClick="videoChat_Click"></asp:Button>
+                    </div>
+
+                    <div class="modal" id="createLease">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                    <div class="form-group">
+                                        <%--<asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>--%>
+                                        <asp:DropDownList ID="ddProperty" runat="server" AppendDataBoundItems="True" class="form-control form-control-lg" DataSourceID="propertyDataSource" DataTextField="Address" DataValueField="PropertyID">
+                                            <asp:ListItem>Select a Property for Lease</asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:SqlDataSource ID="propertyDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:roommagnetdbConnectionString %>" SelectCommand="SELECT PropertyID, (HouseNumber + ' ' + Street + ', ' + City + ', ' + HomeState) AS Address FROM PROPERTY WHERE HostID = @AccountId">
+                                            <SelectParameters>
+                                                <asp:SessionParameter Name="AccountId" SessionField="AccountId"/>
+                                            </SelectParameters>
+                                        </asp:SqlDataSource>
+                                    </div>
+
+                                    <asp:Button ID="createLeaseBtn" runat="server" Text="Create Lease" class="btn btn-md btn-info btn-block" OnClick="createLeaseBtn_Click"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
+
     </div>
 </asp:Content>
 

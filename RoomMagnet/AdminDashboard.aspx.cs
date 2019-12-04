@@ -152,7 +152,7 @@ public partial class AdminDashboard : System.Web.UI.Page
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
         System.Data.SqlClient.SqlCommand checkEmailCount = new System.Data.SqlClient.SqlCommand();
         //Connection
-        sc.ConnectionString = "server=aays89wgdclvqs.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
+        sc.ConnectionString = "server=aawnyfad9tm1sf.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
         //Check email to see if what was entered is in database
         checkEmailCount.Parameters.Add(new SqlParameter("@email", HttpUtility.HtmlEncode(txtEmail.Text)));
         checkEmailCount.CommandText = "SELECT COUNT(*) FROM ACCOUNT WHERE EMAIL = @email";
