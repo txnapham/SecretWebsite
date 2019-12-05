@@ -81,7 +81,7 @@ public partial class AdminDashboard : System.Web.UI.Page
             int leaseCount = (int)selectLeases.ExecuteScalar();
 
             //Populate Emails
-            selectEmail.CommandText = "SELECT Account.FirstName, Account.LastName, Account.Email " +
+            selectEmail.CommandText = "SELECT TOP(10) Account.FirstName, Account.LastName, Account.Email " +
                 "FROM Account FULL OUTER JOIN Host ON Account.AccountID = Host.HostID FULL OUTER JOIN Tenant ON Account.AccountID = Tenant.TenantID " +
                 "WHERE Host.BackgroundCheckStatus = 0 OR Tenant.BackgroundCheckStatus = 0";
 
