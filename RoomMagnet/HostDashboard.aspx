@@ -194,11 +194,11 @@
                     <div class="col-md-12">
                         <div class="card shadow-sm  mb-4">
                             <div class="card-body">
-                                <h5 class="card-title dash-card-titles">New Potential Tenants</h5>
+                                <h5 class="card-title dash-card-titles">Tenants Who Like My Property</h5>
                                     <asp:Literal ID="favTen" runat="server" Mode="Transform"></asp:Literal>
                                 <!--BUTTON-->
                                 <div class=" text-center pt-3 pb-3">
-                                    <a href="HostMessageCenter.aspx" class="btn btn-info">View Potential Tenants</a>
+                                    <a href="HostMessageCenter.aspx" class="btn btn-info">View Message Center</a>
                                 </div>
                                 <!--END OF BUTTON-->
                             </div>

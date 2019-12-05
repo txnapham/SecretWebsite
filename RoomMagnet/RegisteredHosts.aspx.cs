@@ -48,8 +48,8 @@ public partial class RegisteredHosts : System.Web.UI.Page
                 String hostName = reader["Name"].ToString();
                 int hostID = Convert.ToInt16(reader["AccountID"].ToString());
                 int backCheckStatus = Convert.ToInt16(reader["BackgroundCheckStatus"].ToString());
-                if (backCheckStatus == 1) backCheckS = "Complete";
-                if (backCheckStatus == 0) backCheckS = "Incomplete";
+                if (backCheckStatus == 2) backCheckS = "Complete";
+                if (backCheckStatus == 1) backCheckS = "Pending";
 
                 backStatusL.Add(new BackgroundStatus() { accountName = hostName, accountID = hostID, backStatus = backCheckS });
             }
@@ -89,9 +89,9 @@ public partial class RegisteredHosts : System.Web.UI.Page
 
         if (currentBC == 1)
         {
-            update.Parameters.AddWithValue("@BackStatus", 0);
+            update.Parameters.AddWithValue("@BackStatus", 2);
         }
-        else if (currentBC == 0)
+        else if (currentBC == 2)
         {
             update.Parameters.AddWithValue("@BackStatus", 1);
         }

@@ -44,6 +44,7 @@ public partial class Search : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         divider.Text = String.Empty;
+        filterCard.Text = String.Empty;
 
         if (Session["Search"] != null)
         {
@@ -128,6 +129,8 @@ public partial class Search : System.Web.UI.Page
             }
             reader.Close();
             Session["Search"] = null;
+            resultLabel.Visible = true;
+            resultLabel.Text = "Search Results for " + tSearch;
         }
 
         else

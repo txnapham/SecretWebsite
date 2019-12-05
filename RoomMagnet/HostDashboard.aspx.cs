@@ -264,14 +264,15 @@ public partial class HostDashboard : System.Web.UI.Page
                     StringBuilder myCard = new StringBuilder();
                     myCard
                         .Append("<div class=\"chat-list\">")
-                        .Append("           <div class=\"chat-people\">")
-                        .Append("               <div class=\"chat-img\"> <img src =\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + imgURL + "\" class=\"rounded-circle img-fluid\"></div>")
-                        .Append("                <div class=\"chat-ib\">")
-                        .Append("                    <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + ", Age: " + age + "</a></h5>")
-                        .Append("                    <p>Hello I'm interested in your property!</p>")
-                        .Append("                  </div>")
-                        .Append("               </div>")
-                        .Append("            </div>");
+                        .Append("   <div class=\"chat-people\">")
+                        .Append("       <div class=\"chat-img\"> <img src =\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + imgURL + "\" class=\"rounded-circle img-fluid\">")
+                        .Append("       </div>")
+                        .Append("       <div class=\"chat-ib\">")
+                        .Append("           <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + ", Age: " + age + "</a></h5>")
+                        .Append("           <p>Hello I'm interested in your property!</p>")
+                        .Append("       </div>")
+                        .Append("   </div>")
+                        .Append("</div>");
 
                     favTen.Text += myCard.ToString();
                     count++;

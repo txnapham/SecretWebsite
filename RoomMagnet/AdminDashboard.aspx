@@ -63,7 +63,9 @@
                         <div class="card-body">
                             <h5 class="card-title">Registered Hosts</h5>
                             <ul><asp:Literal id="RegHost" runat="server" mode="Transform"></asp:Literal></ul>
-                            <a href="RegisteredHosts.aspx" class="btn btn-info">View more</a>
+                            <div class="text-center">
+                                <a href="RegisteredHosts.aspx" class="btn btn-info text-center">View more</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,7 +77,9 @@
                             <ul>
                                 <asp:Literal id="RegTenant" runat="server" mode="Transform"></asp:Literal>
                             </ul>
-                            <a href="RegisteredTenants.aspx" class="btn btn-info">View more</a>
+                            <div class="text-center">
+                                <a href="RegisteredTenants.aspx" class="btn btn-info text-center">View more</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,7 +89,9 @@
                         <div class="card-body">
                             <h5 class="card-title">Intended Leases</h5>
                             <ul><asp:Literal id="IntLease" runat="server" mode="Transform"></asp:Literal></ul>
-                            <a href="ViewLeases.aspx" class="btn btn-info">View more</a>
+                            <div class="text-center">
+                                <a href="ViewLeases.aspx" class="btn btn-info text-center">View more</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,7 +119,9 @@
                             <ul>
                                 <asp:Literal id="futureEmails" runat="server" mode="Transform"></asp:Literal>
                             </ul>
-                            <a href="#" class="btn btn-info">View more</a>
+                            <div class="text-center">
+                                <a href="#" class="btn btn-info text-center">View more</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -145,7 +153,7 @@
                                 <asp:RequiredFieldValidator ID="passwordReqField" Display ="Dynamic" runat="server" ErrorMessage="Please enter a password." ControlToValidate="txtPassword" Text="*Please enter a password"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" placeholder="Password" TextMode="Password" MaxLength="256"></asp:TextBox>
                             </div>
-                            <asp:Button ID="btnCreateAdmin" runat="server" Text="Create New Admin" class="btn btn-info" CausesValidation="false" OnClick="btnCreateAdmin_Click"/>
+                            <asp:Button ID="btnCreateAdmin" runat="server" Text="Create New Admin" class="btn btn-md btn-info btn-block" CausesValidation="false" OnClick="btnCreateAdmin_Click"/>
                         </div>
                     </div>
                 </div>
