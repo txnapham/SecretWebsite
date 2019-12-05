@@ -1,60 +1,46 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title></title>
     <meta charset="utf-8" />
     <style>
-        table, th, td {
-            border: 1px solid black;
+        @import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap');
+
+        p {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .logo {
+            width: 50%;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .signOff {
+            width: 50%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <br />
-    <table width="50%">
-        <tr>
-            <td align="center" style="background-color: #bdd5ea">
-                <span style="font-size: 25px;">Welcome to roommagnet!  </span>
-                <br />
-                <br />
-            </td>
+    <img src="images/roommagnetLOGO.png" class="logo">
 
-        </tr>
+    <div>
+        <h3>Welcome!</h3>
 
-        <tr align="center">
-            <td>
-                <br />
-                <br />
-                Dear [newusername]  
-                <br />
-                <br />
-                Thank you for registering with us!  
-                <br />
-                <a href="http://roommagnetjmu.com/Home.aspx">Click here to Login  
-                </a>
-                <br />
-                Be on the look out for background check from roommagent and intellicorp
-                <br />
-                Regards,  
-                <br />
-                <br />
-            </td>
-        </tr>
-        <tr>
-            <td align="center" style="background-color: #bdd5ea">
-                <br />
-                <br />
-                <span style="font-size: 15px; text-decoration: underline"> </span>
-                <br />
-                <span style="font-size: 20px;"><i></span>
-                <br />
-                <br />
-            </td>
+        <p>On behalf of the entire roommagnet staff, we would like to take this opportunity to welcome you as a new user! We are thrilled to have you with us.</p>
 
-        </tr>
-          
-  
-    </table>
+        <p>Be on the lookout for an email from Intellicorp to begin your background check status. This should be coming to you in the next few days. We will never share your personal information with anyone else during this process.</p>
+
+        <p>Thank you again for entrusting roommagnet with your housing needs!</p>
+
+        <img src="images/Screen%20Shot%202019-12-04%20at%202.24.56%20AM.png" class="signOff">
+    </div>
 </body>
 </html>

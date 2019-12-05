@@ -77,7 +77,7 @@
                     <div class="card  shadow-sm  mb-4">
                         <div class="card-body">
                             <h5 class="card-title dash-card-titles">My Appointments</h5>
-                            <div class="container-fluid cal pb-3">
+                            <%--<div class="container-fluid cal pb-3">
                                 <div>
                                     <h4 class="mb-4 text-center">November 2019</h4>
                                     <div class="row d-none d-sm-flex p-1 bg-dark text-white">
@@ -433,6 +433,16 @@
                                         <p class="d-sm-none">No events</p>
                                     </div>
                                 </div>
+                            </div>--%>
+
+                            <div>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td><asp:Literal ID="apptName" runat="server"></asp:Literal></td>
+                                        <td><asp:Literal ID="apptDate" runat="server"></asp:Literal></td>
+                                    </tr>
+                                </table>
+
                             </div>
 
 
@@ -445,20 +455,30 @@
 
                                         <div class="modal-body">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                             
-                                                <div class="form-group">
-                                                    <asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>
-                                                </div>
 
-                                                <div class="form-group">
-                                                    <asp:TextBox ID="txtDate" runat="server" class="form-control" placeholder="MM/DD/YYYY"></asp:TextBox>
-                                                </div>
+                                            <div class="form-group">
+                                                <%--<asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>--%>
+                                                <asp:DropDownList ID="ddRecipient" runat="server" AppendDataBoundItems="True" class="form-control form-control-lg" DataSourceID="tenantDataSource" DataTextField="NAME" DataValueField="AccountID">
+                                                    <asp:ListItem>Please Select a Recipient</asp:ListItem>
+                                                </asp:DropDownList>
+                                                <asp:SqlDataSource ID="tenantDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:roommagnetdbConnectionString %>" SelectCommand="SELECT AccountID, (FirstName + ' ' + LastName) AS NAME FROM Account WHERE AccountID IN (SELECT HostID FROM FavoritedTenants WHERE TenantID = @AccountId ) ORDER BY (FirstName + ' ' + LastName)">
+                                                    <SelectParameters>
+                                                        <asp:SessionParameter Name="AccountId" SessionField="AccountId" />
+                                                    </SelectParameters>
+                                                </asp:SqlDataSource>
+                                                <asp:Label ID="lblRError" runat="server" Text="" ForeColor="Red"></asp:Label>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <asp:TextBox ID="txtDate" type="date" runat="server" class="form-control form-control-lg" placeholder="Date (MM/DD/YYYY)"></asp:TextBox>
+                                                <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
+                                            </div>
 
 
-                                                <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" />
+                                            <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" OnClick="btnCreateAppt_Click " />
 
 
-                                             
+
 
 
                                         </div>
@@ -479,6 +499,19 @@
 
     </div>
     <!--END OF DASHBOARD CARDS-->
-       
+
+        <!-- script to keep modal open -->
+    <script type="text/javascript">
+        function showModal() {
+            $('#createAppointment').modal('show');
+        }
+
+        $(function () {
+            $("#btnCreateAppt").click(function () {
+                showModal();
+            });
+        });
+    </script>
+
 </asp:Content>
 
