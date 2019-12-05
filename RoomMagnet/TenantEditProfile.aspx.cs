@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.IO;
 using awsTestUpload;
+using System.Text;
 
 public partial class TenantEditProfile : System.Web.UI.Page
 {
@@ -47,8 +48,29 @@ public partial class TenantEditProfile : System.Web.UI.Page
                 System.Data.SqlClient.SqlCommand search = new System.Data.SqlClient.SqlCommand();
                 search.Connection = sc;
                 search.CommandText = "SELECT FirstName, ISNULL(MiddleName,''), LastName, HomeNumber, Street, City, HomeState, Country, Zip, PhoneNumber, Email FROM Account WHERE AccountID = " + accountID + ";";
-                SqlDataReader searching = search.ExecuteReader();
 
+                System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
+                selectHost.CommandText = "SELECT FirstName, AccountImage FROM Account WHERE AccountID = " + accountID + ";";
+                //Connections
+                selectHost.Connection = sc;
+
+                //Populating Tenant Part of Host Dashboard
+                System.Data.SqlClient.SqlDataReader readerTenantImage = selectHost.ExecuteReader();
+                while (readerTenantImage.Read())
+                {
+                    String tenantName = readerTenantImage["FirstName"].ToString();
+                    String filename = readerTenantImage["AccountImage"].ToString();
+                    // No image uploaded (currently default image in S3)
+                    if (filename == "") filename = "defaulttenantimg.jpg";
+                    // User dashboard dynamically updated using S3
+                    StringBuilder tenantImage = new StringBuilder();
+                    tenantImage
+                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle img-fluid\" width=\"30%\" height=\"auto\">");
+                    tenantCard.Text += tenantImage.ToString();
+                }
+                readerTenantImage.Close();
+
+                SqlDataReader searching = search.ExecuteReader();
                 //checks the database for matches
                 while (searching.Read())
                 {
@@ -343,6 +365,9 @@ public partial class TenantEditProfile : System.Web.UI.Page
             + Family + ", " + "English=" + English + ", " + "Spanish=" + Spanish + ", " + "Mandarin=" + Mandarin + ", " + "Japanese=" + Japanese + ", " + "German=" + German +
             ", " + "French=" + French + "Where " + "AccountID=" + Session["AccountId"].ToString() + ";";
         }
+        charInsertUpdate.ExecuteNonQuery();
+        sc.Close();
+        TenantImageUpdate();
     }
 
     protected void btnChangePassword_Click(object sender, EventArgs e)
@@ -392,9 +417,10 @@ public partial class TenantEditProfile : System.Web.UI.Page
         else // if the account doesn't exist, it will show failure
 
             sc.Close();
+
     }
 
-    protected void TenantImageUpload_Click(object sender, EventArgs e)
+    protected void TenantImageUpdate()
     {
         if (TenantImageUpload.HasFile)
         {
@@ -427,7 +453,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
 
             sc.Close();
 
-            StatusLabel.Text = "Looking good!";
+            StatusLabel.Text = "Looking good! Profile image updated.";
         }
         else
         {
