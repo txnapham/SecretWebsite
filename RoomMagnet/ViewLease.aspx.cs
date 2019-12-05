@@ -105,7 +105,8 @@ public partial class ViewLease : System.Web.UI.Page
             Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
         }
         else
-        { 
+        {
+            sigErrorMessage.Visible = true;
         }
     }
 }
