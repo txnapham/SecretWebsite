@@ -55,7 +55,7 @@
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <!--FILTER BUTTON AND FILTER FORM-->
                             <div class="form-row">
-                                <%--<button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterOptions">Filter</button>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterOptions">Sort</button>
                                 <!--END OF FILTER BUTTON-->
 
 
@@ -63,18 +63,13 @@
                                 <div class="modal" id="filterOptions">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
-
                                             <div class="modal-body">
-
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                                                 <!--start of personality-->
                                                 <h6>Personality/Lifestyle</h6>
                                                 <div class="form-group row">
-
                                                     <div class="col-sm-6">
-
-                                                       
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
                                                                 <asp:CheckBox ID="cbExtrovert" runat="server" class="form-check-input" />
@@ -101,15 +96,10 @@
                                                                 <asp:CheckBox ID="cbEarlyRiser" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterPetFriendly">Early Riser</label>
                                                             </div>
-                                                        </div>
-
-                                                        
+                                                        </div>                    
                                                     </div>
 
                                                     <div class="col-sm-6">
-
-                                                        
-
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
                                                                 <asp:CheckBox ID="cbNightOwl" runat="server" class="form-check-input" />
@@ -129,9 +119,7 @@
                                                                 <asp:CheckBox ID="cbFamily" runat="server" class="form-check-input" />
                                                                 <label class="form-check-label" for="filterSportsFan">Family-Oriented</label>
                                                             </div>
-                                                        </div>
-                                                        
-
+                                                        </div>                                                   
                                                     </div>
                                                 </div>
                                                 <!--end of personality-->
@@ -139,9 +127,7 @@
                                                 <!--start of amentities-->
                                                 <h6>Amenities</h6>
                                                 <div class="form-group row">
-
                                                     <div class="col-sm-6">
-
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
                                                                 <asp:CheckBox ID="cbKitchen" runat="server" class="form-check-input" />
@@ -162,13 +148,6 @@
                                                                 <label class="form-check-label" for="filterSportsFan">Wifi</label>
                                                             </div>
                                                         </div>
-
-                                                        
-
-                                                        
-
-                                                        
-
                                                     </div>
 
                                                     <div class="col-sm-6">
@@ -193,19 +172,15 @@
                                                                 <label class="form-check-label" for="filterSportsFan">Washer / Dryer</label>
                                                             </div>
                                                         </div>
-
-
                                                     </div>
                                                 </div>
                                                 <!--end of amenities-->
 
-                                       <!--start of homesharesmarter-->
-                                                <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housing">®</a>Living</h6>
+                                                <!--start of homesharesmarter-->
+                                                <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housing. <strong> If selected only HomeshareSmarter Properties will be displayed </strong>" data-html="true">®</a>Living</h6>
 
                                                 <div class="form-group row">
-
                                                     <div class="col-sm-12">
-
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
                                                                 <asp:CheckBox ID="cbHomeShareYES" runat="server" class="form-check-input" />
@@ -223,8 +198,6 @@
                                                     </div>
                                                 </div>
                                                 <!--end of homesharesmarter-->
-
-
 
                                                 <!--start of facilites-->
                                                 <h6>Facilities</h6>
@@ -252,13 +225,9 @@
                                                                 <label class="form-check-label" for="filterSportsFan">Backyard</label>
                                                             </div>
                                                         </div>
-
-   
                                                     </div>
 
-                                                    <div class="col-sm-6">
-
-                                                        
+                                                    <div class="col-sm-6">                        
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
                                                                 <asp:CheckBox ID="cbPorch" runat="server" class="form-check-input" />
@@ -276,19 +245,10 @@
                                                 </div>
                                                 <!--end of facilities-->
 
-
-                                                
-
-
-
-
-
                                                 <!--start of languages-->
                                                 <h6>Languages</h6>
                                                 <div class="form-group row">
-
                                                     <div class="col-sm-6">
-
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
                                                                 <asp:CheckBox ID="cbEnglish" runat="server" class="form-check-input" />
@@ -312,7 +272,6 @@
                                                     </div>
 
                                                     <div class="col-sm-6">
-
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
                                                                 <asp:CheckBox ID="cbJapanese" runat="server" class="form-check-input" />
@@ -337,21 +296,12 @@
                                                 </div>
                                                 <!--end of languages-->
 
-         
-
-
-
-                                                <button type="button" class="btn btn-info btn-block">
-                                                    Apply Filters
-                                           
-                                                </button>
-
-
+                                                <button type="button" class="btn btn-info btn-block">Sort By</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!--END OF FILTER FORM-->--%>
+                                <!--END OF FILTER FORM-->
 
 
                                 <!--SEARCH BAR-->
