@@ -198,7 +198,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
         sc.Close();
 
         //Insert Message Statement 
-        String message = txtMessage.Text;
+        String message = HttpUtility.HtmlEncode(txtMessage.Text);
         String date = DateTime.Now.ToString();
 
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
