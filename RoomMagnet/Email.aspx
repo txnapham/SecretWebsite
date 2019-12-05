@@ -4,7 +4,7 @@
     <title></title>
     <meta charset="utf-8" />
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Montserrat%7CRoboto&display=swap%27);
 
         p {
             font-family: 'Montserrat', sans-serif;
@@ -29,7 +29,7 @@
     </style>
 </head>
 <body>
-    <img src="images/roommagnetLOGO.png" class="logo">
+    <img src="https://duvjxbgjpi3nt.cloudfront.net/UserImages/roommagnetLOGO.png" class="logo">
 
     <div>
         <h3>Welcome!</h3>
@@ -40,7 +40,7 @@
 
         <p>Thank you again for entrusting roommagnet with your housing needs!</p>
 
-        <img src="images/Screen%20Shot%202019-12-04%20at%202.24.56%20AM.png" class="signOff">
+        <img src="https://duvjxbgjpi3nt.cloudfront.net/UserImages/joebobsign.png" class="signOff">
     </div>
 </body>
 </html>
