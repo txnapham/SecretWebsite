@@ -181,10 +181,11 @@ public partial class HostAccountCategories : System.Web.UI.Page
         //Execute and Close SQL
         insert.ExecuteNonQuery();
         sc.Close();
+        HostImageUpate();
         Response.Redirect("HostDashboard.aspx");
     }
 
-    protected void HostImageUpload_Click(object sender, EventArgs e)
+    protected void HostImageUpate()
     {
         if (HostImageUpload.HasFile)
         {
@@ -217,11 +218,10 @@ public partial class HostAccountCategories : System.Web.UI.Page
 
             sc.Close();
 
-            StatusLabel.Text = "Looking good!";
         }
         else
         {
-            StatusLabel.Text = "";
+            //Do nothing
         }
     }
 

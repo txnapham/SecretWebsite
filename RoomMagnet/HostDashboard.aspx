@@ -12,8 +12,8 @@
         };
     </script>
     <!--USER DASH-NAV-->
-    <div class="container-fluid  userDash mb-2 pb-3">
-        <div class="navbar navbar-light ">
+    <div class="container-fluid userDash mb-2 pb-3">
+        <div class="navbar navbar-light">
             <ul>
                 <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
 

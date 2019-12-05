@@ -254,6 +254,7 @@ public partial class Search_Tenant : System.Web.UI.Page
             Session["Search"] = null;
             resultLabel.Visible = true;
             resultLabel.Text = "Search Results for " + tSearch;
+            txtSearch.Text = "";
         }
         else
         {

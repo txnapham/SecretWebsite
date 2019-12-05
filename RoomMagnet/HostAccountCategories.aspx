@@ -28,10 +28,10 @@
             <div class="btn">
                 <span>Add photo</span>
                 <asp:FileUpload ID="HostImageUpload" runat="server" AllowMultiple="True" />
-                <asp:Button runat="server" ID="FilesUpload" Text="Upload profile image" AutoPostBack="false" OnClick="HostImageUpload_Click" />
+<%--                <asp:Button runat="server" ID="FilesUpload" Text="Upload profile image" AutoPostBack="false" OnClick="HostImageUpload_Click" />--%>
                 <br />
                 <br />
-                <asp:Label runat="server" ID="StatusLabel" Text="Upload Status: " />
+<%--                <asp:Label runat="server" ID="" Text="Upload Status: " />--%>
             </div>
             
         </section>
