@@ -191,10 +191,11 @@ public partial class TenantAccountCategories : System.Web.UI.Page
 
         insert.ExecuteNonQuery();
         sc.Close();
+        TenantImageUpdate();
         Response.Redirect("TenantDashboard.aspx");
     }
 
-    protected void TenantImageUpload_Click(object sender, EventArgs e)
+    protected void TenantImageUpdate()
     {
         if (TenantImageUpload.HasFile)
         {
@@ -226,12 +227,10 @@ public partial class TenantAccountCategories : System.Web.UI.Page
             update.ExecuteNonQuery();
 
             sc.Close();
-
-            StatusLabel.Text = "Looking good!";
         }
         else
         {
-            StatusLabel.Text = "";
+            // Do nothing
         }
     }
 
