@@ -61,12 +61,12 @@ public partial class AdminDashboard : System.Web.UI.Page
             selectUserName.CommandText = "SELECT FirstName FROM Account WHERE AccountID = " + Session["AccountId"] + ";";
 
             //Host Select
-            selectHost.CommandText = "SELECT TOP(5) FirstName, LastName FROM Account WHERE (AccountType = 2);";
+            selectHost.CommandText = "SELECT TOP(10) FirstName, LastName FROM Account FULL OUTER JOIN Host ON AccountID = HostID WHERE (AccountType = 2) AND BackgroundCheckStatus != 0;";
 
             //Tenant Select 
-            selectTenant.CommandText = "SELECT TOP(5) FirstName, LastName FROM Account WHERE (AccountType = 3);";
+            selectTenant.CommandText = "SELECT TOP(10) FirstName, LastName FROM Account FULL OUTER JOIN Tenant ON AccountID = TenantID WHERE (AccountType = 3) AND BackgroundCheckStatus != 0;";
 
-            //Intented Lease: Hosts and Tenants
+            //Intended Lease: Hosts and Tenants
             selectIntendedLease.CommandText = "SELECT TOP(5) A.FirstName as hostF, A.LastName as hostL, B.FirstName as tenantF, B.LastName as tenantL " +
                 "FROM Account A, Account B " +
                 "WHERE A.AccountID in (select hostID from Host where hostID in (select HostID from lease where Agreed = '1')) " +
@@ -130,7 +130,7 @@ public partial class AdminDashboard : System.Web.UI.Page
 
                 //StringBuilder
                 StringBuilder myCard3 = new StringBuilder();
-                myCard3.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Host: " + hostFName + " " + hostLName + ", Tenant: " + tenantFName + " " + tenantLName + "</a></li>");
+                myCard3.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Host: " + hostFName + " " + hostLName + "<br/>Tenant: " + tenantFName + " " + tenantLName + "</a></li>");
                 IntLease.Text += myCard3.ToString();
             }
             intLeaseRdr.Close();

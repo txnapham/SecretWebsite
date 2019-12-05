@@ -27,13 +27,14 @@ public partial class RegisteredTenants : System.Web.UI.Page
             {
                 select.CommandText += "SELECT AccountID, CONCAT(FirstName, ' ', LastName) AS Name, BackgroundCheckStatus " +
                 "FROM Account INNER JOIN Tenant ON AccountID = TenantID " +
+                "WHERE BackgroundCheckStatus != 0 " +
                 "ORDER BY Name";
             }
             if (searchCheck == 1)
             {
                 select.CommandText += "SELECT AccountID, CONCAT(FirstName, ' ', LastName) AS Name, BackgroundCheckStatus " +
                 "FROM Account INNER JOIN Tenant ON AccountID = TenantID " +
-                "WHERE CONCAT(FirstName, ' ', LastName) = @Name";
+                "WHERE BackgroundCheckStatus !=0 AND CONCAT(FirstName, ' ', LastName) = @Name";
 
                 select.Parameters.AddWithValue("@Name", txtSearch.Text);
             }
@@ -50,7 +51,7 @@ public partial class RegisteredTenants : System.Web.UI.Page
                 int tenantID = Convert.ToInt16(reader["AccountID"].ToString());
                 int backCheckStatus = Convert.ToInt16(reader["BackgroundCheckStatus"].ToString());
                 if (backCheckStatus == 2) backCheckS = "Complete";
-                if (backCheckStatus == 1) backCheckS = "Incomplete";
+                if (backCheckStatus == 1) backCheckS = "Pending";
 
                 backStatusL.Add(new BackgroundStatus() { accountName = tenantName, accountID = tenantID, backStatus = backCheckS });
             }
