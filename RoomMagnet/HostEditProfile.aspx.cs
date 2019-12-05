@@ -391,6 +391,7 @@ public partial class HostEditProfile : System.Web.UI.Page
                 else
                 {
                     lblPrev.Text = "Incorrect Password";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
                 }
             }
         }

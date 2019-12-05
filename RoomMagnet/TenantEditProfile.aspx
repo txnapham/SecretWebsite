@@ -372,5 +372,18 @@
         }
     </script>
 
+    <!-- script to keep modal open -->
+        <script type="text/javascript">
+            function showModal() {
+                $('#updatePassword').modal('show');
+            }
+
+            $(function () {
+                $("#btnChangePassword").click(function () {
+                    showModal();
+                });
+            });
+        </script>
+
 </asp:Content>
 

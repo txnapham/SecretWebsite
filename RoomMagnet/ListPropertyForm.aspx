@@ -4,7 +4,7 @@
     <title>RoomMagnet | List Property Form</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-<%--    <!--USER DASH-NAV-->
+    <%--    <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
         <div class="navbar navbar-light">
             <p>
@@ -24,7 +24,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HostDashboard.aspx" class="breadLink">Dashboard</a></li>
-<%--                    <li class="breadcrumb-item"><a href="ListedProperties.aspx" class="breadLink">Properties</a></li>--%>
+                    <%--                    <li class="breadcrumb-item"><a href="ListedProperties.aspx" class="breadLink">Properties</a></li>--%>
                     <li class="breadcrumb-item active" aria-current="page">List Property</li>
                 </ol>
             </nav>
@@ -48,25 +48,25 @@
 
 
                 <div class="form-group">
-                    <asp:RegularExpressionValidator ID="houseNumValidatorNumbers" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid house number" Text="*Please enter a valid house number" ControlToValidate="txtHouseNum" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
-                    <asp:RequiredFieldValidator ID="houseNumReqField" Display="Dynamic" runat="server" ErrorMessage="Please enter a house number." ControlToValidate="txtHouseNum" Text="*Please enter a house number"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="houseNumValidatorNumbers" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid house number" Text="*Please enter a valid house number" ControlToValidate="txtHouseNum" ValidationExpression="^[0-9]+$" ForeColor="Red"></asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator ID="houseNumReqField" Display="Dynamic" runat="server" ErrorMessage="Please enter a house number." ControlToValidate="txtHouseNum" Text="*Please enter a house number" ForeColor="Red"></asp:RequiredFieldValidator>
                     <asp:TextBox ID="txtHouseNum" runat="server" class="form-control form-control-lg" placeholder="House Number"></asp:TextBox>
                 </div>
                 <div class="form-group">
-                    <asp:RequiredFieldValidator ID="streetReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a street." ControlToValidate="txtStreet" Text="*Please enter a street"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[a-zA-Z_ ]+$"></asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator ID="streetReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a street." ControlToValidate="txtStreet" Text="*Please enter a street" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="streetLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid street name" Text="*Please enter a valid street name" ControlToValidate="txtStreet" ValidationExpression="^[a-zA-Z_ ]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                     <asp:TextBox ID="txtStreet" runat="server" class="form-control form-control-lg" placeholder="Street" MaxLength="30"></asp:TextBox>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-7">
-                        <asp:RequiredFieldValidator ID="cityReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a city." ControlToValidate="txtCity" Text="*Please enter a city"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[0-9a-zA-Z_ -]+$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="cityReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a city." ControlToValidate="txtCity" Text="*Please enter a city" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="cityLetters" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid city name" Text="*Please enter a valid city name" ControlToValidate="txtCity" ValidationExpression="^[0-9a-zA-Z_ -]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtCity" runat="server" class="form-control form-control-lg" placeholder="City"></asp:TextBox>
                     </div>
 
-                    <asp:RequiredFieldValidator ID="stateReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please select a state." ControlToValidate="ddState" Text="*Please select a state"></asp:RequiredFieldValidator>
                     <div class="form-group col-md-3">
+                        <asp:RequiredFieldValidator ID="stateReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please select a state." ControlToValidate="ddState" Text="*Please select a state" ForeColor="Red"></asp:RequiredFieldValidator>
                         <asp:DropDownList ID="ddState" runat="server" class="form-control  form-control-lg">
                             <asp:ListItem Value="">State</asp:ListItem>
                             <asp:ListItem>AL</asp:ListItem>
@@ -123,17 +123,22 @@
                     </div>
 
                     <div class="form-group col-md-2">
-                        <asp:RequiredFieldValidator ID="zipReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a zip code." ControlToValidate="txtZip" Text="*Please enter a zip code"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="zipNumValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid zip code" Text="*Please enter a valid zip code" ControlToValidate="txtZip" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="zipReqFieldValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a zip code." ControlToValidate="txtZip" Text="*Please enter a zip code" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="zipNumValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid zip code" Text="*Please enter a valid zip code" ControlToValidate="txtZip" ValidationExpression="^[0-9]+$" ForeColor="Red"></asp:RegularExpressionValidator>
                         <asp:TextBox ID="txtZip" runat="server" class="form-control form-control-lg" placeholder="Zip"></asp:TextBox>
                     </div>
                 </div>
 
-
-                <div class="form-group">
-                    <asp:RequiredFieldValidator ID="RequiredFieldCountry" Display="Dynamic" runat="server" ErrorMessage="Please enter a country." ControlToValidate="txtCountry" Text="*Please enter a country"></asp:RequiredFieldValidator>
-                    <asp:TextBox ID="txtCountry" runat="server" class="form-control form-control-lg" placeholder="Country" MaxLength="2"></asp:TextBox>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <asp:RequiredFieldValidator ID="ddCountryValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a country." ControlToValidate="ddCountry" Text="*Please enter a country" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddCountry" runat="server" class="form-control form-control-lg">
+                            <asp:ListItem Value="US">US</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
                 </div>
+
+
 
                 <div class="form-group">
                     <small id="addressDisclosure" class="form-text text-muted">*We will never share your address until you begin the lease process.</small>
@@ -306,7 +311,7 @@
                                 </asp:RadioButtonList>
                             </div>
                         </div>
-<%--                            <div class="switchwrapper">
+                        <%--                            <div class="switchwrapper">
                                 <label class="switch">
                                     <asp:CheckBox ID="cbApartment" runat="server" />
                                     <span class="slider round"></span>
@@ -327,7 +332,7 @@
                     </div>
 
 
-<%--                    <div class="col-md-6">
+                    <%--                    <div class="col-md-6">
 
                         <div class="col-md-12">
                             <div class="switchwrapper">
@@ -566,13 +571,10 @@
 
 
 
-<%--                        <h6>Don't see one that applies to you? Fill out the form below:</h6>
+                        <%--                        <h6>Don't see one that applies to you? Fill out the form below:</h6>
                         <div class="form-group">
                             <asp:TextBox ID="txtOtherRules" runat="server" class="form-control" aria-describedby="HouseRule" placeholder="Type your house rule here"></asp:TextBox>
                         </div>--%>
-
-
-
                     </div>
                 </div>
             </section>
@@ -623,7 +625,7 @@
 
 
             <div class="form-group form-check">
-                <asp:CustomValidator ID="cbAgreementValidator" runat="server" Display="Dynamic" ErrorMessage="*Please accept the terms and conditions</br>" ClientValidationFunction="validateTerms" ></asp:CustomValidator>
+                <asp:CustomValidator ID="cbAgreementValidator" runat="server" Display="Dynamic" ErrorMessage="*Please accept the terms and conditions</br>" ClientValidationFunction="validateTerms" ForeColor="Red"></asp:CustomValidator>
                 <asp:CheckBox ID="cbAgreement" runat="server" class="form-check-input" />
                 <label class="form-check-label" for="exampleCheck1">Agreement to Terms &amp; Conditions</label>
             </div>
@@ -632,17 +634,17 @@
 
             <asp:Button ID="btnListProperty" runat="server" class="btn btn-info btn-block" Text="List Property" CausesValidation="true" OnClick="btnListProperty_Click" />
         </div>
-        
+
         <script>
-        function validateTerms(source, arguments) {
-            var $c = $('#<%= cbAgreement.ClientID %>');
-            if($c.prop("checked")){
-                arguments.IsValid = true;
-            } else {
-                arguments.IsValid = false;
+            function validateTerms(source, arguments) {
+                var $c = $('#<%= cbAgreement.ClientID %>');
+                if ($c.prop("checked")) {
+                    arguments.IsValid = true;
+                } else {
+                    arguments.IsValid = false;
+                }
             }
-        }
-    </script>
+        </script>
         <!--END OF BODY CONTENT-->
 </asp:Content>
 

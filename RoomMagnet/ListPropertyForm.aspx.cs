@@ -52,7 +52,6 @@ public partial class ListPropertyForm : System.Web.UI.Page
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
             FileUpload1_Click(sender, e);
 
-            txtCountry.Text = "US";
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
         }
         else
@@ -72,7 +71,7 @@ public partial class ListPropertyForm : System.Web.UI.Page
         {
             //Creates a new property for that host
             Property newProperty = new Property(HttpUtility.HtmlEncode(txtHouseNum.Text), HttpUtility.HtmlEncode(txtStreet.Text), HttpUtility.HtmlEncode(txtCity.Text),
-                ddState.SelectedValue, HttpUtility.HtmlEncode(txtZip.Text), HttpUtility.HtmlEncode(txtCountry.Text));
+                ddState.SelectedValue, HttpUtility.HtmlEncode(txtZip.Text), "US");
             //Different property ammenties
             if (cbStPark.Checked == true) newProperty.setStreetParking(1);
             else newProperty.setStreetParking(0);
@@ -154,7 +153,6 @@ public partial class ListPropertyForm : System.Web.UI.Page
             txtCity.Text = "";
             ddState.ClearSelection();
             txtZip.Text = "";
-            txtCountry.Text = "US";
 
             System.Data.SqlClient.SqlCommand propertyIdGrab = new System.Data.SqlClient.SqlCommand();
             propertyIdGrab.Connection = sc;
