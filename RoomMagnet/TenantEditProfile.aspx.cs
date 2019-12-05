@@ -161,7 +161,14 @@ public partial class TenantEditProfile : System.Web.UI.Page
 
         //Update the Account Address
         System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
+        System.Data.SqlClient.SqlCommand updatePassEmail = new System.Data.SqlClient.SqlCommand();
         update.Connection = sc;
+        updatePassEmail.Connection = sc;
+
+        updatePassEmail.CommandText = "UPDATE Password SET Email = @Email WHERE Email = (SELECT Email FROM Account WHERE AccountID = " + accountID + ")";
+        updatePassEmail.Parameters.Add(new SqlParameter("@Email", txtEmail.Text));
+        updatePassEmail.ExecuteNonQuery();
+
         update.CommandText = "UPDATE Account SET FirstName = @fn, MiddleName = NULLIF(@mn,''), LastName = @ln, PhoneNumber = @number, Email = @email, HomeNumber = @HouseNbr, Street = @street, City = @city, HomeState = @state, " +
             "Country = @country, Zip = @zip WHERE AccountID = @accountID;";
         update.Parameters.Add(new SqlParameter("@fn", txtFN.Text));

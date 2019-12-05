@@ -173,8 +173,15 @@ public partial class HostEditProfile : System.Web.UI.Page
         sc.ConnectionString = "server=aawnyfad9tm1sf.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
         //Save  all updated information 
+        System.Data.SqlClient.SqlCommand updatePassEmail = new System.Data.SqlClient.SqlCommand();
         System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
+        updatePassEmail.Connection = sc;
         update.Connection = sc;
+
+        updatePassEmail.CommandText = "UPDATE Password SET Email = @Email WHERE Email = (SELECT Email FROM Account WHERE AccountID = " + accountID + ")";
+        updatePassEmail.Parameters.Add(new SqlParameter("@Email", txtEmail.Text));
+        updatePassEmail.ExecuteNonQuery();
+
         update.CommandText = "UPDATE Account SET FirstName = @fn, MiddleName = NULLIF(@mn,''), LastName = @ln, PhoneNumber = @number, Email = @email, HomeNumber = @HouseNbr, Street = @street, City = @city, HomeState = @state, " +
             "Country = @country, Zip = @zip WHERE AccountID = @accountID;";
         update.Parameters.Add(new SqlParameter("@fn", txtFN.Text));
