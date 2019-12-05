@@ -34,10 +34,10 @@
                         <div class="d-flex ">
                             <div class="btn btn-rounded float-left">
                                 <asp:FileUpload ID="HostImageUpload" runat="server" AllowMultiple="True" />
-                                <asp:Button runat="server" ID="FilesUpload" Text="Upload profile image" AutoPostBack="false" OnClick="HostImageUpload_Click" />
+<%--                                <asp:Button runat="server" ID="FilesUpload" Text="Upload profile image" AutoPostBack="false" OnClick="HostImageUpload_Click" />--%>
                                 <br />
                                 <br />
-                                <asp:Label runat="server" ID="StatusLabel" Text="Upload Status: " />
+                                <asp:Label runat="server" ID="StatusLabel" Text="" ForeColor="#577399" Font-Bold="true" />
                             </div>
                         </div>
                     </div>

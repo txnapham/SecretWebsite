@@ -338,6 +338,7 @@ public partial class HostEditProfile : System.Web.UI.Page
 
         charInsertUpdate.ExecuteNonQuery();
         sc.Close();
+        HostImageUpdate();
     }
 
     protected void btnChangePassword_Click(object sender, EventArgs e)
@@ -392,7 +393,7 @@ public partial class HostEditProfile : System.Web.UI.Page
         sc.Close();
     }
 
-    protected void HostImageUpload_Click(object sender, EventArgs e)
+    protected void HostImageUpdate()
     {
         if (HostImageUpload.HasFile)
         {
@@ -425,7 +426,7 @@ public partial class HostEditProfile : System.Web.UI.Page
 
             sc.Close();
 
-            StatusLabel.Text = "Looking good!";
+            StatusLabel.Text = "Looking good! Profile image updated.";
         }
         else
         {
