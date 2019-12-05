@@ -233,6 +233,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
         insertLease.Parameters.Add(new SqlParameter("@PropertyID", ddProperty.SelectedValue));
         insertLease.ExecuteNonQuery();
         sc.Close();
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
     }
     protected void videoChat_Click(object sender, EventArgs e)
     {

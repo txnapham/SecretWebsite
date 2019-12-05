@@ -11,6 +11,11 @@
         PageMethods.CreateLease();
     };
 </script>
+<script>
+    function MyFunction() {
+        alert("Lease Has Been Sent for Tenant Approval")
+    }
+</script>
 
 <%--    <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
