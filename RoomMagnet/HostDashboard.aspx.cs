@@ -144,7 +144,8 @@ public partial class HostDashboard : System.Web.UI.Page
             select.CommandText = "SELECT TOP(5) B.FirstName, B.LastName " +
                 "FROM Account A, Account B " +
                 "WHERE A.AccountID in (select hostID from Host where hostID in (select HostID from lease where Agreed = '1')) " +
-                "AND B.AccountID in (select tenantId from Tenant where tenantID in (select tenantID from lease where Agreed = '1'))";
+                "AND B.AccountID in (select tenantId from Tenant where tenantID in (select tenantID from lease where Agreed = '1')) " +
+                "AND A.AccountID = " + accountID;
             //Property Select
             selectProp.CommandText = "SELECT HouseNumber, Street FROM Property WHERE PropertyID in (SELECT propertyID FROM Property WHERE HostID = " + accountID + ");";
             //Message Center Tenant Populating once they favorite the current host's room
