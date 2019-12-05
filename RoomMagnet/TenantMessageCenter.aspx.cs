@@ -11,7 +11,6 @@ using System.Web.UI.WebControls;
 public partial class TenantMessageCenter : System.Web.UI.Page
 {
     System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
-
     protected void Page_PreInit(object sender, EventArgs e)
     {
         //Access to Page for Certain Account Types
@@ -106,12 +105,16 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         selectLease.Connection = sc;
         selectLease.CommandText = "Select Agreed from lease where TenantID =" + tenantID + " AND " + "HostID =" +hostID;
         sc.Open();
-        int agreed = Convert.ToInt16(selectLease.ExecuteScalar().ToString());
         sc.Close();
+        int agreed = 2;
 
+        object agree = selectLease.ExecuteScalar();
+        if (agree != null)
+        {
+            agreed = Convert.ToInt16(selectLease.ExecuteScalar().ToString());
+        }
         loadMessages(hostID);
         txtMessage.Visible = true;
-        //aptBtn.Visible = true;
         videoChat.Visible = true;
         LinkButton2.Visible = true;
         if(agreed == 0)
@@ -126,8 +129,8 @@ public partial class TenantMessageCenter : System.Web.UI.Page
 
     public void loadMessages(int hostID)
     {
-        System.Data.SqlClient.SqlCommand selectMessage = new System.Data.SqlClient.SqlCommand();
-        System.Data.SqlClient.SqlCommand imgSelect = new System.Data.SqlClient.SqlCommand();
+        SqlCommand selectMessage = new SqlCommand();
+        SqlCommand imgSelect = new SqlCommand();
 
         //Message
         selectMessage.CommandText = "select messageContent, date, MessageType from message where (messageType = 1) and FavTenantID in " +
@@ -201,7 +204,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         int tenantID = Convert.ToInt32(Session["AccountId"].ToString());
 
         //Selecting FavProp and FavTenant
-        System.Data.SqlClient.SqlCommand favTenant = new System.Data.SqlClient.SqlCommand();
+        SqlCommand favTenant = new SqlCommand();
         favTenant.Connection = sc;
 
         favTenant.CommandText = "SELECT FavTenantID FROM FavoritedTenants where TenantID = " + tenantID + "AND HostID=" + hostID;
