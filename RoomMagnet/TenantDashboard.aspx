@@ -9,10 +9,9 @@
     <div class="container-fluid  userDash mb-2 pb-3">
         <div class="navbar navbar-light ">
             <ul>
-                <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>
-
-                <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
-            </ul>
+                <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>            
+<%--                <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>--%>
+             </ul>
         </div>
     </div>
     <!--END OF USER DASH-NAV-->
