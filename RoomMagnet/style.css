@@ -5922,7 +5922,7 @@ a.badge-dark:hover, a.badge-dark:focus {
 }
 
 .progress {
-    display: flex;
+    display: flex;<img alt="image" src="https://duvjxbgjpi3nt.cloudfront.net/UserImages/5569boy5.png" class=" rounded-circle-header img-fluid" width="50%" height="auto">
     float: right;
     height: 1rem;
     overflow: hidden;
@@ -7169,7 +7169,7 @@ button.bg-dark:focus {
 .rounded-circle-header {
     float: left;
     border-radius: 50% !important;
-    width:10%;
+    width:40%;
     height:auto;
 }
 

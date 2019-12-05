@@ -16,9 +16,7 @@
         <div class="navbar navbar-light ">
             <ul>
                 <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
-            
-                <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
-             </ul>
+            </ul>
         </div>
     </div>
     <!--END OF USER DASH-NAV-->

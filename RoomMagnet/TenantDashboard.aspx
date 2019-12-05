@@ -11,7 +11,7 @@
             <ul>
                 <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>
             
-                <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
+<%--                <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>--%>
              </ul>
         </div>
     </div>
