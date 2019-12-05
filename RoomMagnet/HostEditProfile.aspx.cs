@@ -59,7 +59,7 @@ public partial class HostEditProfile : System.Web.UI.Page
                     String tenantName = readerHostImage["FirstName"].ToString();
                     String filename = readerHostImage["AccountImage"].ToString();
                     // No image uploaded (currently default image in S3)
-                    if (filename == "") filename = "defaulttenantimg.jpg";
+                    if (filename == "") filename = "noprofileimage.png";
                     // User dashboard dynamically updated using S3
                     StringBuilder hostImage = new StringBuilder();
                     hostImage

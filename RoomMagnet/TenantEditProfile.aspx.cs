@@ -61,7 +61,7 @@ public partial class TenantEditProfile : System.Web.UI.Page
                     String tenantName = readerTenantImage["FirstName"].ToString();
                     String filename = readerTenantImage["AccountImage"].ToString();
                     // No image uploaded (currently default image in S3)
-                    if (filename == "") filename = "defaulttenantimg.jpg";
+                    if (filename == "") filename = "noprofileimage.png";
                     // User dashboard dynamically updated using S3
                     StringBuilder tenantImage = new StringBuilder();
                     tenantImage
