@@ -37,8 +37,6 @@
                             </div>
                             <img class="d-block w-100 img-fluid" src="images/cooking.jpg" alt="Second slide">
                         </div>
-
-
                     </div>
                 </div>
 

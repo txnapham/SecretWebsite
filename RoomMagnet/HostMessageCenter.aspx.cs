@@ -151,6 +151,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
             {
                 StringBuilder myCard = new StringBuilder();
                 myCard
+                .Append("<div>")
                 .Append("<div class=\"incoming-msg-img\">")
                 .Append("   <img src = \"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + accountImg + "\" class=\"rounded-circle img-fluid\">")
                 .Append("</div>")
@@ -159,6 +160,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
                 .Append("       <p>" + message + "</p>")
                 .Append("       <span class=\"time-date\">" + date + "</span>")
                 .Append("   </div>")
+                .Append("</div>")
                 .Append("</div>");
 
                 Message.Text += myCard.ToString();

@@ -252,10 +252,14 @@ public partial class Search_Tenant : System.Web.UI.Page
                 
             reader.Close();
             Session["Search"] = null;
+            resultLabel.Visible = true;
+            resultLabel.Text = "Search Results for " + tSearch;
         }
         else
         {
-            //Insert Label Text here
+            //Label for no search results
+            resultLabel.Visible = true;
+            resultLabel.Text = "No searches match your criteria.";
         }
 
         return cardString;
@@ -315,7 +319,7 @@ public partial class Search_Tenant : System.Web.UI.Page
 
 
         StringBuilder filterBreadCrumbs = new StringBuilder();
-        filterBreadCrumbs.Append("<li class=\"breadcrumb-item active\" aria-current=\"page\"> Filters Applied: ");
+        filterBreadCrumbs.Append("<li class=\"breadcrumb-item active\" aria-current=\"page\"> Sort By: ");
 
         //Checked HomeShare
         //Showing the results in a sorted way by number of matches to filters

@@ -373,6 +373,8 @@
             </div>
         </section>
         <!--END OF FILTER, SEARCH BAR, AND SEARCH BUTTON -->
+        
+        <asp:Label ID="resultLabel" runat="server" Visible="false" Text="Sorry, no results match your search criteria."></asp:Label>
 
         <!--BREADCRUMBS-->
         <section>

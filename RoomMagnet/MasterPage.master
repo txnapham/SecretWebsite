@@ -42,7 +42,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav nav-pills ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link outline-active" href="Home.aspx">Home</a>
+                            <a class="nav-link " href="Home.aspx">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="Search.aspx">Search</a>
