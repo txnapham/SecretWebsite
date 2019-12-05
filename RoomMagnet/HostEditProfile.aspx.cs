@@ -59,7 +59,7 @@ public partial class HostEditProfile : System.Web.UI.Page
                     String tenantName = readerHostImage["FirstName"].ToString();
                     String filename = readerHostImage["AccountImage"].ToString();
                     // No image uploaded (currently default image in S3)
-                    if (filename == "") filename = "defaulttenantimg.jpg";
+                    if (filename == "") filename = "noprofileimage.png";
                     // User dashboard dynamically updated using S3
                     StringBuilder hostImage = new StringBuilder();
                     hostImage
@@ -384,9 +384,9 @@ public partial class HostEditProfile : System.Web.UI.Page
                     //Insert into PASSWORD
                     newPass.Parameters.Add(new SqlParameter("@AccountID", accountID));
                     newPass.Parameters.Add(new SqlParameter("@password", PasswordHash.HashPassword(txtReenterPassword.Text))); // hash entered password
-                    lblPrev.Text = "Success";
                     newPass.ExecuteNonQuery();
                     sqlConn.Close();
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
                 }
                 else
                 {

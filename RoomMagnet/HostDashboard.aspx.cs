@@ -46,7 +46,8 @@ public partial class HostDashboard : System.Web.UI.Page
             favTen.Text = "";
             alert1.Text = "";
             alert2.Text = "";
-            progressBar.Text = "";
+            apptName.Text = "";
+            apptDate.Text = "";
 
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
@@ -87,8 +88,8 @@ public partial class HostDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder hostImage = new StringBuilder();
                 hostImage
-                    .Append("<div> <img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-header img-fluid\" width=\"30%\" height=\"auto\">")
-                    .Append("                Welcome " + tenantName + "! </div>");
+                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-headerrm img-fluid\" width=\"20%\" height=\"auto\">")
+                    .Append("             <h3>Welcome " + tenantName + "!</h3>");
                 HostCard.Text += hostImage.ToString();
             }
             sc.Close();
@@ -111,45 +112,24 @@ public partial class HostDashboard : System.Web.UI.Page
                 .Append("   </button>")
                 .Append("</div>");
 
-            StringBuilder progressOneThird = new StringBuilder();
-            progressOneThird
-                .Append("<div class=\"progress\" style=\"height: 40%; \">")
-                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar1.png\" \">")
-                .Append("</div");
-
-            StringBuilder progressTwoThird = new StringBuilder();
-            progressTwoThird
-                .Append("<div class=\"progress\" style=\"height: 40%; \">")
-                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar2.png\" \">")
-                .Append("</div");
-
-            StringBuilder progressFull = new StringBuilder();
-            progressFull
-                .Append("<div class=\"progress\" style=\"height: 40%; \">")
-                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar3.png\" \">")
-                .Append("</div");
 
             if (charCheck == 0 && backStatusCheck == 0)
             {
                 alert1.Text += alert1Text.ToString();
                 alert2.Text += alert2Text.ToString();
-                progressBar.Text += progressOneThird.ToString();
             }
             else if (charCheck == 1 && backStatusCheck == 1)
             {
-                progressBar.Text += progressFull.ToString();
             }
             else if (charCheck == 1 || backStatusCheck == 1)
             {
                 if (charCheck == 1 || backStatusCheck == 1)
                 {
                     alert1.Text += alert2Text.ToString();
-                    progressBar.Text += progressTwoThird.ToString();
                 }
                 else if (charCheck == 1 || backStatusCheck == 1)
                 {
                     alert1.Text += alert1Text.ToString();
-                    progressBar.Text += progressTwoThird.ToString();
                 }
             }
 
@@ -378,6 +358,7 @@ public partial class HostDashboard : System.Web.UI.Page
 
                     txtDate.Text = "";
                     ddRecipient.ClearSelection();
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
                 }
             }
         }

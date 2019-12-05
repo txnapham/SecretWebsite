@@ -25,15 +25,10 @@
         </section>
 
         <section>
-            <div class="btn">
-                <span>Add photo</span>
+            <div class="form-group">
                 <asp:FileUpload ID="HostImageUpload" runat="server" AllowMultiple="True" />
 <%--                <asp:Button runat="server" ID="FilesUpload" Text="Upload profile image" AutoPostBack="false" OnClick="HostImageUpload_Click" />--%>
-                <br />
-                <br />
-<%--                <asp:Label runat="server" ID="" Text="Upload Status: " />--%>
             </div>
-            
         </section>
 
 
@@ -56,7 +51,7 @@
                     <div class="col-md-12">
                         <div class="switchwrapper">
                             <label class="switch">
-                                <asp:CheckBox ID="cbEnglish" runat="server" AutoPostBack="True" />
+                                <asp:CheckBox ID="cbEnglish" runat="server" />
                                 <span class="slider round"></span>
                             </label>
                             <div>English</div>

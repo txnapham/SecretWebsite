@@ -240,6 +240,8 @@ public partial class TenantMessageCenter : System.Web.UI.Page
 
     protected void videoChat_Click(object sender, EventArgs e)
     {
-        Response.Redirect("TenantVideoChat.aspx");
+        //Response.Redirect("TenantVideoChat.aspx");
+        ClientScript.RegisterStartupScript(this.Page.GetType(), "",
+        "window.open('TenantVideoChat.aspx','Graph','height=400,width=500');", true);
     }
 }
