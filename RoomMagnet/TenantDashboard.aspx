@@ -5,6 +5,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
+    <asp:ScriptManager ID="ScriptManager" runat="server" EnablePageMethods="true">
+    </asp:ScriptManager>
+    <script>
+        function favoriteBtn(propertyID, city, state, priceLow, priceHigh) {
+            PageMethods.MiddleMan(propertyID, city, state, priceLow, priceHigh);
+        };
+    </script>
+
     <!--USER DASH-NAV-->
     <div class="container-fluid  userDash mb-2 pb-3">
         <div class="navbar navbar-light ">
@@ -15,8 +23,6 @@
         </div>
     </div>
     <!--END OF USER DASH-NAV-->
-
-
 
     <!--reminders-->
     <div class="container">

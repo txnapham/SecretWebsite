@@ -4,27 +4,16 @@
     <title>RoomMagnet | Favorited Properties</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <!--USER DASH-NAV-->
-<%--    <div class="container-fluid userDash mb-2 pb-3">
-        <div class="navbar navbar-light">
-            <p>
-                <img src="images/rebeccajames.png" alt="..." class=" rounded-circle img-fluid" width="30%" height="auto">
-                Welcome USER,</p>
 
+    <asp:ScriptManager ID="ScriptManager" runat="server" EnablePageMethods="true">
+    </asp:ScriptManager>
+    <script>
+        function favoriteBtn(propertyID, city, state, priceLow, priceHigh) {
+            PageMethods.MiddleMan(propertyID, city, state, priceLow, priceHigh);
+        };
+    </script>
 
-            <div class="progress" style="height: 30px;">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 66%; color: #fff; font-size: 15px; font-weight: bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Profile Completion</div>
-            </div>
-
-        </div>
-
-
-        
-    </div>--%>
-    <!--END OF USER DASH-NAV-->
-
-
-    <div class="container-fluid px-5">
+    <div class="container-fluid mt-5 px-5">
 
         <!--BREADCRUMBS-->
         <section>

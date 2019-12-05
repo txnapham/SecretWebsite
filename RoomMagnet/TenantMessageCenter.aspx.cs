@@ -191,7 +191,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
                 .Append("           <span class=\"time-date\">" + date + "</span>")
                 .Append("       </div>")
                 .Append("   </div>")
-                .Append("</div>");
+                .Append("</div><br/>");
                 Message.Text += myCard.ToString();
             }
         }
