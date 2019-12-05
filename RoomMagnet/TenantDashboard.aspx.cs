@@ -92,7 +92,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder tenantImage = new StringBuilder();
                 tenantImage
-                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-header img-fluid\" width=\"50%\" height=\"auto\">")
+                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\"rounded-circle-header img-fluid\" width=\"50%\" height=\"auto\">")
                 .Append("                <h3>Welcome " + tenantName + "! </h3>");
                 TenantCard.Text += tenantImage.ToString();
             }

@@ -181,11 +181,11 @@ public partial class HostAccountCategories : System.Web.UI.Page
         //Execute and Close SQL
         insert.ExecuteNonQuery();
         sc.Close();
-        HostImageUpate();
+        HostImageUpdate();
         Response.Redirect("HostDashboard.aspx");
     }
 
-    protected void HostImageUpate()
+    protected void HostImageUpdate()
     {
         if (HostImageUpload.HasFile)
         {

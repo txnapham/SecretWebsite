@@ -88,8 +88,8 @@ public partial class HostDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder hostImage = new StringBuilder();
                 hostImage
-                    .Append("<div> <img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-header img-fluid\" width=\"30%\" height=\"auto\">")
-                    .Append("             <h3>   Welcome " + tenantName + "!</h3> </div>");
+                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-headerrm img-fluid\" width=\"20%\" height=\"auto\">")
+                    .Append("             <h3>Welcome " + tenantName + "!</h3>");
                 HostCard.Text += hostImage.ToString();
             }
             sc.Close();
