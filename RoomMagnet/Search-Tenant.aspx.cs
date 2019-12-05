@@ -48,6 +48,7 @@ public partial class Search_Tenant : System.Web.UI.Page
             filterCard.Text = String.Empty;
             mainResults.Text = String.Empty;
             otherResults.Text = String.Empty;
+            resultLabel.Text = String.Empty;
 
             //Search for Home 
             if (Session["Search"] != null)

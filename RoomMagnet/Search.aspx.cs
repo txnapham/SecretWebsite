@@ -47,6 +47,7 @@ public partial class Search : System.Web.UI.Page
         filterCard.Text = String.Empty;
         mainResults.Text = String.Empty;
         otherResults.Text = String.Empty;
+        resultLabel.Text = String.Empty;
 
         if (Session["Search"] != null)
         {
@@ -68,8 +69,6 @@ public partial class Search : System.Web.UI.Page
         divider.Text = "<hr/>" +
             "<strong>Other Results in State That May Interest You:</strong> ";
         cardBuilder(otherResults, filterOtherResults(), txtSearch.Text);
-
-
     }
 
     public string cardBuilder(Literal name, string cardQuery, string searchString)

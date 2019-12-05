@@ -286,7 +286,7 @@
                                         </div>
                                         <!--end of languages-->
 
-                                        <button type="button" runat="server" onServerClick="btnSearch_Click" class="btn btn-info btn-block" data-dismiss="modal">Sort By</button>
+                                        <button type="button" runat="server" onServerClick="btnSearch_Click" class="btn btn-info btn-block" data-dismiss="modal">Apply</button>
                                     </div>
                                 </div>
                             </div>

@@ -141,8 +141,10 @@ public partial class HostDashboard : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand selectTenant = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectDate = new System.Data.SqlClient.SqlCommand();
             //Tenant Select
-            select.CommandText = "SELECT FirstName,LastName FROM Account WHERE AccountID in " +
-            "(SELECT TOP(5) tenantID FROM Lease WHERE HostID = " + accountID + ");";
+            select.CommandText = "SELECT TOP(5) B.FirstName, B.LastName " +
+                "FROM Account A, Account B " +
+                "WHERE A.AccountID in (select hostID from Host where hostID in (select HostID from lease where Agreed = '1')) " +
+                "AND B.AccountID in (select tenantId from Tenant where tenantID in (select tenantID from lease where Agreed = '1'))";
             //Property Select
             selectProp.CommandText = "SELECT HouseNumber, Street FROM Property WHERE PropertyID in (SELECT propertyID FROM Property WHERE HostID = " + accountID + ");";
             //Message Center Tenant Populating once they favorite the current host's room
@@ -199,10 +201,10 @@ public partial class HostDashboard : System.Web.UI.Page
                 String HouseNum = rdr["HouseNumber"].ToString();
                 String Street = rdr["Street"].ToString();
 
-                StringBuilder currentTenant = new StringBuilder();
-                currentTenant
+                StringBuilder myCard = new StringBuilder();
+                myCard
                 .Append("<li><a href=\"#\" class=\"tenantdashlist\">" + HouseNum + " " + Street + "</a></li>");
-                properties.Text += currentTenant.ToString();
+                properties.Text += myCard.ToString();
             }
             rdr.Close();
             //Populating Message Center Matches
