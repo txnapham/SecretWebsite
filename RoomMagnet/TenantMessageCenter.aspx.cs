@@ -105,7 +105,6 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         selectLease.Connection = sc;
         selectLease.CommandText = "Select Agreed from lease where TenantID =" + tenantID + " AND " + "HostID =" +hostID;
         sc.Open();
-        sc.Close();
         int agreed = 2;
 
         object agree = selectLease.ExecuteScalar();
@@ -125,10 +124,12 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         {
             signedLease.Visible = true;
         }
+        sc.Close();
     }
 
     public void loadMessages(int hostID)
     {
+        sc.Close();
         SqlCommand selectMessage = new SqlCommand();
         SqlCommand imgSelect = new SqlCommand();
 
