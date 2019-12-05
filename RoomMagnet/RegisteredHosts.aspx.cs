@@ -35,7 +35,7 @@ public partial class RegisteredHosts : System.Web.UI.Page
                 "FROM Account INNER JOIN Host ON AccountID = HostID " +
                 "WHERE BackgroundCheckStatus != 0 AND CONCAT(FirstName, ' ', LastName) = @Name";
 
-                select.Parameters.AddWithValue("@Name", txtSearch.Text);
+                select.Parameters.AddWithValue("@Name", HttpUtility.HtmlEncode(txtSearch.Text));
             }
 
             string backCheckS = "";

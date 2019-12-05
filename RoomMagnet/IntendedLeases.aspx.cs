@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 
 public partial class IntendedLeases : System.Web.UI.Page
 {
+    int searchCheck = 0;
     protected void Page_PreInit(object sender, EventArgs e)
     {
         if (Session["type"] != null)
@@ -44,11 +45,26 @@ public partial class IntendedLeases : System.Web.UI.Page
 
             sc.Open();
 
+            IntLease.Text = String.Empty;
+
             //Intented Lease: Hosts and Tenants
-            selectLeases.CommandText = "SELECT TOP(5) A.FirstName as hostF, A.LastName as hostL, B.FirstName as tenantF, B.LastName as tenantL " +
-                "FROM Account A, Account B " +
-                "WHERE A.AccountID in (select hostID from Host where hostID in (select HostID from lease where Agreed = '1')) " +
-                "AND B.AccountID in (select tenantId from Tenant where tenantID in (select tenantID from lease where Agreed = '1'))";
+            if (searchCheck == 0)
+            {
+                selectLeases.CommandText = "SELECT A.FirstName as hostF, A.LastName as hostL, B.FirstName as tenantF, B.LastName as tenantL " +
+                    "FROM Account A, Account B " +
+                    "WHERE A.AccountID in (select hostID from Host where hostID in (select HostID from lease where Agreed = '1')) " +
+                    "AND B.AccountID in (select tenantId from Tenant where tenantID in (select tenantID from lease where Agreed = '1'))";
+            }
+            if(searchCheck == 1)
+            {
+                selectLeases.CommandText = "SELECT A.FirstName as hostF, A.LastName as hostL, B.FirstName as tenantF, B.LastName as tenantL " +
+                    "FROM Account A, Account B " +
+                    "WHERE A.AccountID in (select hostID from Host where hostID in (select HostID from lease where Agreed = '1')) " +
+                    "AND B.AccountID in (select tenantId from Tenant where tenantID in (select tenantID from lease where Agreed = '1'))" +
+                    "AND (CONCAT(A.FirstName, ' ', A.LastName) = @name OR  CONCAT(B.FirstName, ' ', B.LastName) = @name);";
+
+                selectLeases.Parameters.AddWithValue("@Name", HttpUtility.HtmlEncode(txtSearch.Text));
+            }
 
             StringBuilder nameCard = new StringBuilder();
             System.Data.SqlClient.SqlDataReader reader = selectLeases.ExecuteReader();
@@ -67,6 +83,7 @@ public partial class IntendedLeases : System.Web.UI.Page
 
                 IntLease.Text += myCard.ToString();
             }
+            searchCheck = 0;
             reader.Close();
             sc.Close();
         }
@@ -74,5 +91,11 @@ public partial class IntendedLeases : System.Web.UI.Page
         {
             Response.Redirect("Home.aspx");
         }
+    }
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        searchCheck++;
+        Page_Load(sender, e);
     }
 }
