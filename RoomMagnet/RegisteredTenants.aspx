@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
             
-    <div class="container-fluid px-5">
+    <div class="container-fluid mt-5 px-5">
             
         <!--BREADCRUMBS-->
         <section>    
@@ -42,7 +42,7 @@
                                 Text='<%# Eval("backStatus") %>'></asp:Label>
                         </td>
                         <td>
-                            <asp:Button ID="btnDelete" class="btn btn-danger" runat="server" Text="Delete Account"
+                            <asp:Button ID="btnDelete" class="btn btn-danger" runat="server" Text="Deactivate Account"
                                 CustomParameter='<%# Eval("accountID") %>'
                                 OnClick="btnDelete_Click"/>
                         </td>

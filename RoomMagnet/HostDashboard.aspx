@@ -14,10 +14,11 @@
     <!--USER DASH-NAV-->
     <div class="container-fluid  userDash mb-2 pb-3">
         <div class="navbar navbar-light ">
-            <u1>
+            <ul>
                 <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
+            
                 <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
-            </u1>
+             </ul>
         </div>
     </div>
     <!--END OF USER DASH-NAV-->
@@ -193,11 +194,11 @@
                     <div class="col-md-12">
                         <div class="card shadow-sm  mb-4">
                             <div class="card-body">
-                                <h5 class="card-title dash-card-titles">Message Center</h5>
-                                <asp:Literal ID="favTen" runat="server" Mode="Transform"></asp:Literal>
+                                <h5 class="card-title dash-card-titles">New Potential Tenants</h5>
+                                    <asp:Literal ID="favTen" runat="server" Mode="Transform"></asp:Literal>
                                 <!--BUTTON-->
                                 <div class=" text-center pt-3 pb-3">
-                                    <a href="HostMessageCenter.aspx" class="btn btn-info">View Messages</a>
+                                    <a href="HostMessageCenter.aspx" class="btn btn-info">View Potential Tenants</a>
                                 </div>
                                 <!--END OF BUTTON-->
                             </div>

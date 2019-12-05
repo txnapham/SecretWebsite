@@ -4,76 +4,24 @@
     <title>RoomMagnet | Dashboard</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container-fluid userDash mb-2">
-        <!--USER DASH-NAV-->
+    <!--USER DASH-NAV-->
+<%--    <div class="container-fluid userDash mb-2">
         <div class="container-fluid userDash pt-2">
             <div class="navbar navbar-light">
-                <%--<h4><img src="images/robert.png" alt="..." class="rounded-circle img-fluid" width="30%" height="auto">
-                        Welcome Admin,</h4>--%>
                 <ul>
-                    <asp:literal id="UserNameCard" runat="server" mode="Transform"></asp:literal>
+                    <asp:Literal id="UserNameCard" runat="server" mode="Transform"></asp:Literal>
                 </ul>
             </div>
 
         </div>
-        <!--END OF USER DASH-NAV-->
-    </div>
+    </div>--%>
+    <!--END OF USER DASH-NAV-->
 
-    <div class="container-fluid">
+    <div class="container-fluid mt-5 pt-5">
         <!--Cards start here-->
         <section>
             <div class="card-deck row">
-                <div class="col-sm-4 col-md-4 col-lg-4">
-                    <div class="card  shadow-sm  mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Registered Hosts</h5>
-                            <ul><asp:literal id="RegHost" runat="server" mode="Transform"></asp:literal></ul>
-                            <a href="RegisteredHosts.aspx" class="btn btn-info">View more</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-md-4 col-lg-4">
-                    <div class="card  shadow-sm  mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Registered Tenants</h5>
-                            <ul>
-                                <asp:literal id="RegTenant" runat="server" mode="Transform"></asp:literal>
-                            </ul>
-                            <a href="RegisteredTenants.aspx" class="btn btn-info">View more</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-md-4 col-lg-4">
-                    <div class="card  shadow-sm  mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Intended Leases</h5>
-                            <ul><asp:literal id="IntLease" runat="server" mode="Transform"></asp:literal></ul>
-                            <a href="ViewLeases.aspx" class="btn btn-info">View more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-     
-        <section>
-            <div class="card-deck row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="card shadow-sm  mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">RoomMagnet Data</h5>
-                            <ul>
-                                <asp:literal id="UserCount" runat="server" mode="Transform"></asp:literal>
-                                <asp:literal id="LeaseCount" runat="server" mode="Transform"></asp:literal>
-                            </ul>
-
-                            <a href="#" class="btn btn-info">View more</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-sm-8 col-md-8 col-lg-8">
                     <div class="card shadow-sm  mb-4">
                         <div class="card-body">
                             <div class='tableauPlaceholder' id='viz1574151971348' style='position: relative'>
@@ -105,6 +53,70 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        
+        <section>
+            <div class="card-deck row">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="card  shadow-sm  mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Registered Hosts</h5>
+                            <ul><asp:Literal id="RegHost" runat="server" mode="Transform"></asp:Literal></ul>
+                            <a href="RegisteredHosts.aspx" class="btn btn-info">View more</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="card  shadow-sm  mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Registered Tenants</h5>
+                            <ul>
+                                <asp:Literal id="RegTenant" runat="server" mode="Transform"></asp:Literal>
+                            </ul>
+                            <a href="RegisteredTenants.aspx" class="btn btn-info">View more</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="card  shadow-sm  mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Intended Leases</h5>
+                            <ul><asp:Literal id="IntLease" runat="server" mode="Transform"></asp:Literal></ul>
+                            <a href="ViewLeases.aspx" class="btn btn-info">View more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+     
+        <section>
+            <div class="card-deck row">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="card shadow-sm  mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">RoomMagnet Data</h5>
+                            <ul>
+                                <asp:Literal id="UserCount" runat="server" mode="Transform"></asp:Literal>
+                                <asp:Literal id="LeaseCount" runat="server" mode="Transform"></asp:Literal>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+ 
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="card shadow-sm  mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Emails for Intellicorp</h5>
+                            <ul>
+                                <asp:Literal id="futureEmails" runat="server" mode="Transform"></asp:Literal>
+                            </ul>
+                            <a href="#" class="btn btn-info">View more</a>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-sm-4 col-md-4 col-lg-4">
                     <div class="card shadow-sm  mb-4">
@@ -123,7 +135,7 @@
                             </div>
 
                             <div class="form-group">
-                                <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" ControlToValidate="txtEmail" ErrorMessage="Invalid Email Format"></asp:RegularExpressionValidator>
+                                <asp:RegularExpressionValidator ID="regexEmailValid" Display="Dynamic" runat="server" ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" ControlToValidate="txtEmail" ErrorMessage="Invalid Email Format"></asp:RegularExpressionValidator>
                                 <asp:RequiredFieldValidator ID="emailReqFieldValidator" Display ="Dynamic" runat="server" ErrorMessage="Please enter an email." ControlToValidate="txtEmail" Text="*Please enter an email"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtEmail" runat="server" class="form-control form-control-lg" aria-describedby="emailHelp" placeholder="Email" MaxLength="50"></asp:TextBox>
                             </div>

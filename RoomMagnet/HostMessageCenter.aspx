@@ -152,10 +152,11 @@
 
                     <div>
 <%--                        <asp:Button ID="createLeaseBtn" runat="server" Text="Create Lease" class="btn btn-light createLeaseButton btn-block" OnClick="createLeaseBtn_Click"></asp:Button>--%>
-                        <button class="btn btn-light createLeaseButton btn-block" type="button" data-toggle="modal" data-target="#createLease">
-                            <a class="btn btn-md btn-info " href="#">Create Appointment</a>
+                        <asp:Button ID="createLeaseBtn" runat="server" CssClass="btn btn-light createLeaseButton btn-block" data-toggle="modal" data-target="#createLease" Text="Create Lease" OnClientClick="return false;" />
+<%--                        <button text="Create Lease" class="btn btn-light createLeaseButton btn-block" type="button" data-toggle="modal" data-target="#createLease">
+                            <a class="btn btn-light createLeaseButton btn-block" href="#">Create Lease</a>
                         </button>
-<%--                        <asp:Button ID="aptBtn" runat="server" Text="Create Appointment" class="btn createAppointmentButton btn-block"></asp:Button>--%>
+                        <asp:Button ID="aptBtn" runat="server" Text="Create Appointment" class="btn createAppointmentButton btn-block"></asp:Button>--%>
                         <asp:Button ID="videoChat" runat="server" Text="Video Chat" class="btn btn-light vidChat btn-block mb-4" OnClick="videoChat_Click"></asp:Button>
                     </div>
 
@@ -177,7 +178,7 @@
                                         </asp:SqlDataSource>
                                     </div>
 
-                                    <asp:Button ID="createLeaseBtn" runat="server" Text="Create Lease" class="btn btn-md btn-info btn-block" OnClick="createLeaseBtn_Click"/>
+                                    <asp:Button ID="createLeaseClick" runat="server" Text="Create Lease" class="btn btn-md btn-info btn-block" OnClick="createLeaseBtn_Click"/>
                                 </div>
                             </div>
                         </div>

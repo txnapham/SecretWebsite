@@ -6,7 +6,7 @@
 <br />
     <br />
     <br />
-<p>Intent to lease</p>
+<p><strong>Intent to lease</strong></p>
 <p>
     <asp:Label id="dateLabel" runat="server" Text="Date: "></asp:Label>
     <asp:TextBox ID="dateTxt" runat="server" readOnly="true"></asp:TextBox>
@@ -39,12 +39,15 @@
 <p>
     <asp:TextBox ID="sigTxt" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="sigValidator1" runat="server" ControlToValidate="sigTxt" ErrorMessage="RequiredFieldValidator" ForeColor="Red">*</asp:RequiredFieldValidator>
+        <asp:Label ID="sigErrorMessage" runat="server" Text="Signature Does Not Match Name on Lease" ForeColor="Red" Visible="False"></asp:Label>
 </p>
-<p>Tenant Sign Here</p>
+<p><strong>Tenant Sign Here</strong> </p>
 <p>Send an executed copy of this intent to lease to the following link.</p>
 <p><strong>Tenant</strong> shall be sent a stripe payment link to pay the first month&rsquo;s lease payment to the landlord.</p>
 <p><strong>Landlord&rsquo;s</strong> will need to set up a stripe account using the following link</p>
 <asp:Button id="submitBtn" text="Submit" runat="server" CssClass ="btn btn-info" OnClick="submitBtn_Click" CausesValidation="true"/>
-    <p>*By hitting submit you intend to lease with the Landlord and associated property listed on this page*</p>
+    <p><strong>*By hitting submit you intend to lease with the Landlord and associated property listed on this page*</strong>
+        <br />
+    </p>
 </asp:Content>
 

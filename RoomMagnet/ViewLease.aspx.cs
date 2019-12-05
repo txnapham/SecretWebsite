@@ -34,10 +34,14 @@ public partial class ViewLease : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        sigErrorMessage.Visible = false;
+
         SqlCommand selectDate = new SqlCommand();
         SqlCommand selectHostName = new SqlCommand();
         SqlCommand selectTenantName = new SqlCommand();
         SqlCommand selectProp = new SqlCommand();
+        SqlCommand selectSig = new SqlCommand();
+        selectSig.Connection = sc;
         selectDate.Connection = sc;
         selectHostName.Connection = sc;
         selectTenantName.Connection = sc;
@@ -47,6 +51,9 @@ public partial class ViewLease : System.Web.UI.Page
         selectDate.CommandText = "select ModifiedDate from lease where tenantID = " + Session["AccountID"];
         String date = selectDate.ExecuteScalar().ToString();
         dateTxt.Text = date;
+
+        selectSig.CommandText = "select agreed from lease where tenantID=" + Session["AccountID"];
+        
 
         selectHostName.CommandText = "select firstName, LastName from Account where AccountID in (select HostID from lease where tenantID = "+ Session["AccountID"] + ");";
         SqlDataReader reader = selectHostName.ExecuteReader();
@@ -85,14 +92,21 @@ public partial class ViewLease : System.Web.UI.Page
     }
     protected void submitBtn_Click(object sender, EventArgs e)
     {
-        SqlCommand updateLease = new SqlCommand();
-        updateLease.Connection = sc;
-        updateLease.CommandText = "Update Lease Set Agreed = 1 where TenantID = @tenant;";
-        updateLease.Parameters.Add(new SqlParameter("@tenant", Session["AccountID"]));
-        sc.Open();
-        updateLease.ExecuteNonQuery();
-        sc.Close();
+        if (tenantNametxt.Text.Equals(sigTxt.Text))
+        {
+            SqlCommand updateLease = new SqlCommand();
+            updateLease.Connection = sc;
+            updateLease.CommandText = "Update Lease Set Agreed = 1 where TenantID = @tenant;";
+            updateLease.Parameters.Add(new SqlParameter("@tenant", Session["AccountID"]));
+            sc.Open();
+            updateLease.ExecuteNonQuery();
+            sc.Close();
 
-        Response.Redirect("TenantDashboard.aspx");
+            Response.Redirect("TenantDashboard.aspx");
+        }
+        else
+        {
+            sigErrorMessage.Visible = true;
+        }
     }
 }

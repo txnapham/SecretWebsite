@@ -151,6 +151,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
             {
                 StringBuilder myCard = new StringBuilder();
                 myCard
+                .Append("<div>")
                 .Append("<div class=\"incoming-msg-img\">")
                 .Append("   <img src = \"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + accountImg + "\" class=\"rounded-circle img-fluid\">")
                 .Append("</div>")
@@ -159,6 +160,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
                 .Append("       <p>" + message + "</p>")
                 .Append("       <span class=\"time-date\">" + date + "</span>")
                 .Append("   </div>")
+                .Append("</div>")
                 .Append("</div>");
 
                 Message.Text += myCard.ToString();
@@ -220,7 +222,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
     protected void createLeaseBtn_Click(object sender, EventArgs e)
     {
         int tenantID = Convert.ToInt32(Session["msgTenantID"].ToString());
-        int hostID = Convert.ToInt32(Session["AccountId"].ToString());
+        int hostID = Convert.ToInt32(Session["AccountId"].ToString()); 
 
         SqlCommand insertLease = new SqlCommand();
         insertLease.Connection = sc;
@@ -230,7 +232,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
         insertLease.Parameters.Add(new SqlParameter("@Tenant",tenantID));
         insertLease.Parameters.Add(new SqlParameter("@Host",hostID));
         insertLease.Parameters.Add(new SqlParameter("@Agreed", "0"));
-        insertLease.Parameters.Add(new SqlParameter("@PropertyID", "0"));
+        insertLease.Parameters.Add(new SqlParameter("@PropertyID", ddProperty.SelectedValue));
         insertLease.ExecuteNonQuery();
         sc.Close();
     }

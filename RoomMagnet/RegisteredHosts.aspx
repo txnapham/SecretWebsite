@@ -5,14 +5,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">       
        
-    <div class="container-fluid px-5">
+    <div class="container-fluid mt-5 px-5">
             
         <!--BREADCRUMBS-->
         <section>    
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="AdminDashboard.aspx" class="breadLink">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Registered Tenants</li>
+                <li class="breadcrumb-item active" aria-current="page">Registered Hosts</li>
                 </ol>
             </nav>   
         </section>    
@@ -27,8 +27,8 @@
             <table class="w-100 ">
                 <tr class="text-center">
                     <th class="w-50" scope="col">Registered Hosts</th>
-                    <th class="text-right w-10" scope="col">Background Status</th>
-                    <th class="text-right w-10" scope="col">Account Status</th>
+                    <th class="text-left w-10" scope="col">Background Status</th>
+                    <th class="text-left w-10" scope="col">Account Status</th>
                 </tr>
 
                 <asp:Repeater id="regHostRepeater" runat="server">
@@ -42,7 +42,7 @@
                                     Text='<%# Eval("backStatus") %>'></asp:Label>
                             </td>
                             <td>
-                                <asp:Button ID="btnDelete" class="btn btn-danger" runat="server" Text="Delete Account"
+                                <asp:Button ID="btnDelete" class="btn btn-danger" runat="server" Text="Deactivate Account"
                                     CustomParameter='<%# Eval("accountID") %>'
                                     OnClick="btnDelete_Click"/>
                             </td>

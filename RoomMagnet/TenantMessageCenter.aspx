@@ -97,7 +97,7 @@
                     </div>
                     <div>
                         <asp:Button ID="viewLeaseBtn" runat="server" Text="View Lease" class="btn btn-light createLeaseButton btn-block" OnClick="viewLeaseBtn_Click"></asp:Button>
-<%--                        <asp:Button ID="aptBtn" runat="server" Text="Create Appointment" class="btn createAppointmentButton btn-block"></asp:Button>--%>
+                        <asp:Button ID="signedLease" runat="server" Text="Lease Signed" class="btn btn-light createLeaseButton btn-block"></asp:Button>
                         <asp:Button ID="videoChat" runat="server" Text="Video Chat" class="btn btn-light vidChat btn-block" OnClick="videoChat_Click"></asp:Button>
                     </div>
                 </div>

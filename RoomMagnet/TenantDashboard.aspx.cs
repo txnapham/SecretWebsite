@@ -105,6 +105,7 @@ public partial class TenantDashboard : System.Web.UI.Page
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
                 .Append("</div>");
+            
             //Background Check Pop Up
             StringBuilder alert2Text = new StringBuilder();
             alert2Text
@@ -114,24 +115,25 @@ public partial class TenantDashboard : System.Web.UI.Page
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
                 .Append("</div>");
-            //Progress Bar 1/3
+
             StringBuilder progressOneThird = new StringBuilder();
             progressOneThird
-                .Append("<div class=\"progress\" style=\"height: 30px; \">")
-                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:33%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("<div class=\"progress\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar1.png\" \">")
                 .Append("</div");
-            //Prpgress Bar 2/3
+
             StringBuilder progressTwoThird = new StringBuilder();
             progressTwoThird
-                .Append("<div class=\"progress\" style=\"height: 30px; \">")
-                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:66%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("<div class=\"progress\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar2.png\" \">")
                 .Append("</div");
-            //Completed Progress
+
             StringBuilder progressFull = new StringBuilder();
             progressFull
-                .Append("<div class=\"progress\" style=\"height: 30px; \">")
-                .Append("   <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width:100%; color: #fff; font-size: 15px; font-weight: bold;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">Profile Completion</div>")
+                .Append("<div class=\"progress\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar3.png\" \">")
                 .Append("</div");
+
             //Give the profile completion and background check alert to pop up
             if (charCheck == 0 && backStatusCheck == 0)
             {

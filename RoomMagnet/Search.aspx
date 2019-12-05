@@ -94,7 +94,7 @@
                                                         <div class="col-sm-12">
                                                             <div class="form-check">
                                                                 <asp:CheckBox ID="cbEarlyRiser" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterPetFriendly">Early Riser</label>
+                                                                <label class="form-check-label" for="filterPetFriendly">Early-Riser</label>
                                                             </div>
                                                         </div>
 
@@ -364,10 +364,9 @@
         <section>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                    </li>
                     <li class="breadcrumb-item"><a href="Home.aspx" class="breadLink">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Search</li>
+                    <asp:Literal ID="filterCard" runat="server" Mode="Transform"></asp:Literal>
                 </ol>
             </nav>
         </section>
