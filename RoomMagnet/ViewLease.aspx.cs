@@ -40,6 +40,8 @@ public partial class ViewLease : System.Web.UI.Page
         SqlCommand selectHostName = new SqlCommand();
         SqlCommand selectTenantName = new SqlCommand();
         SqlCommand selectProp = new SqlCommand();
+        SqlCommand selectSig = new SqlCommand();
+        selectSig.Connection = sc;
         selectDate.Connection = sc;
         selectHostName.Connection = sc;
         selectTenantName.Connection = sc;
@@ -49,6 +51,9 @@ public partial class ViewLease : System.Web.UI.Page
         selectDate.CommandText = "select ModifiedDate from lease where tenantID = " + Session["AccountID"];
         String date = selectDate.ExecuteScalar().ToString();
         dateTxt.Text = date;
+
+        selectSig.CommandText = "select agreed from lease where tenantID=" + Session["AccountID"];
+        
 
         selectHostName.CommandText = "select firstName, LastName from Account where AccountID in (select HostID from lease where tenantID = "+ Session["AccountID"] + ");";
         SqlDataReader reader = selectHostName.ExecuteReader();

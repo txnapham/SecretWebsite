@@ -42,7 +42,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         if(!IsPostBack)
         {
             txtMessage.Visible = false;
-            //aptBtn.Visible = false;
+            signedLease.Visible = false;
             videoChat.Visible = false;
             LinkButton2.Visible = false;
             viewLeaseBtn.Visible = false;
@@ -120,8 +120,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         }
         else if(agreed == 1)
         {
-            viewLeaseBtn.Text = "Intent to Lease Signed";
-            viewLeaseBtn.Visible = true;
+            signedLease.Visible = true;
         }
     }
 

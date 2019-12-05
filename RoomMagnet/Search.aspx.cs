@@ -153,7 +153,7 @@ public partial class Search : System.Web.UI.Page
         int qualityCount = 0;
 
         StringBuilder filterBreadCrumbs = new StringBuilder();
-        filterBreadCrumbs.Append("<li class=\"breadcrumb-item active\" aria-current=\"page\"> Filters Applied: ");
+        filterBreadCrumbs.Append("<li class=\"breadcrumb-item active\" aria-current=\"page\"> Sort By: ");
 
         //Checked HomeShare
         //Showing the results in a sorted way by number of matches to filters
