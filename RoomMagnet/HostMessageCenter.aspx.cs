@@ -217,8 +217,6 @@ public partial class HostMessageCenter : System.Web.UI.Page
 
         loadMessages(tenantID);
     }
-
-
     protected void createLeaseBtn_Click(object sender, EventArgs e)
     {
         int tenantID = Convert.ToInt32(Session["msgTenantID"].ToString());
