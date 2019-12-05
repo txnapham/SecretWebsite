@@ -16,9 +16,9 @@
         <div class="navbar navbar-light ">
             <ul>
                 <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
-            
+
                 <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
-             </ul>
+            </ul>
         </div>
     </div>
     <!--END OF USER DASH-NAV-->
@@ -195,7 +195,7 @@
                         <div class="card shadow-sm  mb-4">
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">Tenants Who Like My Property</h5>
-                                    <asp:Literal ID="favTen" runat="server" Mode="Transform"></asp:Literal>
+                                <asp:Literal ID="favTen" runat="server" Mode="Transform"></asp:Literal>
                                 <!--BUTTON-->
                                 <div class=" text-center pt-3 pb-3">
                                     <a href="HostMessageCenter.aspx" class="btn btn-info">View Message Center</a>
@@ -594,12 +594,14 @@
                                 <div>
                                     <table style="width: 100%;">
                                         <tr>
-                                            <td><asp:Literal ID="apptName" runat="server"></asp:Literal></td>
-                                            <td><asp:Literal ID="apptDate" runat="server"></asp:Literal></td>
+                                            <td>
+                                                <asp:Literal ID="apptName" runat="server"></asp:Literal></td>
+                                            <td>
+                                                <asp:Literal ID="apptDate" runat="server"></asp:Literal></td>
                                         </tr>
 
                                     </table>
-                                    
+
                                 </div>
                                 <!--BUTTON-->
                                 <button class="nav-item btn btn-block createAppointment" type="button" data-toggle="modal" data-target="#createAppointment">
@@ -658,6 +660,12 @@
                 showModal();
             });
         });
+    </script>
+
+    <script>
+        function MyFunction() {
+            alert("Success!")
+        }
     </script>
 </asp:Content>
 

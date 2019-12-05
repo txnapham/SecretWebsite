@@ -10,9 +10,9 @@
         <div class="navbar navbar-light ">
             <ul>
                 <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>
-            
+
                 <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
-             </ul>
+            </ul>
         </div>
     </div>
     <!--END OF USER DASH-NAV-->
@@ -438,8 +438,10 @@
                             <div>
                                 <table style="width: 100%;">
                                     <tr>
-                                        <td><asp:Literal ID="apptName" runat="server"></asp:Literal></td>
-                                        <td><asp:Literal ID="apptDate" runat="server"></asp:Literal></td>
+                                        <td>
+                                            <asp:Literal ID="apptName" runat="server"></asp:Literal></td>
+                                        <td>
+                                            <asp:Literal ID="apptDate" runat="server"></asp:Literal></td>
                                     </tr>
                                 </table>
 
@@ -475,7 +477,7 @@
                                             </div>
 
 
-                                            <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" OnClick="btnCreateAppt_Click " />
+                                            <asp:Button ID="btnCreateAppt" type="button" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" OnClick="btnCreateAppt_Click" />
 
 
 
@@ -500,7 +502,7 @@
     </div>
     <!--END OF DASHBOARD CARDS-->
 
-        <!-- script to keep modal open -->
+    <!-- script to keep modal open -->
     <script type="text/javascript">
         function showModal() {
             $('#createAppointment').modal('show');
@@ -511,6 +513,12 @@
                 showModal();
             });
         });
+    </script>
+
+    <script>
+        function MyFunction() {
+            alert("Success!")
+        }
     </script>
 
 </asp:Content>

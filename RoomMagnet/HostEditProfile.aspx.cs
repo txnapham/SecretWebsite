@@ -377,9 +377,9 @@ public partial class HostEditProfile : System.Web.UI.Page
                     //Insert into PASSWORD
                     newPass.Parameters.Add(new SqlParameter("@AccountID", accountID));
                     newPass.Parameters.Add(new SqlParameter("@password", PasswordHash.HashPassword(txtReenterPassword.Text))); // hash entered password
-                    lblPrev.Text = "Success";
                     newPass.ExecuteNonQuery();
                     sqlConn.Close();
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
                 }
                 else
                 {
