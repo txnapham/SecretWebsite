@@ -165,6 +165,9 @@ public partial class TenantDashboard : System.Web.UI.Page
             //Selecting from Property
             // System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand messageSelect = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand selectDate = new System.Data.SqlClient.SqlCommand();
+
             select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh, I.images FROM Property LEFT OUTER JOIN PropertyImages I ON Property.PropertyID = I.PropertyID WHERE Property.PropertyID in " +
             "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
             messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, Account.AccountImage, MAX(Message.Date) as Date FROM FavoritedTenants FULL OUTER JOIN Message " +
@@ -174,8 +177,22 @@ public partial class TenantDashboard : System.Web.UI.Page
                  "WHERE MessageType = 0 and FavoritedTenants.TenantID = " + accountID + " " +
                  "GROUP BY Account.FirstName, Account.LastName, Account.AccountImage";
 
+            //Select statement to get appointments with host
+            selectHost.CommandText = "SELECT Account.FirstName, Account.LastName" +
+                " FROM FavoritedTenants INNER JOIN Appointment ON FavoritedTenants.FavTenantID = Appointment.FavTenantID" +
+                " INNER JOIN Host ON FavoritedTenants.HostID = Host.HostID INNER JOIN Account ON " +
+                "Host.HostID = Account.AccountID WHERE FavoritedTenants.TenantID =" + accountID + ";";
+
+            //Select date to get appointments with tenants
+            selectDate.CommandText = "SELECT Appointment.AppointmentDate " +
+                "FROM FavoritedTenants INNER JOIN Appointment ON FavoritedTenants.FavTenantID = Appointment.FavTenantID" +
+                " INNER JOIN Host ON FavoritedTenants.HostID = Host.HostID INNER JOIN Account ON " +
+                "Host.HostID = Account.AccountID WHERE FavoritedTenants.TenantID =" + accountID + ";";
+
             select.Connection = sc;
             messageSelect.Connection = sc;
+            selectHost.Connection = sc;
+            selectDate.Connection = sc;
             sc.Open();
 
             System.Data.SqlClient.SqlDataReader readerProperty = select.ExecuteReader();
@@ -241,11 +258,90 @@ public partial class TenantDashboard : System.Web.UI.Page
                 }
             }
             rdr.Close();
+            //Populate Tenant with appointments
+            System.Data.SqlClient.SqlDataReader aName = selectHost.ExecuteReader();
+            while (aName.Read())
+            {
+                String firstName = aName["FirstName"].ToString();
+                String lastName = aName["LastName"].ToString();
+                //StringBuilder
+                StringBuilder myCard = new StringBuilder();
+                myCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + firstName + " " + lastName + ": </a></li>");
+                apptName.Text += myCard.ToString();
+            }
+            aName.Close();
+            //Populate Host with appointments
+            System.Data.SqlClient.SqlDataReader aDate = selectDate.ExecuteReader();
+            while (aDate.Read())
+            {
+                String apDate = aDate["AppointmentDate"].ToString();
+                //StringBuilder
+                StringBuilder myCard = new StringBuilder();
+                myCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + apDate + " " + " </a></li>");
+                apptDate.Text += myCard.ToString();
+            }
+            aDate.Close();
             sc.Close();
         }
         else
         {
             Response.Redirect("Home.aspx");
+        }
+    }
+    protected void btnCreateAppt_Click(object sender, EventArgs e)
+    {
+        if (ddRecipient.SelectedIndex == 0)
+        {
+            lblRError.Text = "Please select a Recipient.";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+        }
+        else
+        {
+            DateTime appt = new DateTime();
+            if (txtDate.Text == "")
+            {
+                lblError.Text = "Please enter the Date (MM/DD/YYYY). <br/>";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+            }
+            else
+            {
+                //Date validation. Check to make sure appointment date is in the future
+                DateTime today = DateTime.Now;
+                appt = DateTime.Parse(txtDate.Text, new System.Globalization.CultureInfo("pt-BR"));
+                if (appt < today)
+                {
+                    lblError.Text = "Please select a future date.";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+                }
+                else
+                {
+                    //SQL Statement
+                    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+                    //Connection
+                    sc.ConnectionString = "server=aawnyfad9tm1sf.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
+                    sc.Open();
+                    System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+                    System.Data.SqlClient.SqlCommand favTen = new System.Data.SqlClient.SqlCommand();
+                    insert.Connection = sc;
+                    favTen.Connection = sc;
+
+                    int favTenID;
+                    favTen.CommandText = "SELECT FavTenantID FROM FavoritedTenants WHERE TenantID =" + Session["AccountId"] + "AND HostID=" + ddRecipient.SelectedValue;
+                    favTenID = Convert.ToInt32(favTen.ExecuteScalar());
+
+                    //Appointment added into Database
+                    Appointment newAppt = new Appointment(DateTime.Parse(txtDate.Text), favTenID);
+                    insert.CommandText = "INSERT into Appointment VALUES (@date, @favTenID) ; ";
+                    insert.Parameters.Add(new SqlParameter("@date", newAppt.getDate()));
+                    insert.Parameters.Add(new SqlParameter("@favTenID", favTenID));
+
+                    insert.ExecuteNonQuery();
+                    sc.Close();
+
+                    txtDate.Text = "";
+                    ddRecipient.ClearSelection();
+                }
+            }
         }
     }
 }
