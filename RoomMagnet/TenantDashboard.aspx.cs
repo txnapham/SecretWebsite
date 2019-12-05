@@ -46,7 +46,8 @@ public partial class TenantDashboard : System.Web.UI.Page
             hostMsg.Text = "";
             alert1.Text = "";
             alert2.Text = "";
-            //progressBar.Text = "";
+            apptName.Text = "";
+            apptDate.Text = "";
 
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
@@ -342,6 +343,7 @@ public partial class TenantDashboard : System.Web.UI.Page
 
                     txtDate.Text = "";
                     ddRecipient.ClearSelection();
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
                 }
             }
         }
