@@ -4,21 +4,19 @@
     <title>RoomMagnet | Dashboard</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
- <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
- </asp:ScriptManager>
-<script>
-    function insertMessage(tenantID, hostID) {
-        PageMethods.MessageInsert(tenantID, hostID);
-    };
-</script>
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+    </asp:ScriptManager>
+    <script>
+        function insertMessage(tenantID, hostID) {
+            PageMethods.MessageInsert(tenantID, hostID);
+        };
+    </script>
     <!--USER DASH-NAV-->
-    <div class="container-fluid  userDash mb-2 pb-3">
-        <div class="navbar navbar-light ">
+    <div class="container-fluid userDash mb-2 pb-3">
+        <div class="navbar navbar-light">
             <ul>
                 <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
-            
-                <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
-             </ul>
+            </ul>
         </div>
     </div>
     <!--END OF USER DASH-NAV-->
@@ -28,7 +26,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
-                        <asp:Literal ID="alert1" runat="server" Mode="Transform"></asp:Literal>
+                    <asp:Literal ID="alert1" runat="server" Mode="Transform"></asp:Literal>
                 </div>
 
                 <div class="col-md-12">
@@ -56,7 +54,7 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item js-scroll-trigger" href="ListPropertyForm.aspx">Add Property</a>
                                         <button style="color: #000;" type="button" class="btn  dropdown-item js-scroll-trigger" data-toggle="modal" data-dismiss="modal" data-target="#addRoom">
-                                            Add Room</>
+                                        Add Room</>
                                     </div>
 
                                 </div>
@@ -84,7 +82,7 @@
                                                     </asp:DropDownList>
                                                     <asp:SqlDataSource ID="propertyDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:roommagnetdbConnectionString %>" SelectCommand="SELECT PropertyID, (HouseNumber + ' ' + Street + ', ' + City + ', ' + HomeState) AS Address FROM PROPERTY WHERE HostID = @AccountId">
                                                         <SelectParameters>
-                                                            <asp:SessionParameter Name="AccountId" SessionField="AccountId"/>
+                                                            <asp:SessionParameter Name="AccountId" SessionField="AccountId" />
                                                         </SelectParameters>
                                                     </asp:SqlDataSource>
                                                 </div>
@@ -194,20 +192,20 @@
                     <div class="col-md-12">
                         <div class="card shadow-sm  mb-4">
                             <div class="card-body">
-                                <h5 class="card-title dash-card-titles">New Potential Tenants</h5>
-                                    <asp:Literal ID="favTen" runat="server" Mode="Transform"></asp:Literal>
+                                <h5 class="card-title dash-card-titles">Tenants Who Like My Property</h5>
+                                <asp:Literal ID="favTen" runat="server" Mode="Transform"></asp:Literal>
                                 <!--BUTTON-->
                                 <div class=" text-center pt-3 pb-3">
-                                    <a href="HostMessageCenter.aspx" class="btn btn-info">View Potential Tenants</a>
+                                    <a href="HostMessageCenter.aspx" class="btn btn-info">View Message Center</a>
                                 </div>
                                 <!--END OF BUTTON-->
                             </div>
                         </div>
                     </div>
                     <!--END OF MESSAGE MOD-->
-                                
+
                 </div>
-                    <div class="col-md-6">
+                <div class="col-md-6">
                     <!--TENANT/HOST MOD-->
                     <div class="col-md-12">
                         <div class="card  shadow-sm  mb-4">
@@ -231,7 +229,7 @@
                         <div class="card  shadow-sm  mb-4">
                             <div class="card-body">
                                 <h5 class="card-title dash-card-titles">My Appointments</h5>
-                               <!-- <div class="container-fluid cal pb-3">
+                                <!-- <div class="container-fluid cal pb-3">
                                     <div>
                                         <h4 class="mb-4 text-center">November 2019</h4>
                                         <div class="row d-none d-sm-flex p-1 bg-dark text-white">
@@ -588,8 +586,20 @@
                                         </div>
                                     </div>
                                 </div>-->
-                                <div class="container-fluid cal pb-3">
+                                <%--<div class="container-fluid cal pb-3">
                                     <asp:Calendar id="apptCal" runat="server"></asp:Calendar>
+                                </div>--%>
+                                <div>
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <td>
+                                                <asp:Literal ID="apptName" runat="server"></asp:Literal></td>
+                                            <td>
+                                                <asp:Literal ID="apptDate" runat="server"></asp:Literal></td>
+                                        </tr>
+
+                                    </table>
+
                                 </div>
                                 <!--BUTTON-->
                                 <button class="nav-item btn btn-block createAppointment" type="button" data-toggle="modal" data-target="#createAppointment">
@@ -606,22 +616,24 @@
 
                                                 <div class="form-group">
                                                     <%--<asp:TextBox ID="txtRecipient" runat="server" class="form-control" placeholder="Recipient"></asp:TextBox>--%>
-                                                    <asp:DropDownList ID="ddRecipient" runat="server" AppendDataBoundItems="True" class="form-control" DataSourceID="tenantDataSource" DataTextField="NAME" DataValueField="AccountID">
+                                                    <asp:DropDownList ID="ddRecipient" runat="server" AppendDataBoundItems="True" class="form-control form-control-lg" DataSourceID="tenantDataSource" DataTextField="NAME" DataValueField="AccountID">
                                                         <asp:ListItem>Please Select a Recipient</asp:ListItem>
                                                     </asp:DropDownList>
                                                     <asp:SqlDataSource ID="tenantDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:roommagnetdbConnectionString %>" SelectCommand="SELECT AccountID, (FirstName + ' ' + LastName) AS NAME FROM Account WHERE AccountID IN (SELECT TenantID FROM FavoritedTenants WHERE HostID = @AccountId ) ORDER BY (FirstName + ' ' + LastName)">
                                                         <SelectParameters>
-                                                            <asp:SessionParameter Name="AccountId" SessionField="AccountId"/>
+                                                            <asp:SessionParameter Name="AccountId" SessionField="AccountId" />
                                                         </SelectParameters>
                                                     </asp:SqlDataSource>
+                                                    <asp:Label ID="lblRError" runat="server" Text="" ForeColor="Red"></asp:Label>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <%--<input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text">--%>
-                                                    <asp:TextBox type="date" ID="txtDate" runat="server" class="form-control form-control-lg" placeholder="Birthdate (MM/DD/YYYY)" MaxLength="10"></asp:TextBox>
+                                                    <asp:TextBox type="date" ID="txtDate" runat="server" class="form-control form-control-lg" placeholder="Date (MM/DD/YYYY)" MaxLength="10"></asp:TextBox>
+                                                    <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
                                                 </div>
 
-                                                <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" OnClick="btnCreateAppt_Click "/>
+                                                <asp:Button ID="btnCreateAppt" runat="server" Text="Create Appointment " class="btn btn-md btn-info btn-block" OnClick="btnCreateAppt_Click " />
                                             </div>
                                         </div>
                                     </div>
@@ -635,34 +647,23 @@
             </div>
         </section>
     </div>
-    <!--END OF DASHBOARD CARDS-->
-   <%-- <!-- OpenTok.js library -->
-            <script src="https://static.opentok.com/v2/js/opentok.js"></script>
-            <script>
+    <!-- script to keep modal open -->
+    <script type="text/javascript">
+        function showModal() {
+            $('#createAppointment').modal('show');
+        }
 
-                // credentials
+        $(function () {
+            $("#btnCreateAppt").click(function () {
+                showModal();
+            });
+        });
+    </script>
 
-                var apiKey = '45828062';
-                var sessionId = '2_MX40NTgyODA2Mn5-MTU3NDIyNTcyMDMxMn51WENZdlQ5Y0NRY0xJdk8rdS9ud0lGZkR-UH4';
-                var token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9ZThhNGUyODllZWQyZGUzYTUwMjEzODJjOTQzNDdjMmVjMjJhNTZlZjpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTNOREl5TlRjeU1ETXhNbjUxV0VOWmRsUTVZME5SWTB4SmRrOHJkUzl1ZDBsR1prUi1VSDQmY3JlYXRlX3RpbWU9MTU3NDIyNTc5MiZub25jZT0wLjY2MDkzOTkxNTkwOTI3OTMmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTU3NDMxMjE5Mg==';
-
-                // connect to session
-                var session = OT.initSession(apiKey, sessionId);
-
-                // create publisher
-                var publisher = OT.initPublisher();
-                session.connect(token, function (err) {
-                    // publish publisher
-                    session.publish(publisher);
-
-                });
-
-                // create subscriber
-                session.on('streamCreated', function (event) {
-                    session.subscribe(event.stream);
-                });
-
-
-            </script>--%>
+    <script>
+        function MyFunction() {
+            alert("Success!")
+        }
+    </script>
 </asp:Content>
 

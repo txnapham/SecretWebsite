@@ -46,6 +46,8 @@ public partial class Search_Tenant : System.Web.UI.Page
         {
             divider.Text = String.Empty;
             filterCard.Text = String.Empty;
+            mainResults.Text = String.Empty;
+            otherResults.Text = String.Empty;
 
             //Search for Home 
             if (Session["Search"] != null)
@@ -64,9 +66,12 @@ public partial class Search_Tenant : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-        filterCard.Text = string.Empty;
         //Shows the search results with the sorting and ones of main interest
         cardBuilder(mainResults, filter(), txtSearch.Text);
+        if(resultLabel.Text == "")
+            resultLabel.Text = "<strong>Search Results for " + HttpUtility.HtmlEncode(txtSearch.Text) + "</strong>";
+        else
+            resultLabel.Text = "<strong>There are no results for your search, please try searching for another area</strong>";
         divider.Text = "<hr/>" +
             "<strong>Other Results in State That May Interest You:</strong> ";
         cardBuilder(otherResults, filterOtherResults(), txtSearch.Text);
@@ -252,10 +257,12 @@ public partial class Search_Tenant : System.Web.UI.Page
                 
             reader.Close();
             Session["Search"] = null;
+            resultLabel.Visible = true;
         }
         else
         {
-            //Insert Label Text here
+            //Label for no search results
+            resultLabel.Text = "<strong>The search you entered was not in the right format (Format: City, State)</strong>";
         }
 
         return cardString;
@@ -326,12 +333,8 @@ public partial class Search_Tenant : System.Web.UI.Page
             queryFilter += "AND P.HomeShareSmarter = 1   ";
             filterBreadCrumbs.Append("<button class=\"btn personality-outline btn-sm\">HomeshareSmarter®</button>");
         }
-        if (cbHomeShareNO.Checked == true)
-        {
-            queryFilter += "AND P.HomeShareSmarter = 0   ";
-        }
 
-        queryFilter += "GROUP BY P.PropertyID, P.City, P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images,  ";
+        queryFilter += "GROUP BY P.PropertyID, P.City, ";
 
         //Extrovert Filter
         if (cbExtrovert.Checked == true)
@@ -725,6 +728,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         filterCard.Text += filterBreadCrumbs.ToString();
 
         //Shows the amount of filters chosen/in property 
+        queryFilter += "P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images   ";
         queryFilter = queryFilter.Substring(0, queryFilter.Length - 2);
         queryFilter += orderBy;
         queryFilter = queryFilter.Substring(0, queryFilter.Length - 2);
@@ -734,11 +738,11 @@ public partial class Search_Tenant : System.Web.UI.Page
 
     protected string filterOtherResults()
     {
+        //Showing the other results that are most similar to the attributes selected
         string queryFilter = "SELECT P.PropertyID, P.City, P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images " +
             "FROM Account A FULL OUTER JOIN Characteristics C ON A.AccountID = C.AccountID FULL OUTER JOIN Host H ON A.AccountID = H.HostID FULL OUTER JOIN " +
             "PropertyImages I FULL OUTER JOIN Property P ON I.PropertyID = P.PropertyID ON H.HostID = P.HostID  FULL OUTER JOIN PropertyRoom R ON R.PropertyID = P.PropertyID " +
             "WHERE P.City != @City AND P.HomeState = @State   ";
-
         string orderBy = " ";
 
         //Count for number of matching selected values
@@ -748,12 +752,8 @@ public partial class Search_Tenant : System.Web.UI.Page
         {
             queryFilter += "AND P.HomeShareSmarter = 1   ";
         }
-        if (cbHomeShareNO.Checked == true)
-        {
-            queryFilter += "AND P.HomeShareSmarter = 0   ";
-        }
 
-        queryFilter += "GROUP BY P.PropertyID, P.City, P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images,  ";
+        queryFilter += "GROUP BY P.PropertyID, ";
 
         //Extrovert Filter
         if (cbExtrovert.Checked == true)
@@ -1094,6 +1094,7 @@ public partial class Search_Tenant : System.Web.UI.Page
         }
 
         //Shows the amount of filters chosen/in property 
+        queryFilter += "P.City, P.HomeState, P.RoomPriceRangeLow, P.RoomPriceRangeHigh, I.images   ";
         queryFilter = queryFilter.Substring(0, queryFilter.Length - 2);
         queryFilter += orderBy;
         queryFilter = queryFilter.Substring(0, queryFilter.Length - 2);

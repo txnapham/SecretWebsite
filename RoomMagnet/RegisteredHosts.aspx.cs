@@ -26,15 +26,16 @@ public partial class RegisteredHosts : System.Web.UI.Page
             {
                 select.CommandText = "SELECT AccountID, CONCAT(FirstName, ' ', LastName) AS Name, BackgroundCheckStatus " +
                 "FROM Account INNER JOIN Host ON AccountID = HostID " +
+                "WHERE BackgroundCheckStatus != 0 " +
                 "ORDER BY Name";
             }
             if (searchCheck == 1)
             {
                 select.CommandText += "SELECT AccountID, CONCAT(FirstName, ' ', LastName) AS Name, BackgroundCheckStatus " +
                 "FROM Account INNER JOIN Host ON AccountID = HostID " +
-                "WHERE CONCAT(FirstName, ' ', LastName) = @Name";
+                "WHERE BackgroundCheckStatus != 0 AND CONCAT(FirstName, ' ', LastName) = @Name";
 
-                select.Parameters.AddWithValue("@Name", txtSearch.Text);
+                select.Parameters.AddWithValue("@Name", HttpUtility.HtmlEncode(txtSearch.Text));
             }
 
             string backCheckS = "";
@@ -48,8 +49,8 @@ public partial class RegisteredHosts : System.Web.UI.Page
                 String hostName = reader["Name"].ToString();
                 int hostID = Convert.ToInt16(reader["AccountID"].ToString());
                 int backCheckStatus = Convert.ToInt16(reader["BackgroundCheckStatus"].ToString());
-                if (backCheckStatus == 1) backCheckS = "Complete";
-                if (backCheckStatus == 0) backCheckS = "Incomplete";
+                if (backCheckStatus == 2) backCheckS = "Complete";
+                if (backCheckStatus == 1) backCheckS = "Pending";
 
                 backStatusL.Add(new BackgroundStatus() { accountName = hostName, accountID = hostID, backStatus = backCheckS });
             }
@@ -89,9 +90,9 @@ public partial class RegisteredHosts : System.Web.UI.Page
 
         if (currentBC == 1)
         {
-            update.Parameters.AddWithValue("@BackStatus", 0);
+            update.Parameters.AddWithValue("@BackStatus", 2);
         }
-        else if (currentBC == 0)
+        else if (currentBC == 2)
         {
             update.Parameters.AddWithValue("@BackStatus", 1);
         }

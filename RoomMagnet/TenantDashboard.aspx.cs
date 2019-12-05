@@ -46,7 +46,8 @@ public partial class TenantDashboard : System.Web.UI.Page
             hostMsg.Text = "";
             alert1.Text = "";
             alert2.Text = "";
-            progressBar.Text = "";
+            apptName.Text = "";
+            apptDate.Text = "";
 
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
@@ -91,8 +92,8 @@ public partial class TenantDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder tenantImage = new StringBuilder();
                 tenantImage
-                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-header img-fluid\" width=\"30%\" height=\"auto\">")
-                .Append("                Welcome " + tenantName + "!");
+                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\"rounded-circle-header img-fluid\" width=\"50%\" height=\"auto\">")
+                .Append("                <h3>Welcome " + tenantName + "! </h3>");
                 TenantCard.Text += tenantImage.ToString();
             }
             sc.Close();
@@ -116,58 +117,61 @@ public partial class TenantDashboard : System.Web.UI.Page
                 .Append("   </button>")
                 .Append("</div>");
 
-            StringBuilder progressOneThird = new StringBuilder();
-            progressOneThird
-                .Append("<div class=\"progress\" style=\"height: 40%; \">")
-                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar1.png\" \">")
-                .Append("</div");
+            //StringBuilder progressOneThird = new StringBuilder();
+            //progressOneThird
+            //    .Append("<div class=\"progress\" style=\"height: 40%; \">")
+            //    .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar1.png\" \">")
+            //    .Append("</div");
 
-            StringBuilder progressTwoThird = new StringBuilder();
-            progressTwoThird
-                .Append("<div class=\"progress\" style=\"height: 40%; \">")
-                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar2.png\" \">")
-                .Append("</div");
+            //StringBuilder progressTwoThird = new StringBuilder();
+            //progressTwoThird
+            //    .Append("<div class=\"progress\" style=\"height: 40%; \">")
+            //    .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar2.png\" \">")
+            //    .Append("</div");
 
-            StringBuilder progressFull = new StringBuilder();
-            progressFull
-                .Append("<div class=\"progress\" style=\"height: 40%; \">")
-                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar3.png\" \">")
-                .Append("</div");
+            //StringBuilder progressFull = new StringBuilder();
+            //progressFull
+            //    .Append("<div class=\"progress\" style=\"height: 40%; \">")
+            //    .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar3.png\" \">")
+            //    .Append("</div");
 
             //Give the profile completion and background check alert to pop up
-            if (charCheck == 0 && backStatusCheck == 0)
-            {
-                alert1.Text += alert1Text.ToString();
-                alert2.Text += alert2Text.ToString();
-                progressBar.Text += progressOneThird.ToString();
-            }
-            //Move progress bar to fully complete 
-            else if (charCheck == 1 && backStatusCheck == 1)
-            {
-                progressBar.Text += progressFull.ToString();
+            //if (charCheck == 0 && backStatusCheck == 0)
+            //{
+            //    alert1.Text += alert1Text.ToString();
+            //    alert2.Text += alert2Text.ToString();
+            //    //progressBar.Text += progressOneThird.ToString();
+            //}
+            ////Move progress bar to fully complete 
+            //else if (charCheck == 1 && backStatusCheck == 1)
+            //{
+            //    progressBar.Text += progressFull.ToString();
 
-            }
-            //2/3 Progress Bar and Give Alert 
-            else if (charCheck == 1 || backStatusCheck == 1)
-            {
-                if (charCheck == 1 || backStatusCheck == 1)
-                {
-                    alert1.Text += alert2Text.ToString();
-                    progressBar.Text += progressTwoThird.ToString();
-                }
-                //2/3 Progress Bar and Give Alert to Complete Profile
-                else if (charCheck == 1 || backStatusCheck == 1)
-                {
-                    alert1.Text += alert1Text.ToString();
-                    progressBar.Text += progressTwoThird.ToString();
-                }
-            }
+            //}
+            ////2/3 Progress Bar and Give Alert 
+            //else if (charCheck == 1 || backStatusCheck == 1)
+            //{
+            //    if (charCheck == 1 || backStatusCheck == 1)
+            //    {
+            //        alert1.Text += alert2Text.ToString();
+            //        progressBar.Text += progressTwoThird.ToString();
+            //    }
+            //    //2/3 Progress Bar and Give Alert to Complete Profile
+            //    else if (charCheck == 1 || backStatusCheck == 1)
+            //    {
+            //        alert1.Text += alert1Text.ToString();
+            //        progressBar.Text += progressTwoThird.ToString();
+            //    }
+            //}
 
 
             //Selecting from Property
             // System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand messageSelect = new System.Data.SqlClient.SqlCommand();
-            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh, I.images FROM Property LEFT OUTER JOIN PropertyImages I ON Property.PropertyID = I.PropertyID WHERE Property.PropertyID in " +
+            System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand selectDate = new System.Data.SqlClient.SqlCommand();
+
+            select.CommandText = "SELECT Property.PropertyID, City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh, I.images FROM Property LEFT OUTER JOIN PropertyImages I ON Property.PropertyID = I.PropertyID WHERE Property.PropertyID in " +
             "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
             messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, Account.AccountImage, MAX(Message.Date) as Date FROM FavoritedTenants FULL OUTER JOIN Message " +
                  "ON FavoritedTenants.FavTenantID = Message.FavTenantID FULL OUTER JOIN Host ON FavoritedTenants.HostID = Host.HostID FULL OUTER JOIN Account " +
@@ -176,41 +180,59 @@ public partial class TenantDashboard : System.Web.UI.Page
                  "WHERE MessageType = 0 and FavoritedTenants.TenantID = " + accountID + " " +
                  "GROUP BY Account.FirstName, Account.LastName, Account.AccountImage";
 
+            //Select statement to get appointments with host
+            selectHost.CommandText = "SELECT Account.FirstName, Account.LastName" +
+                " FROM FavoritedTenants INNER JOIN Appointment ON FavoritedTenants.FavTenantID = Appointment.FavTenantID" +
+                " INNER JOIN Host ON FavoritedTenants.HostID = Host.HostID INNER JOIN Account ON " +
+                "Host.HostID = Account.AccountID WHERE FavoritedTenants.TenantID =" + accountID + ";";
+
+            //Select date to get appointments with tenants
+            selectDate.CommandText = "SELECT Appointment.AppointmentDate " +
+                "FROM FavoritedTenants INNER JOIN Appointment ON FavoritedTenants.FavTenantID = Appointment.FavTenantID" +
+                " INNER JOIN Host ON FavoritedTenants.HostID = Host.HostID INNER JOIN Account ON " +
+                "Host.HostID = Account.AccountID WHERE FavoritedTenants.TenantID =" + accountID + ";";
+
             select.Connection = sc;
             messageSelect.Connection = sc;
+            selectHost.Connection = sc;
+            selectDate.Connection = sc;
             sc.Open();
 
             System.Data.SqlClient.SqlDataReader readerProperty = select.ExecuteReader();
+            int resultCount = 0;
+
             //Populating Dashboard
-            if (readerProperty.HasRows)
+            while (readerProperty.Read())
             {
-                while (readerProperty.Read())
-                {
-                    String filename = readerProperty["images"].ToString();
-                    if (filename == "") filename = "imagenotfound.png";
-                    String city = readerProperty["City"].ToString();
-                    String homeState = readerProperty["HomeState"].ToString();
-                    String priceRangeLow = readerProperty["RoomPriceRangeLow"].ToString();
-                    String priceRangeHigh = readerProperty["RoomPriceRangeHigh"].ToString();
-                    double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
-                    double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
-                    //String Builder
-                    StringBuilder myCard = new StringBuilder();
-                    myCard
-                    .Append("<div class=\"col-xs-4 col-md-3\">")
-                    .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                    .Append("<img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
-                    .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
-                    .Append("                            <div class=\"card-body\">")
-                    .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
-                    .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
-                    .Append("                            </div>")
-                    .Append("                        </a>")
-                    .Append("")
-                    .Append("                    </div>")
-                    .Append("</div>");
-                    favProp.Text += myCard.ToString();
-                }
+                int PropID = Convert.ToInt32(readerProperty["PropertyID"]);
+                String filename = readerProperty["images"].ToString();
+                if (filename == "") filename = "imagenotfound.png";
+                String city = readerProperty["City"].ToString();
+                String homeState = readerProperty["HomeState"].ToString();
+                String priceRangeLow = readerProperty["RoomPriceRangeLow"].ToString();
+                String priceRangeHigh = readerProperty["RoomPriceRangeHigh"].ToString();
+                double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
+                double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
+                //String Builder
+                StringBuilder myCard = new StringBuilder();
+                myCard
+                .Append("<div class=\"col-xs-4 col-md-3\">")
+                .Append("   <div class=\"card  shadow-sm  mb-4\" >")
+                .Append("       <img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
+                .Append("       <div class=\"card-body\">")
+                .Append("           <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
+                .Append("           <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                .Append("       </div>")
+                .Append("       <div>")
+                .Append("           <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
+                                    "\'" + homeState + "\'" + "," + priceLowRounded + "," + priceHighRounded + ")\" " +
+                                    "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
+                .Append("       </div>")
+                .Append("   </div>")
+                .Append("</div>");
+                favProp.Text += myCard.ToString();
+
+                resultCount++;
             }
             readerProperty.Close();
 
@@ -243,11 +265,111 @@ public partial class TenantDashboard : System.Web.UI.Page
                 }
             }
             rdr.Close();
+            //Populate Tenant with appointments
+            System.Data.SqlClient.SqlDataReader aName = selectHost.ExecuteReader();
+            while (aName.Read())
+            {
+                String firstName = aName["FirstName"].ToString();
+                String lastName = aName["LastName"].ToString();
+                //StringBuilder
+                StringBuilder myCard = new StringBuilder();
+                myCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + firstName + " " + lastName + ": </a></li>");
+                apptName.Text += myCard.ToString();
+            }
+            aName.Close();
+            //Populate Host with appointments
+            System.Data.SqlClient.SqlDataReader aDate = selectDate.ExecuteReader();
+            while (aDate.Read())
+            {
+                String apDate = aDate["AppointmentDate"].ToString();
+                //StringBuilder
+                StringBuilder myCard = new StringBuilder();
+                myCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + apDate + " " + " </a></li>");
+                apptDate.Text += myCard.ToString();
+            }
+            aDate.Close();
             sc.Close();
         }
         else
         {
             Response.Redirect("Home.aspx");
+        }
+    }
+
+    [System.Web.Services.WebMethod]
+    [System.Web.Script.Services.ScriptMethod]
+    public static void MiddleMan(int propertyID, string city, string state, double priceLow, double priceHigh)
+    {
+        int propID = propertyID;
+        int loginID = Convert.ToInt32(HttpContext.Current.Session["AccountId"].ToString());
+
+        System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
+        sqlConn.Open();
+
+        System.Data.SqlClient.SqlCommand delete = new System.Data.SqlClient.SqlCommand();
+        delete.Connection = sqlConn;
+        delete.CommandText = "DELETE FROM [dbo].[FavoritedProperties] WHERE (TenantID = @tenantID) AND (PropertyID = @propertyID)";
+        delete.Parameters.Add(new SqlParameter("@tenantID", loginID));
+        delete.Parameters.Add(new SqlParameter("@propertyID", propID));
+
+        delete.ExecuteNonQuery();
+    }
+
+    protected void btnCreateAppt_Click(object sender, EventArgs e)
+    {
+        if (ddRecipient.SelectedIndex == 0)
+        {
+            lblRError.Text = "Please select a Recipient.";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+        }
+        else
+        {
+            DateTime appt = new DateTime();
+            if (txtDate.Text == "")
+            {
+                lblError.Text = "Please enter the Date (MM/DD/YYYY). <br/>";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+            }
+            else
+            {
+                //Date validation. Check to make sure appointment date is in the future
+                DateTime today = DateTime.Now;
+                appt = DateTime.Parse(txtDate.Text, new System.Globalization.CultureInfo("pt-BR"));
+                if (appt < today)
+                {
+                    lblError.Text = "Please select a future date.";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+                }
+                else
+                {
+                    //SQL Statement
+                    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+                    //Connection
+                    sc.ConnectionString = "server=aawnyfad9tm1sf.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
+                    sc.Open();
+                    System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+                    System.Data.SqlClient.SqlCommand favTen = new System.Data.SqlClient.SqlCommand();
+                    insert.Connection = sc;
+                    favTen.Connection = sc;
+
+                    int favTenID;
+                    favTen.CommandText = "SELECT FavTenantID FROM FavoritedTenants WHERE TenantID =" + Session["AccountId"] + "AND HostID=" + ddRecipient.SelectedValue;
+                    favTenID = Convert.ToInt32(favTen.ExecuteScalar());
+
+                    //Appointment added into Database
+                    Appointment newAppt = new Appointment(DateTime.Parse(txtDate.Text), favTenID);
+                    insert.CommandText = "INSERT into Appointment VALUES (@date, @favTenID) ; ";
+                    insert.Parameters.Add(new SqlParameter("@date", newAppt.getDate()));
+                    insert.Parameters.Add(new SqlParameter("@favTenID", favTenID));
+
+                    insert.ExecuteNonQuery();
+                    sc.Close();
+
+                    txtDate.Text = "";
+                    ddRecipient.ClearSelection();
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
+                }
+            }
         }
     }
 }

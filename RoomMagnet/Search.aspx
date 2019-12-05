@@ -38,315 +38,266 @@
 
         <!--GOOGLE MAPS GOES HERE-->
         <section>
-             <div align="center">
-                    <div class="sticky-top" id="map">
-                    </div>
+            <div align="center">
+                <div class="sticky-top" id="map">
+                </div>
             </div>
         </section>
         <!--END OF GOOGLE MAPS-->
 
         <section>
             <div class="row pb-2">
-
                 <div class="col-md-12">
                     <!--FILTER BUTTON AND FILTER FORM-->
                     <div class="form-row justify-content-center">
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterOptions">Sort</button>
                         <!--END OF FILTER BUTTON-->
 
-                       <!--filter form starts-->
-                                <div class="modal" id="filterOptions">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
+                        <!--filter form starts-->
+                        <div class="modal" id="filterOptions">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                                            <div class="modal-body">
-
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                                                <!--start of personality-->
-                                                <h6>Personality/Lifestyle</h6>
-                                                <div class="form-group row">
-
-                                                    <div class="col-sm-6">
-
-                                                       
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbExtrovert" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Extrovert</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbIntrovert" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterPetFriendly">Introvert</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbNonSmoker" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Non-Smoker</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbEarlyRiser" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterPetFriendly">Early-Riser</label>
-                                                            </div>
-                                                        </div>
-
-                                                        
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-
-                                                        
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbNightOwl" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Night Owl</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbTechSavvy" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Tech-Savvy</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbFamily" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Family-Oriented</label>
-                                                            </div>
-                                                        </div>
-                                                        
-
+                                        <!--start of personality-->
+                                        <h6>Personality/Lifestyle</h6>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6">
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbExtrovert" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Extrovert</label>
                                                     </div>
                                                 </div>
-                                                <!--end of personality-->
 
-                                                <!--start of amentities-->
-                                                <h6>Amenities</h6>
-                                                <div class="form-group row">
-
-                                                    <div class="col-sm-6">
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbKitchen" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Kitchen</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbHVAC" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Heating / Air Conditioning</label>
-                                                            </div>
-                                                        </div>
-
-                                                         <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbWifi" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Wifi</label>
-                                                            </div>
-                                                        </div>
-
-                                                        
-
-                                                        
-
-                                                        
-
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbPrivateBath" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterPetFriendly">Private Bathroom</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbWalkInCloset" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Walk-In Closet</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbWashDry" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Washer / Dryer</label>
-                                                            </div>
-                                                        </div>
-
-
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbIntrovert" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterPetFriendly">Introvert</label>
                                                     </div>
                                                 </div>
-                                                <!--end of amenities-->
 
-                                       <!--start of homesharesmarter-->
-                                     <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housing">®</a>Living</h6>
-
-                                                <div class="form-group row">
-
-                                                    <div class="col-sm-12">
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbHomeShareYES" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterhomeshareYES">Yes</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbHomeShareNO" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterhomeshareNO">No</label>
-                                                            </div>
-                                                        </div>
-
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbNonSmoker" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Non-Smoker</label>
                                                     </div>
                                                 </div>
-                                                <!--end of homesharesmarter-->
 
-
-
-                                                <!--start of facilites-->
-                                                <h6>Facilities</h6>
-                                                <div class="form-group row">
-
-                                                    <div class="col-sm-6">
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbStreetPark" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterPetFriendly">Street Parking</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbGarPark" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterPetFriendly">Garage Parking</label>
-                                                            </div>
-                                                        </div>
-
-                                                         <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbBackyard" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Backyard</label>
-                                                            </div>
-                                                        </div>
-
-   
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-
-                                                        
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbPorch" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Porch / Deck</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbPool" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Pool</label>
-                                                            </div>
-                                                        </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbEarlyRiser" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterPetFriendly">Early-Riser</label>
                                                     </div>
                                                 </div>
-                                                <!--end of facilities-->
+                                            </div>
 
-
-                                                
-
-
-
-
-
-                                                <!--start of languages-->
-                                                <h6>Languages</h6>
-                                                <div class="form-group row">
-
-                                                    <div class="col-sm-6">
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbEnglish" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterPetFriendly">English</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbSpanish" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Spanish</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbMandarin" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">Mandarin</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbJapanese" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterPetFriendly">Japanese </label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbGerman" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">German</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <div class="form-check">
-                                                                <asp:CheckBox ID="cbFrench" runat="server" class="form-check-input" />
-                                                                <label class="form-check-label" for="filterSportsFan">French</label>
-                                                            </div>
-                                                        </div>
+                                            <div class="col-sm-6">
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbNightOwl" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Night Owl</label>
                                                     </div>
                                                 </div>
-                                                <!--end of languages-->
 
-                                                <button type="button" class="btn btn-info btn-block" data-dismiss="modal">Apply</button>
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbTechSavvy" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Tech-Savvy</label>
+                                                    </div>
+                                                </div>
 
-
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbFamily" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Family-Oriented</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        <!--end of personality-->
+
+                                        <!--start of amentities-->
+                                        <h6>Amenities</h6>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6">
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbKitchen" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Kitchen</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbHVAC" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Heating / Air Conditioning</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbWifi" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Wifi</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbPrivateBath" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterPetFriendly">Private Bathroom</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbWalkInCloset" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Walk-In Closet</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbWashDry" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Washer / Dryer</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end of amenities-->
+
+                                        <!--start of homesharesmarter-->
+                                        <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housingPerform basic chores to receive a discount on housing. If selected ONLY HomeshareSmarter Properties will be displayed.">®</a>Living</h6>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbHomeShareYES" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterhomeshareYES">HomeshareSmarter Living</label>
+                                                    </div>
+                                                </div>
+
+                                            <%--<div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbHomeShareNO" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterhomeshareNO">No</label>
+                                                    </div>
+                                                </div>--%>
+                                            </div>
+                                        </div>
+                                        <!--end of homesharesmarter-->
+
+                                        <!--start of facilites-->
+                                        <h6>Facilities</h6>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6">
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbStreetPark" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterPetFriendly">Street Parking</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbGarPark" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterPetFriendly">Garage Parking</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbBackyard" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Backyard</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbPorch" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Porch / Deck</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbPool" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Pool</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end of facilities-->
+
+                                        <!--start of languages-->
+                                        <h6>Languages</h6>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6">
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbEnglish" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterPetFriendly">English</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbSpanish" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Spanish</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbMandarin" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">Mandarin</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbJapanese" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterPetFriendly">Japanese </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbGerman" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">German</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-check">
+                                                        <asp:CheckBox ID="cbFrench" runat="server" class="form-check-input" />
+                                                        <label class="form-check-label" for="filterSportsFan">French</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end of languages-->
+
+                                        <button type="button" runat="server" onServerClick="btnSearch_Click" class="btn btn-info btn-block" data-dismiss="modal">Sort By</button>
                                     </div>
                                 </div>
-                                <!--END OF FILTER FORM-->
+                            </div>
+                        </div>
+                        <!--END OF FILTER FORM-->
 
                         <!--SEARCH BAR-->
                         <div class="col-md-6 searchBar">
                             <asp:TextBox ID="txtSearch" runat="server" class="form-control form-control-lg" placeholder="Enter City, State" ClientIDMode="Static"></asp:TextBox>
                         </div>
                         <!--END OF SEARCH BAR-->
-
 
                         <!--BEGINNING OF SEARCH BUTTON-->
                         <asp:Button ID="btnSearch" OnClick="btnSearch_Click" runat="server" Text="Search" class="btn btn-info" />
@@ -356,9 +307,6 @@
             </div>
         </section>
         <!--END OF FILTER, SEARCH BAR, AND SEARCH BUTTON -->
-                        <asp:Label ID="resultLabel" runat="server" Visible="false" Text="Sorry, no results match your search criteria."></asp:Label>
-
-
 
         <!--BREADCRUMBS-->
         <section>
@@ -371,24 +319,8 @@
             </nav>
         </section>
         <!--END OF BREADCRUMBS-->
-
-
-
-        
-
-
-        <!-- number of properties listed on search-->
-        <section>
-            <div class="row">
-                <div class="col-md-12">
-                    <h3></h3>
-                </div>
-            </div>
-        </section>
-
-
-
-
+          
+        <asp:Literal ID="resultLabel" runat="server" Mode="Transform"></asp:Literal>
 
         <!--BEGINNING OF HOUSE LISTINGS-->
         <section>
@@ -400,15 +332,10 @@
                 <asp:Literal ID="otherResults" runat="server" Mode="Transform"></asp:Literal>
             </div>
         </section>
-
-
-        
-
     </div>
 
     <script src="awesomplete.js"></script>
     <script type="text/javascript">
-
         var ajax = new XMLHttpRequest();
         ajax.open("GET", "csvjson.json", true);
         ajax.onload = function () {

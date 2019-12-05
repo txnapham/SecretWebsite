@@ -38,7 +38,7 @@ public partial class HostDashboard : System.Web.UI.Page
     {
         if (Session["AccountId"] != null && Convert.ToInt16(Session["type"]) == 2)
         {
-            apptCal.SelectedDate = DateTime.Today;
+            //apptCal.SelectedDate = DateTime.Today;
 
             HostCard.Text = "";
             properties.Text = "";
@@ -46,7 +46,8 @@ public partial class HostDashboard : System.Web.UI.Page
             favTen.Text = "";
             alert1.Text = "";
             alert2.Text = "";
-            progressBar.Text = "";
+            apptName.Text = "";
+            apptDate.Text = "";
 
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
@@ -87,8 +88,8 @@ public partial class HostDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder hostImage = new StringBuilder();
                 hostImage
-                    .Append("<div> <img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-header img-fluid\" width=\"30%\" height=\"auto\">")
-                    .Append("                Welcome " + tenantName + "! </div>");
+                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-headerrm img-fluid\" width=\"20%\" height=\"auto\">")
+                    .Append("             <h3>Welcome " + tenantName + "!</h3>");
                 HostCard.Text += hostImage.ToString();
             }
             sc.Close();
@@ -111,45 +112,24 @@ public partial class HostDashboard : System.Web.UI.Page
                 .Append("   </button>")
                 .Append("</div>");
 
-            StringBuilder progressOneThird = new StringBuilder();
-            progressOneThird
-                .Append("<div class=\"progress\" style=\"height: 40%; \">")
-                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar1.png\" \">")
-                .Append("</div");
-
-            StringBuilder progressTwoThird = new StringBuilder();
-            progressTwoThird
-                .Append("<div class=\"progress\" style=\"height: 40%; \">")
-                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar2.png\" \">")
-                .Append("</div");
-
-            StringBuilder progressFull = new StringBuilder();
-            progressFull
-                .Append("<div class=\"progress\" style=\"height: 40%; \">")
-                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar3.png\" \">")
-                .Append("</div");
 
             if (charCheck == 0 && backStatusCheck == 0)
             {
                 alert1.Text += alert1Text.ToString();
                 alert2.Text += alert2Text.ToString();
-                progressBar.Text += progressOneThird.ToString();
             }
             else if (charCheck == 1 && backStatusCheck == 1)
             {
-                progressBar.Text += progressFull.ToString();
             }
             else if (charCheck == 1 || backStatusCheck == 1)
             {
                 if (charCheck == 1 || backStatusCheck == 1)
                 {
                     alert1.Text += alert2Text.ToString();
-                    progressBar.Text += progressTwoThird.ToString();
                 }
                 else if (charCheck == 1 || backStatusCheck == 1)
                 {
                     alert1.Text += alert1Text.ToString();
-                    progressBar.Text += progressTwoThird.ToString();
                 }
             }
 
@@ -158,6 +138,8 @@ public partial class HostDashboard : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand selectProp = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand favoriteTenant = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand tenantDash = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand selectTenant = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand selectDate = new System.Data.SqlClient.SqlCommand();
             //Tenant Select
             select.CommandText = "SELECT FirstName,LastName FROM Account WHERE AccountID in " +
             "(SELECT TOP(5) tenantID FROM Lease WHERE HostID = " + accountID + ");";
@@ -169,11 +151,24 @@ public partial class HostDashboard : System.Web.UI.Page
             //Select statement to get fsvorite tenantID to check if they exist already
             tenantDash.CommandText = "select accountID from account where AccountID in (select tenantID from Tenant where TenantID in (select tenantID from " +
                 "FavoritedTenants where HostID =" + accountID + "));";
+            //Select statement to get appointments with tenants
+            selectTenant.CommandText = "SELECT Account.FirstName, Account.LastName " +
+                "FROM FavoritedTenants INNER JOIN Appointment ON FavoritedTenants.FavTenantID = Appointment.FavTenantID" +
+                " INNER JOIN Tenant ON FavoritedTenants.TenantID = Tenant.TenantID INNER JOIN Account ON " +
+                "Tenant.TenantID = Account.AccountID WHERE FavoritedTenants.HostID =" + accountID + ";";
+            //Select date to get appointments with tenants
+            selectDate.CommandText = "SELECT Appointment.AppointmentDate " +
+                "FROM FavoritedTenants INNER JOIN Appointment ON FavoritedTenants.FavTenantID = Appointment.FavTenantID" +
+                " INNER JOIN Tenant ON FavoritedTenants.TenantID = Tenant.TenantID INNER JOIN Account ON " +
+                "Tenant.TenantID = Account.AccountID WHERE FavoritedTenants.HostID =" + accountID + ";";
+
             //Connections
             select.Connection = sc;
             selectProp.Connection = sc;
             favoriteTenant.Connection = sc;
             tenantDash.Connection = sc;
+            selectTenant.Connection = sc;
+            selectDate.Connection = sc;
             sc.Open();
 
             //Store tenantID for if statement
@@ -249,20 +244,45 @@ public partial class HostDashboard : System.Web.UI.Page
                     StringBuilder myCard = new StringBuilder();
                     myCard
                         .Append("<div class=\"chat-list\">")
-                        .Append("           <div class=\"chat-people\">")
-                        .Append("               <div class=\"chat-img\"> <img src =\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + imgURL + "\" class=\"rounded-circle img-fluid\"></div>")
-                        .Append("                <div class=\"chat-ib\">")
-                        .Append("                    <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + ", Age: " + age + "</a></h5>")
-                        .Append("                    <p>Hello I'm interested in your property!</p>")
-                        .Append("                  </div>")
-                        .Append("               </div>")
-                        .Append("            </div>");
+                        .Append("   <div class=\"chat-people\">")
+                        .Append("       <div class=\"chat-img\"> <img src =\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + imgURL + "\" class=\"rounded-circle img-fluid\">")
+                        .Append("       </div>")
+                        .Append("       <div class=\"chat-ib\">")
+                        .Append("           <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + ", Age: " + age + "</a></h5>")
+                        .Append("           <p>Hello I'm interested in your property!</p>")
+                        .Append("       </div>")
+                        .Append("   </div>")
+                        .Append("</div>");
 
                     favTen.Text += myCard.ToString();
                     count++;
                 }
             }
             drd.Close();
+
+            //Populate Tenant with appointments
+            System.Data.SqlClient.SqlDataReader aName = selectTenant.ExecuteReader();
+            while (aName.Read())
+            {
+                String firstName = aName["FirstName"].ToString();
+                String lastName = aName["LastName"].ToString();
+                //StringBuilder
+                StringBuilder myCard = new StringBuilder();
+                myCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + firstName + " " + lastName + ": </a></li>");
+                apptName.Text += myCard.ToString();
+            }
+            aName.Close();
+            //Populate Tenant with appointments
+            System.Data.SqlClient.SqlDataReader aDate = selectDate.ExecuteReader();
+            while (aDate.Read())
+            {
+                String apDate = aDate["AppointmentDate"].ToString();
+                //StringBuilder
+                StringBuilder myCard = new StringBuilder();
+                myCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + apDate + " " + " </a></li>");
+                apptDate.Text += myCard.ToString();
+            }
+            aDate.Close();
             sc.Close();
         }
         else
@@ -288,31 +308,60 @@ public partial class HostDashboard : System.Web.UI.Page
     }
     protected void btnCreateAppt_Click(object sender, EventArgs e)
     {
-        //SQL Statement
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
-        //Connection
-        sc.ConnectionString = "server=aawnyfad9tm1sf.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
-        sc.Open();
-        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
-        System.Data.SqlClient.SqlCommand favTen = new System.Data.SqlClient.SqlCommand();
-        insert.Connection = sc;
-        favTen.Connection = sc;
+        if (ddRecipient.SelectedIndex==0)
+        {
+            lblRError.Text = "Please select a Recipient.";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+        }
+        else
+        {
+            DateTime appt = new DateTime();
+            if (txtDate.Text == "")
+            {
+                lblError.Text = "Please enter the Date (MM/DD/YYYY). <br/>";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+            }
+            else
+            {
+                //Date validation. Check to make sure appointment date is in the future
+                DateTime today = DateTime.Now;
+                appt = DateTime.Parse(txtDate.Text, new System.Globalization.CultureInfo("pt-BR"));
+                if(appt < today)
+                {
+                    lblError.Text = "Please select a future date.";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+                }
+                else
+                {
+                    //SQL Statement
+                    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection();
+                    //Connection
+                    sc.ConnectionString = "server=aawnyfad9tm1sf.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
+                    sc.Open();
+                    System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+                    System.Data.SqlClient.SqlCommand favTen = new System.Data.SqlClient.SqlCommand();
+                    insert.Connection = sc;
+                    favTen.Connection = sc;
 
-        int favTenID;
-        favTen.CommandText = "SELECT FavTenantID FROM FavoritedTenants WHERE HostID =" + Session["AccountId"] + "AND TenantID=" + ddRecipient.SelectedValue; 
-        favTenID = Convert.ToInt32(favTen.ExecuteScalar());
+                    int favTenID;
+                    favTen.CommandText = "SELECT FavTenantID FROM FavoritedTenants WHERE HostID =" + Session["AccountId"] + "AND TenantID=" + ddRecipient.SelectedValue;
+                    favTenID = Convert.ToInt32(favTen.ExecuteScalar());
 
-        //Appointment added into Database
-        Appointment newAppt = new Appointment(DateTime.Parse(txtDate.Text), favTenID);
-        insert.CommandText = "INSERT into Appointment VALUES (@date, @favTenID) ; ";
-        insert.Parameters.Add(new SqlParameter("@date", newAppt.getDate()));
-        insert.Parameters.Add(new SqlParameter("@favTenID", favTenID));
+                    //Appointment added into Database
+                    Appointment newAppt = new Appointment(DateTime.Parse(txtDate.Text), favTenID);
+                    insert.CommandText = "INSERT into Appointment VALUES (@date, @favTenID) ; ";
+                    insert.Parameters.Add(new SqlParameter("@date", newAppt.getDate()));
+                    insert.Parameters.Add(new SqlParameter("@favTenID", favTenID));
 
-        insert.ExecuteNonQuery();
-        sc.Close();
+                    insert.ExecuteNonQuery();
+                    sc.Close();
 
-        txtDate.Text = "";
-        ddRecipient.ClearSelection();
+                    txtDate.Text = "";
+                    ddRecipient.ClearSelection();
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
+                }
+            }
+        }
     }
 
     protected void btnAddRoom_Click(object sender, EventArgs e)

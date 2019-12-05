@@ -152,16 +152,16 @@ public partial class HostMessageCenter : System.Web.UI.Page
                 StringBuilder myCard = new StringBuilder();
                 myCard
                 .Append("<div>")
-                .Append("<div class=\"incoming-msg-img\">")
-                .Append("   <img src = \"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + accountImg + "\" class=\"rounded-circle img-fluid\">")
-                .Append("</div>")
-                .Append("<div class=\"recieved-msg\">")
-                .Append("   <div class=\"recieved-withd-msg\">")
-                .Append("       <p>" + message + "</p>")
-                .Append("       <span class=\"time-date\">" + date + "</span>")
+                .Append("   <div class=\"incoming-msg-img\">")
+                .Append("       <img src = \"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + accountImg + "\" class=\"rounded-circle img-fluid\">")
                 .Append("   </div>")
-                .Append("</div>")
-                .Append("</div>");
+                .Append("   <div class=\"recieved-msg\">")
+                .Append("       <div class=\"recieved-withd-msg\">")
+                .Append("           <p>" + message + "</p>")
+                .Append("           <span class=\"time-date\">" + date + "</span>")
+                .Append("       </div>")
+                .Append("   </div>")
+                .Append("</div><br/>");
 
                 Message.Text += myCard.ToString();
             }
@@ -236,6 +236,8 @@ public partial class HostMessageCenter : System.Web.UI.Page
     }
     protected void videoChat_Click(object sender, EventArgs e)
     {
-        Response.Redirect("HostVideoChat.aspx");
+        //Response.Redirect("HostVideoChat.aspx");
+        ClientScript.RegisterStartupScript(this.Page.GetType(), "",
+        "window.open('TenantVideoChat.aspx','Graph','height=400,width=500');", true);
     }
 }

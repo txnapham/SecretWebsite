@@ -59,7 +59,7 @@ public partial class HostEditProfile : System.Web.UI.Page
                     String tenantName = readerHostImage["FirstName"].ToString();
                     String filename = readerHostImage["AccountImage"].ToString();
                     // No image uploaded (currently default image in S3)
-                    if (filename == "") filename = "defaulttenantimg.jpg";
+                    if (filename == "") filename = "noprofileimage.png";
                     // User dashboard dynamically updated using S3
                     StringBuilder hostImage = new StringBuilder();
                     hostImage
@@ -173,8 +173,15 @@ public partial class HostEditProfile : System.Web.UI.Page
         sc.ConnectionString = "server=aawnyfad9tm1sf.cqpnea2xsqc1.us-east-1.rds.amazonaws.com; database =roommagnetdb;uid=admin;password=Skylinejmu2019;";
         sc.Open();
         //Save  all updated information 
+        System.Data.SqlClient.SqlCommand updatePassEmail = new System.Data.SqlClient.SqlCommand();
         System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand();
+        updatePassEmail.Connection = sc;
         update.Connection = sc;
+
+        updatePassEmail.CommandText = "UPDATE Password SET Email = @Email WHERE Email = (SELECT Email FROM Account WHERE AccountID = " + accountID + ")";
+        updatePassEmail.Parameters.Add(new SqlParameter("@Email", txtEmail.Text));
+        updatePassEmail.ExecuteNonQuery();
+
         update.CommandText = "UPDATE Account SET FirstName = @fn, MiddleName = NULLIF(@mn,''), LastName = @ln, PhoneNumber = @number, Email = @email, HomeNumber = @HouseNbr, Street = @street, City = @city, HomeState = @state, " +
             "Country = @country, Zip = @zip WHERE AccountID = @accountID;";
         update.Parameters.Add(new SqlParameter("@fn", txtFN.Text));
@@ -338,6 +345,7 @@ public partial class HostEditProfile : System.Web.UI.Page
 
         charInsertUpdate.ExecuteNonQuery();
         sc.Close();
+        HostImageUpdate();
     }
 
     protected void btnChangePassword_Click(object sender, EventArgs e)
@@ -376,9 +384,9 @@ public partial class HostEditProfile : System.Web.UI.Page
                     //Insert into PASSWORD
                     newPass.Parameters.Add(new SqlParameter("@AccountID", accountID));
                     newPass.Parameters.Add(new SqlParameter("@password", PasswordHash.HashPassword(txtReenterPassword.Text))); // hash entered password
-                    lblPrev.Text = "Success";
                     newPass.ExecuteNonQuery();
                     sqlConn.Close();
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
                 }
                 else
                 {
@@ -392,7 +400,7 @@ public partial class HostEditProfile : System.Web.UI.Page
         sc.Close();
     }
 
-    protected void HostImageUpload_Click(object sender, EventArgs e)
+    protected void HostImageUpdate()
     {
         if (HostImageUpload.HasFile)
         {
@@ -425,7 +433,7 @@ public partial class HostEditProfile : System.Web.UI.Page
 
             sc.Close();
 
-            StatusLabel.Text = "Looking good!";
+            StatusLabel.Text = "Looking good! Profile image updated.";
         }
         else
         {

@@ -45,6 +45,7 @@ public partial class AdminDashboard : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand selectIntendedLease = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectUsers = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectLeases = new System.Data.SqlClient.SqlCommand();
+            System.Data.SqlClient.SqlCommand selectEmail = new System.Data.SqlClient.SqlCommand();
 
             //Connections
             selectUserName.Connection = sc;
@@ -53,18 +54,19 @@ public partial class AdminDashboard : System.Web.UI.Page
             selectIntendedLease.Connection = sc;
             selectUsers.Connection = sc;
             selectLeases.Connection = sc;
+            selectEmail.Connection = sc;
             sc.Open();
 
             //User Name Select
             selectUserName.CommandText = "SELECT FirstName FROM Account WHERE AccountID = " + Session["AccountId"] + ";";
 
             //Host Select
-            selectHost.CommandText = "SELECT TOP(5) FirstName, LastName FROM Account WHERE (AccountType = 2);";
+            selectHost.CommandText = "SELECT TOP(10) FirstName, LastName FROM Account FULL OUTER JOIN Host ON AccountID = HostID WHERE (AccountType = 2) AND BackgroundCheckStatus != 0;";
 
             //Tenant Select 
-            selectTenant.CommandText = "SELECT TOP(5) FirstName, LastName FROM Account WHERE (AccountType = 3);";
+            selectTenant.CommandText = "SELECT TOP(10) FirstName, LastName FROM Account FULL OUTER JOIN Tenant ON AccountID = TenantID WHERE (AccountType = 3) AND BackgroundCheckStatus != 0;";
 
-            //Intented Lease: Hosts and Tenants
+            //Intended Lease: Hosts and Tenants
             selectIntendedLease.CommandText = "SELECT TOP(5) A.FirstName as hostF, A.LastName as hostL, B.FirstName as tenantF, B.LastName as tenantL " +
                 "FROM Account A, Account B " +
                 "WHERE A.AccountID in (select hostID from Host where hostID in (select HostID from lease where Agreed = '1')) " +
@@ -78,13 +80,18 @@ public partial class AdminDashboard : System.Web.UI.Page
             selectLeases.CommandText = "SELECT COUNT(*) FROM Lease;";
             int leaseCount = (int)selectLeases.ExecuteScalar();
 
+            //Populate Emails
+            selectEmail.CommandText = "SELECT TOP(10) Account.FirstName, Account.LastName, Account.Email " +
+                "FROM Account FULL OUTER JOIN Host ON Account.AccountID = Host.HostID FULL OUTER JOIN Tenant ON Account.AccountID = Tenant.TenantID " +
+                "WHERE Host.BackgroundCheckStatus = 0 OR Tenant.BackgroundCheckStatus = 0";
+
             //Populate Dashboard with Admin Name
             string userName = selectUserName.ExecuteScalar().ToString();
 
             //StringBuilder
             StringBuilder nameCard = new StringBuilder();
             nameCard.Append("<a href =\"#\" class=\"tenantdashlist\">" + "Welcome, " + userName + "</a>");
-            UserNameCard.Text += nameCard.ToString();
+            //UserNameCard.Text += nameCard.ToString();
 
             //Populate Dashboard with Host Info 
             System.Data.SqlClient.SqlDataReader reader = selectHost.ExecuteReader();
@@ -123,10 +130,28 @@ public partial class AdminDashboard : System.Web.UI.Page
 
                 //StringBuilder
                 StringBuilder myCard3 = new StringBuilder();
-                myCard3.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Host: " + hostFName + " " + hostLName + ", Tenant: " + tenantFName + " " + tenantLName);
+                myCard3.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Host: " + hostFName + " " + hostLName + "<br/>Tenant: " + tenantFName + " " + tenantLName + "</a></li>");
                 IntLease.Text += myCard3.ToString();
             }
             intLeaseRdr.Close();
+
+            System.Data.SqlClient.SqlDataReader noBackEmail = selectEmail.ExecuteReader();
+            while(noBackEmail.Read())
+            {
+                String fName = noBackEmail["FirstName"].ToString();
+                String lName = noBackEmail["LastName"].ToString();
+                String email = noBackEmail["Email"].ToString();
+
+                StringBuilder names = new StringBuilder();
+                names.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + fName + " " + lName + "</a></li>");
+
+                StringBuilder emails = new StringBuilder();
+                emails.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + email + "</a></li>");
+
+                futureEmails.Text += emails.ToString();
+            }
+            noBackEmail.Close();
+
             sc.Close();
 
             //StringBuilder for Amount of Users
@@ -139,6 +164,8 @@ public partial class AdminDashboard : System.Web.UI.Page
             StringBuilder myCard5 = new StringBuilder();
             myCard5.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + "Number of Leases: " + leaseCount + "</a></li>");
             LeaseCount.Text += myCard5.ToString();
+
+
         }
         else
         {

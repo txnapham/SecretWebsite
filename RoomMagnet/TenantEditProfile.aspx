@@ -28,16 +28,18 @@
                 <div class="sm-form md-form lg-form ">
                     <div class="file-field">
                         <div class="mb-4">
+
 <%--                            <img src="images/rebeccajames.png" class="rounded-circle img-fluid" alt="...">--%>
-                            <asp:Literal ID="Card" runat="server" Mode="Transform"></asp:Literal>
+                            <asp:Literal ID="tenantCard" runat="server" Mode="Transform"></asp:Literal>
+
                         </div>
                         <div class="d-flex ">
                             <div class="btn btn-rounded float-left">
                                 <asp:FileUpload ID="TenantImageUpload" runat="server" AllowMultiple="True" />
-                                <asp:Button runat="server" ID="FilesUpload" Text="Upload profile image" AutoPostBack="false" OnClick="TenantImageUpload_Click" />
+<%--                                <asp:Button runat="server" ID="FilesUpload" Text="Upload profile image" AutoPostBack="false" OnClick="TenantImageUpload_Click" />--%>
                                 <br />
                                 <br />
-                                <asp:Label runat="server" ID="StatusLabel" Text="Upload Status: " />
+                                <asp:Label runat="server" ID="StatusLabel" Text="" ForeColor="#577399" Font-Bold="true" />
                             </div>
                         </div>
                     </div>
@@ -363,5 +365,12 @@
         </section>
     </div>
     <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-info btn-lg btn-block" OnClick="btnSave_Click" />
+
+    <script>
+        function MyFunction() {
+            alert("Success!")
+        }
+    </script>
+
 </asp:Content>
 

@@ -100,7 +100,7 @@ nav {
 
     nav .loginBUTTON a {
         font-size: 20px;
-        padding: 0;
+        padding: 2%;
        margin-bottom: 9px;
     }
 
@@ -192,11 +192,11 @@ div.container-fluid.homepageAbove {
     max-width: auto;
 }
 
-.aboutusInfoBox {
+/*.aboutusInfoBox {
     background-color: #BDD5EA;
     border-left: 19px solid #fff;
     border-radius: 10px;
-}
+}*/
 
 .howItWorksBox {
     padding-top: 14px;
@@ -206,11 +206,11 @@ div.container-fluid.homepageAbove {
         color: #577399;
     }
 
-.oldandYoungImage {
+/*.oldandYoungImage {
     background-image: url("../images/young-teaching-old.jpg");
     background-size: 100%;
     background-position: cover;
-}
+}*/
 
 .roomimagehomepage {
     background-image: url(../images/loft-style-bedroom.jpg);
@@ -776,6 +776,488 @@ button.btn-yes-go {
     background-color: green;
     color: #fff;
 }
+
+
+@media screen and (min-width: 500px) {
+    #homePageCarousel {
+        margin-top: 10%;
+        max-height: 620px;
+        max-width: auto;
+    }
+
+        #homePageCarousel .carousel-inner {
+            padding-top: 7%;
+            max-height: 350px;
+            max-width: auto;
+        }
+
+    .searchform {
+        max-width: 50%;
+        position: relative;
+    }
+
+        .searchform .searchformSortButton {
+            height: 45px;
+            position: absolute;
+            top: -6000%;
+            left: -20%;
+            float: left;
+        }
+
+        .searchform .searchformSearchBar {
+            position: absolute;
+            top: -6000%;
+            left: 0%;
+        }
+
+        .searchform .searchformSearchButton {
+            height: 45px;
+            position: absolute;
+            float: right;
+            top: -6000%;
+            right:-30%;
+        }
+
+    .carousel-caption {
+        position: relative;
+        top: -25%;
+    }
+
+    .caption-headline-main {
+        padding-bottom: 35%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #577399;
+    }
+
+    .caption-headline {
+        padding-top:25%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #577399;
+    }
+
+    .caption-headline-dog {
+        padding-top: 25%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #f7f7ff;
+    }
+
+    .oldandYoungImage {
+        background-image: url("../images/young-teaching-old.jpg");
+        background-size: 100%;
+        background-position: cover;
+        height: 300px;
+        width: auto;
+        margin-bottom: 3%;
+    }
+
+    .aboutusInfoBox {
+        background-color: #BDD5EA;
+    }
+
+    .howItWorksBox {
+        padding-top: 14px;
+        margin-bottom: 2%;
+    }
+}
+
+@media screen and (min-width: 602px) {
+    #homePageCarousel {
+        margin-top: -7%;
+        max-height: 500px;
+        max-width: auto;
+    }
+
+        #homePageCarousel .carousel-inner {
+            padding-top: 7%;
+            max-height: 500px;
+            max-width: auto;
+        }
+
+    .searchform {
+        max-width: 125%;
+        position: relative;
+    }
+
+        .searchform .searchformSortButton {
+            height: 45px;
+            position: absolute;
+            top: -6000%;
+            left: -13%;
+            float: left;
+        }
+
+        .searchform .searchformSearchBar {
+            position: absolute;
+            top: -6000%;
+            left: -6%;
+        }
+
+        .searchform .searchformSearchButton {
+            height: 45px;
+            position: absolute;
+            float: right;
+            top: -6000%;
+            right: 38%;
+        }
+
+    .carousel-caption {
+        position: relative;
+        top: -25%;
+    }
+
+    .caption-headline-main {
+        padding-top: 55%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #577399;
+    }
+
+    .caption-headline {
+        padding-top: 55%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #577399;
+    }
+
+    .caption-headline-dog {
+        padding-top: 45%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #f7f7ff;
+    }
+
+    .caption-tagline {
+        font-style: italic;
+        font-size: 25px;
+        color: #f7f7ff;
+    }
+
+    .caption-tagline-cooking {
+        font-style: italic;
+        font-size: 25px;
+        color: #577399;
+    }
+
+    .oldandYoungImage {
+        background-image: url("../images/young-teaching-old.jpg");
+        background-size: 100%;
+        background-position: cover;
+        height: 300px;
+        width: auto;
+        margin-bottom: 3%;
+    }
+
+    .aboutusInfoBox {
+        background-color: #BDD5EA;
+    }
+
+    .howItWorksBox {
+        padding-top: 14px;
+        margin-bottom: 2%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #homePageCarousel {
+        margin-top: -7%;
+        max-height: 500px;
+        max-width: auto;
+    }
+
+        #homePageCarousel .carousel-inner {
+            padding-top: 7%;
+            max-height: 500px;
+            max-width: auto;
+        }
+
+    .searchform {
+        max-width: 135%;
+        position: relative;
+    }
+
+        .searchform .searchformSortButton {
+            height: 45px;
+            position: absolute;
+            top:-10000%;
+            left: -11%;
+            float: left;
+        }
+
+        .searchform .searchformSearchBar {
+            position: absolute;
+            top: -10000%;
+            left: -6%;
+        }
+
+        .searchform .searchformSearchButton {
+            height: 45px;
+            position: absolute;
+            float: right;
+            top: -10000%;
+            right:41%;
+        }
+
+    .carousel-caption {
+        position: relative;
+        top: -25%;
+    }
+
+    .caption-headline-main {
+        padding-top: 60%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #577399;
+    }
+
+    .caption-headline {
+        padding-top: 55%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #577399;
+    }
+
+    .caption-headline-dog {
+        padding-top: 45%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #f7f7ff;
+    }
+
+    .caption-tagline {
+        font-style: italic;
+        font-size: 25px;
+        color: #f7f7ff;
+    }
+
+    .caption-tagline-cooking {
+        font-style: italic;
+        font-size: 25px;
+        color: #577399;
+    }
+
+    .oldandYoungImage {
+        background-image: url("../images/young-teaching-old.jpg");
+        background-size: 100%;
+        background-position: cover;
+        height: 300px;
+        width: auto;
+        margin-bottom: 3%;
+    }
+
+    .aboutusInfoBox {
+        background-color: #BDD5EA;
+    }
+
+    .howItWorksBox {
+        padding-top: 14px;
+        margin-bottom: 2%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    #homePageCarousel {
+        margin-top: -7%;
+        max-height: 500px;
+        max-width: auto;
+    }
+
+        #homePageCarousel .carousel-inner {
+            padding-top: 7%;
+            max-height: 500px;
+            max-width: auto;
+        }
+
+    .searchform {
+        max-width: 135%;
+        position: relative;
+    }
+
+        .searchform .searchformSortButton {
+            height: 45px;
+            position: absolute;
+            top: -10000%;
+            left: -11%;
+            float: left;
+        }
+
+        .searchform .searchformSearchBar {
+            position: absolute;
+            top: -10000%;
+            left: -6%;
+        }
+
+        .searchform .searchformSearchButton {
+            height: 45px;
+            position: absolute;
+            float: right;
+            top: -10000%;
+            right: 41%;
+        }
+
+    .carousel-caption {
+        position: relative;
+        top: -25%;
+    }
+
+    .caption-headline-main {
+        padding-top: 60%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #577399;
+    }
+
+    .caption-headline {
+        padding-top: 55%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #577399;
+    }
+
+    .caption-headline-dog {
+        padding-top: 45%;
+        font-size: 30px;
+        font-weight: bold;
+        color: #f7f7ff;
+    }
+
+    .caption-tagline {
+        font-style: italic;
+        font-size: 25px;
+        color: #f7f7ff;
+    }
+
+    .caption-tagline-cooking {
+        font-style: italic;
+        font-size: 25px;
+        color: #577399;
+    }
+
+    .oldandYoungImage {
+        background-image: url("../images/young-teaching-old.jpg");
+        background-size: 100%;
+        background-position: cover;
+        height: 300px;
+        width: auto;
+        margin-bottom: 3%;
+    }
+
+    .aboutusInfoBox {
+       
+        background-color: #BDD5EA;
+        border-left: 19px solid #fff;
+        border-radius: 10px
+    }
+
+    .howItWorksBox {
+        padding-top: 14px;
+        margin-bottom: 2%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #homePageCarousel {
+        margin-top: -7%;
+        max-height: 620px;
+        max-width: auto;
+    }
+
+        #homePageCarousel .carousel-inner {
+            padding-top: 7%;
+            max-height:620px;
+            max-width: auto;
+        }
+
+    .searchform {
+        min-width: 110%;
+        position: relative;
+    }
+
+        .searchform .searchformSortButton {
+            height: 45px;
+            position: absolute;
+            top: -10000%;
+            left: -6%;
+            float: left;
+        }
+
+        .searchform .searchformSearchBar {
+            position: absolute;
+            top: -10000%;
+            left: -2%;
+        }
+
+        .searchform .searchformSearchButton {
+            height: 45px;
+            position: absolute;
+            float: right;
+            top: -10000%;
+            right: 38%;
+        }
+
+    .carousel-caption {
+        position: relative;
+        top: -25%;
+    }
+
+    .caption-headline-main {
+        padding-top: 54%;
+        font-size:50px;
+        font-weight: bold;
+        color: #577399;
+    }
+
+    .caption-headline {
+        padding-top: 51%;
+        font-size:50px;
+        font-weight: bold;
+        color: #577399;
+    }
+
+    .caption-headline-dog {
+        padding-top: 50%;
+        font-size: 50px;
+        font-weight: bold;
+        color: #f7f7ff;
+    }
+
+    .caption-tagline {
+        font-style: italic;
+        font-size: 25px;
+        color: #f7f7ff;
+    }
+
+    .caption-tagline-cooking {
+        font-style: italic;
+        font-size: 25px;
+        color: #577399;
+    }
+
+    .oldandYoungImage {
+        background-image: url("../images/young-teaching-old.jpg");
+        background-size: 100%;
+        background-position: cover;
+        height: 300px;
+        width: auto;
+        margin-bottom: 3%;
+    }
+
+    .aboutusInfoBox {
+        height: 300px;
+        background-color: #BDD5EA;
+        border-left: 19px solid #fff;
+        border-radius: 10px;
+    }
+
+    .howItWorksBox {
+        padding-top: 14px;
+        margin-bottom: 2%;
+    }
+}
+
+
 
 /*!
  * Bootstrap v4.2.1 (https://getbootstrap.com/)
@@ -4768,10 +5250,9 @@ input[type=button].btn-block {
     list-style: none;
 }
 
-
 .nav-link {
     display: block;
-    padding: 0.6em 2em;
+    padding: 0.6em 0.5em;
 }
 
 
@@ -5922,7 +6403,7 @@ a.badge-dark:hover, a.badge-dark:focus {
 }
 
 .progress {
-    display: flex;
+    display: flex;<img alt="image" src="https://duvjxbgjpi3nt.cloudfront.net/UserImages/5569boy5.png" class=" rounded-circle-header img-fluid" width="50%" height="auto">
     float: right;
     height: 1rem;
     overflow: hidden;
@@ -7166,11 +7647,15 @@ button.bg-dark:focus {
     border-radius: 50% !important;
 }
 
-.rounded-circle-header {
+.rounded-circle-headerrm {
     float: left;
     border-radius: 50% !important;
-    width:10%;
-    height:auto;
+    width: 10%;
+    height: auto;
+    /*float: left;
+    border-radius: 50% !important;
+    width: 40%;
+    height: auto;*/
 }
 
 .rounded-pill {
