@@ -55,7 +55,7 @@
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <!--FILTER BUTTON AND FILTER FORM-->
                             <div class="form-row">
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterOptions">Sort</button>
+                                <button type="button" class="btn btn-info searchformSortButton" data-toggle="modal" data-target="#filterOptions">Sort</button>
                                 <!--END OF FILTER BUTTON-->
 
 
@@ -305,13 +305,13 @@
 
 
                                 <!--SEARCH BAR-->
-                                <div class="col-md-6 searchBar">
+                                <div class="col-sm-7 col-md-7 searchformSearchBar">
                                     <asp:TextBox ID="txtSearch" runat="server" class="form-control form-control-lg " placeholder="Enter City, State" ClientIDMode="Static"></asp:TextBox>
                                 </div>
                                 <!--END OF SEARCH BAR-->
 
                                 <!--BEGINNING OF SEARCH BUTTON-->
-                                <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-info" OnClick="btnSearch_Click" />
+                                <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-info searchformSearchButton" OnClick="btnSearch_Click" />
                                 <!--END OF SERACH BUTTON-->
                             </div>
                         </div>
