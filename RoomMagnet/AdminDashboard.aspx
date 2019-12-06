@@ -14,7 +14,7 @@
             <div class="card-deck row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="card shadow-sm x1mb-4 card align-items-center" style="width: 97.5%;">
-                        <div class="card-body">
+                        <div class="card-body" style="background-color: #fff;">
                             <div class='tableauPlaceholder' id='viz1575600013008' style='position: relative'>
                                 <div class='tableauPlaceholder' id='viz1575610507462' style='position: relative'>
                                     <noscript>
@@ -40,13 +40,13 @@
                                     var divElement = document.getElementById('viz1575610507462');
                                     var vizElement = divElement.getElementsByTagName('object')[0];
                                     if (divElement.offsetWidth > 800) {
-                                        vizElement.style.width = '1000px'; vizElement.style.height = '827px';
+                                        vizElement.style.width = '1000px'; vizElement.style.height = '850px';
                                     }
                                     else if (divElement.offsetWidth > 500) {
-                                        vizElement.style.width = '1000px'; vizElement.style.height = '827px';
+                                        vizElement.style.width = '1000px'; vizElement.style.height = '850px';
                                     }
                                     else {
-                                        vizElement.style.width = '1000px'; vizElement.style.height = '927px';
+                                        vizElement.style.width = '1000px'; vizElement.style.height = '850px';
                                     }
                                     var scriptElement = document.createElement('script');
                                     scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
