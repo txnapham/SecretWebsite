@@ -223,17 +223,33 @@ public partial class HostMessageCenter : System.Web.UI.Page
         int hostID = Convert.ToInt32(Session["AccountId"].ToString()); 
 
         SqlCommand insertLease = new SqlCommand();
+        SqlCommand leaseCheck = new SqlCommand();
+        leaseCheck.Connection = sc;
         insertLease.Connection = sc;
         sc.Open();
-        insertLease.CommandText = "INSERT INTO LEASE VALUES(@Date,@Tenant,@Host,@Agreed,@PropertyID);";
-        insertLease.Parameters.Add(new SqlParameter("@Date",DateTime.Now.ToString()));
-        insertLease.Parameters.Add(new SqlParameter("@Tenant",tenantID));
-        insertLease.Parameters.Add(new SqlParameter("@Host",hostID));
-        insertLease.Parameters.Add(new SqlParameter("@Agreed", "0"));
-        insertLease.Parameters.Add(new SqlParameter("@PropertyID", ddProperty.SelectedValue));
-        insertLease.ExecuteNonQuery();
-        sc.Close();
-        Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
+
+        leaseCheck.CommandText = "SELECT COUNT(*) FROM Lease WHERE TenantID = @Tenant AND HostID = @Host";
+        leaseCheck.Parameters.Add(new SqlParameter("@Tenant", tenantID));
+        leaseCheck.Parameters.Add(new SqlParameter("@Host", hostID));
+
+        int lCheck = (int)leaseCheck.ExecuteScalar();
+
+        if (lCheck == 0)
+        {
+            insertLease.CommandText = "INSERT INTO LEASE VALUES(@Date,@Tenant,@Host,@Agreed,@PropertyID);";
+            insertLease.Parameters.Add(new SqlParameter("@Date", DateTime.Now.ToString()));
+            insertLease.Parameters.Add(new SqlParameter("@Tenant", tenantID));
+            insertLease.Parameters.Add(new SqlParameter("@Host", hostID));
+            insertLease.Parameters.Add(new SqlParameter("@Agreed", "0"));
+            insertLease.Parameters.Add(new SqlParameter("@PropertyID", ddProperty.SelectedValue));
+            insertLease.ExecuteNonQuery();
+            sc.Close();
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "ApproveFunction()", true);
+        }
+        else
+        {
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "SentFunction()", true);
+        }
     }
     protected void videoChat_Click(object sender, EventArgs e)
     {
