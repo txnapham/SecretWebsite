@@ -16,12 +16,12 @@
     <!--USER DASH-NAV-->
     <div class="container-fluid  userDash mb-2 pb-3">
         <div class="navbar navbar-light ">
-            <table style="width: 100%; border:hidden;">
+            <table style="width: 100%; border: hidden;">
                 <tr>
-                    <td style="width:200px; height: auto;">
+                    <td style="width: 200px; height: auto;">
                         <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>
                     </td>
-                    <td class="pb-5" style="vertical-align:central">
+                    <td class="pb-5" style="vertical-align: central">
                         <asp:Literal ID="TenantCard2" runat="server" Mode="Transform"></asp:Literal>
                     </td>
                     <td>
@@ -53,11 +53,11 @@
     <div class="container-fluid px-5">
         <section>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <!--PROPERTIES-->
                     <div class="card  shadow-sm  mb-4">
+                        <h5 class="card-header">Favorite Properties</h5>
                         <div class="card-body">
-                            <h5 class="card-title dash-card-titles">Favorite Properties</h5>
 
                             <ul>
                                 <div class="row px-4 py-3">
@@ -72,25 +72,14 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="card  shadow-sm  mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title dash-card-titles">Message Center</h5>
-                            <asp:Literal ID="hostMsg" runat="server" Mode="Transform"></asp:Literal>
 
-                            <div class=" text-center pt-3">
-                                <a href="TenantMessageCenter.aspx" class="btn btn-info">View Messages</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="row pt-4">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="card  shadow-sm  mb-4">
+                        <h5 class="card-header">My Appointments</h5>
                         <div class="card-body">
-                            <h5 class="card-title dash-card-titles">My Appointments</h5>
                             <%--<div class="container-fluid cal pb-3">
                                 <div>
                                     <h4 class="mb-4 text-center">November 2019</h4>
@@ -450,11 +439,13 @@
                             </div>--%>
 
                             <div>
-                                <table style="width: 100%;">
+                                <table style="width: 95%; border: none;">
                                     <tr>
                                         <td>
+                                            <h5>Host</h5>
                                             <asp:Literal ID="apptName" runat="server"></asp:Literal></td>
                                         <td>
+                                            <h5>Time</h5>
                                             <asp:Literal ID="apptDate" runat="server"></asp:Literal></td>
                                     </tr>
                                 </table>
@@ -503,6 +494,18 @@
                             </div>
 
                             <!--END OF BUTTON-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card  shadow-sm  mb-4">
+                        <h5 class="card-header">Message Center</h5>
+                        <div class="card-body">
+                            <asp:Literal ID="hostMsg" runat="server" Mode="Transform"></asp:Literal>
+
+                            <div class=" text-center pt-3">
+                                <a href="TenantMessageCenter.aspx" class="btn btn-info">View Messages</a>
+                            </div>
                         </div>
                     </div>
                 </div>

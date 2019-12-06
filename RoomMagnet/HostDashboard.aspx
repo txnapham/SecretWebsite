@@ -56,8 +56,9 @@
                     <!--PROPERTIES MOD-->
                     <div class="col-md-12">
                         <div class="card  shadow-sm  mb-4">
+                            <h5 class="card-header">Properties</h5>
                             <div class="card-body">
-                                <h5 class="card-title dash-card-titles">Properties</h5>
+                                
 
                                 <div class="text-center" style="padding-left: 90%;">
                                     <a class="dropdown-toggle btn-info addmorePropButton" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">+</a>
@@ -200,8 +201,8 @@
                     <!--message mod-->
                     <div class="col-md-12">
                         <div class="card shadow-sm  mb-4">
+                            <h5 class="card-header">Tenants Who Like My Property</h5>
                             <div class="card-body">
-                                <h5 class="card-title dash-card-titles">Tenants Who Like My Property</h5>
                                 <asp:Literal ID="favTen" runat="server" Mode="Transform"></asp:Literal>
                                 <!--BUTTON-->
                                 <div class=" text-center pt-3 pb-3">
@@ -218,8 +219,8 @@
                     <!--TENANT/HOST MOD-->
                     <div class="col-md-12">
                         <div class="card  shadow-sm  mb-4">
+                            <h5 class="card-header">Current Tenants</h5>
                             <div class="card-body">
-                                <h5 class="card-title dash-card-titles">Current Tenants</h5>
                                 <ul>
                                     <asp:Literal ID="currTen" runat="server" Mode="Transform"></asp:Literal>
                                 </ul>
@@ -236,8 +237,8 @@
                     <!--APPOINTMENT MOD-->
                     <div class="col-md-12">
                         <div class="card  shadow-sm  mb-4">
+                            <h5 class="card-header">My Appointments</h5>
                             <div class="card-body">
-                                <h5 class="card-title dash-card-titles">My Appointments</h5>
                                 <!-- <div class="container-fluid cal pb-3">
                                     <div>
                                         <h4 class="mb-4 text-center">November 2019</h4>
@@ -599,11 +600,13 @@
                                     <asp:Calendar id="apptCal" runat="server"></asp:Calendar>
                                 </div>--%>
                                 <div>
-                                    <table style="width: 100%; border:none;">
+                                    <table style="width: 95%; border:none;">
                                         <tr>
                                             <td>
+                                                <h5>Tenant</h5>
                                                 <asp:Literal ID="apptName" runat="server"></asp:Literal></td>
                                             <td>
+                                                <h5>Time</h5>
                                                 <asp:Literal ID="apptDate" runat="server"></asp:Literal></td>
                                         </tr>
 

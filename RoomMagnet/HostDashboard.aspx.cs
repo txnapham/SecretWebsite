@@ -305,7 +305,7 @@ public partial class HostDashboard : System.Web.UI.Page
                 String lastName = aName["LastName"].ToString();
                 //StringBuilder
                 StringBuilder myCard = new StringBuilder();
-                myCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + firstName + " " + lastName + ": </a></li>");
+                myCard.Append("<li style=\"list-style-type: none;\"><a href =\"#\" class=\"tenantdashlist\">" + firstName + " " + lastName + ": </a></li>");
                 apptName.Text += myCard.ToString();
             }
             aName.Close();
@@ -316,7 +316,7 @@ public partial class HostDashboard : System.Web.UI.Page
                 String apDate = aDate["AppointmentDate"].ToString();
                 //StringBuilder
                 StringBuilder myCard = new StringBuilder();
-                myCard.Append("<li><a href =\"#\" class=\"tenantdashlist\">" + apDate + " " + " </a></li>");
+                myCard.Append("<li style=\"list-style-type: none;\"><a href =\"#\" class=\"tenantdashlist\">" + apDate + " " + " </a></li>");
                 apptDate.Text += myCard.ToString();
             }
             aDate.Close();
