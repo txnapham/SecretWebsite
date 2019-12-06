@@ -35,6 +35,7 @@ public partial class ViewLease : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         sigErrorMessage.Visible = false;
+        submitBtn.Text = "Submit";
 
         SqlCommand selectDate = new SqlCommand();
         SqlCommand selectHostName = new SqlCommand();
@@ -53,9 +54,9 @@ public partial class ViewLease : System.Web.UI.Page
         dateTxt.Text = date;
 
         selectSig.CommandText = "select agreed from lease where tenantID=" + Session["AccountID"];
-        
 
-        selectHostName.CommandText = "select firstName, LastName from Account where AccountID in (select HostID from lease where tenantID = "+ Session["AccountID"] + ");";
+
+        selectHostName.CommandText = "select firstName, LastName from Account where AccountID in (select HostID from lease where tenantID = " + Session["AccountID"] + ");";
         SqlDataReader reader = selectHostName.ExecuteReader();
         while (reader.Read())
         {
@@ -87,23 +88,48 @@ public partial class ViewLease : System.Web.UI.Page
             cityTxt.Text = city;
             stateTxt.Text = state;
         }
-        rdr.Close();
+        read.Close();
+
+        string tenantID = Session["AccountID"].ToString();
+        string hostID = Session["msgHostID"].ToString();
+
+        SqlCommand checkLease = new SqlCommand();
+
+        checkLease.Connection = sc;
+        checkLease.CommandText = "SELECT COUNT(*) FROM Lease WHERE Agreed = 1 AND TenantID = @tenant AND HostID = @host;";
+
+        checkLease.Parameters.Add(new SqlParameter("@tenant", tenantID));
+        checkLease.Parameters.Add(new SqlParameter("@host", hostID));
+        int check = (int)checkLease.ExecuteScalar();
+
+        if (check == 1)
+        {
+            sigTxt.Text = "Lease Completed!";        
+            submitBtn.Text = "Back To Dashboard";
+        }
+
         sc.Close();
     }
     protected void submitBtn_Click(object sender, EventArgs e)
     {
-        if (tenantNametxt.Text.Equals(sigTxt.Text))
+        if (tenantNametxt.Text.Equals(sigTxt.Text) && submitBtn.Text == "Submit")
         {
             SqlCommand updateLease = new SqlCommand();
             updateLease.Connection = sc;
-            updateLease.CommandText = "Update Lease Set Agreed = 1 where TenantID = @tenant;";
-            updateLease.Parameters.Add(new SqlParameter("@tenant", Session["AccountID"]));
-            sc.Open();
+            updateLease.CommandText = "Update Lease Set Agreed = 1 where TenantID = @tenant AND HostID = @host;";
+
+            string tenantID = Session["AccountID"].ToString();
+            string hostID = Session["msgHostID"].ToString();
+
+            updateLease.Parameters.Add(new SqlParameter("@tenant", tenantID));
+            updateLease.Parameters.Add(new SqlParameter("@host", hostID));
             updateLease.ExecuteNonQuery();
             sc.Close();
 
             Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
-
+        }
+        else if(submitBtn.Text == "Back To Dashboard")
+        {
             Response.Redirect("TenantDashboard.aspx");
         }
         else

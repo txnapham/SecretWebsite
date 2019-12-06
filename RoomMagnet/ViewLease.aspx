@@ -45,13 +45,13 @@
 <p>Send an executed copy of this intent to lease to the following link.</p>
 <p><strong>Tenant</strong> shall be sent a stripe payment link to pay the first month&rsquo;s lease payment to the landlord.</p>
 <p><strong>Landlord&rsquo;s</strong> will need to set up a stripe account using the following link</p>
-<asp:Button id="submitBtn" text="Submit" runat="server" CssClass ="btn btn-info" OnClick="submitBtn_Click" CausesValidation="true"/>
+<asp:Button id="submitBtn" text="" runat="server" CssClass ="btn btn-info" OnClick="submitBtn_Click" CausesValidation="true"/>
     <p><strong>*By hitting submit you intend to lease with the Landlord and associated property listed on this page*</strong>
         <br />
     </p>
     <script>
     function MyFunction() {
-        alert("Lease Submitted Succesfully")
+        alert("Lease Submitted Succesfully!")
     }
 </script>
 </asp:Content>

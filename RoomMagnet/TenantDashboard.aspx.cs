@@ -106,7 +106,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             StringBuilder alert1Text = new StringBuilder();
             alert1Text
                 .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
-                .Append("   <strong>Complete profile now! (Go to Edit Profile to Complete Profile!)</strong>")
+                .Append("   <strong>Complete profile now! (Go to Edit Profile to Complete Preferences)</strong>")
                 .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
@@ -252,7 +252,8 @@ public partial class TenantDashboard : System.Web.UI.Page
                     String firstName = rdr["FirstName"].ToString();
                     String LastName = rdr["LastName"].ToString();
                     String date = rdr["Date"].ToString();
-                    date = date.Substring(0, 10);
+                    if(date != "")
+                        date = date.Substring(0, 10);
                     String filename = rdr["AccountImage"].ToString();
                     if (filename == "") filename = "noprofileimage.png";
                     //Show chat 

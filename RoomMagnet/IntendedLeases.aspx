@@ -24,8 +24,8 @@
         <div class="pt-4">
             <table class="w-100">
                 <tr class="text-center">
-                    <th class="w-10" scope="col">Host</th>
-                    <th class="text-left w-10" scope="col">Tenant</th>
+                    <th class="w-10" scope="col">Hosts</th>
+                    <th class="text-left w-10" scope="col">Tenants</th>
                 </tr>
                 <asp:Literal ID="IntLease" runat="server" Mode="Transform"></asp:Literal>
             </table>

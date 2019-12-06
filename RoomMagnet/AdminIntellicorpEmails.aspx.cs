@@ -63,7 +63,7 @@ public partial class AdminIntellicorpEmails : System.Web.UI.Page
                 //StringBuilder
                 StringBuilder myCard = new StringBuilder();
                 myCard.Append("<tr><td><a href =\"#\" class=\"tenantdashlist\">" + "Name: " + fName + " " + lName + "</a></td>" +
-                    "<td><a href =\"#\" class=\"tenantdashlist\">" + "Tenant: " + email + "</a></td></tr>");
+                    "<td><a href =\"#\" class=\"tenantdashlist\">" + "Email: " + email + "</a></td></tr>");
                 intellicorpEmail.Text += myCard.ToString();
             }
             reader.Close();
