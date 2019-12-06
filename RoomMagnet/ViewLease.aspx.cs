@@ -118,6 +118,8 @@ public partial class ViewLease : System.Web.UI.Page
             updateLease.Connection = sc;
             updateLease.CommandText = "Update Lease Set Agreed = 1 where TenantID = @tenant AND HostID = @host;";
 
+            sc.Open();
+
             string tenantID = Session["AccountID"].ToString();
             string hostID = Session["msgHostID"].ToString();
 
@@ -127,6 +129,8 @@ public partial class ViewLease : System.Web.UI.Page
             sc.Close();
 
             Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
+
+            Page_Load(sender, e);
         }
         else if(submitBtn.Text == "Back To Dashboard")
         {
