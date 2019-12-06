@@ -602,10 +602,10 @@
                                 <div>
                                     <table style="width: 95%; border:none;">
                                         <tr>
-                                            <td>
+                                            <td style="border-bottom: none;">
                                                 <h5>Tenant</h5>
                                                 <asp:Literal ID="apptName" runat="server"></asp:Literal></td>
-                                            <td>
+                                            <td style="border-bottom: none;">
                                                 <h5>Time</h5>
                                                 <asp:Literal ID="apptDate" runat="server"></asp:Literal></td>
                                         </tr>
