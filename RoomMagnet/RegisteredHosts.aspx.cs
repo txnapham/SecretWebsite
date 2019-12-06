@@ -26,15 +26,16 @@ public partial class RegisteredHosts : System.Web.UI.Page
             {
                 select.CommandText = "SELECT AccountID, CONCAT(FirstName, ' ', LastName) AS Name, BackgroundCheckStatus " +
                 "FROM Account INNER JOIN Host ON AccountID = HostID " +
+                "WHERE BackgroundCheckStatus != 0 " +
                 "ORDER BY Name";
             }
             if (searchCheck == 1)
             {
                 select.CommandText += "SELECT AccountID, CONCAT(FirstName, ' ', LastName) AS Name, BackgroundCheckStatus " +
                 "FROM Account INNER JOIN Host ON AccountID = HostID " +
-                "WHERE CONCAT(FirstName, ' ', LastName) = @Name";
+                "WHERE BackgroundCheckStatus != 0 AND CONCAT(FirstName, ' ', LastName) = @Name";
 
-                select.Parameters.AddWithValue("@Name", txtSearch.Text);
+                select.Parameters.AddWithValue("@Name", HttpUtility.HtmlEncode(txtSearch.Text));
             }
 
             string backCheckS = "";

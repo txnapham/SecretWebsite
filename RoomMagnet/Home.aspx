@@ -177,7 +177,7 @@
                                                 <!--end of amenities-->
 
                                                 <!--start of homesharesmarter-->
-                                                <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housing. <strong> If selected only HomeshareSmarter Properties will be displayed </strong>" data-html="true">®</a>Living</h6>
+                                                <h6>HomeshareSmarter<a href="#" data-toggle="tooltip" data-placement="right" title="Perform basic chores to receive a discount on housing. If selected ONLY HomeshareSmarter Properties will be displayed." data-html="true">®</a>Living</h6>
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">

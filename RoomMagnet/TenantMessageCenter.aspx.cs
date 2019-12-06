@@ -191,7 +191,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
                 .Append("           <span class=\"time-date\">" + date + "</span>")
                 .Append("       </div>")
                 .Append("   </div>")
-                .Append("</div>");
+                .Append("</div><br/>");
                 Message.Text += myCard.ToString();
             }
         }
@@ -214,7 +214,7 @@ public partial class TenantMessageCenter : System.Web.UI.Page
         sc.Close();
 
         //Insert Message Statement 
-        String message = txtMessage.Text;
+        String message = HttpUtility.HtmlEncode(txtMessage.Text);
         String date = DateTime.Now.ToString();
 
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();

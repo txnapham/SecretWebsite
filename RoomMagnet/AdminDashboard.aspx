@@ -4,19 +4,6 @@
     <title>RoomMagnet | Dashboard</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <!--USER DASH-NAV-->
-<%--    <div class="container-fluid userDash mb-2">
-        <div class="container-fluid userDash pt-2">
-            <div class="navbar navbar-light">
-                <ul>
-                    <asp:Literal id="UserNameCard" runat="server" mode="Transform"></asp:Literal>
-                </ul>
-            </div>
-
-        </div>
-    </div>--%>
-    <!--END OF USER DASH-NAV-->
-
     <div class="container-fluid mt-5 pt-5">
         <!--Cards start here-->
         <section>
@@ -43,8 +30,8 @@
                             <script type='text/javascript'>                    
                                 var divElement = document.getElementById('viz1574151971348');
                                 var vizElement = divElement.getElementsByTagName('object')[0];
-                                if (divElement.offsetWidth > 800) { vizElement.style.width = '800px'; vizElement.style.height = '700px'; }
-                                else if (divElement.offsetWidth > 500) { vizElement.style.width = '800px'; vizElement.style.height = '700px'; }
+                                if (divElement.offsetWidth > 800) { vizElement.style.width = '100%'; vizElement.style.height = '700px'; }
+                                else if (divElement.offsetWidth > 500) { vizElement.style.width = '100%'; vizElement.style.height = '700px'; }
                                 else { vizElement.style.width = '100%'; vizElement.style.height = '927px'; }
                                 var scriptElement = document.createElement('script');
                                 scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
@@ -90,7 +77,7 @@
                             <h5 class="card-title">Intended Leases</h5>
                             <ul><asp:Literal id="IntLease" runat="server" mode="Transform"></asp:Literal></ul>
                             <div class="text-center">
-                                <a href="ViewLeases.aspx" class="btn btn-info text-center">View more</a>
+                                <a href="IntendedLeases.aspx" class="btn btn-info text-center">View more</a>
                             </div>
                         </div>
                     </div>

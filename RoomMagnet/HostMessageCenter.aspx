@@ -11,6 +11,11 @@
         PageMethods.CreateLease();
     };
 </script>
+<script>
+    function MyFunction() {
+        alert("Lease Has Been Sent for Tenant Approval")
+    }
+</script>
 
 <%--    <!--USER DASH-NAV-->
     <div class="container-fluid userDash mb-2 pb-3">
@@ -145,7 +150,7 @@
                     <div class="type-msg">
                         <div class="input-msg-write">
                             <%--<input type="text" class="write-msg" placeholder="Type a message">--%>
-                            <asp:TextBox ID="txtMessage" runat="server" class="write-msg" placeholder="Please DO NOT Share Any Personal Information" Width="695px"></asp:TextBox>
+                            <asp:TextBox ID="txtMessage" runat="server" class="write-msg" placeholder="Please DO NOT Share Any Personal Information" Width="665px"></asp:TextBox>
                             <asp:LinkButton id="LinkButton2" runat="server" class="msg-send-btn" type="button" Text ="Send" OnClick="messagebtn_Click"/>
                         </div>
                     </div>

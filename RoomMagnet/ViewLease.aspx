@@ -49,5 +49,10 @@
     <p><strong>*By hitting submit you intend to lease with the Landlord and associated property listed on this page*</strong>
         <br />
     </p>
+    <script>
+    function MyFunction() {
+        alert("Lease Submitted Succesfully")
+    }
+</script>
 </asp:Content>
 

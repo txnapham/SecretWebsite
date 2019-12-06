@@ -152,16 +152,16 @@ public partial class HostMessageCenter : System.Web.UI.Page
                 StringBuilder myCard = new StringBuilder();
                 myCard
                 .Append("<div>")
-                .Append("<div class=\"incoming-msg-img\">")
-                .Append("   <img src = \"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + accountImg + "\" class=\"rounded-circle img-fluid\">")
-                .Append("</div>")
-                .Append("<div class=\"recieved-msg\">")
-                .Append("   <div class=\"recieved-withd-msg\">")
-                .Append("       <p>" + message + "</p>")
-                .Append("       <span class=\"time-date\">" + date + "</span>")
+                .Append("   <div class=\"incoming-msg-img\">")
+                .Append("       <img src = \"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + accountImg + "\" class=\"rounded-circle img-fluid\">")
                 .Append("   </div>")
-                .Append("</div>")
-                .Append("</div>");
+                .Append("   <div class=\"recieved-msg\">")
+                .Append("       <div class=\"recieved-withd-msg\">")
+                .Append("           <p>" + message + "</p>")
+                .Append("           <span class=\"time-date\">" + date + "</span>")
+                .Append("       </div>")
+                .Append("   </div>")
+                .Append("</div><br/>");
 
                 Message.Text += myCard.ToString();
             }
@@ -198,7 +198,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
         sc.Close();
 
         //Insert Message Statement 
-        String message = txtMessage.Text;
+        String message = HttpUtility.HtmlEncode(txtMessage.Text);
         String date = DateTime.Now.ToString();
 
         System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
@@ -217,8 +217,6 @@ public partial class HostMessageCenter : System.Web.UI.Page
 
         loadMessages(tenantID);
     }
-
-
     protected void createLeaseBtn_Click(object sender, EventArgs e)
     {
         int tenantID = Convert.ToInt32(Session["msgTenantID"].ToString());
@@ -235,6 +233,7 @@ public partial class HostMessageCenter : System.Web.UI.Page
         insertLease.Parameters.Add(new SqlParameter("@PropertyID", ddProperty.SelectedValue));
         insertLease.ExecuteNonQuery();
         sc.Close();
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
     }
     protected void videoChat_Click(object sender, EventArgs e)
     {

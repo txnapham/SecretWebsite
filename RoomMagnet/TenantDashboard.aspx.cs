@@ -171,7 +171,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand selectHost = new System.Data.SqlClient.SqlCommand();
             System.Data.SqlClient.SqlCommand selectDate = new System.Data.SqlClient.SqlCommand();
 
-            select.CommandText = "SELECT City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh, I.images FROM Property LEFT OUTER JOIN PropertyImages I ON Property.PropertyID = I.PropertyID WHERE Property.PropertyID in " +
+            select.CommandText = "SELECT Property.PropertyID, City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh, I.images FROM Property LEFT OUTER JOIN PropertyImages I ON Property.PropertyID = I.PropertyID WHERE Property.PropertyID in " +
             "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
             messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, Account.AccountImage, MAX(Message.Date) as Date FROM FavoritedTenants FULL OUTER JOIN Message " +
                  "ON FavoritedTenants.FavTenantID = Message.FavTenantID FULL OUTER JOIN Host ON FavoritedTenants.HostID = Host.HostID FULL OUTER JOIN Account " +
@@ -199,36 +199,40 @@ public partial class TenantDashboard : System.Web.UI.Page
             sc.Open();
 
             System.Data.SqlClient.SqlDataReader readerProperty = select.ExecuteReader();
+            int resultCount = 0;
+
             //Populating Dashboard
-            if (readerProperty.HasRows)
+            while (readerProperty.Read())
             {
-                while (readerProperty.Read())
-                {
-                    String filename = readerProperty["images"].ToString();
-                    if (filename == "") filename = "imagenotfound.png";
-                    String city = readerProperty["City"].ToString();
-                    String homeState = readerProperty["HomeState"].ToString();
-                    String priceRangeLow = readerProperty["RoomPriceRangeLow"].ToString();
-                    String priceRangeHigh = readerProperty["RoomPriceRangeHigh"].ToString();
-                    double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
-                    double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
-                    //String Builder
-                    StringBuilder myCard = new StringBuilder();
-                    myCard
-                    .Append("<div class=\"col-xs-4 col-md-3\">")
-                    .Append("<div class=\"card  shadow-sm  mb-4\" >")
-                    .Append("<img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
-                    .Append("                        <a href=\"search-result-page-detail.html\" class=\"cardLinks\">")
-                    .Append("                            <div class=\"card-body\">")
-                    .Append("                                <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
-                    .Append("                                <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
-                    .Append("                            </div>")
-                    .Append("                        </a>")
-                    .Append("")
-                    .Append("                    </div>")
-                    .Append("</div>");
-                    favProp.Text += myCard.ToString();
-                }
+                int PropID = Convert.ToInt32(readerProperty["PropertyID"]);
+                String filename = readerProperty["images"].ToString();
+                if (filename == "") filename = "imagenotfound.png";
+                String city = readerProperty["City"].ToString();
+                String homeState = readerProperty["HomeState"].ToString();
+                String priceRangeLow = readerProperty["RoomPriceRangeLow"].ToString();
+                String priceRangeHigh = readerProperty["RoomPriceRangeHigh"].ToString();
+                double priceLowRounded = Math.Round(Convert.ToDouble(priceRangeLow), 0, MidpointRounding.ToEven);
+                double priceHighRounded = Math.Round(Convert.ToDouble(priceRangeHigh), 0, MidpointRounding.ToEven);
+                //String Builder
+                StringBuilder myCard = new StringBuilder();
+                myCard
+                .Append("<div class=\"col-xs-4 col-md-3\">")
+                .Append("   <div class=\"card  shadow-sm  mb-4\" >")
+                .Append("       <img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
+                .Append("       <div class=\"card-body\">")
+                .Append("           <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
+                .Append("           <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
+                .Append("       </div>")
+                .Append("       <div>")
+                .Append("           <button type=\"button\" id=\"heartbtn" + resultCount + "\" onClick=\"favoriteBtn(" + PropID + "," + "\'" + city + "\'" + "," +
+                                    "\'" + homeState + "\'" + "," + priceLowRounded + "," + priceHighRounded + ")\" " +
+                                    "class=\"btn favoriteHeartButton\"><i id=\"hearti\" class=\"far fa-heart\"></i></button>")
+                .Append("       </div>")
+                .Append("   </div>")
+                .Append("</div>");
+                favProp.Text += myCard.ToString();
+
+                resultCount++;
             }
             readerProperty.Close();
 
@@ -291,6 +295,26 @@ public partial class TenantDashboard : System.Web.UI.Page
             Response.Redirect("Home.aspx");
         }
     }
+
+    [System.Web.Services.WebMethod]
+    [System.Web.Script.Services.ScriptMethod]
+    public static void MiddleMan(int propertyID, string city, string state, double priceLow, double priceHigh)
+    {
+        int propID = propertyID;
+        int loginID = Convert.ToInt32(HttpContext.Current.Session["AccountId"].ToString());
+
+        System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["roommagnetdbConnectionString"].ToString());
+        sqlConn.Open();
+
+        System.Data.SqlClient.SqlCommand delete = new System.Data.SqlClient.SqlCommand();
+        delete.Connection = sqlConn;
+        delete.CommandText = "DELETE FROM [dbo].[FavoritedProperties] WHERE (TenantID = @tenantID) AND (PropertyID = @propertyID)";
+        delete.Parameters.Add(new SqlParameter("@tenantID", loginID));
+        delete.Parameters.Add(new SqlParameter("@propertyID", propID));
+
+        delete.ExecuteNonQuery();
+    }
+
     protected void btnCreateAppt_Click(object sender, EventArgs e)
     {
         if (ddRecipient.SelectedIndex == 0)
