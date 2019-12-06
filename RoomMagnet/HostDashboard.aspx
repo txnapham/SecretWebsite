@@ -19,8 +19,11 @@
                     <td>
                         <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
                     </td>
+                    <td style="vertical-align:bottom">
+                        <asp:Literal ID="HostCard2" runat="server" Mode="Transform"></asp:Literal>
+                    </td>
                     <td>
-
+                        
                     </td>
                 </tr>
             </table>

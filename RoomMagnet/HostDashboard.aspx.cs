@@ -81,16 +81,20 @@ public partial class HostDashboard : System.Web.UI.Page
             System.Data.SqlClient.SqlDataReader readerHostImage = selectHost.ExecuteReader();
             while (readerHostImage.Read())
             {
-                String tenantName = readerHostImage["FirstName"].ToString();
+                String hostName = readerHostImage["FirstName"].ToString();
                 String filename = readerHostImage["AccountImage"].ToString();
                 // No image uploaded (currently default image in S3)
                 if (filename == "") filename = "noprofileimage.png";
                 // User dashboard dynamically updated using S3
                 StringBuilder hostImage = new StringBuilder();
                 hostImage
-                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-headerrm img-fluid\" width=\"20%\" height=\"auto\">")
-                    .Append("             <h3>Welcome " + tenantName + "!</h3>");
+                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-headerrm img-fluid\" width=\"20%\" height=\"auto\">");
                 HostCard.Text += hostImage.ToString();
+
+                StringBuilder hostFirstName = new StringBuilder();
+                hostFirstName
+                    .Append("<h3>Welcome " + hostName + "!</h3>");
+                HostCard2.Text += hostFirstName.ToString();
             }
             sc.Close();
 
