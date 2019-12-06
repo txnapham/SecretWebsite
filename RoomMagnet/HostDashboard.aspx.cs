@@ -138,7 +138,7 @@ public partial class HostDashboard : System.Web.UI.Page
 
 
             //Give the profile completion and background check alert to pop up
-            if (charCheck == 0 && backStatusCheck == 1)
+            if (charCheck == 0 && (backStatusCheck == 0 || backStatusCheck == 1))
             {
                 alert1.Text += alert1Text.ToString();
                 //alert2.Text += alert2Text.ToString();
@@ -151,7 +151,7 @@ public partial class HostDashboard : System.Web.UI.Page
 
             }
             //2/3 Progress Bar and Give Alert 
-            else if (charCheck == 1 && backStatusCheck == 1)
+            else if (charCheck == 1 && (backStatusCheck == 0 || backStatusCheck == 1))
             {
                 //if (charCheck == 1 || backStatusCheck == 1)
                 //{
