@@ -12,8 +12,8 @@
         };
     </script>
     <!--USER DASH-NAV-->
-    <div class="container-fluid userDash mb-2 pb-3">
-        <div class="navbar navbar-light">
+    <div class="container-fluid mb-2 pb-3 mt-5 pt-5" style="padding-right: 0px; padding-left: 0px">
+        <div class="card" style="background-color: #f7f7ff; margin-right: 0px; margin-left: 0px">
             <table style="width: 100%; border:hidden;">
                 <tr>
                     <td style="width:200px; height: auto;">

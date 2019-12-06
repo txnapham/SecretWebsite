@@ -141,7 +141,7 @@ public partial class Search_Tenant : System.Web.UI.Page
                 .Append("   <div class=\"card  shadow-sm  mb-4\" >")
                 .Append("       <img class=\"img-fluid card-img-small\" src=\"https://duvjxbgjpi3nt.cloudfront.net/PropertyImages/" + filename + "\" />")
                 .Append("       <a data-toggle=\"modal\" href=\"#propDetailModal\" class=\"cardLinks\">")
-                .Append("           <div class=\"card-body\">")
+                .Append("           <div class=\"card-body\" style=\"background-color: #fff;\">")
                 .Append("               <h5 class=\"card-title\">" + city + ", " + homeState + "</h5>")
                 .Append("               <p class=\"card-text\">" + "$" + priceLowRounded + " - " + "$" + priceHighRounded + "</p>")
                 .Append(chars)

@@ -81,13 +81,13 @@
                                 <asp:Label ID="lblPass" runat="server" Text="" ForeColor="Red"></asp:Label>
 
                             </div>
-                            <asp:Button ID="btnLogin" runat="server" Text="Login" class="btn btn-md btn-info btn-block" OnClick="btnLogin_Click" />
+                            <asp:Button ID="btnLogin" runat="server" Text="Login" class="btn btn-md btn-info btn-block mb-1" OnClick="btnLogin_Click" />
                             
                             <a class="text-center" href="#">Forgot Password?</a>
                     </div>
 
                     <div class="modal-body">
-                        <div class="pb-3">
+                        <div class="pb-1">
                             <h5 class="modal-title">Don't have an account? Sign up today!</h5>
                         </div>
                         <div>

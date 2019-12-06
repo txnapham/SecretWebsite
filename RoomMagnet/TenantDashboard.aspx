@@ -14,8 +14,8 @@
     </script>
 
     <!--USER DASH-NAV-->
-    <div class="container-fluid  userDash mb-2 pb-3">
-        <div class="navbar navbar-light ">
+    <div class="container-fluid mb-2 pb-3 mt-5 pt-5" style="padding-right: 0px; padding-left: 0px">
+        <div class="card" style="background-color: #f7f7ff; margin-right: 0px; margin-left: 0px">
             <table style="width: 100%; border: hidden;">
                 <tr>
                     <td style="width: 200px; height: auto;">
@@ -59,15 +59,14 @@
                         <h5 class="card-header">Favorite Properties</h5>
                         <div class="card-body">
 
-                            <ul>
-                                <div class="row px-4 py-3">
-                                    <asp:Literal ID="favProp" runat="server" Mode="Transform"></asp:Literal>
-                                </div>
-                            </ul>
+                        <div class="row pb-3">
+                            <asp:Literal ID="favProp" runat="server" Mode="Transform"></asp:Literal>
+                        </div>
 
-                            <div class=" text-center">
-                                <a href="FavoritedProperties.aspx" class="btn btn-info text-center">View more</a>
-                            </div>
+                        <div class=" text-center">
+                            <a href="FavoritedProperties.aspx" class="btn btn-info text-center">View more</a>
+                        </div>
+
                         </div>
                     </div>
                 </div>
