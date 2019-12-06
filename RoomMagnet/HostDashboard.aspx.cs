@@ -137,28 +137,34 @@ public partial class HostDashboard : System.Web.UI.Page
 
 
 
-            if (charCheck == 0 && backStatusCheck == 0)
+            //Give the profile completion and background check alert to pop up
+            if (charCheck == 0 && backStatusCheck == 1)
             {
                 alert1.Text += alert1Text.ToString();
                 //alert2.Text += alert2Text.ToString();
                 progressBar.Text += progressOneThird.ToString();
             }
-            else if (charCheck == 1 && backStatusCheck == 1)
+            //Move progress bar to fully complete 
+            else if (charCheck == 1 && backStatusCheck == 2)
             {
                 progressBar.Text += progressFull.ToString();
+
             }
-            else if (charCheck == 1 || backStatusCheck == 1)
+            //2/3 Progress Bar and Give Alert 
+            else if (charCheck == 1 && backStatusCheck == 1)
             {
-                if (charCheck == 1 || backStatusCheck == 1)
-                {
-                    //alert1.Text += alert2Text.ToString();
-                    progressBar.Text += progressTwoThird.ToString();
-                }
-                else if (charCheck == 1 || backStatusCheck == 1)
-                {
-                    alert1.Text += alert1Text.ToString();
-                    progressBar.Text += progressTwoThird.ToString();
-                }
+                //if (charCheck == 1 || backStatusCheck == 1)
+                //{
+                //    //alert1.Text += alert2Text.ToString();
+                //    progressBar.Text += progressTwoThird.ToString();
+                //}
+                ////2/3 Progress Bar and Give Alert to Complete Profile
+                //else if (charCheck == 1 || backStatusCheck == 1)
+                //{
+                //    alert1.Text += alert1Text.ToString();
+                //    progressBar.Text += progressTwoThird.ToString();
+                //}
+                progressBar.Text += progressTwoThird.ToString();
             }
 
             //Select Statements for tenant and properties

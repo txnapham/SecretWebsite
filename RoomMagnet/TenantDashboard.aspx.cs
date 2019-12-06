@@ -106,7 +106,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             StringBuilder alert1Text = new StringBuilder();
             alert1Text
                 .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
-                .Append("   <strong>Complete profile now! (Welcome -> Edit Profile to Complete Profile)</strong>")
+                .Append("   <strong>Complete profile now! (Go to Edit Profile to Complete Profile!)</strong>")
                 .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
@@ -141,32 +141,33 @@ public partial class TenantDashboard : System.Web.UI.Page
                 .Append("</div");
 
             //Give the profile completion and background check alert to pop up
-            if (charCheck == 0 && backStatusCheck == 0)
+            if (charCheck == 0 && backStatusCheck == 1)
             {
                 alert1.Text += alert1Text.ToString();
                 //alert2.Text += alert2Text.ToString();
                 progressBar.Text += progressOneThird.ToString();
             }
             //Move progress bar to fully complete 
-            else if (charCheck == 1 && backStatusCheck == 1)
+            else if (charCheck == 1 && backStatusCheck == 2)
             {
                 progressBar.Text += progressFull.ToString();
 
             }
             //2/3 Progress Bar and Give Alert 
-            else if (charCheck == 1 || backStatusCheck == 1)
+            else if (charCheck == 1 && backStatusCheck == 1)
             {
-                if (charCheck == 1 || backStatusCheck == 1)
-                {
-                    //alert1.Text += alert2Text.ToString();
-                    progressBar.Text += progressTwoThird.ToString();
-                }
-                //2/3 Progress Bar and Give Alert to Complete Profile
-                else if (charCheck == 1 || backStatusCheck == 1)
-                {
-                    alert1.Text += alert1Text.ToString();
-                    progressBar.Text += progressTwoThird.ToString();
-                }
+                //if (charCheck == 1 || backStatusCheck == 1)
+                //{
+                //    //alert1.Text += alert2Text.ToString();
+                //    progressBar.Text += progressTwoThird.ToString();
+                //}
+                ////2/3 Progress Bar and Give Alert to Complete Profile
+                //else if (charCheck == 1 || backStatusCheck == 1)
+                //{
+                //    alert1.Text += alert1Text.ToString();
+                //    progressBar.Text += progressTwoThird.ToString();
+                //}
+                progressBar.Text += progressTwoThird.ToString();
             }
 
 
@@ -178,11 +179,12 @@ public partial class TenantDashboard : System.Web.UI.Page
 
             select.CommandText = "SELECT Property.PropertyID, City, HomeState, RoomPriceRangeLow, RoomPriceRangeHigh, I.images FROM Property LEFT OUTER JOIN PropertyImages I ON Property.PropertyID = I.PropertyID WHERE Property.PropertyID in " +
             "(SELECT TOP(4) PropertyID FROM FavoritedProperties WHERE TenantID = " + accountID + ");";
+
             messageSelect.CommandText = "SELECT Account.FirstName, Account.LastName, Account.AccountImage, MAX(Message.Date) as Date FROM FavoritedTenants FULL OUTER JOIN Message " +
                  "ON FavoritedTenants.FavTenantID = Message.FavTenantID FULL OUTER JOIN Host ON FavoritedTenants.HostID = Host.HostID FULL OUTER JOIN Account " +
                  "ON Host.HostID = Account.AccountID FULL OUTER JOIN Tenant " +
                  "ON FavoritedTenants.TenantID = Tenant.TenantID AND Account.AccountID = Tenant.TenantID " +
-                 "WHERE MessageType = 0 and FavoritedTenants.TenantID = " + accountID + " " +
+                 "WHERE FavoritedTenants.TenantID = " + accountID + " " +
                  "GROUP BY Account.FirstName, Account.LastName, Account.AccountImage";
 
             //Select statement to get appointments with host
@@ -250,22 +252,23 @@ public partial class TenantDashboard : System.Web.UI.Page
                     String firstName = rdr["FirstName"].ToString();
                     String LastName = rdr["LastName"].ToString();
                     String date = rdr["Date"].ToString();
+                    date = date.Substring(0, 10);
                     String filename = rdr["AccountImage"].ToString();
                     if (filename == "") filename = "noprofileimage.png";
                     //Show chat 
                     StringBuilder myCard = new StringBuilder();
                     myCard
-                        .Append(" <div class=\"chat-list\">")
-                        .Append("            <div class=\"chat-people\">")
-                        .Append("                <div class=\"chat-img\">")
-                        .Append("                    <img src = \"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\"rounded-circle img-fluid\">")
-                        .Append("                </div>")
-                        .Append("                <div class=\"chat-ib\">")
-                        .Append("                    <h5>" + firstName + " " + LastName + "</h5>")
-                        .Append("                    <p>" + date + "</p>")
-                        .Append("                </div>")
-                        .Append("            </div>")
-                        .Append("        </div>");
+                        .Append("<div class=\"chat-list\">")
+                        .Append("   <div class=\"chat-people\">")
+                        .Append("       <div class=\"chat-img\">")
+                        .Append("           <img src = \"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\"rounded-circle img-fluid\">")
+                        .Append("       </div>")
+                        .Append("       <div class=\"chat-ib\">")
+                        .Append("           <h5>" + firstName + " " + LastName + "</h5>")
+                        .Append("           <p>" + date + "</p>")
+                        .Append("       </div>")
+                        .Append("   </div>")
+                        .Append("</div>");
                     hostMsg.Text += myCard.ToString();
                 }
             }
