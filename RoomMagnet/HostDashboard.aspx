@@ -66,7 +66,6 @@
                                         <button style="color: #000;" type="button" class="btn  dropdown-item js-scroll-trigger" data-toggle="modal" data-dismiss="modal" data-target="#addRoom">
                                         Add Room</>
                                     </div>
-
                                 </div>
 
                                 <!--ADD ROOM MOD-->
@@ -212,9 +211,9 @@
                             </div>
                         </div>
                     </div>
-                    <!--END OF MESSAGE MOD-->
-
                 </div>
+                <!--END OF MESSAGE MOD-->
+
                 <div class="col-md-6">
                     <!--TENANT/HOST MOD-->
                     <div class="col-md-12">
@@ -226,7 +225,7 @@
                                 </ul>
                                 <!--BUTTON-->
                                 <div class=" text-center">
-                                    <a href="Host-Tenants.aspx" class="btn btn-info">View more</a>
+                                    <a href="#" class="btn btn-info">View more</a>
                                 </div>
                                 <!--END OF BUTTON-->
                             </div>
