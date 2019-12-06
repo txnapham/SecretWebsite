@@ -21,7 +21,7 @@
                     <td style="width:200px; height: auto;">
                         <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>
                     </td>
-                    <td class="pb-5" style="vertical-align:bottom">
+                    <td class="pb-5" style="vertical-align:central">
                         <asp:Literal ID="TenantCard2" runat="server" Mode="Transform"></asp:Literal>
                     </td>
                     <td>

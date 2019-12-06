@@ -14,8 +14,8 @@
         <section>
             <div class="card-deck row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="card shadow-sm x1mb-4">
-                        <div class="card-body">
+                    <div class="card shadow-sm x1mb-4 card align-items-center" style="width: 99%;">
+                        <div class="card-body";>
                             <div class='tableauPlaceholder' id='viz1575600013008' style='position: relative'>
                                 <noscript><a href='#'>
                                     <img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ro&#47;RoommagnetUsers&#47;Dashboard2&#47;1_rss.png' style='border: none' /></a></noscript>
@@ -41,13 +41,14 @@
                                     vizElement.style.width = '1000px'; vizElement.style.height = '827px';
                                 } else if (divElement.offsetWidth > 500) {
                                     vizElement.style.width = '1000px'; vizElement.style.height = '827px';
-                                } else { vizElement.style.width = '100%'; vizElement.style.height = '927px'; }
+                                } else { vizElement.style.width = '1000px'; vizElement.style.height = '927px'; }
                                 var scriptElement = document.createElement('script');
                                 scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
                                 vizElement.parentNode.insertBefore(scriptElement, vizElement);
                             </script>
                         </div>
                     </div>
+                    <br />
                 </div>
             </div>
         </section>
