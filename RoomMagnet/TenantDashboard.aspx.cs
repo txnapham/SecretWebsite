@@ -92,10 +92,15 @@ public partial class TenantDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder tenantImage = new StringBuilder();
                 tenantImage
-                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\"rounded-circle-header img-fluid\" width=\"50%\" height=\"auto\">")
-                .Append("                <h3>Welcome " + tenantName + "! </h3>");
+                .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\"rounded-circle img-fluid\">");
                 TenantCard.Text += tenantImage.ToString();
+
+                StringBuilder tenantFirstName = new StringBuilder();
+                tenantFirstName
+                    .Append("<h3>Welcome " + tenantName + "!</h3>");
+                TenantCard2.Text += tenantFirstName.ToString();
             }
+        
             sc.Close();
             //Complete Profile Pop-Up
             StringBuilder alert1Text = new StringBuilder();
@@ -108,61 +113,61 @@ public partial class TenantDashboard : System.Web.UI.Page
                 .Append("</div>");
             
             //Background Check Pop Up
-            StringBuilder alert2Text = new StringBuilder();
-            alert2Text
-                .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
-                .Append("   <strong>Begin background check now! (Welcome -> Edit Profile to Begin Background Check)</strong>")
-                .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
-                .Append("       <span aria-hidden=\"true\">&times;</span>")
-                .Append("   </button>")
-                .Append("</div>");
+            //StringBuilder alert2Text = new StringBuilder();
+            //alert2Text
+            //    .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
+            //    .Append("   <strong>Begin background check now! (Welcome -> Edit Profile to Begin Background Check)</strong>")
+            //    .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
+            //    .Append("       <span aria-hidden=\"true\">&times;</span>")
+            //    .Append("   </button>")
+            //    .Append("</div>");
 
-            //StringBuilder progressOneThird = new StringBuilder();
-            //progressOneThird
-            //    .Append("<div class=\"progress\" style=\"height: 40%; \">")
-            //    .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar1.png\" \">")
-            //    .Append("</div");
+            StringBuilder progressOneThird = new StringBuilder();
+            progressOneThird
+                .Append("<div class=\"progressrm\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progress1.png\" \">")
+                .Append("</div");
 
-            //StringBuilder progressTwoThird = new StringBuilder();
-            //progressTwoThird
-            //    .Append("<div class=\"progress\" style=\"height: 40%; \">")
-            //    .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar2.png\" \">")
-            //    .Append("</div");
+            StringBuilder progressTwoThird = new StringBuilder();
+            progressTwoThird
+                .Append("<div class=\"progressrm\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progress2.png\" \">")
+                .Append("</div");
 
-            //StringBuilder progressFull = new StringBuilder();
-            //progressFull
-            //    .Append("<div class=\"progress\" style=\"height: 40%; \">")
-            //    .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progressbar3.png\" \">")
-            //    .Append("</div");
+            StringBuilder progressFull = new StringBuilder();
+            progressFull
+                .Append("<div class=\"progressrm\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progress3.png\" \">")
+                .Append("</div");
 
             //Give the profile completion and background check alert to pop up
-            //if (charCheck == 0 && backStatusCheck == 0)
-            //{
-            //    alert1.Text += alert1Text.ToString();
-            //    alert2.Text += alert2Text.ToString();
-            //    //progressBar.Text += progressOneThird.ToString();
-            //}
-            ////Move progress bar to fully complete 
-            //else if (charCheck == 1 && backStatusCheck == 1)
-            //{
-            //    progressBar.Text += progressFull.ToString();
+            if (charCheck == 0 && backStatusCheck == 0)
+            {
+                alert1.Text += alert1Text.ToString();
+                //alert2.Text += alert2Text.ToString();
+                progressBar.Text += progressOneThird.ToString();
+            }
+            //Move progress bar to fully complete 
+            else if (charCheck == 1 && backStatusCheck == 1)
+            {
+                progressBar.Text += progressFull.ToString();
 
-            //}
-            ////2/3 Progress Bar and Give Alert 
-            //else if (charCheck == 1 || backStatusCheck == 1)
-            //{
-            //    if (charCheck == 1 || backStatusCheck == 1)
-            //    {
-            //        alert1.Text += alert2Text.ToString();
-            //        progressBar.Text += progressTwoThird.ToString();
-            //    }
-            //    //2/3 Progress Bar and Give Alert to Complete Profile
-            //    else if (charCheck == 1 || backStatusCheck == 1)
-            //    {
-            //        alert1.Text += alert1Text.ToString();
-            //        progressBar.Text += progressTwoThird.ToString();
-            //    }
-            //}
+            }
+            //2/3 Progress Bar and Give Alert 
+            else if (charCheck == 1 || backStatusCheck == 1)
+            {
+                if (charCheck == 1 || backStatusCheck == 1)
+                {
+                    //alert1.Text += alert2Text.ToString();
+                    progressBar.Text += progressTwoThird.ToString();
+                }
+                //2/3 Progress Bar and Give Alert to Complete Profile
+                else if (charCheck == 1 || backStatusCheck == 1)
+                {
+                    alert1.Text += alert1Text.ToString();
+                    progressBar.Text += progressTwoThird.ToString();
+                }
+            }
 
 
             //Selecting from Property

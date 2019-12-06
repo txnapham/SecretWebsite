@@ -16,10 +16,19 @@
     <!--USER DASH-NAV-->
     <div class="container-fluid  userDash mb-2 pb-3">
         <div class="navbar navbar-light ">
-            <ul>
-                <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>            
-<%--                <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>--%>
-             </ul>
+            <table style="width: 100%; border:hidden;">
+                <tr>
+                    <td style="width:200px; height: auto;">
+                        <asp:Literal ID="TenantCard" runat="server" Mode="Transform"></asp:Literal>
+                    </td>
+                    <td class="pb-5" style="vertical-align:bottom">
+                        <asp:Literal ID="TenantCard2" runat="server" Mode="Transform"></asp:Literal>
+                    </td>
+                    <td>
+                        <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <!--END OF USER DASH-NAV-->

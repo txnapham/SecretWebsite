@@ -710,8 +710,8 @@ input:checked + .slider:before {
         border-radius: 50%;
     }
 
-.progress {
-    width: 30%;
+.progressrm {
+    width: 100%;
 }
 
 body > div.container-fluid.userDash.mb-5.pb-3 > div > div > div {
@@ -7647,10 +7647,10 @@ button.bg-dark:focus {
     border-radius: 50% !important;
 }
 
-.rounded-circle-headerrm {
+.rounded-circle-headermy {
     float: left;
     border-radius: 50% !important;
-    width: 10%;
+    width: 50%;
     height: auto;
     /*float: left;
     border-radius: 50% !important;
