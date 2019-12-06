@@ -48,6 +48,7 @@ public partial class HostDashboard : System.Web.UI.Page
             alert2.Text = "";
             apptName.Text = "";
             apptDate.Text = "";
+            progressBar.Text = "";
 
             int accountID = Convert.ToInt16(HttpContext.Current.Session["AccountId"].ToString());
 
@@ -88,7 +89,7 @@ public partial class HostDashboard : System.Web.UI.Page
                 // User dashboard dynamically updated using S3
                 StringBuilder hostImage = new StringBuilder();
                 hostImage
-                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\" rounded-circle-headerrm img-fluid\" width=\"20%\" height=\"auto\">");
+                    .Append("<img alt=\"image\" src=\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + filename + "\" class=\"rounded-circle img-fluid\">");
                 HostCard.Text += hostImage.ToString();
 
                 StringBuilder hostFirstName = new StringBuilder();
@@ -107,33 +108,56 @@ public partial class HostDashboard : System.Web.UI.Page
                 .Append("   </button>")
                 .Append("</div>");
 
-            StringBuilder alert2Text = new StringBuilder();
-            alert2Text
-                .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
-                .Append("   <strong>Begin background check now! (Welcome -> Edit Profile to Begin Background Check)</strong>")
-                .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
-                .Append("       <span aria-hidden=\"true\">&times;</span>")
-                .Append("   </button>")
-                .Append("</div>");
+            //StringBuilder alert2Text = new StringBuilder();
+            //alert2Text
+            //    .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
+            //    .Append("   <strong>Begin background check now! (Welcome -> Edit Profile to Begin Background Check)</strong>")
+            //    .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
+            //    .Append("       <span aria-hidden=\"true\">&times;</span>")
+            //    .Append("   </button>")
+            //    .Append("</div>");
+
+            StringBuilder progressOneThird = new StringBuilder();
+            progressOneThird
+                .Append("<div class=\"progressrm\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progress1.png\" \">")
+                .Append("</div");
+
+            StringBuilder progressTwoThird = new StringBuilder();
+            progressTwoThird
+                .Append("<div class=\"progressrm\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progress2.png\" \">")
+                .Append("</div");
+
+            StringBuilder progressFull = new StringBuilder();
+            progressFull
+                .Append("<div class=\"progressrm\" style=\"height: 40%; \">")
+                .Append("   <img class=\"d-block w-100 img-fluid\" src=\"images/Progress3.png\" \">")
+                .Append("</div");
+
 
 
             if (charCheck == 0 && backStatusCheck == 0)
             {
                 alert1.Text += alert1Text.ToString();
-                alert2.Text += alert2Text.ToString();
+                //alert2.Text += alert2Text.ToString();
+                progressBar.Text += progressOneThird.ToString();
             }
             else if (charCheck == 1 && backStatusCheck == 1)
             {
+                progressBar.Text += progressFull.ToString();
             }
             else if (charCheck == 1 || backStatusCheck == 1)
             {
                 if (charCheck == 1 || backStatusCheck == 1)
                 {
-                    alert1.Text += alert2Text.ToString();
+                    //alert1.Text += alert2Text.ToString();
+                    progressBar.Text += progressTwoThird.ToString();
                 }
                 else if (charCheck == 1 || backStatusCheck == 1)
                 {
                     alert1.Text += alert1Text.ToString();
+                    progressBar.Text += progressTwoThird.ToString();
                 }
             }
 

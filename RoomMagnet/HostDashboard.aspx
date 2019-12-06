@@ -16,14 +16,14 @@
         <div class="navbar navbar-light">
             <table style="width: 100%; border:hidden;">
                 <tr>
-                    <td>
+                    <td style="width:200px; height: auto;">
                         <asp:Literal ID="HostCard" runat="server" Mode="Transform"></asp:Literal>
                     </td>
-                    <td style="vertical-align:bottom">
+                    <td class="pb-5" style="vertical-align:bottom">
                         <asp:Literal ID="HostCard2" runat="server" Mode="Transform"></asp:Literal>
                     </td>
                     <td>
-                        
+                        <asp:Literal ID="progressBar" runat="server" Mode="Transform"></asp:Literal>
                     </td>
                 </tr>
             </table>
