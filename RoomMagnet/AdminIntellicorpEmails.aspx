@@ -39,7 +39,7 @@
         <div class="pt-4">
             <table class="w-100">
                 <tr class="text-center">
-                    <th class="w-10" scope="col">Name</th>
+                    <th class="w-10" scope="col">Names</th>
                     <th class="text-left w-10" scope="col">Emails</th>
                 </tr>
                 <asp:Literal ID="intellicorpEmail" runat="server" Mode="Transform"></asp:Literal>

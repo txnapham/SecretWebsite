@@ -102,7 +102,7 @@ public partial class HostDashboard : System.Web.UI.Page
             StringBuilder alert1Text = new StringBuilder();
             alert1Text
                 .Append("<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">")
-                .Append("   <strong>Complete profile now! (Welcome -> Edit Profile to Complete Profile)</strong>")
+                .Append("   <strong>Complete profile now! (Go to Edit Profile to Complete Preferences)</strong>")
                 .Append("   <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">")
                 .Append("       <span aria-hidden=\"true\">&times;</span>")
                 .Append("   </button>")
@@ -138,7 +138,7 @@ public partial class HostDashboard : System.Web.UI.Page
 
 
             //Give the profile completion and background check alert to pop up
-            if (charCheck == 0 && backStatusCheck == 1)
+            if (charCheck == 0 && (backStatusCheck == 0 || backStatusCheck == 1))
             {
                 alert1.Text += alert1Text.ToString();
                 //alert2.Text += alert2Text.ToString();
@@ -151,7 +151,7 @@ public partial class HostDashboard : System.Web.UI.Page
 
             }
             //2/3 Progress Bar and Give Alert 
-            else if (charCheck == 1 && backStatusCheck == 1)
+            else if (charCheck == 1 && (backStatusCheck == 0 || backStatusCheck == 1))
             {
                 //if (charCheck == 1 || backStatusCheck == 1)
                 //{
