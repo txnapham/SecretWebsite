@@ -103,6 +103,8 @@ public partial class ViewLease : System.Web.UI.Page
             sc.Close();
 
             Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MyFunction()", true);
+
+            Response.Redirect("TenantDashboard.aspx");
         }
         else
         {

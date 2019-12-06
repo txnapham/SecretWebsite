@@ -12,8 +12,14 @@
     };
 </script>
 <script>
-    function MyFunction() {
-        alert("Lease Has Been Sent for Tenant Approval")
+    function ApproveFunction() {
+        alert("Lease has been sent for tenant approval")
+    }
+</script>
+
+<script>
+    function SentFunction() {
+        alert("Lease is currently is pending tenant approval")
     }
 </script>
 
