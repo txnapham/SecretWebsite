@@ -291,6 +291,7 @@ public partial class TenantDashboard : System.Web.UI.Page
             while (aDate.Read())
             {
                 String apDate = aDate["AppointmentDate"].ToString();
+                apDate = apDate.Substring(0, 10);
                 //StringBuilder
                 StringBuilder myCard = new StringBuilder();
                 myCard.Append("<li style=\"list-style-type: none;\"><a href =\"#\" class=\"tenantdashlist\">" + apDate + " " + " </a></li>");
