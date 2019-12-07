@@ -69,8 +69,8 @@ public partial class AdminDashboard : System.Web.UI.Page
             //Intended Lease: Hosts and Tenants
             selectIntendedLease.CommandText = "SELECT TOP(5) A.FirstName as hostF, A.LastName as hostL, B.FirstName as tenantF, B.LastName as tenantL " +
                 "FROM Account A, Account B " +
-                "WHERE A.AccountID in (select hostID from Host where hostID in (select HostID from lease where Agreed = '1')) " +
-                "AND B.AccountID in (select tenantId from Tenant where tenantID in (select tenantID from lease where Agreed = '1'))";
+                "WHERE A.AccountID in (select hostID from Host where hostID in (select HostID from lease where Agreed = '1' AND tenantID = B.AccountID)) " +
+                "AND B.AccountID in (select tenantId from Tenant where tenantID in (select tenantID from lease where Agreed = '1' AND hostID = A.AccountID))";
 
             //Select Number of Users 
             selectUsers.CommandText = "SELECT COUNT(*) FROM Account;";
