@@ -285,7 +285,7 @@ public partial class HostDashboard : System.Web.UI.Page
                         .Append("       <div class=\"chat-img\"> <img src =\"https://duvjxbgjpi3nt.cloudfront.net/UserImages/" + imgURL + "\" class=\"rounded-circle img-fluid\">")
                         .Append("       </div>")
                         .Append("       <div class=\"chat-ib\">")
-                        .Append("           <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + " " + ", Age: " + age + "</a></h5>")
+                        .Append("           <h5><a href=\"#\" class=\"tenantdashlist\" onclick= \"insertMessage(" + tenantID + "," + HttpContext.Current.Session["AccountId"] + ");\">" + firstName + " " + lastName + ", Age: " + age + "</a></h5>")
                         .Append("           <p>Hello I'm interested in your property!</p>")
                         .Append("       </div>")
                         .Append("   </div>")
